@@ -2,6 +2,7 @@ package com.example.bahasaku.ui.register
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -20,8 +21,12 @@ import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.ui.destinations.HomeScreenDestination
+import com.example.bahasaku.ui.destinations.LoginScreenDestination
+import com.example.bahasaku.ui.destinations.RegisterScreenDestination
+import com.example.bahasaku.ui.destinations.WelcomeScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.popUpTo
 
 @Destination
 @Composable
@@ -34,7 +39,10 @@ fun RegisterScreen(
     ) {
         Column {
             RegisterContent(
-                { navigator.navigate(HomeScreenDestination) }
+                { navigator.navigate(HomeScreenDestination) },
+                { navigator.navigate(LoginScreenDestination) {
+                    popUpTo(WelcomeScreenDestination)
+                } }
             )
         }
     }
@@ -42,7 +50,8 @@ fun RegisterScreen(
 
 @Composable
 fun RegisterContent(
-    onCreateAccountClicked: () -> Unit
+    onCreateAccountClicked: () -> Unit,
+    onLoginClicked: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -117,7 +126,10 @@ fun RegisterContent(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(text = "Sudah punya akun? ")
-                Text(text = "Masuk")
+                Text(
+                    modifier = Modifier.clickable(onClick = onLoginClicked),
+                    text = "Masuk"
+                )
             }
 
         }
@@ -133,7 +145,7 @@ fun RegisterPreview() {
             color = MaterialTheme.colors.background
         ) {
             Column {
-                RegisterContent({})
+                RegisterContent({}, {})
             }
         }
     }

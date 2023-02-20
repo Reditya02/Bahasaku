@@ -2,6 +2,7 @@ package com.example.bahasaku.ui.login
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -20,8 +21,12 @@ import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.ui.destinations.HomeScreenDestination
+import com.example.bahasaku.ui.destinations.LoginScreenDestination
+import com.example.bahasaku.ui.destinations.RegisterScreenDestination
+import com.example.bahasaku.ui.destinations.WelcomeScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.popUpTo
 
 @Destination
 @Composable
@@ -34,7 +39,10 @@ fun LoginScreen(
     ) {
         Column {
             LoginContent(
-                { navigator.navigate(HomeScreenDestination) }
+                { navigator.navigate(HomeScreenDestination) },
+                { navigator.navigate(RegisterScreenDestination) {
+                    popUpTo(WelcomeScreenDestination)
+                } }
             )
         }
     }
@@ -42,7 +50,8 @@ fun LoginScreen(
 
 @Composable
 fun LoginContent(
-    onLoginClicked: () -> Unit
+    onLoginClicked: () -> Unit,
+    onRegisterClicked: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -104,7 +113,10 @@ fun LoginContent(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(text = "Belum punya akun? ")
-                Text(text = "Buat akun")
+                Text(
+                    modifier = Modifier.clickable(onClick = onRegisterClicked),
+                    text = "Buat akun"
+                )
             }
 
         }
@@ -120,7 +132,7 @@ fun LoginPreview() {
             color = MaterialTheme.colors.background
         ) {
             Column {
-                LoginContent({})
+                LoginContent({}, {})
             }
         }
     }
