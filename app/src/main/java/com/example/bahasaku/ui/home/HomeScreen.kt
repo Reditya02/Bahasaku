@@ -58,16 +58,13 @@ fun HomeContent() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
-        Column {
-            LazyColumn(
-                content = {
-                    items(dummy) {
-                        BCardWithProgress(title = it.title, progression = it.progress)
-                    }
+        LazyColumn(
+            content = {
+                items(dummy) {
+                    BCardWithProgress(title = it.title, progression = it.progress)
                 }
-            )
-        }
+            }
+        )
     }
 }
 
