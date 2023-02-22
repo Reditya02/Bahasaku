@@ -108,7 +108,7 @@ fun EditProfileContent(
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = { /*TODO*/ }
+                onClick = onSaveprofileClicked
             ) {
                 androidx.compose.material.Text(
                     text = "Simpan Profil",
