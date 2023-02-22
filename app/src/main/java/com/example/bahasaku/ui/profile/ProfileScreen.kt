@@ -28,6 +28,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.skydoves.landscapist.coil.CoilImage
 import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.BahasakuTheme
+import com.example.bahasaku.ui.destinations.EditProfileScreenDestination
 
 @Destination
 @Composable
@@ -63,14 +64,18 @@ fun ProfileScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
-                ProfileContent()
+                ProfileContent(
+                    { navigator.navigate(EditProfileScreenDestination) }
+                )
             }
         }
     }
 }
 
 @Composable
-fun ProfileContent() {
+fun ProfileContent(
+    onEditProfileClicked: () -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -122,7 +127,7 @@ fun ProfileContent() {
                     modifier = Modifier
                         .fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.background),
-                    onClick = { /*TODO*/ }
+                    onClick = onEditProfileClicked
                 ) {
                     Text(
                         text = "Edit Profil",
@@ -139,6 +144,6 @@ fun ProfileContent() {
 @Composable
 fun ProfilePreview() {
     BahasakuTheme {
-        ProfileContent()
+        ProfileContent( {} )
     }
 }

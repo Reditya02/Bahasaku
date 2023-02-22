@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
@@ -73,6 +74,19 @@ fun RegisterContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 24.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                value = "",
+                placeholderString = "Nama",
+                leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "") },
+                onValueChange = {},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                )
+            )
+            BEditText(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
                 value = "",
                 placeholderString = "Email",
                 leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "") },
