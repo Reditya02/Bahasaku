@@ -29,6 +29,7 @@ import com.skydoves.landscapist.coil.CoilImage
 import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.ui.destinations.EditProfileScreenDestination
+import com.example.bahasaku.ui.destinations.WelcomeScreenDestination
 
 @Destination
 @Composable
@@ -46,7 +47,9 @@ fun ProfileScreen(
                         text = "Bahasaku",
                         color = MaterialTheme.colors.onPrimary
                     ) },
-                    actions = { IconButton(onClick = { /*TODO*/ }) {
+                    actions = { IconButton(onClick = {
+                        navigator.navigate(WelcomeScreenDestination)
+                    }) {
                         Icon(
                             imageVector = Icons.Default.Logout,
                             contentDescription = "",
