@@ -31,17 +31,9 @@ fun BBottomNavigationBar(
                     popUpTo(HomeScreenDestination)
                 } },
                 icon = { Icon(imageVector = it.icon, contentDescription = "") },
-                label = { Text(text = it.text) },
+//                label = { Text(text = it.text) },
                 alwaysShowLabel = false,
             )
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun BBottomNavigationBarPreview() {
-//    BahasakuTheme {
-//        BBottomNavigationBar(selected = BottomNavigationDestination.HomeScreen)
-//    }
-//}

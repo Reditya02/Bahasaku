@@ -34,7 +34,7 @@ fun HomeScreen(
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
-                    title = { Text(text = "Bahasaku") },
+                    title = { Text(text = "Beranda") },
                     Modifier.background(MaterialTheme.colors.background)
                 )
             },

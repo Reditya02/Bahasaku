@@ -44,7 +44,7 @@ fun ProfileScreen(
             topBar = {
                 CenterAlignedTopAppBar(
                     title = { Text(
-                        text = "Bahasaku",
+                        text = "Profil",
                         color = MaterialTheme.colors.onPrimary
                     ) },
                     actions = { IconButton(onClick = {

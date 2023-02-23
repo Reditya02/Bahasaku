@@ -42,7 +42,7 @@ fun LeaderboardScreen(
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
-                    title = { Text(text = "Bahasaku") },
+                    title = { Text(text = "Papan Peringkat") },
                     Modifier.background(MaterialTheme.colors.background)
                 )
             },
