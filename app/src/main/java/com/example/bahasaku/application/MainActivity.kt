@@ -11,7 +11,9 @@ import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.ui.NavGraphs
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.ramcosta.composedestinations.DestinationsNavHost
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

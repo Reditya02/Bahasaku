@@ -12,12 +12,15 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.ui.destinations.HomeScreenDestination
@@ -32,15 +35,22 @@ import com.ramcosta.composedestinations.navigation.popUpTo
 @Composable
 fun LoginScreen(
     navigator: DestinationsNavigator,
+    viewModel: LoginViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsState()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
         Column {
             LoginContent(
-                { navigator.navigate(HomeScreenDestination) },
-                { navigator.navigate(RegisterScreenDestination) {
+                emailValue = state.email,
+                onEmailTextFieldValueChanged = { viewModel.onEmailTextFieldValueChanged(it) },
+                passwordValue = state.password,
+                onPasswordTextFieldValueChanged = { viewModel.onPasswordTextFieldValueChanged(it) },
+                onLoginClicked = { navigator.navigate(HomeScreenDestination) },
+                onRegisterClicked = { navigator.navigate(RegisterScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
                 } }
             )
@@ -50,6 +60,10 @@ fun LoginScreen(
 
 @Composable
 fun LoginContent(
+    emailValue: String,
+    onEmailTextFieldValueChanged: (String) -> Unit,
+    passwordValue: String,
+    onPasswordTextFieldValueChanged: (String) -> Unit,
     onLoginClicked: () -> Unit,
     onRegisterClicked: () -> Unit
 ) {
@@ -73,10 +87,10 @@ fun LoginContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 24.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
-                value = "",
+                value = emailValue,
                 placeholderString = "Email",
                 leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "") },
-                onValueChange = {},
+                onValueChange = onEmailTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Next
@@ -86,10 +100,10 @@ fun LoginContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 8.dp),
-                value = "",
+                value = passwordValue,
                 placeholderString = "Password",
                 leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "") },
-                onValueChange = {},
+                onValueChange = onPasswordTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
@@ -132,7 +146,13 @@ fun LoginPreview() {
             color = MaterialTheme.colors.background
         ) {
             Column {
-                LoginContent({}, {})
+                LoginContent(
+                    emailValue = "",
+                    onEmailTextFieldValueChanged = {},
+                    passwordValue = "",
+                    onPasswordTextFieldValueChanged = {},
+                    onLoginClicked = {},
+                    onRegisterClicked = {})
             }
         }
     }
