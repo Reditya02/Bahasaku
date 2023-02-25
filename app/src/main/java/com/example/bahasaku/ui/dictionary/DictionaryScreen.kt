@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BSearchBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
@@ -27,7 +28,10 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun DictionaryScreen(
     navigator: DestinationsNavigator,
+    viewModel: DictionaryViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsState()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -46,13 +50,19 @@ fun DictionaryScreen(
                 )
             }
         ) {
-            DictionaryContent()
+            DictionaryContent(
+                searchedTextValue = state.searchedText,
+                onSearchedTextTextFieldValueChanged = { viewModel.onSearchedTextTextFieldValueChanged(it) }
+            )
         }
     }
 }
 
 @Composable
-fun DictionaryContent() {
+fun DictionaryContent(
+    searchedTextValue: String,
+    onSearchedTextTextFieldValueChanged: (String) -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -94,7 +104,7 @@ fun DictionaryContent() {
             }
         }
         
-        BSearchBar(query = "", onQueryChange = {  })
+        BSearchBar(query = searchedTextValue, onQueryChange = onSearchedTextTextFieldValueChanged)
     }
 }
 
