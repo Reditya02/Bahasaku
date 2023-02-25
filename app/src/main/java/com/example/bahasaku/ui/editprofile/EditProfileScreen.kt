@@ -11,6 +11,8 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,6 +24,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.R
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
@@ -32,15 +35,23 @@ import com.skydoves.landscapist.coil.CoilImage
 @Destination
 @Composable
 fun EditProfileScreen(
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
+    viewModel: EditProfileViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsState()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
         Column {
             EditProfileContent(
-                { navigator.popBackStack() }
+                nameValue = state.name,
+                onNameTextFieldValueChanged = { viewModel.onNameTextFieldValueChanged(it) },
+                emailValue = state.email,
+                onEmailTextFieldValueChanged = { viewModel.onEmailTextFieldValueChanged(it) },
+                onSaveprofileClicked = { navigator.popBackStack() }
+
             )
         }
     }
@@ -48,6 +59,10 @@ fun EditProfileScreen(
 
 @Composable
 fun EditProfileContent(
+    nameValue: String,
+    onNameTextFieldValueChanged: (String) -> Unit,
+    emailValue: String,
+    onEmailTextFieldValueChanged: (String) -> Unit,
     onSaveprofileClicked: () -> Unit
 ) {
     Scaffold(
@@ -82,10 +97,10 @@ fun EditProfileContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 24.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
-                value = "",
+                value = nameValue,
                 placeholderString = "Nama",
                 leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "") },
-                onValueChange = {},
+                onValueChange = onNameTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Next
@@ -95,10 +110,10 @@ fun EditProfileContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
-                value = "",
+                value = emailValue,
                 placeholderString = "Email",
                 leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "") },
-                onValueChange = {},
+                onValueChange = onEmailTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Done
@@ -129,7 +144,12 @@ fun EditProfilePreview() {
             color = MaterialTheme.colors.background
         ) {
             Column {
-                EditProfileContent({})
+                EditProfileContent(
+                    nameValue = "",
+                    onNameTextFieldValueChanged = {},
+                    emailValue = "",
+                    onEmailTextFieldValueChanged = {},
+                    onSaveprofileClicked = {})
             }
         }
     }
