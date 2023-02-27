@@ -10,7 +10,7 @@ import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,6 +40,10 @@ fun ProfileScreen(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
+        var isOpenDialog by remember {
+            mutableStateOf(false)
+        }
+
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
@@ -47,9 +51,7 @@ fun ProfileScreen(
                         text = "Profil",
                         color = MaterialTheme.colors.onPrimary
                     ) },
-                    actions = { IconButton(onClick = {
-                        navigator.navigate(WelcomeScreenDestination)
-                    }) {
+                    actions = { IconButton(onClick = { isOpenDialog = true }) {
                         Icon(
                             imageVector = Icons.Default.Logout,
                             contentDescription = "",
@@ -70,6 +72,12 @@ fun ProfileScreen(
                 ProfileContent(
                     { navigator.navigate(EditProfileScreenDestination) }
                 )
+                if (isOpenDialog) {
+                    LogoutAlertDialog(
+                        onDismissClicked = { isOpenDialog = false },
+                        onConfirmClicked = { navigator.navigate(WelcomeScreenDestination) }
+                    )
+                }
             }
         }
     }
