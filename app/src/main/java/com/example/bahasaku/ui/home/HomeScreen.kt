@@ -1,6 +1,7 @@
 package com.example.bahasaku.ui.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +19,8 @@ import androidx.compose.ui.Modifier
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BCardWithProgress
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.data.LessonData
+import com.example.bahasaku.data.CourseData
+import com.example.bahasaku.ui.destinations.ListCourseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -46,14 +48,16 @@ fun HomeScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
-                HomeContent()
+                HomeContent( { navigator.navigate(ListCourseScreenDestination) } )
             }
         }
     }
 }
 
 @Composable
-fun HomeContent() {
+fun HomeContent(
+    onCardClicked: () -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -61,19 +65,23 @@ fun HomeContent() {
         LazyColumn(
             content = {
                 items(dummy) {
-                    BCardWithProgress(title = it.title, progression = it.progress)
+                    BCardWithProgress(
+                        modifier = Modifier.clickable(onClick = onCardClicked),
+                        title = it.title,
+                        progression = it.progress
+                    )
                 }
             }
         )
     }
 }
 
-val dummy: List<LessonData>
+val dummy: List<CourseData>
     get() {
-        val data = mutableListOf<LessonData>()
+        val data = mutableListOf<CourseData>()
         for (i in 0..10) {
             data.add(
-                LessonData(
+                CourseData(
                     title = "Bab $i",
                     progress = i.toFloat() / 10
                 )
