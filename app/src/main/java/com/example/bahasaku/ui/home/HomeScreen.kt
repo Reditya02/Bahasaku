@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BCardWithProgress
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.data.CourseData
+import com.example.bahasaku.data.ChapterData
 import com.example.bahasaku.ui.destinations.ListCourseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -76,12 +76,12 @@ fun HomeContent(
     }
 }
 
-val dummy: List<CourseData>
+val dummy: List<ChapterData>
     get() {
-        val data = mutableListOf<CourseData>()
+        val data = mutableListOf<ChapterData>()
         for (i in 0..10) {
             data.add(
-                CourseData(
+                ChapterData(
                     title = "Bab $i",
                     progress = i.toFloat() / 10
                 )

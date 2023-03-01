@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -18,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.bahasaku.core.components.BCourseCard
 import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.core.theme.BahasakuTheme
-import com.example.bahasaku.ui.home.dummy
+import com.example.bahasaku.data.CourseData
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -48,30 +49,56 @@ fun ListCourseContent() {
             LazyColumn(
                 content = {
                     items(dummy) {
-                        Row(
-                            Modifier.fillMaxWidth()
-                        ) {
-                            BCourseCard(
-                                Modifier.weight(1f),
-                                name = it.title,
-                                type = CourseType.Exercise,
-                                isAvailable = it.progress > 0.5
-                            )
-                            if (it.progress < 0.7) {
-                                BCourseCard(
-                                    Modifier.weight(1f),
-                                    name = "latihan ${it.title}",
-                                    type = CourseType.Exercise,
-                                    isAvailable = it.progress > 0.5
-                                )
-                            } else {
-                                Spacer(modifier = Modifier.weight(1f))
-                            }
-                        }
+                        BCourseCard(
+                            Modifier.fillMaxWidth(),
+                            name = it.name,
+                            type = it.type,
+                            isAvailable = it.isAvailable,
+                            isDone = it.isDone
+                        )
                     }
                 }
             )
         }
+    }
+}
+
+@Composable
+fun SingleCourseCard(
+    course: CourseData,
+    index: Int
+) {
+    Row(Modifier.fillMaxWidth()) {
+        Spacer(modifier = Modifier.weight(0.25f))
+
+        Spacer(modifier = Modifier.weight(0.25f))
+    }
+}
+
+@Composable
+fun DoubleCourseCard(
+    course1: CourseData,
+    index1: Int,
+    course2: CourseData,
+    index2: Int,
+) {
+    Row(
+        Modifier.fillMaxWidth()
+    ) {
+        BCourseCard(
+            Modifier.weight(0.5f),
+            name = course1.name,
+            type = CourseType.Exercise,
+            isAvailable = index1 <= 10,
+            isDone = index1 <= 4
+        )
+        BCourseCard(
+            Modifier.weight(0.5f),
+            name = course2.name,
+            type = CourseType.Exercise,
+            isAvailable = course2.isAvailable,
+            isDone = course2.isDone
+        )
     }
 }
 
@@ -86,3 +113,20 @@ fun ListCoursePreview() {
         }
     }
 }
+
+val dummy: List<CourseData>
+    get() {
+        val data = mutableListOf<CourseData>()
+        for (i in 0..14) {
+            val type = if (i % 3 == 1) CourseType.Exercise else CourseType.Reading
+            data.add(
+                CourseData(
+                    name = "Course $i $type",
+                    type = type,
+                    isAvailable = i <= 10,
+                    isDone = i < 6
+                )
+            )
+        }
+        return data
+    }
