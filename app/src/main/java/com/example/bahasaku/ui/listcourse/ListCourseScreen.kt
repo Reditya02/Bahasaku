@@ -63,45 +63,6 @@ fun ListCourseContent() {
     }
 }
 
-@Composable
-fun SingleCourseCard(
-    course: CourseData,
-    index: Int
-) {
-    Row(Modifier.fillMaxWidth()) {
-        Spacer(modifier = Modifier.weight(0.25f))
-
-        Spacer(modifier = Modifier.weight(0.25f))
-    }
-}
-
-@Composable
-fun DoubleCourseCard(
-    course1: CourseData,
-    index1: Int,
-    course2: CourseData,
-    index2: Int,
-) {
-    Row(
-        Modifier.fillMaxWidth()
-    ) {
-        BCourseCard(
-            Modifier.weight(0.5f),
-            name = course1.name,
-            type = CourseType.Exercise,
-            isAvailable = index1 <= 10,
-            isDone = index1 <= 4
-        )
-        BCourseCard(
-            Modifier.weight(0.5f),
-            name = course2.name,
-            type = CourseType.Exercise,
-            isAvailable = course2.isAvailable,
-            isDone = course2.isDone
-        )
-    }
-}
-
 @Preview
 @Composable
 fun ListCoursePreview() {
