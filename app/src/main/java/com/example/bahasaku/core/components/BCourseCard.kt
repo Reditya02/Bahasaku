@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -25,7 +26,8 @@ fun BCourseCard(
     type: CourseType,
     onClick: () -> Unit = {},
     isAvailable: Boolean = false,
-    isDone: Boolean = false
+    isDone: Boolean = false,
+    score: Int = 0
 ) {
     Card(
         modifier = modifier
@@ -40,22 +42,38 @@ fun BCourseCard(
             ),
         elevation = 10.dp,
         ) {
-        Column(
+        Row(
             modifier = Modifier
                 .padding(12.dp)
                 .alpha(if (isAvailable) 1f else 0.5f),
-            Arrangement.Center
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(
-                text = name,
-                style = MaterialTheme.typography.subtitle1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Text(
-                modifier = Modifier.alpha(0.8f),
-                text = if (type == CourseType.Exercise) "\tLatihan" else "\tMateri",
-                style = MaterialTheme.typography.overline,
-            )
+            Column(
+                modifier = modifier
+                    .weight(if (type == CourseType.Exercise) 0.8f else 1f),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.subtitle1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    modifier = Modifier.alpha(0.8f),
+                    text = if (type == CourseType.Exercise) "\tLatihan" else "\tMateri",
+                    style = MaterialTheme.typography.overline,
+                )
+            }
+            if (type == CourseType.Exercise) {
+                Row(
+                    modifier = Modifier.fillMaxHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(text = score.toString())
+                    Text(text = "/100")
+                }
+            }
+
         }
     }
 }
@@ -66,7 +84,7 @@ fun BCourseCardpreview1() {
     BahasakuTheme {
         Surface {
             BCourseCard(
-                name = "lorem ipsum dor sit amulter asdasd asd asduadi wer qrw afs",
+                name = "lorem ipsum dor sit amulter asdasd asd asduadi wer qrw afs lorem ipsum dor sit amulter asdasd asd asduadi wer qrw afs",
                 type = CourseType.Exercise,
                 isAvailable = true,
                 isDone = false
