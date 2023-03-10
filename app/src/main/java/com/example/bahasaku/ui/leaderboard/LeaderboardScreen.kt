@@ -70,7 +70,7 @@ fun LeaderboardContent() {
             LazyColumn(
                 state = scrollState,
                 content = {
-                    items(dummy) {
+                    items(LeaderboardData.getListDummy) {
                         if (it.rank != 1) {
                             Divider(
                                 modifier = Modifier
@@ -142,19 +142,3 @@ fun LeaderBoardScreenPreview() {
         }
     }
 }
-
-val dummy: List<LeaderboardData>
-    get() {
-        val data = mutableListOf<LeaderboardData>()
-        for (i in 0..10) {
-            data.add(
-                LeaderboardData(
-                    rank = i+1,
-                    photoUrl = "https://loremflickr.com/320/240",
-                    name = "John Doe $i",
-                    score = "${100 - i}"
-                )
-            )
-        }
-        return data
-    }

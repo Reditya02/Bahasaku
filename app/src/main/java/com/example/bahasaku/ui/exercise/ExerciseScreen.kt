@@ -1,7 +1,5 @@
 package com.example.bahasaku.ui.exercise
 
-import android.util.Log
-import androidx.annotation.BoolRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
@@ -15,12 +13,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.bahasaku.core.components.BBorderedButton
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.data.QuestionData
 import com.example.bahasaku.data.QuestionType
-import com.example.bahasaku.ui.leaderboard.dummy
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -29,7 +25,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun ExerciseScreen(
     navigation: DestinationsNavigator
 ) {
-    androidx.compose.material.Surface {
+    Surface {
         Column {
             ExerciseContent()
         }
@@ -43,16 +39,7 @@ fun ExerciseContent() {
             .fillMaxSize()
             .padding(8.dp)
     ) {
-        val question = QuestionData(
-            question = "Pertanyaan",
-            type = QuestionType.Essay,
-            option = listOf(
-                "Benar",
-                "Salah 1",
-                "Salah 2",
-                "Salah 3",
-            )
-        )
+        val question = QuestionData.getDummyEssay
         ProgressIndicator(item = dummyIndicator)
         QuestionSection(questionData = question.copy(
             option = let {
@@ -177,7 +164,7 @@ fun ExerciseButton(
 @Composable
 fun ExercisePreview() {
     BahasakuTheme {
-        androidx.compose.material.Surface {
+        Surface {
             ExerciseContent()
         }
     }

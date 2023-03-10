@@ -64,7 +64,7 @@ fun HomeContent(
     ) {
         LazyColumn(
             content = {
-                items(dummy) {
+                items(ChapterData.getListDummy) {
                     BCardWithProgress(
                         modifier = Modifier.clickable(onClick = onCardClicked),
                         title = it.title,
@@ -75,17 +75,3 @@ fun HomeContent(
         )
     }
 }
-
-val dummy: List<ChapterData>
-    get() {
-        val data = mutableListOf<ChapterData>()
-        for (i in 0..10) {
-            data.add(
-                ChapterData(
-                    title = "Bab $i",
-                    progress = i.toFloat() / 10
-                )
-            )
-        }
-        return data
-    }

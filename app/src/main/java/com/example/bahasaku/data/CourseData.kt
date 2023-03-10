@@ -10,4 +10,23 @@ data class CourseData(
     val type: CourseType,
     var isAvailable: Boolean = false,
     var isDone: Boolean = false
-) : Parcelable
+) : Parcelable {
+    companion object {
+        val getListDummy: List<CourseData>
+            get() {
+                val data = mutableListOf<CourseData>()
+                for (i in 0..14) {
+                    val type = if (i % 3 == 1) CourseType.Exercise else CourseType.Reading
+                    data.add(
+                        CourseData(
+                            name = "Course $i $type",
+                            type = type,
+                            isAvailable = i <= 10,
+                            isDone = i < 6
+                        )
+                    )
+                }
+                return data
+            }
+    }
+}

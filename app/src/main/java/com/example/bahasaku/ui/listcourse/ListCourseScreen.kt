@@ -59,7 +59,7 @@ fun ListCourseContent(
         Column(Modifier.padding(padding)) {
             LazyColumn(
                 content = {
-                    items(dummy) {
+                    items(CourseData.getListDummy) {
                         BCourseCard(
                             Modifier.fillMaxWidth(),
                             name = it.name,
@@ -86,20 +86,3 @@ fun ListCoursePreview() {
         }
     }
 }
-
-val dummy: List<CourseData>
-    get() {
-        val data = mutableListOf<CourseData>()
-        for (i in 0..14) {
-            val type = if (i % 3 == 1) CourseType.Exercise else CourseType.Reading
-            data.add(
-                CourseData(
-                    name = "Course $i $type",
-                    type = type,
-                    isAvailable = i <= 10,
-                    isDone = i < 6
-                )
-            )
-        }
-        return data
-    }
