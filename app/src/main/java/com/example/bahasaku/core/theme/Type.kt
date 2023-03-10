@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 val Typography = Typography(
     defaultFontFamily = FontFamily.Default,
     h1 = TextStyle(
-        fontWeight = FontWeight.Light,
+        fontWeight = FontWeight.Bold,
         fontSize = 96.sp,
         letterSpacing = (-1.5).sp
     ),

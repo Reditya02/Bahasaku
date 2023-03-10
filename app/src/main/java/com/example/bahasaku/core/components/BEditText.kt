@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -17,9 +18,9 @@ import androidx.compose.ui.unit.dp
 fun BEditText(
     modifier: Modifier = Modifier,
     value: String,
-    placeholderString: String,
-    leadingIcon: @Composable (() -> Unit)?,
-    trailingIcon: @Composable (() -> Unit)? = {},
+    label: String,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     onValueChange: (String) -> Unit,
     onSearch: () -> Unit = {},
@@ -27,19 +28,13 @@ fun BEditText(
     isError: Boolean = false
 ) {
     val focusManager = LocalFocusManager.current
-    val color =
-        animateColorAsState(targetValue = if (isError) MaterialTheme.colors.error else MaterialTheme.colors.primary)
 
     OutlinedTextField(
         singleLine = true,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
-        modifier = modifier
-            .border(
-                width = 1.5.dp,
-                color = color.value,
-                shape = MaterialTheme.shapes.small
-            ),
+        modifier = modifier,
+        colors = TextFieldDefaults.outlinedTextFieldColors(),
         value = value,
         textStyle = MaterialTheme.typography.body1,
         keyboardOptions = keyboardOptions,
@@ -54,7 +49,7 @@ fun BEditText(
         ),
         onValueChange = onValueChange,
         visualTransformation = visualTransformation,
-        placeholder = { Text(text = placeholderString, style = MaterialTheme.typography.body1) },
+        label = { Text(text = label, style = MaterialTheme.typography.body1) },
         isError = isError
     )
 }

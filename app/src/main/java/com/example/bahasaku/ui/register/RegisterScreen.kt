@@ -26,7 +26,6 @@ import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.ui.destinations.HomeScreenDestination
 import com.example.bahasaku.ui.destinations.LoginScreenDestination
-import com.example.bahasaku.ui.destinations.RegisterScreenDestination
 import com.example.bahasaku.ui.destinations.WelcomeScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -79,7 +78,10 @@ fun RegisterContent(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "Bahasaku") },
+                title = { Text(
+                    text = "Bahasaku",
+                    style = MaterialTheme.typography.h6
+                ) },
                 Modifier.background(MaterialTheme.colors.background)
             )
         }
@@ -97,7 +99,7 @@ fun RegisterContent(
                     .fillMaxWidth()
                     .padding(top = 24.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
                 value = nameValue,
-                placeholderString = "Nama",
+                label = "Nama",
                 leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "") },
                 onValueChange = onNameTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(
@@ -110,7 +112,7 @@ fun RegisterContent(
                     .fillMaxWidth()
                     .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
                 value = emailValue,
-                placeholderString = "Email",
+                label = "Email",
                 leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "") },
                 onValueChange = onEmailTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(
@@ -123,7 +125,7 @@ fun RegisterContent(
                     .fillMaxWidth()
                     .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
                 value = passwordValue,
-                placeholderString = "Password",
+                label = "Password",
                 leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "") },
                 onValueChange = onPasswordTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(
@@ -136,7 +138,7 @@ fun RegisterContent(
                     .fillMaxWidth()
                     .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 8.dp),
                 value = retypePasswordValue,
-                placeholderString = "Masukkan Ulang Password",
+                label = "Masukkan Ulang Password",
                 leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "") },
                 onValueChange = onRetypePasswordTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(

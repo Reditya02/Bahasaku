@@ -8,10 +8,9 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,6 +19,7 @@ import com.example.bahasaku.core.components.BCourseCard
 import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.data.CourseData
+import com.example.bahasaku.ui.destinations.ExerciseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -30,18 +30,29 @@ fun ListCourseScreen(
 ) {
     Surface {
         Column {
-            ListCourseContent()
+            ListCourseContent(
+                { navigator.popBackStack() },
+                { navigator.navigate(ExerciseScreenDestination) }
+            )
         }
     }
 }
 
 @Composable
-fun ListCourseContent() {
+fun ListCourseContent(
+    onBackPressed: () -> Unit,
+    onCourseClicked: () -> Unit
+) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = "List Course") },
-                Modifier.background(MaterialTheme.colors.background)
+                Modifier.background(MaterialTheme.colors.background),
+                navigationIcon = {
+                    IconButton(onClick = onBackPressed) {
+                        Icon(imageVector = Icons.Default.ChevronLeft, contentDescription = "")
+                    }
+                }
             )
         }
     ) { padding ->
@@ -54,7 +65,8 @@ fun ListCourseContent() {
                             name = it.name,
                             type = it.type,
                             isAvailable = it.isAvailable,
-                            isDone = it.isDone
+                            isDone = it.isDone,
+                            onClick = onCourseClicked
                         )
                     }
                 }
@@ -69,7 +81,7 @@ fun ListCoursePreview() {
     BahasakuTheme {
         Surface {
             Column {
-                ListCourseContent()
+                ListCourseContent({}, {})
             }
         }
     }

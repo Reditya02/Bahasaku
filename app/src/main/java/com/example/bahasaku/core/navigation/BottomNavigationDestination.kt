@@ -1,7 +1,7 @@
 package com.example.bahasaku.core.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.bahasaku.ui.destinations.DictionaryScreenDestination
 import com.example.bahasaku.ui.destinations.HomeScreenDestination
@@ -14,8 +14,8 @@ enum class BottomNavigationDestination(
     val text: String,
     val icon: ImageVector
 ) {
-    HomeScreen(HomeScreenDestination, "Home", Icons.Default.Lock),
-    DictionaryScreen(DictionaryScreenDestination, "Dictionary", Icons.Default.Lock),
-    LeaderboardScreen(LeaderboardScreenDestination, "Leaderboard", Icons.Default.Lock),
-    ProfileScreen(ProfileScreenDestination, "Profile", Icons.Default.Lock)
+    HomeScreen(HomeScreenDestination, "Home", Icons.Default.Home),
+    DictionaryScreen(DictionaryScreenDestination, "Dictionary", Icons.Default.Book),
+    LeaderboardScreen(LeaderboardScreenDestination, "Leaderboard", Icons.Default.Leaderboard),
+    ProfileScreen(ProfileScreenDestination, "Profile", Icons.Default.Person)
 }

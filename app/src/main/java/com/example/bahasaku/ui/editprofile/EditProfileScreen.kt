@@ -98,7 +98,7 @@ fun EditProfileContent(
                     .fillMaxWidth()
                     .padding(top = 24.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
                 value = nameValue,
-                placeholderString = "Nama",
+                label = "Nama",
                 leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "") },
                 onValueChange = onNameTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(
@@ -111,7 +111,7 @@ fun EditProfileContent(
                     .fillMaxWidth()
                     .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
                 value = emailValue,
-                placeholderString = "Email",
+                label = "Email",
                 leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "") },
                 onValueChange = onEmailTextFieldValueChanged,
                 keyboardOptions = KeyboardOptions(
