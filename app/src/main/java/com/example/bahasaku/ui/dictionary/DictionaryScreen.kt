@@ -49,11 +49,13 @@ fun DictionaryScreen(
                     navigator = navigator
                 )
             }
-        ) {
-            DictionaryContent(
-                searchedTextValue = state.searchedText,
-                onSearchedTextTextFieldValueChanged = { viewModel.onSearchedTextTextFieldValueChanged(it) }
-            )
+        ) { padding ->
+            Column(Modifier.padding(padding)) {
+                DictionaryContent(
+                    searchedTextValue = state.searchedText,
+                    onSearchedTextTextFieldValueChanged = { viewModel.onSearchedTextTextFieldValueChanged(it) }
+                )
+            }
         }
     }
 }
@@ -105,8 +107,35 @@ fun DictionaryContent(
         }
         
         BSearchBar(query = searchedTextValue, onQueryChange = onSearchedTextTextFieldValueChanged)
+        for (pair in dummyDictionary) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 8.dp)
+            ) {
+                Text(
+                    text = pair.first,
+                    style = MaterialTheme.typography.subtitle2
+                )
+                Text(
+                    modifier = Modifier.padding(start = 24.dp),
+                    text = pair.second,
+                    style = MaterialTheme.typography.body2
+                )
+            }
+        }
+
     }
 }
+
+val dummyDictionary = listOf(
+    Pair("Aasdi", "asdiasd"),
+    Pair("Aw45qqnnj45sm5rsmasdi", "asd34b634qbh6nq34iasd"),
+    Pair("Aa34qn643m6m43qm,m,23 5235q,q,547,74qtyi7e695q,4q,4sdi", "as6h"),
+    Pair("Aasdi", "asdiasddia b252b5,6e88,565b25b g253g4557254335b3254dia b252b5,6e88,565b25b g253g4557254335b3254"),
+    Pair("Aas65di", "asdiw65asd"),
+    Pair("Aas4wdi", "as6diasd"),
+    )
 
 enum class DictionaryType {
     IndonesianToBalinese, BalineseToIndonesian
