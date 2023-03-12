@@ -66,11 +66,10 @@ fun HomeContent(
             content = {
                 items(ChapterData.getListDummy) {
                     BCardWithProgress(
-                        modifier = Modifier.clickable(onClick = onCardClicked),
                         title = it.title,
                         progression = it.progress,
-                        isAvailable = false,
-                        onClick = {},
+                        isAvailable = true,
+                        onClick = onCardClicked,
                     )
                 }
             }
