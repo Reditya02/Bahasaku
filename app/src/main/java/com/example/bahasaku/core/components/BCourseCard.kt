@@ -34,7 +34,7 @@ fun BCourseCard(
             .fillMaxWidth()
             .aspectRatio(4f)
             .padding(8.dp)
-            .clickable(enabled = isAvailable, onClick = onClick)
+            .clickable(enabled = true, onClick = onClick)
             .border(
                 2.dp,
                 if (isDone) Color.Green else Color.Transparent,

@@ -68,7 +68,9 @@ fun HomeContent(
                     BCardWithProgress(
                         modifier = Modifier.clickable(onClick = onCardClicked),
                         title = it.title,
-                        progression = it.progress
+                        progression = it.progress,
+                        isAvailable = false,
+                        onClick = {},
                     )
                 }
             }
