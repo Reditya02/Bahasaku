@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.bahasaku.core.components.BCourseCard
 import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.core.theme.BahasakuTheme
+import com.example.bahasaku.data.ChapterData
 import com.example.bahasaku.data.CourseData
 import com.example.bahasaku.ui.destinations.ExerciseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -26,13 +27,15 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Destination
 @Composable
 fun ListCourseScreen(
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
+    data: ChapterData
 ) {
     Surface {
         Column {
             ListCourseContent(
                 { navigator.popBackStack() },
-                { navigator.navigate(ExerciseScreenDestination) }
+                { navigator.navigate(ExerciseScreenDestination) },
+                data
             )
         }
     }
@@ -41,12 +44,13 @@ fun ListCourseScreen(
 @Composable
 fun ListCourseContent(
     onBackPressed: () -> Unit,
-    onCourseClicked: () -> Unit
+    onCourseClicked: () -> Unit,
+    chapterData: ChapterData
 ) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "List Course") },
+                title = { Text(text = chapterData.title) },
                 Modifier.background(MaterialTheme.colors.background),
                 navigationIcon = {
                     IconButton(onClick = onBackPressed) {
@@ -74,15 +78,15 @@ fun ListCourseContent(
         }
     }
 }
-
-@Preview
-@Composable
-fun ListCoursePreview() {
-    BahasakuTheme {
-        Surface {
-            Column {
-                ListCourseContent({}, {})
-            }
-        }
-    }
-}
+//
+//@Preview
+//@Composable
+//fun ListCoursePreview() {
+//    BahasakuTheme {
+//        Surface {
+//            Column {
+//                ListCourseContent({}, {})
+//            }
+//        }
+//    }
+//}

@@ -16,9 +16,11 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BCardWithProgress
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
+import com.example.bahasaku.core.utils.BToast
 import com.example.bahasaku.data.ChapterData
 import com.example.bahasaku.ui.destinations.ListCourseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -29,6 +31,8 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun HomeScreen(
     navigator: DestinationsNavigator,
 ) {
+    val context = LocalContext.current
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -48,7 +52,15 @@ fun HomeScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
-                HomeContent( { navigator.navigate(ListCourseScreenDestination) } )
+                HomeContent(
+                    {
+                        if (it.isAvailable)
+                            navigator.navigate(ListCourseScreenDestination(it))
+                        else
+                            BToast(context, "Bab terkunci, silahkan selesaikan bab sebelumnya")
+                    },
+                    ChapterData.getListDummy
+                )
             }
         }
     }
@@ -56,20 +68,20 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(
-    onCardClicked: () -> Unit
+    onCardClicked: (ChapterData) -> Unit,
+    data: List<ChapterData>
 ) {
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         LazyColumn(
             content = {
-                items(ChapterData.getListDummy) {
+                items(data) {
                     BCardWithProgress(
-                        title = it.title,
-                        progression = it.progress,
-                        isAvailable = true,
                         onClick = onCardClicked,
+                        data = it,
                     )
                 }
             }

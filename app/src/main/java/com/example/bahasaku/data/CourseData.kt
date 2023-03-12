@@ -6,6 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CourseData(
+    val id: Int = 0,
+    val chapterId: Int = 0,
     val name: String,
     val type: CourseType,
     var isAvailable: Boolean = false,

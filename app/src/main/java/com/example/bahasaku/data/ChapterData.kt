@@ -5,8 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ChapterData(
+    val id: Int = 0,
     val title: String,
-    val progress: Float
+    val progress: Float,
+    var isAvailable: Boolean = false
 ) : Parcelable {
     companion object {
         val getListDummy: List<ChapterData>
@@ -16,7 +18,8 @@ data class ChapterData(
                     data.add(
                         ChapterData(
                             title = "Bab $i",
-                            progress = i.toFloat() / 10
+                            progress = (10 - i.toFloat()) / 10,
+                            isAvailable = i != 10
                         )
                     )
                 }
