@@ -18,26 +18,23 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.theme.BahasakuTheme
+import com.example.bahasaku.data.CourseData
 
 @Composable
 fun BCourseCard(
     modifier: Modifier = Modifier,
-    name: String,
-    type: CourseType,
-    onClick: () -> Unit = {},
-    isAvailable: Boolean = false,
-    isDone: Boolean = false,
-    score: Int = 0
+    data: CourseData,
+    onClick: (CourseData) -> Unit = {},
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .aspectRatio(4f)
             .padding(8.dp)
-            .clickable(enabled = true, onClick = onClick)
+            .clickable(enabled = true, onClick = { onClick(data) })
             .border(
                 2.dp,
-                if (isDone) Color.Green else Color.Transparent,
+                if (data.isDone) Color.Green else Color.Transparent,
                 MaterialTheme.shapes.small
             ),
         elevation = 10.dp,
@@ -45,31 +42,31 @@ fun BCourseCard(
         Row(
             modifier = Modifier
                 .padding(12.dp)
-                .alpha(if (isAvailable) 1f else 0.5f),
+                .alpha(if (data.isAvailable) 1f else 0.5f),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
                 modifier = modifier
-                    .weight(if (type == CourseType.Exercise) 0.8f else 1f),
+                    .weight(if (data.type == CourseType.Exercise) 0.8f else 1f),
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = name,
+                    text = data.name,
                     style = MaterialTheme.typography.subtitle1,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     modifier = Modifier.alpha(0.8f),
-                    text = if (type == CourseType.Exercise) "\tLatihan" else "\tMateri",
+                    text = if (data.type == CourseType.Exercise) "\tLatihan" else "\tMateri",
                     style = MaterialTheme.typography.overline,
                 )
             }
-            if (type == CourseType.Exercise) {
+            if (data.type == CourseType.Exercise) {
                 Row(
                     modifier = Modifier.fillMaxHeight(),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(text = score.toString())
+                    Text(text = data.score.toString())
                     Text(text = "/100")
                 }
             }
@@ -77,51 +74,51 @@ fun BCourseCard(
         }
     }
 }
-
-@Preview
-@Composable
-fun BCourseCardpreview1() {
-    BahasakuTheme {
-        Surface {
-            BCourseCard(
-                name = "lorem ipsum dor sit amulter asdasd asd asduadi wer qrw afs lorem ipsum dor sit amulter asdasd asd asduadi wer qrw afs",
-                type = CourseType.Exercise,
-                isAvailable = true,
-                isDone = false
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-fun BCourseCardpreview2() {
-    BahasakuTheme {
-        Surface {
-            BCourseCard(
-                name = "lorem ipsum dor sit amulter",
-                type = CourseType.Exercise,
-                isAvailable = true,
-                isDone = true
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-fun BCourseCardpreview3() {
-    BahasakuTheme {
-        Surface {
-            BCourseCard(
-                name = "lorem ipsum dor sit amulter asdasd asd asduadi wer qrw afs",
-                type = CourseType.Exercise,
-                isAvailable = false,
-                isDone = false
-            )
-        }
-    }
-}
+//
+//@Preview
+//@Composable
+//fun BCourseCardpreview1() {
+//    BahasakuTheme {
+//        Surface {
+//            BCourseCard(
+//                name = "lorem ipsum dor sit amulter asdasd asd asduadi wer qrw afs lorem ipsum dor sit amulter asdasd asd asduadi wer qrw afs",
+//                type = CourseType.Exercise,
+//                isAvailable = true,
+//                isDone = false
+//            )
+//        }
+//    }
+//}
+//
+//@Preview
+//@Composable
+//fun BCourseCardpreview2() {
+//    BahasakuTheme {
+//        Surface {
+//            BCourseCard(
+//                name = "lorem ipsum dor sit amulter",
+//                type = CourseType.Exercise,
+//                isAvailable = true,
+//                isDone = true
+//            )
+//        }
+//    }
+//}
+//
+//@Preview
+//@Composable
+//fun BCourseCardpreview3() {
+//    BahasakuTheme {
+//        Surface {
+//            BCourseCard(
+//                name = "lorem ipsum dor sit amulter asdasd asd asduadi wer qrw afs",
+//                type = CourseType.Exercise,
+//                isAvailable = false,
+//                isDone = false
+//            )
+//        }
+//    }
+//}
 
 enum class CourseType {
     Reading, Exercise

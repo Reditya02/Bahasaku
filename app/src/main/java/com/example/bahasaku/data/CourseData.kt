@@ -11,7 +11,8 @@ data class CourseData(
     val name: String,
     val type: CourseType,
     var isAvailable: Boolean = false,
-    var isDone: Boolean = false
+    var isDone: Boolean = false,
+    var score: Int = 0
 ) : Parcelable {
     companion object {
         val getListDummy: List<CourseData>

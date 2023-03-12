@@ -14,10 +14,12 @@ import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.bahasaku.core.components.BCourseCard
 import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.core.theme.BahasakuTheme
+import com.example.bahasaku.core.utils.BToast
 import com.example.bahasaku.data.ChapterData
 import com.example.bahasaku.data.CourseData
 import com.example.bahasaku.ui.destinations.ExerciseScreenDestination
@@ -30,11 +32,18 @@ fun ListCourseScreen(
     navigator: DestinationsNavigator,
     data: ChapterData
 ) {
+    val context = LocalContext.current
+
     Surface {
         Column {
             ListCourseContent(
                 { navigator.popBackStack() },
-                { navigator.navigate(ExerciseScreenDestination) },
+                {
+                    if (it.isAvailable)
+                        navigator.navigate(ExerciseScreenDestination(it))
+                    else
+                        BToast(context, "Materi terkunci, silahkan selesaikan materi dan latihan soal sebelumnya")
+                },
                 data
             )
         }
@@ -44,7 +53,7 @@ fun ListCourseScreen(
 @Composable
 fun ListCourseContent(
     onBackPressed: () -> Unit,
-    onCourseClicked: () -> Unit,
+    onCourseClicked: (CourseData) -> Unit,
     chapterData: ChapterData
 ) {
     Scaffold(
@@ -66,10 +75,7 @@ fun ListCourseContent(
                     items(CourseData.getListDummy) {
                         BCourseCard(
                             Modifier.fillMaxWidth(),
-                            name = it.name,
-                            type = it.type,
-                            isAvailable = it.isAvailable,
-                            isDone = it.isDone,
+                            data = it,
                             onClick = onCourseClicked
                         )
                     }
