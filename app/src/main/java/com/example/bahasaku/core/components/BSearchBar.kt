@@ -25,12 +25,6 @@ fun BSearchBar(
     TextField(
         value = query,
         onValueChange = onQueryChange,
-//        leadingIcon = {
-//            Icon(
-//                imageVector = Icons.Default.Search,
-//                contentDescription = null
-//            )
-//        },
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = MaterialTheme.colors.surface,
             disabledIndicatorColor = Color.Transparent,
@@ -47,7 +41,7 @@ fun BSearchBar(
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colors.primary,
-                shape = RoundedCornerShape(16.dp)
+                shape = MaterialTheme.shapes.medium
             )
     )
 }

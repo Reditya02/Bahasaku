@@ -115,7 +115,7 @@ fun DictionaryContent(
             ) {
                 Text(
                     text = pair.first,
-                    style = MaterialTheme.typography.subtitle2
+                    style = MaterialTheme.typography.h6
                 )
                 Text(
                     modifier = Modifier.padding(start = 24.dp),
@@ -129,7 +129,7 @@ fun DictionaryContent(
 }
 
 val dummyDictionary = listOf(
-    Pair("Aasdi", "asdiasd"),
+    Pair("Bunga", "Andap: Bunga; Alus: Sekar"),
     Pair("Aw45qqnnj45sm5rsmasdi", "asd34b634qbh6nq34iasd"),
     Pair("Aa34qn643m6m43qm,m,23 5235q,q,547,74qtyi7e695q,4q,4sdi", "as6h"),
     Pair("Aasdi", "asdiasddia b252b5,6e88,565b25b g253g4557254335b3254dia b252b5,6e88,565b25b g253g4557254335b3254"),
