@@ -18,20 +18,27 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.theme.BahasakuTheme
+import com.example.bahasaku.data.ChapterData
 import com.example.bahasaku.data.CourseData
 
 @Composable
 fun BCourseCard(
     modifier: Modifier = Modifier,
     data: CourseData,
-    onClick: (CourseData) -> Unit = {},
+    navigateToCourseContent: (CourseData) -> Unit,
+    showSnackbar: () -> Unit,
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .aspectRatio(4f)
             .padding(8.dp)
-            .clickable(enabled = true, onClick = { onClick(data) })
+            .clickable(enabled = true, onClick = {
+                if (data.isAvailable)
+                    navigateToCourseContent(data)
+                else
+                    showSnackbar()
+            })
             .border(
                 2.dp,
                 if (data.isDone) Color.Green else Color.Transparent,
