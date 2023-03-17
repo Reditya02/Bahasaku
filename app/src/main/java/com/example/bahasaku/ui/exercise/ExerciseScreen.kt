@@ -15,9 +15,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
-import com.example.bahasaku.data.CourseData
-import com.example.bahasaku.data.QuestionData
-import com.example.bahasaku.data.QuestionType
+import com.example.bahasaku.data.model.CourseData
+import com.example.bahasaku.data.model.QuestionData
+import com.example.bahasaku.data.model.QuestionType
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 

@@ -1,4 +1,4 @@
-package com.example.bahasaku.data
+package com.example.bahasaku.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
