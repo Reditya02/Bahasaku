@@ -7,8 +7,9 @@ import kotlinx.parcelize.Parcelize
 data class ChapterData(
     val id: Int = 0,
     val title: String,
-    val progress: Float,
-    var isAvailable: Boolean = false
+    var progress: Float,
+    var isAvailable: Boolean = false,
+    var courses: MutableList<CourseData> = mutableListOf()
 ) : Parcelable {
     companion object {
         val getListDummy: List<ChapterData>
