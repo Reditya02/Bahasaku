@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import com.example.bahasaku.core.components.BCourseCard
-import com.example.bahasaku.data.model.ChapterData
-import com.example.bahasaku.data.model.CourseData
+import com.example.bahasaku.data.model.Chapter
+import com.example.bahasaku.data.model.Course
 import com.example.bahasaku.ui.destinations.ExerciseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListCourseScreen(
     navigator: DestinationsNavigator,
-    data: ChapterData
+    data: Chapter
 ) {
     val snackbarHostState = SnackbarHostState()
     val scope = rememberCoroutineScope()
@@ -51,15 +51,15 @@ fun ListCourseScreen(
 @Composable
 fun ListCourseContent(
     onBackPressed: () -> Unit,
-    navigateToCourseContent: (CourseData) -> Unit,
+    navigateToCourseContent: (Course) -> Unit,
     showSnackbar: () -> Unit,
     snackbarHostState: SnackbarHostState,
-    chapterData: ChapterData
+    chapter: Chapter
 ) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = chapterData.title) },
+                title = { Text(text = chapter.title) },
                 Modifier.background(MaterialTheme.colors.background),
                 navigationIcon = {
                     IconButton(onClick = onBackPressed) {
@@ -72,7 +72,7 @@ fun ListCourseContent(
         Column(Modifier.padding(padding)) {
             LazyColumn(
                 content = {
-                    items(CourseData.getListDummy) {
+                    items(Course.getListDummy) {
                         BCourseCard(
                             Modifier.fillMaxWidth(),
                             data = it,

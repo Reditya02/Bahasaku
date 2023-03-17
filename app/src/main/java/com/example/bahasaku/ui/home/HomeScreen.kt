@@ -1,8 +1,6 @@
 package com.example.bahasaku.ui.home
 
-import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,10 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BCardWithProgress
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.data.ChapterData
+import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.ui.destinations.ListCourseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -59,14 +58,24 @@ fun HomeScreen(
                             )
                         }
                     },
-                    ChapterData.getListDummy
+                    Chapter.getListDummy
                 )
             }
             Column(Modifier.fillMaxWidth()) {
                 Spacer(modifier = Modifier.weight(1F))
                 SnackbarHost(
                     modifier = Modifier.padding(padding),
-                    hostState = snackbarHostState
+                    hostState = snackbarHostState,
+                    snackbar = {
+                        snackbarHostState.currentSnackbarData?.let {
+                            Snackbar(
+                                it,
+//                                backgroundColor = MaterialTheme.colors.background,
+//                                contentColor = MaterialTheme.colors.onBackground,
+                                elevation = 16.dp
+                            )
+                        }
+                    }
                 )
             }
         }
@@ -75,10 +84,10 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(
-    navigateToCourse: (ChapterData) -> Unit,
+    navigateToCourse: (Chapter) -> Unit,
     snackbarHostState: SnackbarHostState,
     showSnackbar: () -> Unit,
-    data: List<ChapterData>
+    data: List<Chapter>
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

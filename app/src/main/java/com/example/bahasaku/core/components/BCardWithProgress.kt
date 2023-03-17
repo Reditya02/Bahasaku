@@ -13,13 +13,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.theme.*
-import com.example.bahasaku.data.model.ChapterData
+import com.example.bahasaku.data.model.Chapter
 
 @Composable
 fun BCardWithProgress(
     modifier: Modifier = Modifier,
-    data: ChapterData,
-    navigateToCourse: (ChapterData) -> Unit,
+    data: Chapter,
+    navigateToCourse: (Chapter) -> Unit,
     showSnackbar: () -> Unit,
 ) {
     Card(

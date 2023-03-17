@@ -1,23 +1,24 @@
 package com.example.bahasaku.data.model
 
 import android.os.Parcelable
+import androidx.room.Entity
 import kotlinx.parcelize.Parcelize
 
+@Entity
 @Parcelize
-data class ChapterData(
+data class Chapter(
     val id: Int = 0,
     val title: String,
     var progress: Float,
     var isAvailable: Boolean = false,
-    var courses: MutableList<CourseData> = mutableListOf()
 ) : Parcelable {
     companion object {
-        val getListDummy: List<ChapterData>
+        val getListDummy: List<Chapter>
             get() {
-                val data = mutableListOf<ChapterData>()
+                val data = mutableListOf<Chapter>()
                 for (i in 0..10) {
                     data.add(
-                        ChapterData(
+                        Chapter(
                             title = "Bab $i",
                             progress = (10 - i.toFloat()) / 10,
                             isAvailable = i != 10

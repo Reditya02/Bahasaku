@@ -14,13 +14,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.theme.GreenVariant
-import com.example.bahasaku.data.model.CourseData
+import com.example.bahasaku.data.model.Course
 
 @Composable
 fun BCourseCard(
     modifier: Modifier = Modifier,
-    data: CourseData,
-    navigateToCourseContent: (CourseData) -> Unit,
+    data: Course,
+    navigateToCourseContent: (Course) -> Unit,
     showSnackbar: () -> Unit,
 ) {
     Card(
