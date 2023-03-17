@@ -18,6 +18,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.theme.BahasakuTheme
+import com.example.bahasaku.core.theme.GreenPrimary
+import com.example.bahasaku.core.theme.GreenVariant
 import com.example.bahasaku.data.ChapterData
 import com.example.bahasaku.data.CourseData
 
@@ -41,7 +43,7 @@ fun BCourseCard(
             })
             .border(
                 2.dp,
-                if (data.isDone) Color.Green else Color.Transparent,
+                if (data.isDone) GreenVariant else Color.Transparent,
                 MaterialTheme.shapes.small
             ),
         elevation = 10.dp,
