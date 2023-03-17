@@ -33,6 +33,8 @@ fun BBottomNavigationBar(
                 icon = { Icon(imageVector = it.icon, contentDescription = "") },
 //                label = { Text(text = it.text) },
                 alwaysShowLabel = false,
+                selectedContentColor = MaterialTheme.colors.primary,
+                unselectedContentColor = MaterialTheme.colors.onBackground.copy(alpha = 0.6F)
             )
         }
     }

@@ -41,7 +41,7 @@ fun ExerciseContent() {
             .fillMaxSize()
             .padding(8.dp)
     ) {
-        val question = QuestionData.getDummyEssay
+        val question = QuestionData.getDummyOption
         ProgressIndicator(item = dummyIndicator)
         QuestionSection(questionData = question.copy(
             option = let {
