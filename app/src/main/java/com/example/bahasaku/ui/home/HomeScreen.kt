@@ -1,37 +1,33 @@
 package com.example.bahasaku.ui.home
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BCardWithProgress
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.core.utils.BToast
 import com.example.bahasaku.data.ChapterData
 import com.example.bahasaku.ui.destinations.ListCourseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.launch
 
 @Destination
 @Composable
 fun HomeScreen(
     navigator: DestinationsNavigator,
 ) {
-    val context = LocalContext.current
+    val snackbarHostState = SnackbarHostState()
+    val scope = rememberCoroutineScope()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -53,13 +49,24 @@ fun HomeScreen(
         ) { padding ->
             Column(Modifier.padding(padding)) {
                 HomeContent(
+                    { navigator.navigate(ListCourseScreenDestination(it)) },
+                    snackbarHostState,
                     {
-                        if (it.isAvailable)
-                            navigator.navigate(ListCourseScreenDestination(it))
-                        else
-                            BToast(context, "Bab terkunci, silahkan selesaikan bab sebelumnya")
+                        snackbarHostState.currentSnackbarData?.dismiss()
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                "Bab terkunci, silahkan selesaikan bab sebelumnya"
+                            )
+                        }
                     },
                     ChapterData.getListDummy
+                )
+            }
+            Column(Modifier.fillMaxWidth()) {
+                Spacer(modifier = Modifier.weight(1F))
+                SnackbarHost(
+                    modifier = Modifier.padding(padding),
+                    hostState = snackbarHostState
                 )
             }
         }
@@ -68,10 +75,11 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(
-    onCardClicked: (ChapterData) -> Unit,
+    navigateToCourse: (ChapterData) -> Unit,
+    snackbarHostState: SnackbarHostState,
+    showSnackbar: () -> Unit,
     data: List<ChapterData>
 ) {
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -80,11 +88,13 @@ fun HomeContent(
             content = {
                 items(data) {
                     BCardWithProgress(
-                        onClick = onCardClicked,
                         data = it,
+                        navigateToCourse = navigateToCourse,
+                        showSnackbar = showSnackbar,
                     )
                 }
             }
         )
     }
+    SnackbarHost(hostState = snackbarHostState)
 }
