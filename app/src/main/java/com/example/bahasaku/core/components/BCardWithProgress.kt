@@ -49,17 +49,12 @@ fun BCardWithProgress(
         ) {
             var progressColor by remember { mutableStateOf(ProgressColor.Red) }
 
-            Log.d("Reditya", data.progress.toString())
-
             progressColor = when (data.progress) {
                 in 0.0..0.4 -> ProgressColor.Red
                 in 0.4..0.8 -> ProgressColor.Yellow
                 in 0.8..1.0 -> ProgressColor.Green
                 else -> ProgressColor.Green
             }
-
-            Log.d("Reditya", progressColor.toString())
-
 
             Spacer(modifier = Modifier.weight(1f))
             Text(text = data.title)
