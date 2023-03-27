@@ -1,8 +1,10 @@
 package com.example.bahasaku.data.model
 
 import android.os.Parcelable
+import androidx.room.Entity
 import kotlinx.parcelize.Parcelize
 
+@Entity
 @Parcelize
 data class Question private constructor(
     val id: String = "",

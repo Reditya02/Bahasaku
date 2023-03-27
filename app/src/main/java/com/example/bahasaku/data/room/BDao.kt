@@ -33,6 +33,10 @@ interface BDao {
     @Query("update course set isAvailable = 1 where id like :courseId")
     suspend fun updateCourseAvailable(courseId: String)
 
+    //Question Section
+    @Query("select * from question where courseId like :courseId")
+    suspend fun getAllQuestion(courseId: String)
+
     //Populate Section
     @Insert(onConflict = REPLACE)
     fun populateChapter(list: List<Chapter>)

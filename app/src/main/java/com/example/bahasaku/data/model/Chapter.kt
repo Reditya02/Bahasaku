@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class Chapter(
     val id: String = "",
     val title: String,
-    var progress: Float,
+    var progress: Float = 0F,
     var isAvailable: Boolean = false,
 ) : Parcelable {
     companion object {
