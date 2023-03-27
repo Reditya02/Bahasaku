@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class Chapter(
-    val id: Int = 0,
+    val id: String = "",
     val title: String,
     var progress: Float,
     var isAvailable: Boolean = false,

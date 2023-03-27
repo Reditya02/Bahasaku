@@ -6,8 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Course
+import com.example.bahasaku.data.model.Question
 
-@Database(entities = [Chapter::class, Course::class], version = 1)
+@Database(entities = [Chapter::class, Course::class, Question::class], version = 1)
 abstract class BDatabase : RoomDatabase() {
     abstract fun dao(): BDao
 

@@ -4,7 +4,9 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class QuestionData private constructor(
+data class Question private constructor(
+    val id: String = "",
+    val courseId: String = "",
     val question: String,
     val type: QuestionType,
     val answerEssay: String = "",
@@ -12,25 +14,25 @@ data class QuestionData private constructor(
 ) : Parcelable {
 
     constructor(
-        question: String, type: QuestionType, answerEssay: String
+        id: String, courseId: String, question: String, type: QuestionType, answerEssay: String
     ) : this(
-        question, type, answerEssay, listOf()
+        id, courseId, question, type, answerEssay, listOf()
     )
 
     constructor(
-        question: String, type: QuestionType, option: List<String>
+        id: String, courseId: String, question: String, type: QuestionType, option: List<String>
     ) : this(
-        question, type, option[0], option
+        id, courseId, question, type, option[0], option
     )
 
     companion object {
-        val getDummyEssay = QuestionData(
+        val getDummyEssay = Question(
             question = "Pertanyaan",
             type = QuestionType.Essay,
             answerEssay = "Benar"
         )
 
-        val getDummyOption = QuestionData(
+        val getDummyOption = Question(
             question = "Pertanyaan",
             type = QuestionType.Option,
             option = listOf(

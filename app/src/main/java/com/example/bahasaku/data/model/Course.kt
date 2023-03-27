@@ -8,13 +8,13 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class Course(
-    val id: Int = 0,
-    val chapterId: Int = 0,
+    val id: String = "",
+    val chapterId: String = "",
     val name: String,
     val type: CourseType,
     var isAvailable: Boolean = false,
     var isDone: Boolean = false,
-    var score: Int = 0
+    var score: Int = 0,
 ) : Parcelable {
     companion object {
         val getListDummy: List<Course>
