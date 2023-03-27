@@ -15,6 +15,7 @@ data class Course(
     var isAvailable: Boolean = false,
     var isDone: Boolean = false,
     var score: Int = 0,
+    val reading: List<String> = listOf()
 ) : Parcelable {
     companion object {
         val getListDummy: List<Course>
