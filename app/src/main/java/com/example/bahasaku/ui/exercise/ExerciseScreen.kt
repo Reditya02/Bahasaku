@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.data.model.Course
-import com.example.bahasaku.data.model.QuestionData
+import com.example.bahasaku.data.model.Question
 import com.example.bahasaku.data.model.QuestionType
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -41,9 +41,9 @@ fun ExerciseContent() {
             .fillMaxSize()
             .padding(8.dp)
     ) {
-        val question = QuestionData.getDummyOption
+        val question = Question.getDummyOption
         ProgressIndicator(item = dummyIndicator)
-        QuestionSection(questionData = question.copy(
+        QuestionSection(question = question.copy(
             option = let {
                 question.option.shuffled()
             })
@@ -84,7 +84,7 @@ fun ProgressIndicator(
 
 @Composable
 fun QuestionSection(
-    questionData: QuestionData
+    question: Question
 ) {
     Column(
         modifier = Modifier
@@ -93,9 +93,9 @@ fun QuestionSection(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.weight(0.45f))
-        Text(text = questionData.question)
+        Text(text = question.question)
         Spacer(modifier = Modifier.weight(0.45f))
-        when (questionData.type) {
+        when (question.type) {
             QuestionType.Essay -> {
                 BEditText(
                     value = "",
@@ -106,7 +106,7 @@ fun QuestionSection(
             QuestionType.Option -> {
                 var selectedButton by remember { mutableStateOf("") }
 
-                questionData.option.forEach {
+                question.option.forEach {
                     ExerciseButton(
                         text = it,
                         isSelected = it == selectedButton
