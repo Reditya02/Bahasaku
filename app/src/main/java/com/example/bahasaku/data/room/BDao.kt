@@ -12,7 +12,7 @@ import com.example.bahasaku.data.model.Question
 interface BDao {
     //Chapter Section
     @Query("select * from chapter")
-    suspend fun getAllChapter()
+    suspend fun getAllChapter(): List<Chapter>
 
     @Query("update chapter set progress = :progress where id like :chapterId")
     suspend fun updateChapterProgress(chapterId: String, progress: Float)
@@ -22,7 +22,7 @@ interface BDao {
 
     //Course Section
     @Query("select * from course where chapterId like :chapterId")
-    suspend fun getAllCourse(chapterId: String)
+    suspend fun getAllCourse(chapterId: String): List<Course>
 
     @Query("update course set score = :score where id like :courseId")
     suspend fun updateCourseScore(courseId: String, score: Int)
@@ -35,7 +35,7 @@ interface BDao {
 
     //Question Section
     @Query("select * from question where courseId like :courseId")
-    suspend fun getAllQuestion(courseId: String)
+    suspend fun getAllQuestion(courseId: String): List<Question>
 
     //Populate Section
     @Insert(onConflict = REPLACE)

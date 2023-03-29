@@ -2,29 +2,31 @@ package com.example.bahasaku.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
-data class Question private constructor(
+data class Question constructor(
+    @PrimaryKey
     val id: String = "",
     val courseId: String = "",
     val question: String,
     val type: QuestionType,
     val answerEssay: String = "",
-    val option: List<String> = listOf()
+    var option: String= ""
 ) : Parcelable {
 
     constructor(
         id: String, courseId: String, question: String, type: QuestionType, answerEssay: String
     ) : this(
-        id, courseId, question, type, answerEssay, listOf()
+        id, courseId, question, type, answerEssay, ""
     )
 
     constructor(
         id: String, courseId: String, question: String, type: QuestionType, option: List<String>
     ) : this(
-        id, courseId, question, type, option[0], option
+        id, courseId, question, type, option[0], option.toString()
     )
 
     companion object {
@@ -34,16 +36,16 @@ data class Question private constructor(
             answerEssay = "Benar"
         )
 
-        val getDummyOption = Question(
-            question = "Pertanyaan",
-            type = QuestionType.Option,
-            option = listOf(
-                "Benar",
-                "Salah 1",
-                "Salah 2",
-                "Salah 3",
-            )
-        )
+//        val getDummyOption = Question(
+//            question = "Pertanyaan",
+//            type = QuestionType.Option,
+//            option = listOf(
+//                "Benar",
+//                "Salah 1",
+//                "Salah 2",
+//                "Salah 3",
+//            )
+//        )
     }
 
 }

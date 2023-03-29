@@ -41,13 +41,9 @@ fun ExerciseContent() {
             .fillMaxSize()
             .padding(8.dp)
     ) {
-        val question = Question.getDummyOption
+        val question = Question.getDummyEssay
         ProgressIndicator(item = dummyIndicator)
-        QuestionSection(question = question.copy(
-            option = let {
-                question.option.shuffled()
-            })
-        )
+        QuestionSection(question = question)
     }
 }
 
@@ -106,7 +102,10 @@ fun QuestionSection(
             QuestionType.Option -> {
                 var selectedButton by remember { mutableStateOf("") }
 
-                question.option.forEach {
+                //TODO : Implement this on upper level
+                val option = question.option.split(", ")
+
+                option.forEach {
                     ExerciseButton(
                         text = it,
                         isSelected = it == selectedButton

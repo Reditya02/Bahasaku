@@ -2,12 +2,14 @@ package com.example.bahasaku.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.bahasaku.core.components.CourseType
 import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
 data class Course(
+    @PrimaryKey
     val id: String = "",
     val chapterId: String = "",
     val name: String,
@@ -15,7 +17,7 @@ data class Course(
     var isAvailable: Boolean = false,
     var isDone: Boolean = false,
     var score: Int = 0,
-    val reading: List<String> = listOf()
+    val reading: String = ""
 ) : Parcelable {
     companion object {
         val getListDummy: List<Course>

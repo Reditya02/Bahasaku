@@ -2,11 +2,13 @@ package com.example.bahasaku.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
 data class Chapter(
+    @PrimaryKey
     val id: String = "",
     val title: String,
     var progress: Float = 0F,
