@@ -34,8 +34,6 @@ fun HomeScreen(
     val scope = rememberCoroutineScope()
 
     val state by viewModel.state.collectAsState()
-    Log.d("Reditya", "inside Screen ${state.listChapter}")
-
 
     Surface(
         modifier = Modifier.fillMaxSize(),

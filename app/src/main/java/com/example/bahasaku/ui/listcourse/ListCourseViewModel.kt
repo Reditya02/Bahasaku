@@ -1,6 +1,6 @@
-package com.example.bahasaku.ui.home
+package com.example.bahasaku.ui.listcourse
 
-import android.util.Log
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.Repository
@@ -12,20 +12,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class ListCourseViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
-    private val _state = MutableStateFlow(HomeState())
-    val state: StateFlow<HomeState> = _state
+    private val _state = MutableStateFlow(ListCourseState())
+    var state: StateFlow<ListCourseState> = _state
 
-    init {
-        getAllChapter()
-    }
-
-    fun getAllChapter() {
+    fun getAllCourse(chapterId: String) {
         viewModelScope.launch {
-            _state.update { it.copy(listChapter = repository.getAllChapter()) }
+            _state.update { _state.value.copy(listCourse = repository.getAllCourse(chapterId)) }
         }
     }
-
 }

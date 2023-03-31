@@ -9,12 +9,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BCourseCard
+import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Course
 import com.example.bahasaku.ui.destinations.ExerciseScreenDestination
+import com.example.bahasaku.ui.destinations.ReadingScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -23,16 +28,26 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListCourseScreen(
     navigator: DestinationsNavigator,
-    data: Chapter
+    data: Chapter,
+    viewModel: ListCourseViewModel = hiltViewModel()
 ) {
     val snackbarHostState = SnackbarHostState()
     val scope = rememberCoroutineScope()
+
+    val state by viewModel.state.collectAsState()
+
+    viewModel.getAllCourse(data.id)
 
     Surface {
         Column {
             ListCourseContent(
                 { navigator.popBackStack() },
-                { navigator.navigate(ExerciseScreenDestination(it)) },
+                {
+                    if (it.type == CourseType.Exercise)
+                        navigator.navigate(ExerciseScreenDestination(it))
+                    else
+                        navigator.navigate(ReadingScreenDestination())
+                },
                 {
                     snackbarHostState.currentSnackbarData?.dismiss()
                     scope.launch {
@@ -42,7 +57,8 @@ fun ListCourseScreen(
                     }
                 },
                 snackbarHostState,
-                data
+                data,
+                state
             )
         }
     }
@@ -54,7 +70,8 @@ fun ListCourseContent(
     navigateToCourseContent: (Course) -> Unit,
     showSnackbar: () -> Unit,
     snackbarHostState: SnackbarHostState,
-    chapter: Chapter
+    chapter: Chapter,
+    courseData: ListCourseState
 ) {
     Scaffold(
         topBar = {
@@ -72,7 +89,7 @@ fun ListCourseContent(
         Column(Modifier.padding(padding)) {
             LazyColumn(
                 content = {
-                    items(Course.getListDummy) {
+                    items(courseData.listCourse) {
                         BCourseCard(
                             Modifier.fillMaxWidth(),
                             data = it,

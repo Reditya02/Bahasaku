@@ -8,11 +8,13 @@ object Populate {
     val populateChapter = listOf(
         Chapter(
             id = "1",
-            title = "Bab I"
+            title = "Bab I",
+            isAvailable = true
         ),
         Chapter(
             id = "2",
-            title = "Bab II"
+            title = "Bab II",
+            isAvailable = true
         ),
         Chapter(
             id = "3",
@@ -34,7 +36,8 @@ object Populate {
             chapterId = "1",
             name = "Salam dan waktu",
             type = CourseType.Reading,
-            reading = ""
+            reading = "",
+            isAvailable = true
         ),
         Course(
             id = "121",
@@ -133,7 +136,8 @@ object Populate {
             chapterId = "2",
             name = "Kata kerja berimbuhan",
             type = CourseType.Reading,
-            reading = ""
+            reading = "",
+            isAvailable = true
         ),
         Course(
             id = "221",
@@ -363,7 +367,7 @@ object Populate {
         ),
         Course(
             id = "425",
-            chapterId = "1",
+            chapterId = "4",
             name = "Cuaca",
             type = CourseType.Exercise,
             reading = ""

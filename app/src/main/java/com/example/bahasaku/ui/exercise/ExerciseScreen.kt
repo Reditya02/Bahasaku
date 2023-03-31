@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.data.model.Course
@@ -25,17 +26,25 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun ExerciseScreen(
     navigation: DestinationsNavigator,
+    viewModel: ExerciseViewModel = hiltViewModel(),
     data: Course
 ) {
+    val state by viewModel.state.collectAsState()
     Surface {
         Column {
-            ExerciseContent()
+            ExerciseContent(
+                state,
+                { viewModel.onEssayAnswerTextFieldValueChanged(it) }
+            )
         }
     }
 }
 
 @Composable
-fun ExerciseContent() {
+fun ExerciseContent(
+    state: ExerciseState,
+    onEssayAnswerTextFieldValueChanged: (String) ->  Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,7 +52,11 @@ fun ExerciseContent() {
     ) {
         val question = Question.getDummyEssay
         ProgressIndicator(item = dummyIndicator)
-        QuestionSection(question = question)
+        QuestionSection(
+            question = question,
+            state = state,
+            onEssayAnswerTextFieldValueChanged = { onEssayAnswerTextFieldValueChanged(it) }
+        )
     }
 }
 
@@ -80,7 +93,9 @@ fun ProgressIndicator(
 
 @Composable
 fun QuestionSection(
-    question: Question
+    question: Question,
+    state: ExerciseState,
+    onEssayAnswerTextFieldValueChanged: (String) ->  Unit,
 ) {
     Column(
         modifier = Modifier
@@ -94,9 +109,9 @@ fun QuestionSection(
         when (question.type) {
             QuestionType.Essay -> {
                 BEditText(
-                    value = "",
+                    value = state.essayAnswer,
                     label = "Jawab Disini",
-                    onValueChange = {}
+                    onValueChange = onEssayAnswerTextFieldValueChanged
                 )
             }
             QuestionType.Option -> {
@@ -161,15 +176,15 @@ fun ExerciseButton(
     }
 }
 
-@Preview
-@Composable
-fun ExercisePreview() {
-    BahasakuTheme {
-        Surface {
-            ExerciseContent()
-        }
-    }
-}
+//@Preview
+//@Composable
+//fun ExercisePreview() {
+//    BahasakuTheme {
+//        Surface {
+//            ExerciseContent()
+//        }
+//    }
+//}
 
 val dummyIndicator = listOf(
     ExerciseCondition.Correct,
