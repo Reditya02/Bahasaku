@@ -109,7 +109,7 @@ fun QuestionSection(
         when (question.type) {
             QuestionType.Essay -> {
                 BEditText(
-                    value = state.essayAnswer,
+                    value = state.answer,
                     label = "Jawab Disini",
                     onValueChange = onEssayAnswerTextFieldValueChanged
                 )

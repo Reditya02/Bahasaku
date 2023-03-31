@@ -10,4 +10,6 @@ class Repository @Inject constructor(
     suspend fun getAllChapter() = dao.getAllChapter()
 
     suspend fun getAllCourse(chapterId: String) = dao.getAllCourse(chapterId)
+
+    suspend fun getAllQuestion(courseId: String) = dao.getAllQuestion(courseId)
 }

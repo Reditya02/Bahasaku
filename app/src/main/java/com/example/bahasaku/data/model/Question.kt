@@ -13,27 +13,24 @@ data class Question constructor(
     val courseId: String = "",
     val question: String,
     val type: QuestionType,
-    val answerEssay: String = "",
+    var answer: String = "",
     var option: String= ""
 ) : Parcelable {
 
-    constructor(
-        id: String, courseId: String, question: String, type: QuestionType, answerEssay: String
-    ) : this(
-        id, courseId, question, type, answerEssay, ""
-    )
+    init {
+        if (type == QuestionType.Option)
+            answer = option.split("$")[0]
+    }
 
-    constructor(
-        id: String, courseId: String, question: String, type: QuestionType, option: List<String>
-    ) : this(
-        id, courseId, question, type, option[0], option.toString()
-    )
+    fun getOption(): List<String> {
+        return option.split("$")
+    }
 
     companion object {
         val getDummyEssay = Question(
             question = "Pertanyaan",
             type = QuestionType.Essay,
-            answerEssay = "Benar"
+            answer = "Benar"
         )
 
 //        val getDummyOption = Question(

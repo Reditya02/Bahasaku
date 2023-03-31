@@ -19,6 +19,10 @@ data class Course(
     var score: Int = 0,
     val reading: String = ""
 ) : Parcelable {
+    fun getReading(): List<String> {
+        return reading.split("$")
+    }
+
     companion object {
         val getListDummy: List<Course>
             get() {
