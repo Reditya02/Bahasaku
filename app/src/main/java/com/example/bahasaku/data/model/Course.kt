@@ -19,7 +19,7 @@ data class Course(
     var score: Int = 0,
     val reading: String = ""
 ) : Parcelable {
-    fun getReading(): List<String> {
+    fun getReadingList(): List<String> {
         return reading.split("$")
     }
 

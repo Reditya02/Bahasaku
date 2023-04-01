@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "975117014069",
+    "project_id": "bahasaku-6785c",
+    "storage_bucket": "bahasaku-6785c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975117014069:android:78bc6e73dc425572344d7c",
+        "android_client_info": {
+          "package_name": "com.example.bahasaku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975117014069-pm89ptqvan3esjuafb7tea8t2ma6rirv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0X49s1x_VMOcXMCme5Rg94ThQheU11w0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975117014069-pm89ptqvan3esjuafb7tea8t2ma6rirv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

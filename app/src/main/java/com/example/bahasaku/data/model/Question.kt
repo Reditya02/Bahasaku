@@ -22,7 +22,7 @@ data class Question constructor(
             answer = option.split("$")[0]
     }
 
-    fun getOption(): List<String> {
+    fun getOptionList(): List<String> {
         return option.split("$")
     }
 

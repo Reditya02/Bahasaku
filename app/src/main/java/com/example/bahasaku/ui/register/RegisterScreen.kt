@@ -53,7 +53,7 @@ fun RegisterScreen(
                 onPasswordTextFieldValueChanged = { viewModel.onPasswordTextFieldValueChanged(it) },
                 retypePasswordValue = state.retypePassword,
                 onRetypePasswordTextFieldValueChanged = { viewModel.onRetypePasswordTextFieldValueChanged(it) },
-                onCreateAccountClicked = { navigator.navigate(HomeScreenDestination) },
+                onCreateAccountClicked = { viewModel.onRegisterClicked() },
                 onLoginClicked = { navigator.navigate(LoginScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
                 } },
