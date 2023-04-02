@@ -1,6 +1,7 @@
 package com.example.bahasaku.data.room
 
 import android.content.Context
+import android.util.Log
 import androidx.room.CoroutinesRoom
 import androidx.room.Database
 import androidx.room.Room
@@ -38,6 +39,7 @@ abstract class BDatabase : RoomDatabase() {
                                 INSTANCE?.let {
                                     applicationScope.launch {
                                         val bDao = it.dao()
+                                        Log.d("Reditya", "populate DB")
                                         bDao.populateChapter(Populate.populateChapter)
                                         bDao.populateCourse(Populate.populateCourse)
                                     }

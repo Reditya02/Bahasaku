@@ -1,6 +1,7 @@
 package com.example.bahasaku.ui.login
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -26,6 +27,9 @@ import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.ui.destinations.HomeScreenDestination
 import com.example.bahasaku.ui.destinations.RegisterScreenDestination
 import com.example.bahasaku.ui.destinations.WelcomeScreenDestination
+import com.example.bahasaku.ui.register.AuthCondition
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.popUpTo
@@ -38,6 +42,12 @@ fun LoginScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    val user = Firebase.auth.currentUser
+
+    user?.run {
+        Log.d("Reditya", "$email\n$displayName\n$uid")
+    }
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -48,7 +58,13 @@ fun LoginScreen(
                 onEmailTextFieldValueChanged = { viewModel.onEmailTextFieldValueChanged(it) },
                 passwordValue = state.password,
                 onPasswordTextFieldValueChanged = { viewModel.onPasswordTextFieldValueChanged(it) },
-                onLoginClicked = { navigator.navigate(HomeScreenDestination) },
+                onLoginClicked = {
+                    val id = viewModel.onLoginClicked()
+                    if (state.authCondition == AuthCondition.Success) {
+                        Log.d("Reditya", id.toString())
+                        navigator.navigate(HomeScreenDestination)
+                    }
+                },
                 onRegisterClicked = { navigator.navigate(RegisterScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
                 } }
