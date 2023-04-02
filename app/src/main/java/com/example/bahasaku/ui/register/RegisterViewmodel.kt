@@ -1,11 +1,13 @@
 package com.example.bahasaku.ui.register
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewmodel @Inject constructor(
-    repository: Repository
+    private val repository: Repository
 ) : ViewModel() {
     private val _state = MutableStateFlow(RegisterState())
     val state: StateFlow<RegisterState> = _state
@@ -55,20 +57,23 @@ class RegisterViewmodel @Inject constructor(
         }
     }
 
-    fun register() {
-        viewModelScope.launch {
-            _state.value.apply {
-                try {
+    fun register() = viewModelScope.launch {
+        _state.value.apply {
+            try {
 //                    loadingState.emit(LoadingState.LOADING)
-                    Log.d("Reditya", "Start Register")
-                    Firebase.auth.createUserWithEmailAndPassword(email, password).await()
-//                    loadingState.emit(LoadingState.LOADED)
-                    Log.d("Reditya", "Complete Register")
-                } catch (e: Exception) {
+                Log.d("Reditya", "Start Register")
+                Firebase.auth.createUserWithEmailAndPassword(email, password).await()
+//                    loadingState.emit
+                Firebase.auth.currentUser?.updateProfile(userProfileChangeRequest {
+                    displayName = name
+                    photoUri = Uri.parse("")
+                })
+                repository.populateDatabase()
+                Log.d("Reditya", "Complete Register")
+            } catch (e: Exception) {
 //                    loadingState.emit(LoadingState.error(e.localizedMessage))
-                    Log.d("Reditya", e.toString())
+                Log.d("Reditya", e.toString())
 
-                }
             }
         }
     }

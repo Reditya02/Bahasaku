@@ -27,6 +27,8 @@ import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.ui.destinations.HomeScreenDestination
 import com.example.bahasaku.ui.destinations.LoginScreenDestination
 import com.example.bahasaku.ui.destinations.WelcomeScreenDestination
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.popUpTo
@@ -53,7 +55,11 @@ fun RegisterScreen(
                 onPasswordTextFieldValueChanged = { viewModel.onPasswordTextFieldValueChanged(it) },
                 retypePasswordValue = state.retypePassword,
                 onRetypePasswordTextFieldValueChanged = { viewModel.onRetypePasswordTextFieldValueChanged(it) },
-                onCreateAccountClicked = { viewModel.onRegisterClicked() },
+                onCreateAccountClicked = {
+                    viewModel.onRegisterClicked()
+                    if (Firebase.auth.currentUser != null)
+                        navigator.navigate(HomeScreenDestination)
+                },
                 onLoginClicked = { navigator.navigate(LoginScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
                 } },

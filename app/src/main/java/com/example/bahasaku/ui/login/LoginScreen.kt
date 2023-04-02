@@ -59,11 +59,9 @@ fun LoginScreen(
                 passwordValue = state.password,
                 onPasswordTextFieldValueChanged = { viewModel.onPasswordTextFieldValueChanged(it) },
                 onLoginClicked = {
-                    val id = viewModel.onLoginClicked()
-                    if (state.authCondition == AuthCondition.Success) {
-                        Log.d("Reditya", id.toString())
+                    viewModel.onLoginClicked()
+                    if (Firebase.auth.currentUser != null)
                         navigator.navigate(HomeScreenDestination)
-                    }
                 },
                 onRegisterClicked = { navigator.navigate(RegisterScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
