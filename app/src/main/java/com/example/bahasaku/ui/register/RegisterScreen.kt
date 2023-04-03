@@ -41,6 +41,9 @@ fun RegisterScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    if (Firebase.auth.currentUser != null)
+        navigator.navigate(HomeScreenDestination)
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -57,8 +60,6 @@ fun RegisterScreen(
                 onRetypePasswordTextFieldValueChanged = { viewModel.onRetypePasswordTextFieldValueChanged(it) },
                 onCreateAccountClicked = {
                     viewModel.onRegisterClicked()
-                    if (Firebase.auth.currentUser != null)
-                        navigator.navigate(HomeScreenDestination)
                 },
                 onLoginClicked = { navigator.navigate(LoginScreenDestination) {
                     popUpTo(WelcomeScreenDestination)

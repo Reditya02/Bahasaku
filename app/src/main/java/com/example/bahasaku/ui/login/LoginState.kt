@@ -6,9 +6,9 @@ data class LoginState(
     val email: String = "",
     val password: String = "",
 
-    var isEmailValid: Boolean = false,
-    var isPasswordValid: Boolean = false,
-    var isLoginValid: Boolean = false,
+    val isEmailValid: Boolean = false,
+    val isPasswordValid: Boolean = false,
+    val isLoginValid: Boolean = false,
 
     val authCondition: AuthCondition = AuthCondition.None
 )

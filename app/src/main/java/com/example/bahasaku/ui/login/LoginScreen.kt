@@ -44,9 +44,12 @@ fun LoginScreen(
 
     val user = Firebase.auth.currentUser
 
-    user?.run {
-        Log.d("Reditya", "$email\n$displayName\n$uid")
-    }
+//    user?.run {
+//        Log.d("Reditya", "$email\n$displayName\n$uid")
+//    }
+
+    if (state.authCondition == AuthCondition.Success)
+        navigator.navigate(HomeScreenDestination)
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -60,8 +63,7 @@ fun LoginScreen(
                 onPasswordTextFieldValueChanged = { viewModel.onPasswordTextFieldValueChanged(it) },
                 onLoginClicked = {
                     viewModel.onLoginClicked()
-                    if (Firebase.auth.currentUser != null)
-                        navigator.navigate(HomeScreenDestination)
+                    Log.d("Reditya", state.authCondition.toString())
                 },
                 onRegisterClicked = { navigator.navigate(RegisterScreenDestination) {
                     popUpTo(WelcomeScreenDestination)

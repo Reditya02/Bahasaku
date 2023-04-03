@@ -30,6 +30,8 @@ import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.ui.destinations.EditProfileScreenDestination
 import com.example.bahasaku.ui.destinations.WelcomeScreenDestination
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 @Destination
 @Composable
@@ -75,7 +77,10 @@ fun ProfileScreen(
                 if (isOpenDialog) {
                     LogoutAlertDialog(
                         onDismissClicked = { isOpenDialog = false },
-                        onConfirmClicked = { navigator.navigate(WelcomeScreenDestination) }
+                        onConfirmClicked = {
+                            navigator.navigate(WelcomeScreenDestination)
+                            Firebase.auth.signOut()
+                        }
                     )
                 }
             }

@@ -68,7 +68,7 @@ class RegisterViewmodel @Inject constructor(
                     displayName = name
                     photoUri = Uri.parse("")
                 })
-                repository.populateDatabase()
+//                repository.populateDatabase()
                 Log.d("Reditya", "Complete Register")
             } catch (e: Exception) {
 //                    loadingState.emit(LoadingState.error(e.localizedMessage))
