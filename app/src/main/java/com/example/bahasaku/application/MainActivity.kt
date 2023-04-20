@@ -8,8 +8,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.bahasaku.NavGraphs
 import com.example.bahasaku.core.theme.BahasakuTheme
-import com.example.bahasaku.ui.NavGraphs
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint

@@ -28,8 +28,8 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.skydoves.landscapist.coil.CoilImage
 import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.BahasakuTheme
-import com.example.bahasaku.ui.destinations.EditProfileScreenDestination
-import com.example.bahasaku.ui.destinations.WelcomeScreenDestination
+import com.example.bahasaku.destinations.EditProfileScreenDestination
+import com.example.bahasaku.destinations.WelcomeScreenDestination
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

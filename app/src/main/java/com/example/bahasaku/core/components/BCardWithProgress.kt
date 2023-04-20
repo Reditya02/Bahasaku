@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -42,27 +43,30 @@ fun BCardWithProgress(
         ) {
             var progressColor by remember { mutableStateOf(ProgressColor.Red) }
 
-            progressColor = when (data.progress) {
+            val progress = 0.3f
+
+            progressColor = when (progress) {
                 in 0.0..0.4 -> ProgressColor.Red
                 in 0.4..0.8 -> ProgressColor.Yellow
                 in 0.8..1.0 -> ProgressColor.Green
                 else -> ProgressColor.Green
             }
 
+
             Spacer(modifier = Modifier.weight(1f))
             Text(text = data.title)
             Spacer(modifier = Modifier.weight(1f))
             Row(Modifier.fillMaxWidth()) {
                 Spacer(modifier = Modifier.weight(1f))
-                Text(text = "${(data.progress * 100).toInt()}%")
+                Text(text = "${(progress * 100).toInt()}%")
             }
             LinearProgressIndicator(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(CircleShape),
-                progress = data.progress,
-                color = progressColor.color,
-                backgroundColor = progressColor.background.copy(alpha = 0.6F)
+                progress = progress,
+//                color = progressColor.color,
+//                backgroundColor = progressColor.background.copy(alpha = 0.6F)
             )
         }
     }

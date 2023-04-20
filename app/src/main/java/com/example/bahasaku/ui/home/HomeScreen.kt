@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -17,9 +20,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BCardWithProgress
+import com.example.bahasaku.core.components.BChapterCard
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.ui.destinations.ListCourseScreenDestination
+import com.example.bahasaku.destinations.ListCourseScreenDestination
+import com.example.bahasaku.ui.login.LoginState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -28,12 +33,14 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     navigator: DestinationsNavigator,
-    viewModel:HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val snackbarHostState = SnackbarHostState()
     val scope = rememberCoroutineScope()
 
     val state by viewModel.state.collectAsState()
+
+    viewModel.getAllChapter()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -55,7 +62,9 @@ fun HomeScreen(
         ) { padding ->
             Column(Modifier.padding(padding)) {
                 HomeContent(
-                    { navigator.navigate(ListCourseScreenDestination(it)) },
+                    { id, title ->
+                        navigator.navigate(ListCourseScreenDestination(id, title))
+                    },
                     snackbarHostState,
                     {
                         snackbarHostState.currentSnackbarData?.dismiss()
@@ -65,7 +74,7 @@ fun HomeScreen(
                             )
                         }
                     },
-                    state.listChapter
+                    state
                 )
             }
             Column(Modifier.fillMaxWidth()) {
@@ -91,22 +100,29 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(
-    navigateToCourse: (Chapter) -> Unit,
+    navigateToCourse: (String, String) -> Unit,
     snackbarHostState: SnackbarHostState,
     showSnackbar: () -> Unit,
-    data: List<Chapter>
+    data: HomeState
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        LazyColumn(
+        LazyVerticalGrid(
+            modifier = Modifier.padding(horizontal = 8.dp),
+            columns = GridCells.Fixed(2),
             content = {
-                items(data) {
-                    BCardWithProgress(
-                        data = it,
+                items(data.listChapter) {
+//                    BCardWithProgress(
+//                        data = it,
+//                        navigateToCourse = navigateToCourse,
+//                        showSnackbar = showSnackbar,
+//                    )
+                    BChapterCard(
+                        chapterData = it,
                         navigateToCourse = navigateToCourse,
-                        showSnackbar = showSnackbar,
+                        showSnackbar = showSnackbar
                     )
                 }
             }

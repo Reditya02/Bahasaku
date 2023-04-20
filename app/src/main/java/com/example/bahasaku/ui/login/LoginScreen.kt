@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
-import com.example.bahasaku.ui.destinations.HomeScreenDestination
-import com.example.bahasaku.ui.destinations.RegisterScreenDestination
-import com.example.bahasaku.ui.destinations.WelcomeScreenDestination
+import com.example.bahasaku.destinations.HomeScreenDestination
+import com.example.bahasaku.destinations.RegisterScreenDestination
+import com.example.bahasaku.destinations.WelcomeScreenDestination
 import com.example.bahasaku.ui.register.AuthCondition
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

@@ -18,8 +18,8 @@ import com.example.bahasaku.core.components.BCourseCard
 import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Course
-import com.example.bahasaku.ui.destinations.ExerciseScreenDestination
-import com.example.bahasaku.ui.destinations.ReadingScreenDestination
+import com.example.bahasaku.destinations.ExerciseScreenDestination
+import com.example.bahasaku.destinations.ReadingScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -28,7 +28,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListCourseScreen(
     navigator: DestinationsNavigator,
-    data: Chapter,
+    id: String,
+    title: String,
     viewModel: ListCourseViewModel = hiltViewModel()
 ) {
     val snackbarHostState = SnackbarHostState()
@@ -36,7 +37,7 @@ fun ListCourseScreen(
 
     val state by viewModel.state.collectAsState()
 
-    viewModel.getAllCourse(data.id)
+    viewModel.getAllCourse(id)
 
     Surface {
         Column {
@@ -57,7 +58,7 @@ fun ListCourseScreen(
                     }
                 },
                 snackbarHostState,
-                data,
+                title,
                 state
             )
         }
@@ -70,13 +71,13 @@ fun ListCourseContent(
     navigateToCourseContent: (Course) -> Unit,
     showSnackbar: () -> Unit,
     snackbarHostState: SnackbarHostState,
-    chapter: Chapter,
+    title: String,
     courseData: ListCourseState
 ) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = chapter.title) },
+                title = { Text(text = title) },
                 Modifier.background(MaterialTheme.colors.background),
                 navigationIcon = {
                     IconButton(onClick = onBackPressed) {

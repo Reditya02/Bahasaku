@@ -18,8 +18,8 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.BahasakuTheme
-import com.example.bahasaku.ui.destinations.LoginScreenDestination
-import com.example.bahasaku.ui.destinations.RegisterScreenDestination
+import com.example.bahasaku.destinations.LoginScreenDestination
+import com.example.bahasaku.destinations.RegisterScreenDestination
 import com.example.bahasaku.ui.register.RegisterScreen
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
