@@ -74,7 +74,7 @@ fun BChapterCard(
 
             LaunchedEffect(Unit) {
                 val storage = FirebaseStorage.getInstance().reference
-                val url = storage.child("Hewan/anak_bebek.png").downloadUrl.await()
+                val url = storage.child(chapterData.imageUrl).downloadUrl.await()
                 image.value = url.toString()
             }
 

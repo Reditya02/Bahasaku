@@ -14,7 +14,7 @@ data class Chapter(
     val courseNumber: Int,
     val done: Int = 0,
     val isAvailable: Boolean = false,
-    val iconUrl: String
+    val imageUrl: String
 ) {
     companion object {
         val getListDummy: List<Chapter>
@@ -27,7 +27,7 @@ data class Chapter(
                             courseNumber = i,
                             done = Random.nextInt(0, i),
                             isAvailable = i != 10,
-                            iconUrl = Icons.Default.WavingHand.name
+                            imageUrl = "Hewan/anak_bebek.png"
                         )
                     )
                 }
