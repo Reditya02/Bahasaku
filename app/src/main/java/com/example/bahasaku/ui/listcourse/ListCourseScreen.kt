@@ -93,10 +93,9 @@ fun ListCourseContent(
                     items(courseData.listCourse) {
                         BCourseCard(
                             Modifier.fillMaxWidth(),
-                            data = it,
+                            courseData = it,
                             navigateToCourseContent = navigateToCourseContent,
                             showSnackbar = showSnackbar,
-
                         )
                     }
                 }
@@ -111,15 +110,3 @@ fun ListCourseContent(
         }
     }
 }
-//
-//@Preview
-//@Composable
-//fun ListCoursePreview() {
-//    BahasakuTheme {
-//        Surface {
-//            Column {
-//                ListCourseContent({}, {})
-//            }
-//        }
-//    }
-//}

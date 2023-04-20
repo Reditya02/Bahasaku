@@ -13,6 +13,7 @@ data class Course(
     val id: String = "",
     val chapterId: String = "",
     val name: String,
+    val imageUrl: String,
     val type: CourseType,
     var isAvailable: Boolean = false,
     var isDone: Boolean = false,
@@ -34,7 +35,8 @@ data class Course(
                             name = "Course $i $type",
                             type = type,
                             isAvailable = i <= 10,
-                            isDone = i < 6
+                            isDone = i < 6,
+                            imageUrl = "Hewan/anak_bebek.png"
                         )
                     )
                 }
