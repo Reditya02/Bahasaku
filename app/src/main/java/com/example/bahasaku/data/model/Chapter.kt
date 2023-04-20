@@ -1,19 +1,21 @@
 package com.example.bahasaku.data.model
 
-import android.os.Parcelable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.WavingHand
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.Parcelize
+import kotlin.random.Random
 
 @Entity
-@Parcelize
 data class Chapter(
     @PrimaryKey
     val id: String = "",
     val title: String,
-    var progress: Float = 0F,
-    var isAvailable: Boolean = false,
-) : Parcelable {
+    val courseNumber: Int,
+    val done: Int = 0,
+    val isAvailable: Boolean = false,
+    val iconUrl: String
+) {
     companion object {
         val getListDummy: List<Chapter>
             get() {
@@ -22,8 +24,10 @@ data class Chapter(
                     data.add(
                         Chapter(
                             title = "Bab $i",
-                            progress = (10 - i.toFloat()) / 10,
-                            isAvailable = i != 10
+                            courseNumber = i,
+                            done = Random.nextInt(0, i),
+                            isAvailable = i != 10,
+                            iconUrl = Icons.Default.WavingHand.name
                         )
                     )
                 }

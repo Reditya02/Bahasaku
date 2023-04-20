@@ -14,8 +14,8 @@ interface BDao {
     @Query("select * from chapter")
     suspend fun getAllChapter(): List<Chapter>
 
-    @Query("update chapter set progress = :progress where id like :chapterId")
-    suspend fun updateChapterProgress(chapterId: String, progress: Float)
+    @Query("update chapter set done = done + 1 where id like :chapterId")
+    suspend fun updateChapterProgress(chapterId: String)
 
     @Query("update chapter set isAvailable = 1 where id like :chapterId")
     suspend fun makeChapterAvailable(chapterId: String)

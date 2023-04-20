@@ -1,5 +1,7 @@
 package com.example.bahasaku.data
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.WavingHand
 import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Course
@@ -9,24 +11,39 @@ object Populate {
         Chapter(
             id = "1",
             title = "Bab I",
-            isAvailable = true
+            isAvailable = true,
+            courseNumber = 0,
+            done = 0,
+            iconUrl = Icons.Default.WavingHand.name
         ),
         Chapter(
             id = "2",
             title = "Bab II",
-            isAvailable = true
+            isAvailable = true,
+            courseNumber = 0,
+            done = 0,
+            iconUrl = Icons.Default.WavingHand.name
         ),
         Chapter(
             id = "3",
-            title = "Bab III"
+            title = "Bab III",
+            courseNumber = 0,
+            done = 0,
+            iconUrl = Icons.Default.WavingHand.name
         ),
         Chapter(
             id = "4",
-            title = "Bab IV"
+            title = "Bab IV",
+            courseNumber = 0,
+            done = 0,
+            iconUrl = Icons.Default.WavingHand.name
         ),
         Chapter(
             id = "5",
-            title = "Bab V"
+            title = "Bab V",
+            courseNumber = 0,
+            done = 0,
+            iconUrl = Icons.Default.WavingHand.name
         ),
     )
 
