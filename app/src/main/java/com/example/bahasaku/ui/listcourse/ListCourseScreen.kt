@@ -3,6 +3,9 @@ package com.example.bahasaku.ui.listcourse
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -13,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BCourseCard
 import com.example.bahasaku.core.components.CourseType
@@ -88,7 +92,9 @@ fun ListCourseContent(
         }
     ) { padding ->
         Column(Modifier.padding(padding)) {
-            LazyColumn(
+            LazyVerticalGrid(
+                modifier = Modifier.padding(horizontal = 8.dp),
+                columns = GridCells.Fixed(4),
                 content = {
                     items(courseData.listCourse) {
                         BCourseCard(

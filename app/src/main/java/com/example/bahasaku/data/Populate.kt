@@ -14,7 +14,7 @@ object Populate {
             isAvailable = true,
             courseNumber = 0,
             done = 0,
-            iconUrl = Icons.Default.WavingHand.name
+            imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "2",
@@ -22,28 +22,28 @@ object Populate {
             isAvailable = true,
             courseNumber = 0,
             done = 0,
-            iconUrl = Icons.Default.WavingHand.name
+            imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "3",
             title = "Bab III",
             courseNumber = 0,
             done = 0,
-            iconUrl = Icons.Default.WavingHand.name
+            imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "4",
             title = "Bab IV",
             courseNumber = 0,
             done = 0,
-            iconUrl = Icons.Default.WavingHand.name
+            imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "5",
             title = "Bab V",
             courseNumber = 0,
             done = 0,
-            iconUrl = Icons.Default.WavingHand.name
+            imageUrl = "Hewan/anak_bebek.png"
         ),
     )
 

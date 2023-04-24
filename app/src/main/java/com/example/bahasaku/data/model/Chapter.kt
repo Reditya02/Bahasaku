@@ -14,7 +14,7 @@ data class Chapter(
     val courseNumber: Int,
     val done: Int = 0,
     val isAvailable: Boolean = false,
-    val imageUrl: String
+    val imageUrl: String = ""
 ) {
     companion object {
         val getListDummy: List<Chapter>

@@ -28,15 +28,4 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getImage(list: List<Chapter>) {
-        viewModelScope.launch {
-            val storage = Firebase.storage("gs://bahasaku-6785c.appspot.com").reference
-            list.forEachIndexed { index, chapter ->
-                storage.child(chapter.iconUrl).downloadUrl.addOnSuccessListener { uri ->
-                    _state.update { it.copy(listImage = it.listImage.mapIndexed { i, uri -> if (i == index) uri }) }
-                }
-            }
-        }
-    }
-
 }

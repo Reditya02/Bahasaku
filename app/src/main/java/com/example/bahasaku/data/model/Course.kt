@@ -13,7 +13,7 @@ data class Course(
     val id: String = "",
     val chapterId: String = "",
     val name: String,
-    val imageUrl: String,
+    val imageUrl: String = "Hewan/anak_bebek.png",
     val type: CourseType,
     var isAvailable: Boolean = false,
     var isDone: Boolean = false,
