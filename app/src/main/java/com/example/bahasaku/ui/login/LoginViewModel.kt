@@ -77,4 +77,9 @@ class LoginViewModel @Inject constructor(
         }
         _state.update { it.copy(isPasswordValid = isValid) }
     }
+
+    fun onHideShowPasswordToggled() {
+        _state.update { it.copy(isPasswordShown = !_state.value.isPasswordShown) }
+        Log.d("Reditya", _state.value.isPasswordShown.toString())
+    }
 }

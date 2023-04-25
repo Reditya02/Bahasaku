@@ -10,6 +10,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
@@ -19,6 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -67,7 +71,10 @@ fun LoginScreen(
                 },
                 onRegisterClicked = { navigator.navigate(RegisterScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
-                } }
+                } },
+                onHideShowPasswordToggled = { viewModel.onHideShowPasswordToggled() },
+                isPasswordShown = state.isPasswordShown
+
             )
         }
     }
@@ -80,7 +87,10 @@ fun LoginContent(
     passwordValue: String,
     onPasswordTextFieldValueChanged: (String) -> Unit,
     onLoginClicked: () -> Unit,
-    onRegisterClicked: () -> Unit
+    onRegisterClicked: () -> Unit,
+    onHideShowPasswordToggled: () -> Unit,
+    isPasswordShown: Boolean
+
 ) {
     Scaffold(
         topBar = {
@@ -125,7 +135,17 @@ fun LoginContent(
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
-                )
+                ),
+                trailingIcon = {
+                    IconButton(onClick = onHideShowPasswordToggled) {
+                        Icon(
+                            imageVector = if (isPasswordShown) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                            contentDescription = null
+                        )
+                    }
+                },
+                visualTransformation = if (isPasswordShown) VisualTransformation.None else PasswordVisualTransformation()
+
             )
             Button(
                 modifier = Modifier
@@ -170,7 +190,10 @@ fun LoginPreview() {
                     passwordValue = "",
                     onPasswordTextFieldValueChanged = {},
                     onLoginClicked = {},
-                    onRegisterClicked = {})
+                    onRegisterClicked = {},
+                    onHideShowPasswordToggled = {},
+                    isPasswordShown = false,
+                )
             }
         }
     }

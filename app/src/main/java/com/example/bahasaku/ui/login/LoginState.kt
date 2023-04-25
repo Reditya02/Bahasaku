@@ -10,5 +10,7 @@ data class LoginState(
     val isPasswordValid: Boolean = false,
     val isLoginValid: Boolean = false,
 
-    val authCondition: AuthCondition = AuthCondition.None
+    val authCondition: AuthCondition = AuthCondition.None,
+
+    val isPasswordShown: Boolean = false
 )
