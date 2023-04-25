@@ -7,9 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
@@ -19,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,8 +41,8 @@ fun RegisterScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    if (Firebase.auth.currentUser != null)
-        navigator.navigate(HomeScreenDestination)
+//    if (Firebase.auth.currentUser != null)
+//        navigator.navigate(HomeScreenDestination)
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -64,6 +64,10 @@ fun RegisterScreen(
                 onLoginClicked = { navigator.navigate(LoginScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
                 } },
+                onHideShowPasswordToggled = { viewModel.onHideShowPasswordToggled() },
+                isPasswordShown = state.isPasswordShown,
+                onHideShowRetypePasswordToggled = { viewModel.onHideShowRetypePasswordToggled() },
+                isRetypePasswordShown = state.isRetypePasswordShown
             )
         }
     }
@@ -80,7 +84,11 @@ fun RegisterContent(
     retypePasswordValue: String,
     onRetypePasswordTextFieldValueChanged: (String) -> Unit,
     onCreateAccountClicked: () -> Unit,
-    onLoginClicked: () -> Unit
+    onLoginClicked: () -> Unit,
+    onHideShowPasswordToggled: () -> Unit,
+    isPasswordShown: Boolean,
+    onHideShowRetypePasswordToggled: () -> Unit,
+    isRetypePasswordShown: Boolean
 ) {
     Scaffold(
         topBar = {
@@ -138,7 +146,13 @@ fun RegisterContent(
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
-                )
+                ),
+                trailingIcon = { IconButton(onClick = onHideShowPasswordToggled) { Icon(
+                    imageVector = if (isPasswordShown) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                    contentDescription = null
+                ) } },
+                visualTransformation = if (isPasswordShown) VisualTransformation.None else PasswordVisualTransformation()
+
             )
             BEditText(
                 modifier = Modifier
@@ -151,7 +165,13 @@ fun RegisterContent(
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
-                )
+                ),
+                trailingIcon = { IconButton(onClick = onHideShowRetypePasswordToggled) { Icon(
+                    imageVector = if (isRetypePasswordShown) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                    contentDescription = null
+                ) } },
+                visualTransformation = if (isRetypePasswordShown) VisualTransformation.None else PasswordVisualTransformation()
+
             )
             Button(
                 modifier = Modifier
@@ -181,29 +201,29 @@ fun RegisterContent(
     }
 }
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Composable
-fun RegisterPreview() {
-    BahasakuTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-            Column {
-                RegisterContent(
-                    nameValue = "",
-                    onNameTextFieldValueChanged = {},
-                    emailValue = "",
-                    onEmailTextFieldValueChanged = {},
-                    passwordValue = "",
-                    onPasswordTextFieldValueChanged = {},
-                    retypePasswordValue = "",
-                    onRetypePasswordTextFieldValueChanged = {},
-                    onCreateAccountClicked = {},
-                    onLoginClicked = {}
-
-                )
-            }
-        }
-    }
-}
+//@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
+//@Composable
+//fun RegisterPreview() {
+//    BahasakuTheme {
+//        Surface(
+//            modifier = Modifier.fillMaxSize(),
+//            color = MaterialTheme.colors.background
+//        ) {
+//            Column {
+//                RegisterContent(
+//                    nameValue = "",
+//                    onNameTextFieldValueChanged = {},
+//                    emailValue = "",
+//                    onEmailTextFieldValueChanged = {},
+//                    passwordValue = "",
+//                    onPasswordTextFieldValueChanged = {},
+//                    retypePasswordValue = "",
+//                    onRetypePasswordTextFieldValueChanged = {},
+//                    onCreateAccountClicked = {},
+//                    onLoginClicked = {}
+//
+//                )
+//            }
+//        }
+//    }
+//}

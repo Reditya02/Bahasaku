@@ -136,14 +136,10 @@ fun LoginContent(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
                 ),
-                trailingIcon = {
-                    IconButton(onClick = onHideShowPasswordToggled) {
-                        Icon(
-                            imageVector = if (isPasswordShown) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                            contentDescription = null
-                        )
-                    }
-                },
+                trailingIcon = { IconButton(onClick = onHideShowPasswordToggled) { Icon(
+                    imageVector = if (isPasswordShown) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                    contentDescription = null
+                ) } },
                 visualTransformation = if (isPasswordShown) VisualTransformation.None else PasswordVisualTransformation()
 
             )

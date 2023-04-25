@@ -6,14 +6,18 @@ data class RegisterState(
     val password: String = "",
     val retypePassword: String = "",
 
-    var isEmailValid: Boolean = false,
-    var isPasswordValid: Boolean = false,
-    var isRetypePasswordValid: Boolean = false,
-    var isNameValid: Boolean = false,
-    var isRegisterValid: Boolean = false,
+    val isEmailValid: Boolean = false,
+    val isPasswordValid: Boolean = false,
+    val isRetypePasswordValid: Boolean = false,
+    val isNameValid: Boolean = false,
+    val isRegisterValid: Boolean = false,
 
 
-    val authCondition: AuthCondition = AuthCondition.None
+    val authCondition: AuthCondition = AuthCondition.None,
+
+    val isPasswordShown: Boolean = false,
+    val isRetypePasswordShown: Boolean = false
+
 )
 
 enum class AuthCondition {

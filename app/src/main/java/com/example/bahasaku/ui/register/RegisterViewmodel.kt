@@ -99,4 +99,12 @@ class RegisterViewmodel @Inject constructor(
     fun isNameValid() {
         _state.update { it.copy(isNameValid = it.name.all { c -> c.isLetter() }) }
     }
+
+    fun onHideShowPasswordToggled() {
+        _state.update { it.copy(isPasswordShown = !_state.value.isPasswordShown) }
+    }
+
+    fun onHideShowRetypePasswordToggled() {
+        _state.update { it.copy(isRetypePasswordShown = !_state.value.isRetypePasswordShown) }
+    }
 }
