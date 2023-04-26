@@ -23,8 +23,10 @@ import com.example.bahasaku.core.components.BCardWithProgress
 import com.example.bahasaku.core.components.BChapterCard
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.example.bahasaku.data.model.Chapter
+import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.example.bahasaku.destinations.ListCourseScreenDestination
 import com.example.bahasaku.ui.login.LoginState
+import com.google.firebase.firestore.FirebaseFirestore
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -61,6 +63,7 @@ fun HomeScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
+                viewModel.updateProgress()
                 HomeContent(
                     { id, title ->
                         navigator.navigate(ListCourseScreenDestination(id, title))
@@ -113,18 +116,17 @@ fun HomeContent(
             modifier = Modifier.padding(horizontal = 8.dp),
             columns = GridCells.Fixed(2),
             content = {
-                items(data.listChapter) {
-//                    BCardWithProgress(
-//                        data = it,
-//                        navigateToCourse = navigateToCourse,
-//                        showSnackbar = showSnackbar,
-//                    )
-                    BChapterCard(
-                        chapterData = it,
-                        navigateToCourse = navigateToCourse,
-                        showSnackbar = showSnackbar
-                    )
+                if (data.listChapter.isNotEmpty() && data.progress.isAvailable.size > 0) {
+                    items(data.listChapter) {
+                        BChapterCard(
+                            chapterData = it,
+                            navigateToCourse = navigateToCourse,
+                            showSnackbar = showSnackbar,
+                            isAvailable = data.progress.isAvailable[it.id.toInt()]
+                        )
+                    }
                 }
+
             }
         )
     }

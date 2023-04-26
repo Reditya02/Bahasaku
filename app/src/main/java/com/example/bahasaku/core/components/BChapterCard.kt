@@ -43,6 +43,7 @@ import kotlinx.coroutines.tasks.await
 fun BChapterCard(
     modifier: Modifier = Modifier,
     chapterData: Chapter,
+    isAvailable: Boolean,
     navigateToCourse: (String, String) -> Unit,
     showSnackbar: () -> Unit,
 ) {
@@ -52,7 +53,7 @@ fun BChapterCard(
             .aspectRatio(1f)
 //            .fillMaxWidth()
             .clickable {
-                if (chapterData.isAvailable)
+                if (isAvailable)
                     navigateToCourse(chapterData.id, chapterData.title)
                 else
                     showSnackbar()
@@ -64,7 +65,7 @@ fun BChapterCard(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .alpha(if (chapterData.isAvailable) 1f else 0.5f),
+                .alpha(if (isAvailable) 1f else 0.5f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
