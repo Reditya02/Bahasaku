@@ -1,7 +1,5 @@
 package com.example.bahasaku.data
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.WavingHand
 import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Course
@@ -9,40 +7,51 @@ import com.example.bahasaku.data.model.Course
 object Populate {
     val populateChapter = listOf(
         Chapter(
-            id = "1",
-            title = "Bab I",
-            isAvailable = true,
+            id = "0",
+            title = "Salam dan Perkenalan",
             courseNumber = 0,
-            done = 0,
+            imageUrl = "Hewan/anak_bebek.png"
+        ),
+        Chapter(
+            id = "1",
+            title = "Benda",
+            courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "2",
-            title = "Bab II",
-            isAvailable = true,
+            title = "Angka",
             courseNumber = 0,
-            done = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "3",
-            title = "Bab III",
+            title = "Hewan",
             courseNumber = 0,
-            done = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "4",
-            title = "Bab IV",
+            title = "Makanan",
             courseNumber = 0,
-            done = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "5",
-            title = "Bab V",
+            title = "Minuman",
             courseNumber = 0,
-            done = 0,
+            imageUrl = "Hewan/anak_bebek.png"
+        ),
+        Chapter(
+            id = "6",
+            title = "Amggota Badan",
+            courseNumber = 0,
+            imageUrl = "Hewan/anak_bebek.png"
+        ),
+        Chapter(
+            id = "7",
+            title = "Kata Kerja",
+            courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
     )

@@ -1,10 +1,7 @@
 package com.example.bahasaku.data.model
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.WavingHand
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlin.random.Random
 
 @Entity
 data class Chapter(
@@ -12,8 +9,6 @@ data class Chapter(
     val id: String = "",
     val title: String,
     val courseNumber: Int,
-    val done: Int = 0,
-    val isAvailable: Boolean = false,
     val imageUrl: String = ""
 ) {
     companion object {
@@ -25,8 +20,6 @@ data class Chapter(
                         Chapter(
                             title = "Bab $i",
                             courseNumber = i,
-                            done = Random.nextInt(0, i),
-                            isAvailable = i != 10,
                             imageUrl = "Hewan/anak_bebek.png"
                         )
                     )
