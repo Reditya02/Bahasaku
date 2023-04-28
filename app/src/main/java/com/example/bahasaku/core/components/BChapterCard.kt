@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
-import com.example.bahasaku.data.LocalIcon
 import com.example.bahasaku.data.model.Chapter
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -88,7 +87,7 @@ fun BChapterCard(
             Spacer(modifier = Modifier.height(12.dp))
             Text(text = chapterData.title, style = MaterialTheme.typography.body2)
             Spacer(modifier = Modifier.height(12.dp))
-            Text(text = chapterData.run { "$done/$courseNumber" }, style = MaterialTheme.typography.caption)
+            Text(text = chapterData.run { "0/$courseNumber" }, style = MaterialTheme.typography.caption)
         }
     }
 }

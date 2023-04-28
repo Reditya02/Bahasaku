@@ -116,13 +116,13 @@ fun HomeContent(
             modifier = Modifier.padding(horizontal = 8.dp),
             columns = GridCells.Fixed(2),
             content = {
-                if (data.listChapter.isNotEmpty() && data.progress.isAvailable.size > 0) {
+                if (data.listChapter.isNotEmpty() && data.progress.available.size > 0) {
                     items(data.listChapter) {
                         BChapterCard(
                             chapterData = it,
                             navigateToCourse = navigateToCourse,
                             showSnackbar = showSnackbar,
-                            isAvailable = data.progress.isAvailable[it.id.toInt()]
+                            isAvailable = data.progress.available[it.id.toInt()]
                         )
                     }
                 }

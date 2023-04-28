@@ -2,7 +2,8 @@ package com.example.bahasaku.data.model.remote
 
 import com.google.firebase.firestore.PropertyName
 
-data class ProgressChapter(
+data class ProgressCard(
     val available: MutableList<Boolean> = mutableListOf(),
-    val progress: MutableList<Int> = mutableListOf()
+
+    val done: MutableList<Boolean> = mutableListOf()
 )
