@@ -3,53 +3,62 @@ package com.example.bahasaku.data
 import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Course
+import com.example.bahasaku.data.model.Word
 
 object Populate {
     val populateChapter = listOf(
         Chapter(
-            id = "0",
-            title = "Salam dan Perkenalan",
+            id = "00",
+            title = "Salam",
             courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
-            id = "1",
-            title = "Benda",
+            id = "01",
+            title = "Panggilan",
             courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
-            id = "2",
-            title = "Angka",
-            courseNumber = 0,
-            imageUrl = "Hewan/anak_bebek.png"
-        ),
-        Chapter(
-            id = "3",
+            id = "02",
             title = "Hewan",
             courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
-            id = "4",
-            title = "Makanan",
+            id = "03",
+            title = "Angka",
             courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
-            id = "5",
-            title = "Minuman",
+            id = "04",
+            title = "Benda",
             courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
-            id = "6",
+            id = "05",
+            title = "Makanan dan Minuman",
+            courseNumber = 0,
+            imageUrl = "Hewan/anak_bebek.png"
+        ),
+        Chapter(
+            id = "06",
             title = "Amggota Badan",
             courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
-            id = "7",
+            id = "07",
+            title = "Kata Kerja",
+            courseNumber = 0,
+            imageUrl = "Hewan/anak_bebek.png"
+        ),
+
+        //Child
+        Chapter(
+            id = "12",
             title = "Kata Kerja",
             courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
@@ -512,5 +521,308 @@ object Populate {
             reading = ""
         ),
 
+    )
+
+    val populateWord = listOf(
+        //Salam
+        Word(
+            id = "0000",
+            courseId = "00",
+            indonesian = "Selamat Pagi",
+            balinese = "Rahajeng Semeng",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0001",
+            courseId = "00",
+            indonesian = "Selamat Siang",
+            balinese = "Rahajeng Siang",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0002",
+            courseId = "00",
+            indonesian = "Selamat Malam",
+            balinese = "Rahajeng Wengi",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0003",
+            courseId = "00",
+            indonesian = "Selamat Makan",
+            balinese = "Rahajeng Majengan",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0004",
+            courseId = "00",
+            indonesian = "Selamat Tahun Baru",
+            balinese = "Rahajeng Nyanggra Warsa Anyar",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0005",
+            courseId = "00",
+            indonesian = "Selamat Ulang Tahun",
+            balinese = "Rahajeng Wanti Warsa",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0006",
+            courseId = "00",
+            indonesian = "Selamat Tinggal",
+            balinese = "Rahajeng Memargi",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0007",
+            courseId = "00",
+            indonesian = "Semoga Selamat",
+            balinese = "Dumogi Rahayu",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+
+        //Panggilan
+        Word(
+            id = "0100",
+            courseId = "01",
+            indonesian = "",
+            balinese = "",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+
+        //Hewan
+        Word(
+            id = "0200",
+            courseId = "02",
+            indonesian = "Kuda",
+            balinese = "Jaran",
+            imageUrl = "",
+            option = "",
+            wordChild = "1200"
+        ),
+        Word(
+            id = "0201",
+            courseId = "02",
+            indonesian = "Kambing",
+            balinese = "Kambing",
+            imageUrl = "",
+            option = "",
+            wordChild = "1201"
+        ),
+        Word(
+            id = "0202",
+            courseId = "02",
+            indonesian = "Kucing",
+            balinese = "Meong",
+            imageUrl = "",
+            option = "",
+            wordChild = "1202"
+        ),
+        Word(
+            id = "0203",
+            courseId = "02",
+            indonesian = "Bebek",
+            balinese = "Bebek",
+            imageUrl = "",
+            option = "",
+            wordChild = "1203"
+        ),
+        Word(
+            id = "0204",
+            courseId = "02",
+            indonesian = "Anjing",
+            balinese = "Cicing",
+            imageUrl = "",
+            option = "",
+            wordChild = "1204"
+        ),
+        Word(
+            id = "0205",
+            courseId = "02",
+            indonesian = "Kerbau",
+            balinese = "Kebo",
+            imageUrl = "",
+            option = "",
+            wordChild = "1205"
+        ),
+        Word(
+            id = "0206",
+            courseId = "02",
+            indonesian = "Tikus",
+            balinese = "Bikul",
+            imageUrl = "",
+            option = "",
+            wordChild = "1206"
+        ),
+        Word(
+            id = "0207",
+            courseId = "02",
+            indonesian = "Babi",
+            balinese = "Bangkung",
+            imageUrl = "",
+            option = "",
+            wordChild = "1207"
+        ),
+        Word(
+            id = "0208",
+            courseId = "02",
+            indonesian = "Ular",
+            balinese = "Lelipi",
+            imageUrl = "",
+            option = "",
+            wordChild = "1208"
+        ),
+        Word(
+            id = "0209",
+            courseId = "02",
+            indonesian = "Monyet/Kera",
+            balinese = "Bojog",
+            imageUrl = "",
+            option = "",
+            wordChild = "1209"
+        ),
+        Word(
+            id = "0210",
+            courseId = "02",
+            indonesian = "Sapi",
+            balinese = "Sampi",
+            imageUrl = "",
+            option = "",
+            wordChild = "1210"
+        ),
+        Word(
+            id = "0211",
+            courseId = "02",
+            indonesian = "Kepiting",
+            balinese = "Yuyu",
+            imageUrl = "",
+            option = "",
+            wordChild = "12011"
+        ),
+
+        //Child
+        Word(
+            id = "1200",
+            courseId = "12",
+            indonesian = "Anak Kuda",
+            balinese = "Bebedag",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1201",
+            courseId = "12",
+            indonesian = "Anak Kambing",
+            balinese = "Wiwi",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1202",
+            courseId = "12",
+            indonesian = "Anak Kucing",
+            balinese = "Tai",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1203",
+            courseId = "12",
+            indonesian = "Anak Bebek",
+            balinese = "Memeri",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1204",
+            courseId = "12",
+            indonesian = "Anak Anjing",
+            balinese = "Kuluk",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1205",
+            courseId = "12",
+            indonesian = "Anak Kerbau",
+            balinese = "Bedigal",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1206",
+            courseId = "12",
+            indonesian = "Anak Tikus",
+            balinese = "Nyinh-nying",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1207",
+            courseId = "12",
+            indonesian = "Anak Babi",
+            balinese = "Kucit",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1208",
+            courseId = "12",
+            indonesian = "Anak Ular",
+            balinese = "Brara",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1209",
+            courseId = "12",
+            indonesian = "Anak Monyet/Kera",
+            balinese = "Apa",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1210",
+            courseId = "12",
+            indonesian = "Anak Sapi",
+            balinese = "Godel",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "1211",
+            courseId = "12",
+            indonesian = "Anak Kepiting",
+            balinese = "Kreket/Utung-utung",
+            imageUrl = "",
+            option = "",
+        ),
+
+        //Makanan
+
+        //Minuman
+
+        //Anggota Badan
+
+        //Kata Kerja
     )
 }

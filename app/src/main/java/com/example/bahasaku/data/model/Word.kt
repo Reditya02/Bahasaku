@@ -14,7 +14,8 @@ data class Word(
     val indonesian: String = "",
     val balinese: String = "",
     val imageUrl: String = "Hewan/anak_bebek.png",
-    val option: String = ""
+    val option: String = "",
+    val wordChild: String = ""
 ) : Parcelable {
     fun getOptionList(): List<String> {
         return option.split("$").shuffled()
