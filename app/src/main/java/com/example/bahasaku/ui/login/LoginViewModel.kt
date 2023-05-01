@@ -22,6 +22,12 @@ class LoginViewModel @Inject constructor(
     private val _state = MutableStateFlow(LoginState())
     val state: StateFlow<LoginState> = _state
 
+    init {
+        viewModelScope.launch {
+            repository.getAllChapter()
+        }
+    }
+
     fun onEmailTextFieldValueChanged(value: String) {
         _state.update { it.copy(email = value) }
     }
@@ -48,15 +54,9 @@ class LoginViewModel @Inject constructor(
     fun login() = viewModelScope.launch {
         _state.value.apply {
             try {
-//                    loadingState.emit(LoadingState.LOADING)
-                Log.d("Reditya", "Start Login")
                 Firebase.auth.signInWithEmailAndPassword(email, password).await()
-//                    loadingState.emit(LoadingState.LOADED)
                 _state.update { it.copy(authCondition = AuthCondition.Success) }
-                Log.d("Reditya", "Complete Login")
             } catch (e: Exception) {
-//                    loadingState.emit(LoadingState.error(e.localizedMessage))
-                Log.d("Reditya", e.toString())
                 _state.update { it.copy(authCondition = AuthCondition.Failed) }
 
             }
@@ -80,6 +80,5 @@ class LoginViewModel @Inject constructor(
 
     fun onHideShowPasswordToggled() {
         _state.update { it.copy(isPasswordShown = !_state.value.isPasswordShown) }
-        Log.d("Reditya", _state.value.isPasswordShown.toString())
     }
 }

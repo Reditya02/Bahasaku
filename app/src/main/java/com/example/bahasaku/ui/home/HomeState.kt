@@ -10,7 +10,7 @@ data class HomeState(
         Uri.parse("android.resource://com.example.bahasaku/drawable/placeholder_image")
     },
     val progress: ProgressChapter = ProgressChapter(
-        isAvailable = mutableListOf(),
+        available = mutableListOf(),
         progress = mutableListOf()
     )
 )
