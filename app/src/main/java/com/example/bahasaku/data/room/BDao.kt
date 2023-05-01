@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Course
 import com.example.bahasaku.data.model.Question
+import com.example.bahasaku.data.model.Word
 
 @Dao
 interface BDao {
@@ -14,11 +15,11 @@ interface BDao {
     @Query("select * from chapter")
     suspend fun getAllChapter(): List<Chapter>
 
-    @Query("update chapter set done = done + 1 where id like :chapterId")
-    suspend fun updateChapterProgress(chapterId: String)
+//    @Query("update chapter set done = done + 1 where id like :chapterId")
+//    suspend fun updateChapterProgress(chapterId: String)
 
-    @Query("update chapter set isAvailable = 1 where id like :chapterId")
-    suspend fun makeChapterAvailable(chapterId: String)
+//    @Query("update chapter set isAvailable = 1 where id like :chapterId")
+//    suspend fun makeChapterAvailable(chapterId: String)
 
     //Course Section
     @Query("select * from course where chapterId like :chapterId")
@@ -37,6 +38,10 @@ interface BDao {
     @Query("select * from question where courseId like :courseId")
     suspend fun getAllQuestion(courseId: String): List<Question>
 
+    //Card Section
+    @Query("select * from word where chapterId like :chapterId")
+    suspend fun getAllWordById(chapterId: String): List<Word>
+
     //Populate Section
     @Insert(onConflict = REPLACE)
     fun populateChapter(list: List<Chapter>)
@@ -46,4 +51,7 @@ interface BDao {
 
     @Insert(onConflict = REPLACE)
     fun populateQuestion(list: List<Question>)
+
+    @Insert(onConflict = REPLACE)
+    fun populateWord(list: List<Word>)
 }

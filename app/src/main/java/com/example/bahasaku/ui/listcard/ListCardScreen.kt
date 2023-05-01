@@ -1,10 +1,14 @@
-package com.example.bahasaku.ui.listcourse
+package com.example.bahasaku.ui.listcard
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronLeft
@@ -17,40 +21,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BWordCard
-import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.data.model.Course
-import com.example.bahasaku.destinations.ExerciseScreenDestination
-import com.example.bahasaku.destinations.ReadingScreenDestination
+import com.example.bahasaku.data.model.Word
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 
 @Destination
 @Composable
-fun ListCourseScreen(
+fun ListCardScreen(
     navigator: DestinationsNavigator,
     id: String,
     title: String,
-    viewModel: ListCourseViewModel = hiltViewModel()
+    viewModel: ListCardViewModel = hiltViewModel()
 ) {
     val snackbarHostState = SnackbarHostState()
     val scope = rememberCoroutineScope()
 
     val state by viewModel.state.collectAsState()
 
-    viewModel.getAllCourse(id)
+    viewModel.getAllCard(id)
+    viewModel.updateProgress(id)
 
     Surface {
         Column {
-            ListCourseContent(
-                { navigator.popBackStack() },
-                {
-                    if (it.type == CourseType.Exercise)
-                        navigator.navigate(ExerciseScreenDestination(it))
-                    else
-                        navigator.navigate(ReadingScreenDestination())
-                },
-                {
+            ListCardContent(
+                onBackPressed = { navigator.popBackStack() },
+                navigateToCourseContent = {  },
+                showSnackbar = {
                     snackbarHostState.currentSnackbarData?.dismiss()
                     scope.launch {
                         snackbarHostState.showSnackbar(
@@ -58,22 +56,22 @@ fun ListCourseScreen(
                         )
                     }
                 },
-                snackbarHostState,
-                title,
-                state
+                snackbarHostState = snackbarHostState,
+                title = title,
+                state = state
             )
         }
     }
 }
 
 @Composable
-fun ListCourseContent(
+fun ListCardContent(
     onBackPressed: () -> Unit,
     navigateToCourseContent: (Course) -> Unit,
     showSnackbar: () -> Unit,
     snackbarHostState: SnackbarHostState,
     title: String,
-    courseData: ListCourseState
+    state: ListCardState
 ) {
     Scaffold(
         topBar = {
@@ -93,13 +91,17 @@ fun ListCourseContent(
                 modifier = Modifier.padding(horizontal = 8.dp),
                 columns = GridCells.Fixed(4),
                 content = {
-                    items(courseData.listCourse) {
-//                        BWordCard(
-//                            Modifier.fillMaxWidth(),
-//                            courseData = it,
-//                            navigateToCourseContent = navigateToCourseContent,
-//                            showSnackbar = showSnackbar,
-//                        )
+                    if (state.listWord.isNotEmpty() && state.progress.available.size > 0) {
+                        itemsIndexed(state.listWord) {i, it ->
+                            BWordCard(
+                                Modifier.fillMaxWidth(),
+                                navigateToCourseContent = navigateToCourseContent,
+                                showSnackbar = showSnackbar,
+                                word = it,
+                                isAvailable = state.progress.available[i],
+                                isDone = state.progress.done[i],
+                            )
+                        }
                     }
                 }
             )

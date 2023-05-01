@@ -527,7 +527,7 @@ object Populate {
         //Salam
         Word(
             id = "0000",
-            courseId = "00",
+            chapterId = "00",
             indonesian = "Selamat Pagi",
             balinese = "Rahajeng Semeng",
             imageUrl = "",
@@ -536,7 +536,7 @@ object Populate {
         ),
         Word(
             id = "0001",
-            courseId = "00",
+            chapterId = "00",
             indonesian = "Selamat Siang",
             balinese = "Rahajeng Siang",
             imageUrl = "",
@@ -545,7 +545,7 @@ object Populate {
         ),
         Word(
             id = "0002",
-            courseId = "00",
+            chapterId = "00",
             indonesian = "Selamat Malam",
             balinese = "Rahajeng Wengi",
             imageUrl = "",
@@ -554,7 +554,7 @@ object Populate {
         ),
         Word(
             id = "0003",
-            courseId = "00",
+            chapterId = "00",
             indonesian = "Selamat Makan",
             balinese = "Rahajeng Majengan",
             imageUrl = "",
@@ -563,7 +563,7 @@ object Populate {
         ),
         Word(
             id = "0004",
-            courseId = "00",
+            chapterId = "00",
             indonesian = "Selamat Tahun Baru",
             balinese = "Rahajeng Nyanggra Warsa Anyar",
             imageUrl = "",
@@ -572,7 +572,7 @@ object Populate {
         ),
         Word(
             id = "0005",
-            courseId = "00",
+            chapterId = "00",
             indonesian = "Selamat Ulang Tahun",
             balinese = "Rahajeng Wanti Warsa",
             imageUrl = "",
@@ -581,7 +581,7 @@ object Populate {
         ),
         Word(
             id = "0006",
-            courseId = "00",
+            chapterId = "00",
             indonesian = "Selamat Tinggal",
             balinese = "Rahajeng Memargi",
             imageUrl = "",
@@ -590,7 +590,7 @@ object Populate {
         ),
         Word(
             id = "0007",
-            courseId = "00",
+            chapterId = "00",
             indonesian = "Semoga Selamat",
             balinese = "Dumogi Rahayu",
             imageUrl = "",
@@ -601,7 +601,7 @@ object Populate {
         //Panggilan
         Word(
             id = "0100",
-            courseId = "01",
+            chapterId = "01",
             indonesian = "",
             balinese = "",
             imageUrl = "",
@@ -612,7 +612,7 @@ object Populate {
         //Hewan
         Word(
             id = "0200",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Kuda",
             balinese = "Jaran",
             imageUrl = "",
@@ -621,7 +621,7 @@ object Populate {
         ),
         Word(
             id = "0201",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Kambing",
             balinese = "Kambing",
             imageUrl = "",
@@ -630,7 +630,7 @@ object Populate {
         ),
         Word(
             id = "0202",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Kucing",
             balinese = "Meong",
             imageUrl = "",
@@ -639,7 +639,7 @@ object Populate {
         ),
         Word(
             id = "0203",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Bebek",
             balinese = "Bebek",
             imageUrl = "",
@@ -648,7 +648,7 @@ object Populate {
         ),
         Word(
             id = "0204",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Anjing",
             balinese = "Cicing",
             imageUrl = "",
@@ -657,7 +657,7 @@ object Populate {
         ),
         Word(
             id = "0205",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Kerbau",
             balinese = "Kebo",
             imageUrl = "",
@@ -666,7 +666,7 @@ object Populate {
         ),
         Word(
             id = "0206",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Tikus",
             balinese = "Bikul",
             imageUrl = "",
@@ -675,7 +675,7 @@ object Populate {
         ),
         Word(
             id = "0207",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Babi",
             balinese = "Bangkung",
             imageUrl = "",
@@ -684,7 +684,7 @@ object Populate {
         ),
         Word(
             id = "0208",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Ular",
             balinese = "Lelipi",
             imageUrl = "",
@@ -693,7 +693,7 @@ object Populate {
         ),
         Word(
             id = "0209",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Monyet/Kera",
             balinese = "Bojog",
             imageUrl = "",
@@ -702,7 +702,7 @@ object Populate {
         ),
         Word(
             id = "0210",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Sapi",
             balinese = "Sampi",
             imageUrl = "",
@@ -711,7 +711,7 @@ object Populate {
         ),
         Word(
             id = "0211",
-            courseId = "02",
+            chapterId = "02",
             indonesian = "Kepiting",
             balinese = "Yuyu",
             imageUrl = "",
@@ -722,7 +722,7 @@ object Populate {
         //Child
         Word(
             id = "1200",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Kuda",
             balinese = "Bebedag",
             imageUrl = "",
@@ -730,7 +730,7 @@ object Populate {
         ),
         Word(
             id = "1201",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Kambing",
             balinese = "Wiwi",
             imageUrl = "",
@@ -738,7 +738,7 @@ object Populate {
         ),
         Word(
             id = "1202",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Kucing",
             balinese = "Tai",
             imageUrl = "",
@@ -746,7 +746,7 @@ object Populate {
         ),
         Word(
             id = "1203",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Bebek",
             balinese = "Memeri",
             imageUrl = "",
@@ -754,7 +754,7 @@ object Populate {
         ),
         Word(
             id = "1204",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Anjing",
             balinese = "Kuluk",
             imageUrl = "",
@@ -762,7 +762,7 @@ object Populate {
         ),
         Word(
             id = "1205",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Kerbau",
             balinese = "Bedigal",
             imageUrl = "",
@@ -770,7 +770,7 @@ object Populate {
         ),
         Word(
             id = "1206",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Tikus",
             balinese = "Nyinh-nying",
             imageUrl = "",
@@ -778,7 +778,7 @@ object Populate {
         ),
         Word(
             id = "1207",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Babi",
             balinese = "Kucit",
             imageUrl = "",
@@ -786,7 +786,7 @@ object Populate {
         ),
         Word(
             id = "1208",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Ular",
             balinese = "Brara",
             imageUrl = "",
@@ -794,7 +794,7 @@ object Populate {
         ),
         Word(
             id = "1209",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Monyet/Kera",
             balinese = "Apa",
             imageUrl = "",
@@ -802,7 +802,7 @@ object Populate {
         ),
         Word(
             id = "1210",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Sapi",
             balinese = "Godel",
             imageUrl = "",
@@ -810,7 +810,7 @@ object Populate {
         ),
         Word(
             id = "1211",
-            courseId = "12",
+            chapterId = "12",
             indonesian = "Anak Kepiting",
             balinese = "Kreket/Utung-utung",
             imageUrl = "",

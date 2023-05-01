@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class Word(
     @PrimaryKey
     val id: String = "",
-    val courseId: String = "",
+    val chapterId: String = "",
     val indonesian: String = "",
     val balinese: String = "",
     val imageUrl: String = "Hewan/anak_bebek.png",

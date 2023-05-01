@@ -13,6 +13,8 @@ class Repository @Inject constructor(
 
     suspend fun getAllQuestion(courseId: String) = dao.getAllQuestion(courseId)
 
+    suspend fun getAllWordById(chapterId: String) = dao.getAllWordById(chapterId)
+
     fun populateDatabase() {
         dao.apply {
             populateChapter(Populate.populateChapter)
