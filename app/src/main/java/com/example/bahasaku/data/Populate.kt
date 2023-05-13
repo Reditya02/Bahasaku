@@ -59,7 +59,7 @@ object Populate {
         //Child
         Chapter(
             id = "12",
-            title = "Kata Kerja",
+            title = "Anak Hewan",
             courseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
@@ -602,8 +602,80 @@ object Populate {
         Word(
             id = "0100",
             chapterId = "01",
-            indonesian = "",
-            balinese = "",
+            indonesian = "Saya",
+            balinese = "Tiang/Titiang/Irage",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0101",
+            chapterId = "01",
+            indonesian = "Kamu",
+            balinese = "Awak",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0102",
+            chapterId = "01",
+            indonesian = "Kakak Laki-kali",
+            balinese = "Bli",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0103",
+            chapterId = "01",
+            indonesian = "Kakak Perempuan",
+            balinese = "Mbok",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0104",
+            chapterId = "01",
+            indonesian = "Ayah",
+            balinese = "Bapa",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0105",
+            chapterId = "01",
+            indonesian = "Ibu",
+            balinese = "Meme",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0106",
+            chapterId = "01",
+            indonesian = "Kakek",
+            balinese = "Pekak",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0107",
+            chapterId = "01",
+            indonesian = "Nenek",
+            balinese = "Dadong/Niang",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ),
+        Word(
+            id = "0108",
+            chapterId = "01",
+            indonesian = "Adik",
+            balinese = "Adi/Adin",
             imageUrl = "",
             option = "",
             wordChild = ""
@@ -817,9 +889,11 @@ object Populate {
             option = "",
         ),
 
-        //Makanan
+        //Angka
 
-        //Minuman
+        //Benda
+
+        //Makanan dan Minuman
 
         //Anggota Badan
 
