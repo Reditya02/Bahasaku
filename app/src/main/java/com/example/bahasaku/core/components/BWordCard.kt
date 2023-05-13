@@ -28,10 +28,10 @@ import kotlinx.coroutines.tasks.await
 fun BWordCard(
     modifier: Modifier = Modifier,
     word: Word,
-    navigateToCourseContent: (Course) -> Unit,
+    onCardClicked: (String, Int) -> Unit,
     showSnackbar: () -> Unit,
     isAvailable: Boolean,
-    isDone: Boolean
+    isDone: Boolean,
 ) {
     Card(
         modifier = modifier
@@ -40,7 +40,7 @@ fun BWordCard(
             .padding(8.dp)
             .clickable(enabled = true, onClick = {
                 if (isAvailable)
-//                    navigateToCourseContent(word)
+                    onCardClicked("", 0)
                 else
                     showSnackbar()
             })
@@ -59,7 +59,7 @@ fun BWordCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Log.d("Reditya", "${word.indonesian} > $isAvailable > $isDone")
+//            Log.d("Reditya", "${word.indonesian} > $isAvailable > $isDone")
             val image = remember {
                 mutableStateOf("")
             }

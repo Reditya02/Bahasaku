@@ -29,7 +29,7 @@ class ListCardViewModel @Inject constructor(
 
     fun updateProgress(chapterId: String) {
         val firebase = FirebaseFirestore.getInstance()
-        Log.d("Redittya", "chapterId: $chapterId")
+//        Log.d("Redittya", "chapterId: $chapterId")
         firebase
             .collection("progress")
             .document("reditya")
@@ -39,7 +39,7 @@ class ListCardViewModel @Inject constructor(
             .addOnSuccessListener { res ->
                 res?.let {
                     _state.update { it.copy(progress = res.toObject(ProgressCard::class.java)!!) }
-                    Log.d("Reditya", _state.value.progress.toString())
+//                    Log.d("Reditya", _state.value.progress.toString())
                 }
             }
     }

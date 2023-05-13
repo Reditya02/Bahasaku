@@ -106,10 +106,10 @@ fun WelcomeContent(
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Button(onClick = onLoginClicked) {
-                            Text(text = "masuk")
+                            Text(text = "Masuk")
                         }
                         Button(onClick = onRegisterClicked) {
-                            Text(text = "daftar")
+                            Text(text = "Daftar")
                         }
                     }
                 }
