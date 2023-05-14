@@ -6,6 +6,7 @@ import com.example.bahasaku.data.model.Course
 import com.example.bahasaku.data.model.Word
 
 object Populate {
+    //TODO: Chapter
     val populateChapter = listOf(
         Chapter(
             id = "00",
@@ -56,7 +57,7 @@ object Populate {
             imageUrl = "Hewan/anak_bebek.png"
         ),
 
-        //Child
+        //TODO: Child
         Chapter(
             id = "12",
             title = "Anak Hewan",
@@ -524,13 +525,13 @@ object Populate {
     )
 
     val populateWord = listOf(
-        //Salam
+        //TODO: Salam
         Word(
             id = "0000",
             chapterId = "00",
             indonesian = "Selamat Pagi",
             balinese = "Rahajeng Semeng",
-            imageUrl = "",
+            imageUrl = "salam/selamat_pagi.png",
             option = "",
             wordChild = ""
         ),
@@ -539,7 +540,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Siang",
             balinese = "Rahajeng Siang",
-            imageUrl = "",
+            imageUrl = "salam/selamat_siang.png",
             option = "",
             wordChild = ""
         ),
@@ -548,7 +549,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Malam",
             balinese = "Rahajeng Wengi",
-            imageUrl = "",
+            imageUrl = "salam/selamat_malam.png",
             option = "",
             wordChild = ""
         ),
@@ -557,7 +558,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Makan",
             balinese = "Rahajeng Majengan",
-            imageUrl = "",
+            imageUrl = "salam/selamat_makan.png",
             option = "",
             wordChild = ""
         ),
@@ -566,7 +567,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Tahun Baru",
             balinese = "Rahajeng Nyanggra Warsa Anyar",
-            imageUrl = "",
+            imageUrl = "salam/selamat_tahun_baru.png",
             option = "",
             wordChild = ""
         ),
@@ -575,7 +576,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Ulang Tahun",
             balinese = "Rahajeng Wanti Warsa",
-            imageUrl = "",
+            imageUrl = "salam/selamat_ulang_tahun.png",
             option = "",
             wordChild = ""
         ),
@@ -584,27 +585,27 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Tinggal",
             balinese = "Rahajeng Memargi",
-            imageUrl = "",
+            imageUrl = "salam/selamat_tinggal.png",
             option = "",
             wordChild = ""
         ),
         Word(
             id = "0007",
             chapterId = "00",
-            indonesian = "Semoga Selamat",
-            balinese = "Dumogi Rahayu",
-            imageUrl = "",
+            indonesian = "Terima Kasih",
+            balinese = "Matur Suksma",
+            imageUrl = "salam/terima_kasih.png",
             option = "",
             wordChild = ""
         ),
 
-        //Panggilan
+        //TODO: Panggilan
         Word(
             id = "0100",
             chapterId = "01",
             indonesian = "Saya",
             balinese = "Tiang/Titiang/Irage",
-            imageUrl = "",
+            imageUrl = "panggilan/saya.png",
             option = "",
             wordChild = ""
         ),
@@ -613,7 +614,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Kamu",
             balinese = "Awak",
-            imageUrl = "",
+            imageUrl = "panggilan/kamu.png",
             option = "",
             wordChild = ""
         ),
@@ -622,7 +623,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Kakak Laki-kali",
             balinese = "Bli",
-            imageUrl = "",
+            imageUrl = "panggilan/kakak_laki_laki.png",
             option = "",
             wordChild = ""
         ),
@@ -631,7 +632,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Kakak Perempuan",
             balinese = "Mbok",
-            imageUrl = "",
+            imageUrl = "panggilan/kakak_perempuan.png",
             option = "",
             wordChild = ""
         ),
@@ -640,7 +641,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Ayah",
             balinese = "Bapa",
-            imageUrl = "",
+            imageUrl = "panggilan/ayah.png",
             option = "",
             wordChild = ""
         ),
@@ -649,7 +650,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Ibu",
             balinese = "Meme",
-            imageUrl = "",
+            imageUrl = "panggilan/ibu.png",
             option = "",
             wordChild = ""
         ),
@@ -658,7 +659,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Kakek",
             balinese = "Pekak",
-            imageUrl = "",
+            imageUrl = "panggilan/kakek.png",
             option = "",
             wordChild = ""
         ),
@@ -667,7 +668,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Nenek",
             balinese = "Dadong/Niang",
-            imageUrl = "",
+            imageUrl = "panggilan/nenek.png",
             option = "",
             wordChild = ""
         ),
@@ -676,12 +677,12 @@ object Populate {
             chapterId = "01",
             indonesian = "Adik",
             balinese = "Adi/Adin",
-            imageUrl = "",
+            imageUrl = "panggilan/adik.png",
             option = "",
             wordChild = ""
         ),
 
-        //Hewan
+        //TODO: Hewan
         Word(
             id = "0200",
             chapterId = "02",
@@ -791,7 +792,7 @@ object Populate {
             wordChild = "12011"
         ),
 
-        //Child
+        //TODO: Child
         Word(
             id = "1200",
             chapterId = "12",
@@ -889,14 +890,14 @@ object Populate {
             option = "",
         ),
 
-        //Angka
+        //TODO: Angka
 
-        //Benda
+        //TODO: Benda
 
-        //Makanan dan Minuman
+        //TODO: Makanan dan Minuman
 
-        //Anggota Badan
+        //TODO: Anggota Badan
 
-        //Kata Kerja
+        //TODO: Kata Kerja
     )
 }
