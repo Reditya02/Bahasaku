@@ -1,15 +1,21 @@
 package com.example.bahasaku.ui.welcome
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
@@ -21,9 +27,9 @@ import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.destinations.LoginScreenDestination
 import com.example.bahasaku.destinations.RegisterScreenDestination
 import com.example.bahasaku.ui.register.RegisterScreen
-import com.google.accompanist.pager.HorizontalPager
+//import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.rememberPagerState
+//import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -59,9 +65,9 @@ fun WelcomeContent(
                 Modifier.background(MaterialTheme.colors.background)
             )
         }
-    ) {
+    ) { padding ->
         Column(
-            Modifier.padding(horizontal = 8.dp)
+            Modifier.padding(padding)
         ) {
             val pagerState = rememberPagerState()
 
@@ -75,7 +81,7 @@ fun WelcomeContent(
             Spacer(modifier = Modifier.weight(1f))
 
             HorizontalPager(
-                count = cardData.size,
+                pageCount = cardData.size,
                 state = pagerState,
                 contentPadding = PaddingValues(horizontal = 24.dp),
                 modifier = Modifier
@@ -85,11 +91,24 @@ fun WelcomeContent(
                 WelcomeCard(animation = cardData[page])
             }
 
-            HorizontalPagerIndicator(
-                pagerState = pagerState,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally),
-            )
+            Row(
+                Modifier
+                    .height(50.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(cardData.size) { iteration ->
+                    val color = if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
+                    Box(
+                        modifier = Modifier
+                            .padding(2.dp)
+                            .clip(CircleShape)
+                            .background(color)
+                            .size(20.dp)
+
+                    )
+                }
+            }
             
             Box(
                 modifier = Modifier
