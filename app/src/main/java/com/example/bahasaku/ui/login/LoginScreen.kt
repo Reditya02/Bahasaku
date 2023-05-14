@@ -46,7 +46,10 @@ fun LoginScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    val user = Firebase.auth.currentUser
+//    val user = Firebase.auth.currentUser
+
+    if (Firebase.auth.currentUser != null)
+        navigator.navigate(HomeScreenDestination)
 
 //    user?.run {
 //        Log.d("Reditya", "$email\n$displayName\n$uid")
@@ -102,7 +105,7 @@ fun LoginContent(
                 Modifier.background(MaterialTheme.colors.background)
             )
         }
-    ) {
+    ) { padding ->
         Column(
             Modifier.padding(16.dp)
         ) {
