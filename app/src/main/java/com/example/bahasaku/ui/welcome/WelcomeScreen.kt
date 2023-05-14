@@ -101,10 +101,10 @@ fun WelcomeContent(
                     val color = if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
                     Box(
                         modifier = Modifier
-                            .padding(2.dp)
+                            .padding(4.dp)
                             .clip(CircleShape)
                             .background(color)
-                            .size(20.dp)
+                            .size(8.dp)
 
                     )
                 }
