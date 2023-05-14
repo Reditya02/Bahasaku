@@ -92,6 +92,7 @@ fun ProfileScreen(
 fun ProfileContent(
     onEditProfileClicked: () -> Unit
 ) {
+    val user = Firebase.auth.currentUser
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -126,13 +127,13 @@ fun ProfileContent(
                 }
                 Spacer(Modifier.height(16.dp))
                 Text(
-                    text = "Name",
+                    text = user?.displayName ?: "",
                     style = MaterialTheme.typography.subtitle1,
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = "Email",
+                    text = user?.email ?: "",
                     style = MaterialTheme.typography.body2,
                     color = MaterialTheme.colors.onPrimary,
                     textAlign = TextAlign.Center,
