@@ -1,5 +1,6 @@
 package com.example.bahasaku.ui.detailcard
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,7 +21,11 @@ class DetailCardViewModel @Inject constructor(
 
     fun getAllCard(chapterId: String) {
         viewModelScope.launch {
-            _state.update { _state.value.copy(listWord = repository.getAllWordById(chapterId)) }
+//            Log.d("Reditya", "DetailCardViewModel $chapterId")
+            val res = repository.getAllWordById(chapterId)
+//            Log.d("Reditya", "DetailCardViewModel Res $res")
+            _state.update { _state.value.copy(listWord = res) }
+//            Log.d("Reditya", "DetailCardViewModel State ${state.value.listWord}")
         }
     }
 

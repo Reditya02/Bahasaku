@@ -1,11 +1,15 @@
 package com.example.bahasaku.ui.detailcard
 
 import android.util.Log
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -19,12 +23,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.bahasaku.data.model.Word
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -50,7 +53,7 @@ fun DetailCardScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         DetailCardContent(
-            listWord = listWord,
+            listWord = state.listWord,
             selected = selected,
             getChild = { viewModel.getChild(it) },
             state = state
@@ -65,31 +68,65 @@ fun DetailCardContent(
     getChild: (String) -> Unit,
     state: DetailCardState
 ) {
+//    Log.d("Reditya", "DetailCardContent")
+
+    val pagerState = rememberPagerState(initialPage = selected)
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = "Bahasaku") },
                 Modifier.background(MaterialTheme.colors.background)
             )
+        },
+        bottomBar = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Log.d("Reditya", "Position ${pagerState.currentPage} $selected")
+                if (pagerState.currentPage != 0) {
+                    Button(
+                        modifier = Modifier.weight(0.5f),
+                        onClick = { Log.d("Reditya", "Button Clicked") }
+                    ) {
+                        Text(text = "Sebelumnya")
+                    }
+                } else {
+                    Spacer(Modifier.weight(0.5f))
+                }
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                if (pagerState.currentPage != listWord.size - 1) {
+                    Button(
+                        modifier = Modifier.weight(0.5f),
+                        onClick = { Log.d("Reditya", "Button Clicked") }
+                    ) {
+                        Text(text = "Selanjutnya")
+                    }
+                } else {
+                    Spacer(Modifier.weight(0.5f))
+                }
+            }
         }
-    ) {
+    ) { padding ->
 
         val position by remember {
             mutableStateOf(selected)
         }
 
-        val isStart by remember {
-            mutableStateOf(position == 0)
-        }
-
-        val isEnd by remember {
-            mutableStateOf(position == listWord.size)
-        }
-
-        Column {
-            val pagerState = rememberPagerState(initialPage = selected)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+        ) {
             HorizontalPager(
-                count = listWord.size,
+                modifier = Modifier.fillMaxSize(),
+                pageCount = listWord.size,
                 state = pagerState
             ) { page ->
                 val word = listWord[page]
@@ -101,26 +138,6 @@ fun DetailCardContent(
 
                 DetailCardItem(word = listWord[page], child = child)
             }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = { /*TODO*/ }
-                ) {
-                    Text(text = "Sebelumnya")
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = { /*TODO*/ }
-                ) {
-                    Text(text = "Selanjutnya")
-                }
-            }
         }
     }
 
@@ -131,21 +148,22 @@ fun DetailCardItem(
     word: Word,
     child: Word = Word(id = "0")
 ) {
+//    Log.d("Reditya", "DetailCardItem $word")
     Card(
         modifier = Modifier
             .padding(8.dp, 8.dp)
-            .aspectRatio(1f)
+//            .aspectRatio(1f)
             .fillMaxSize(),
         elevation = 10.dp,
         backgroundColor = Color.White,
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween,
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             DetailCardItemContent(word = word)
-            if (child.id != "0") {
+            if (child.id != "") {
                 DetailCardItemContent(word = child)
             }
         }
@@ -156,23 +174,35 @@ fun DetailCardItem(
 fun DetailCardItemContent(
     word: Word
 ) {
-    Log.d("Reditya", word.toString())
-    Column {
+//    Log.d("Reditya", "DetailCardItemContent $word")
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         val image = remember {
             mutableStateOf("")
         }
 
         LaunchedEffect(Unit) {
             val storage = FirebaseStorage.getInstance().reference
-            val url = storage.child(word.imageUrl).downloadUrl.await()
+            val url = storage.child(word.imageUrl.ifEmpty { "Hewan/anak_bebek.png" }).downloadUrl.await()
             image.value = url.toString()
         }
+        Row {
+            Spacer(modifier = Modifier.weight(0.3f))
+            Image(
+                modifier = Modifier
+                    .weight(0.4f)
+                    .aspectRatio(1f),
+                painter = rememberAsyncImagePainter(image.value),
+                contentDescription = "description",
+                contentScale = ContentScale.Fit
+            )
+            Spacer(modifier = Modifier.weight(0.3f))
+        }
 
-        Image(
-            painter = rememberAsyncImagePainter(image.value),
-            contentDescription = "description",
-            contentScale = ContentScale.Crop
-        )
+
         Spacer(modifier = Modifier.height(24.dp))
         Text(
             text = word.balinese,
@@ -183,5 +213,21 @@ fun DetailCardItemContent(
             text = word.indonesian,
             style = MaterialTheme.typography.caption
         )
+    }
+}
+
+@Preview
+@Composable
+fun DetailCardItemPreview() {
+    Surface {
+        DetailCardItem(word = Word(
+            id = "",
+            chapterId = "",
+            indonesian = "Indonesian",
+            balinese = "Balinese",
+            imageUrl = "",
+            option = "",
+            wordChild = ""
+        ))
     }
 }
