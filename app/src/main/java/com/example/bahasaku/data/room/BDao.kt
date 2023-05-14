@@ -42,6 +42,10 @@ interface BDao {
     @Query("select * from word where chapterId like :chapterId")
     suspend fun getAllWordById(chapterId: String): List<Word>
 
+    //Dictionary
+    @Query("select * from word where upper(balinese) like upper(:query) or upper(indonesian) like upper(:query)")
+    suspend fun getWordByQuery(query: String): List<Word>
+
     //Populate Section
     @Insert(onConflict = REPLACE)
     fun populateChapter(list: List<Chapter>)

@@ -15,6 +15,8 @@ class Repository @Inject constructor(
 
     suspend fun getAllWordById(chapterId: String) = dao.getAllWordById(chapterId)
 
+    suspend fun getAllWord(query: String) = dao.getWordByQuery(query)
+
     fun populateDatabase() {
         dao.apply {
             populateChapter(Populate.populateChapter)
