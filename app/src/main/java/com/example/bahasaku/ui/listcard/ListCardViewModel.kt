@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.Repository
 import com.example.bahasaku.data.model.remote.ProgressCard
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,18 +31,18 @@ class ListCardViewModel @Inject constructor(
 
     fun updateProgress(chapterId: String) {
         val firebase = FirebaseFirestore.getInstance()
-//        Log.d("Redittya", "chapterId: $chapterId")
-        firebase
-            .collection("progress")
-            .document("reditya")
-            .collection("learning")
-            .document(chapterId)
-            .get()
-            .addOnSuccessListener { res ->
-                res?.let {
-                    _state.update { it.copy(progress = res.toObject(ProgressCard::class.java)!!) }
-//                    Log.d("Reditya", _state.value.progress.toString())
+        Firebase.auth.currentUser?.uid?.let { id ->
+            firebase
+                .collection("progress")
+                .document(id)
+                .collection("learning_card")
+                .document(chapterId)
+                .get()
+                .addOnSuccessListener { res ->
+                    res?.let {
+                        _state.update { it.copy(progress = res.toObject(ProgressCard::class.java)!!) }
+                    }
                 }
-            }
+        }
     }
 }
