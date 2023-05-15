@@ -13,7 +13,7 @@ data class Word(
     val chapterId: String = "",
     val indonesian: String = "",
     val balinese: String = "",
-    val imageUrl: String = "Hewan/anak_bebek.png",
+    val imageUrl: String = "",
     val option: String = "",
     val wordChild: String = ""
 ) : Parcelable {

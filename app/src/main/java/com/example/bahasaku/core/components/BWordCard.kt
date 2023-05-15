@@ -65,7 +65,7 @@ fun BWordCard(
             }
 
             LaunchedEffect(Unit) {
-                val iUrl = word.imageUrl.ifEmpty { "Hewan/anak_bebek.png" }
+                val iUrl = word.imageUrl
                 val storage = FirebaseStorage.getInstance().reference
                 val url = storage.child(iUrl).downloadUrl.await()
                 image.value = url.toString()
@@ -74,7 +74,7 @@ fun BWordCard(
             Image(
                 painter = rememberAsyncImagePainter(image.value),
                 contentDescription = "description",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Fit
             )
         }
     }
