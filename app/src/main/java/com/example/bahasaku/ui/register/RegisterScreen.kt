@@ -41,8 +41,9 @@ fun RegisterScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-//    if (Firebase.auth.currentUser != null)
-//        navigator.navigate(HomeScreenDestination)
+    if (state.authCondition == AuthCondition.Success) {
+        navigator.navigate(HomeScreenDestination)
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -67,7 +68,7 @@ fun RegisterScreen(
                 onHideShowPasswordToggled = { viewModel.onHideShowPasswordToggled() },
                 isPasswordShown = state.isPasswordShown,
                 onHideShowRetypePasswordToggled = { viewModel.onHideShowRetypePasswordToggled() },
-                isRetypePasswordShown = state.isRetypePasswordShown
+                isRetypePasswordShown = state.isRetypePasswordShown,
             )
         }
     }
@@ -100,9 +101,9 @@ fun RegisterContent(
                 Modifier.background(MaterialTheme.colors.background)
             )
         }
-    ) {
+    ) { padding ->
         Column(
-            Modifier.padding(16.dp)
+            Modifier.padding(padding)
         ) {
             Text(
                 modifier = Modifier.padding(top = 32.dp),

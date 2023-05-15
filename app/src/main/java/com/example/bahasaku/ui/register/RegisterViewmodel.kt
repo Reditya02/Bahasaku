@@ -5,9 +5,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.Repository
+import com.example.bahasaku.data.model.remote.ProgressCard
+import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -60,20 +63,19 @@ class RegisterViewmodel @Inject constructor(
     fun register() = viewModelScope.launch {
         _state.value.apply {
             try {
-//                    loadingState.emit(LoadingState.LOADING)
-                Log.d("Reditya", "Start Register")
-                Firebase.auth.createUserWithEmailAndPassword(email, password).await()
-//                    loadingState.emit
-                Firebase.auth.currentUser?.updateProfile(userProfileChangeRequest {
-                    displayName = name
-                    photoUri = Uri.parse("")
-                })
-//                repository.populateDatabase()
-                Log.d("Reditya", "Complete Register")
+                val fbAuth = Firebase.auth
+                fbAuth.createUserWithEmailAndPassword(email, password).await()
+                fbAuth.currentUser?.apply {
+                    updateProfile(userProfileChangeRequest {
+                        displayName = name
+                        photoUri = Uri.parse("")
+                    })
+                    createProgress(uid)
+                }
+                _state.update { it.copy(authCondition = AuthCondition.Success) }
             } catch (e: Exception) {
-//                    loadingState.emit(LoadingState.error(e.localizedMessage))
                 Log.d("Reditya", e.toString())
-
+                _state.update { it.copy(authCondition = AuthCondition.Failed) }
             }
         }
     }
@@ -106,5 +108,62 @@ class RegisterViewmodel @Inject constructor(
 
     fun onHideShowRetypePasswordToggled() {
         _state.update { it.copy(isRetypePasswordShown = !_state.value.isRetypePasswordShown) }
+    }
+
+    fun createProgress(id: String) {
+        FirebaseFirestore
+            .getInstance()
+            .collection("progress")
+            .document(id)
+            .apply {
+
+                set(hashMapOf("score" to 0))
+
+                collection("learning_chapter")
+                    .document("chapter_progress")
+                    .set(ProgressChapter(
+                        available = mutableListOf(
+                            true, false, false, false, false, false, false, false
+                        ),
+                        progress = mutableListOf(
+                            0, 0, 0, 0, 0, 0, 0, 0
+                        ),
+                    ))
+
+                collection("learning_card")
+                    .apply {
+
+                        document("00")
+                            .set(ProgressCard(
+                                available = mutableListOf(
+                                    true, false, false, false, false, false, false, false
+                                ),
+                                done = mutableListOf(
+                                    false, false, false, false, false, false, false, false
+                                )
+                            ))
+
+                        document("01")
+                            .set(ProgressCard(
+                                available = mutableListOf(
+                                    true, false, false, false, false, false, false, false, false
+                                ),
+                                done = mutableListOf(
+                                    false, false, false, false, false, false, false, false, false
+                                )
+                            ))
+
+                        document("02")
+                            .set(ProgressCard(
+                                available = mutableListOf(
+                                    true, false, false, false, false, false, false, false, false, false, false, false
+                                ),
+                                done = mutableListOf(
+                                    false, false, false, false, false, false, false, false, false, false, false, false
+                                )
+                            ))
+                    }
+            }
+
     }
 }
