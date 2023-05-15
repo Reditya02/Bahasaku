@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.Repository
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.remote.ProgressChapter
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -32,15 +33,19 @@ class HomeViewModel @Inject constructor(
 
     fun updateProgress() {
         val firebase = FirebaseFirestore.getInstance()
-        firebase
-            .collection("progress")
-            .document("reditya")
-            .get()
-            .addOnSuccessListener { res ->
-                res?.let {
-                    _state.update { it.copy(progress = res.toObject(ProgressChapter::class.java)!!) }
+        Firebase.auth.currentUser?.uid?.let { id ->
+            firebase
+                .collection("progress")
+                .document(id)
+                .collection("learning_chapter")
+                .document("chapter_progress")
+                .get()
+                .addOnSuccessListener { res ->
+                    res?.let {
+                        _state.update { it.copy(progress = res.toObject(ProgressChapter::class.java)!!) }
+                    }
                 }
-            }
+        }
     }
 
 }
