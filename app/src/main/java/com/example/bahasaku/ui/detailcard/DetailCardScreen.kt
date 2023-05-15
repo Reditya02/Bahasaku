@@ -28,9 +28,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.bahasaku.data.model.Word
+import com.example.bahasaku.data.model.remote.ProgressCard
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.tasks.await
 
 @Destination
@@ -130,6 +136,26 @@ fun DetailCardContent(
                 state = pagerState
             ) { page ->
                 val word = listWord[page]
+
+                Firebase.auth.currentUser?.uid?.let { id ->
+                    val firebase = FirebaseFirestore.getInstance()
+                        .collection("progress")
+                        .document(id)
+                        .collection("learning_card")
+                        .document(word.chapterId)
+
+                    firebase.get().addOnSuccessListener { res ->
+                        res?.let {
+                            val result = res.toObject(ProgressCard::class.java)!!
+                            result.done[page] = true
+                            if (pagerState.currentPage != listWord.size - 1)
+                                result.available[page + 1] = true
+
+                            firebase.set(result)
+                        }
+                    }
+                }
+
                 if (word.wordChild != "") {
                     getChild(word.wordChild)
                     state.child
