@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.bahasaku.data.model.Word
 import com.example.bahasaku.data.model.remote.ProgressCard
+import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -147,11 +148,39 @@ fun DetailCardContent(
                     firebase.get().addOnSuccessListener { res ->
                         res?.let {
                             val result = res.toObject(ProgressCard::class.java)!!
-                            result.done[page] = true
-                            if (pagerState.currentPage != listWord.size - 1)
-                                result.available[page + 1] = true
 
-                            firebase.set(result)
+                            if (!result.done[page]) {
+                                result.done[page] = true
+
+                                val chapterProgressInstance = FirebaseFirestore.getInstance()
+                                    .collection("progress")
+                                    .document(id)
+                                    .collection("learning_chapter")
+                                    .document("chapter_progress")
+
+                                var chapterProgress: ProgressChapter
+
+                                chapterProgressInstance.get()
+                                    .addOnSuccessListener {
+                                        chapterProgress = it.toObject(ProgressChapter::class.java)!!
+
+                                        val progress = chapterProgress.progress
+
+                                        chapterProgress = ProgressChapter(chapterProgress.available, progress)
+                                    }
+
+
+
+                                if (pagerState.currentPage != listWord.size - 1) {
+                                    result.available[page + 1] = true
+                                } else {
+
+                                }
+
+
+
+                                firebase.set(result)
+                            }
                         }
                     }
                 }

@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
@@ -28,6 +29,10 @@ import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import com.example.bahasaku.data.model.Chapter
+import com.example.bahasaku.data.model.remote.ProgressCard
+import com.example.bahasaku.data.model.remote.ProgressChapter
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
@@ -42,10 +47,45 @@ import kotlinx.coroutines.tasks.await
 fun BChapterCard(
     modifier: Modifier = Modifier,
     chapterData: Chapter,
-    isAvailable: Boolean,
     navigateToCourse: (String, String) -> Unit,
     showSnackbar: () -> Unit,
 ) {
+    val i = chapterData.id.toInt()
+
+    var isAvailable = true
+
+    var progress = 0
+
+    Firebase.auth.currentUser?.uid?.let { id ->
+        FirebaseFirestore.getInstance()
+            .collection("progress")
+            .document(id)
+            .collection("learning_card")
+            .document(chapterData.id)
+            .get()
+            .addOnSuccessListener { response ->
+                Log.d("Reditya I", "${chapterData.id} $response")
+
+                val res = response.toObject(ProgressCard::class.java)!!
+
+                Log.d("Reditya II", res.toString())
+
+                progress = res.done.count { it }
+            }
+
+        FirebaseFirestore.getInstance()
+            .collection("progress")
+            .document(id)
+            .collection("learning_chapter")
+            .document("chapter_progress")
+            .get()
+            .addOnSuccessListener { response ->
+                val res = response.toObject(ProgressChapter::class.java)!!
+
+                isAvailable = res.available[i]
+
+            }
+    }
     Card(
         modifier = modifier
             .padding(8.dp, 8.dp)
@@ -87,7 +127,7 @@ fun BChapterCard(
             Spacer(modifier = Modifier.height(12.dp))
             Text(text = chapterData.title, style = MaterialTheme.typography.body2)
             Spacer(modifier = Modifier.height(12.dp))
-            Text(text = chapterData.run { "0/$courseNumber" }, style = MaterialTheme.typography.caption)
+            Text(text = chapterData.run { "$progress/$courseNumber" }, style = MaterialTheme.typography.caption)
         }
     }
 }

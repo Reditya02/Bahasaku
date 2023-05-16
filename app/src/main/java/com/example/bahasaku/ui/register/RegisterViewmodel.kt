@@ -162,6 +162,58 @@ class RegisterViewmodel @Inject constructor(
                                     false, false, false, false, false, false, false, false, false, false, false, false
                                 )
                             ))
+
+                        document("03")
+                            .set(ProgressCard(
+                                available = mutableListOf(
+                                    true, false, false, false, false, false, false, false, false, false, false, false
+                                ),
+                                done = mutableListOf(
+                                    false, false, false, false, false, false, false, false, false, false, false, false
+                                )
+                            ))
+
+                        document("04")
+                            .set(ProgressCard(
+                                available = mutableListOf(
+                                    true, false, false, false, false, false, false, false, false, false, false, false
+                                ),
+                                done = mutableListOf(
+                                    false, false, false, false, false, false, false, false, false, false, false, false
+                                )
+                            ))
+
+                        document("05")
+                            .set(ProgressCard(
+                                available = mutableListOf(
+                                    true, false, false, false, false, false, false, false, false, false, false, false
+                                ),
+                                done = mutableListOf(
+                                    false, false, false, false, false, false, false, false, false, false, false, false
+                                )
+                            ))
+
+                        document("06")
+                            .set(ProgressCard(
+                                available = mutableListOf(
+                                    true, false, false, false, false, false, false, false, false, false, false, false
+                                ),
+                                done = mutableListOf(
+                                    false, false, false, false, false, false, false, false, false, false, false, false
+                                )
+                            ))
+
+                        document("07")
+                            .set(ProgressCard(
+                                available = mutableListOf(
+                                    true, false, false, false, false, false, false, false, false, false, false, false
+                                ),
+                                done = mutableListOf(
+                                    false, false, false, false, false, false, false, false, false, false, false, false
+                                )
+                            ))
+
+
                     }
             }
 

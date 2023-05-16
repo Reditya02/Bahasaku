@@ -12,7 +12,7 @@ import com.example.bahasaku.data.model.Word
 @Dao
 interface BDao {
     //Chapter Section
-    @Query("select * from chapter")
+    @Query("select * from chapter where id like '0%'")
     suspend fun getAllChapter(): List<Chapter>
 
 //    @Query("update chapter set done = done + 1 where id like :chapterId")

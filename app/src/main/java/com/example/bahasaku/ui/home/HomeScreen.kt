@@ -116,7 +116,7 @@ fun HomeContent(
                             chapterData = it,
                             navigateToCourse = navigateToCourse,
                             showSnackbar = showSnackbar,
-                            isAvailable = data.progress.available[it.id.toInt()]
+//                            isAvailable = data.progress.available[it.id.toInt()]
                         )
                     }
                 }
