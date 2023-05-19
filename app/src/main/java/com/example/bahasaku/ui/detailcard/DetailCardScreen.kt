@@ -65,7 +65,8 @@ fun DetailCardScreen(
             listWord = state.listWord,
             selected = selected,
             getChild = { viewModel.getChild(it) },
-            state = state
+            state = state,
+            updateProgress = { id, page -> viewModel.udateCardProgress(id, page) }
         )
     }
 }
@@ -75,7 +76,8 @@ fun DetailCardContent(
     listWord: List<Word>,
     selected: Int,
     getChild: (String) -> Unit,
-    state: DetailCardState
+    state: DetailCardState,
+    updateProgress: (String, Int) -> Unit
 ) {
 //    Log.d("Reditya", "DetailCardContent")
 
@@ -98,7 +100,6 @@ fun DetailCardContent(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Log.d("Reditya", "Position ${pagerState.currentPage} $selected")
                 if (pagerState.currentPage != 0) {
                     Button(
                         modifier = Modifier.weight(0.5f),
@@ -147,52 +148,56 @@ fun DetailCardContent(
             ) { page ->
                 val word = listWord[page]
 
-                Firebase.auth.currentUser?.uid?.let { id ->
-                    val firebase = FirebaseFirestore.getInstance()
-                        .collection("progress")
-                        .document(id)
-                        .collection("learning_card")
-                        .document(word.chapterId)
-
-                    firebase.get().addOnSuccessListener { res ->
-                        res?.let {
-                            val result = res.toObject(ProgressCard::class.java)!!
-
-                            if (!result.done[page]) {
-                                result.done[page] = true
-
-                                val chapterProgressInstance = FirebaseFirestore.getInstance()
-                                    .collection("progress")
-                                    .document(id)
-                                    .collection("learning_chapter")
-                                    .document("chapter_progress")
-
-                                var chapterProgress: ProgressChapter
-
-                                chapterProgressInstance.get()
-                                    .addOnSuccessListener {
-                                        chapterProgress = it.toObject(ProgressChapter::class.java)!!
-
-                                        val progress = chapterProgress.progress
-
-                                        chapterProgress = ProgressChapter(chapterProgress.available, progress)
-                                    }
+                updateProgress(word.chapterId, page)
 
 
 
-                                if (pagerState.currentPage != listWord.size - 1) {
-                                    result.available[page + 1] = true
-                                } else {
-
-                                }
-
-
-
-                                firebase.set(result)
-                            }
-                        }
-                    }
-                }
+//                Firebase.auth.currentUser?.uid?.let { id ->
+//                    val firebase = FirebaseFirestore.getInstance()
+//                        .collection("progress")
+//                        .document(id)
+//                        .collection("learning_card")
+//                        .document(word.chapterId)
+//
+//                    firebase.get().addOnSuccessListener { res ->
+//                        res?.let {
+//                            val result = res.toObject(ProgressCard::class.java)!!
+//
+//                            if (!result.done[page]) {
+//                                result.done[page] = true
+//
+//                                val chapterProgressInstance = FirebaseFirestore.getInstance()
+//                                    .collection("progress")
+//                                    .document(id)
+//                                    .collection("learning_chapter")
+//                                    .document("chapter_progress")
+//
+//                                var chapterProgress: ProgressChapter
+//
+//                                chapterProgressInstance.get()
+//                                    .addOnSuccessListener {
+//                                        chapterProgress = it.toObject(ProgressChapter::class.java)!!
+//
+//                                        val progress = chapterProgress.progress
+//
+//                                        chapterProgress = ProgressChapter(chapterProgress.available, progress)
+//                                    }
+//
+//
+//
+//                                if (pagerState.currentPage != listWord.size - 1) {
+//                                    result.available[page + 1] = true
+//                                } else {
+//
+//                                }
+//
+//
+//
+//                                firebase.set(result)
+//                            }
+//                        }
+//                    }
+//                }
 
                 if (word.wordChild != "") {
                     getChild(word.wordChild)
