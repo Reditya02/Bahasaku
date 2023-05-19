@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
 
     fun getProgress() {
         viewModelScope.launch {
-            firestoreRepository.getProgress().collect { response ->
+            firestoreRepository.getProgressChapter().collect { response ->
                 response?.let { result ->
                     _state.update { it.copy(progress = result) }
                 }

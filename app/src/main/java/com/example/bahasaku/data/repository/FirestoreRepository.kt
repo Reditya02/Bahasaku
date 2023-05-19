@@ -1,5 +1,7 @@
 package com.example.bahasaku.data.repository
 
+import android.util.Log
+import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
@@ -15,60 +17,50 @@ class FirestoreRepository @Inject constructor(
 ) {
     private val uid = auth.uid
 
-    fun getProgress() = callbackFlow {
+    private val fsProgress = FirebaseFirestore.getInstance()
+        .collection("progress")
+        .document(uid)
+
+    fun getProgressChapter() = callbackFlow {
         val listener = object : EventListener<DocumentSnapshot> {
             override fun onEvent(value: DocumentSnapshot?, error: FirebaseFirestoreException?) {
                 if (error != null) {
                     cancel()
                     return
                 }
-
                 if (value != null && value.exists()) {
-                    // The user document has data
-                    val user = value.toObject(ProgressChapter::class.java)
-                    trySend(user)
-                } else {
-                    // The user document does not exist or has no data
+                    val result = value.toObject(ProgressChapter::class.java)
+                    trySend(result)
                 }
             }
         }
 
-        val firebase = FirebaseFirestore.getInstance()
-            .collection("progress")
-            .document(uid)
+        val firebase = fsProgress
             .collection("learning_chapter")
             .document("chapter_progress")
             .addSnapshotListener(listener)
+        awaitClose { firebase.remove() }
+    }
 
+    fun getProgressCard(chapterId: String) = callbackFlow {
+        val listener = object : EventListener<DocumentSnapshot> {
+            override fun onEvent(value: DocumentSnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+                    cancel()
+                    return
+                }
+                if (value != null && value.exists()) {
+                    val result = value.toObject(ProgressCard::class.java)
+                    trySend(result)
+                }
+            }
+        }
+
+        val firebase = fsProgress
+            .collection("learning_card")
+            .document(chapterId)
+            .addSnapshotListener(listener)
         awaitClose { firebase.remove() }
 
     }
 }
-
-//.addSnapshotListener { res, e ->
-//    Log.d("Reditya", "firebase $res")
-//    val result = res!!.toObject(ProgressChapter::class.java)
-//    val response = res?.let {
-//        val result = it.toObject(ProgressChapter::class.java)
-//        result
-//    } ?: run {
-//        Response.Failure(e)
-//    }
-//    trySend(response)
-//}
-
-//try {
-//    FirebaseFirestore.getInstance()
-//        .collection("progress")
-//        .document(uid)
-//        .collection("learning_chapter")
-//        .document("chapter_progress")
-//        .get()
-//        .addOnSuccessListener { res ->
-//            Log.d("Reditya", "firebase $res")
-//            Response.Success(res)
-//        }
-//
-//} catch (e: Exception) {
-//    Response.Failure(e)
-//}
