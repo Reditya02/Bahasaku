@@ -1,7 +1,9 @@
 package com.example.bahasaku.di
 
-import com.example.bahasaku.data.Repository
+import com.example.bahasaku.data.repository.FirestoreRepository
+import com.example.bahasaku.data.repository.RoomRepository
 import com.example.bahasaku.data.room.BDao
+import com.example.bahasaku.data.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,5 +15,13 @@ import javax.inject.Singleton
 object ViewModelProviders {
     @Provides
     @Singleton
-    fun provideRepository(dao: BDao) = Repository(dao)
+    fun provideRoomRepository(dao: BDao) = RoomRepository(dao)
+
+    @Provides
+    @Singleton
+    fun provideAuthRepository() = AuthRepository()
+
+    @Provides
+    @Singleton
+    fun provideFirestoreRepository(auth: AuthRepository) = FirestoreRepository(auth)
 }

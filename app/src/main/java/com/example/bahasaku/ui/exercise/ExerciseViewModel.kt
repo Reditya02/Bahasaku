@@ -2,7 +2,7 @@ package com.example.bahasaku.ui.exercise
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bahasaku.data.Repository
+import com.example.bahasaku.data.repository.RoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExerciseViewModel @Inject constructor(
-    private val repository: Repository
+    private val roomRepository: RoomRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(ExerciseState())
     val state: StateFlow<ExerciseState> = _state
@@ -23,7 +23,7 @@ class ExerciseViewModel @Inject constructor(
 
     fun getAllQuestion(courseId: String) {
         viewModelScope.launch {
-            _state.update { it.copy(question = repository.getAllQuestion(courseId)) }
+            _state.update { it.copy(question = roomRepository.getAllQuestion(courseId)) }
         }
     }
 

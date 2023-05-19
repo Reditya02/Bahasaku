@@ -1,10 +1,10 @@
-package com.example.bahasaku.data
+package com.example.bahasaku.data.repository
 
-import com.example.bahasaku.data.model.Chapter
+import com.example.bahasaku.data.Populate
 import com.example.bahasaku.data.room.BDao
 import javax.inject.Inject
 
-class Repository @Inject constructor(
+class RoomRepository @Inject constructor(
     private val dao: BDao
 ) {
     suspend fun getAllChapter() = dao.getAllChapter()

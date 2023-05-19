@@ -1,10 +1,8 @@
 package com.example.bahasaku.ui.detailcard
 
-import android.util.Log
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bahasaku.data.Repository
+import com.example.bahasaku.data.repository.RoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailCardViewModel @Inject constructor(
-    val repository: Repository
+    val roomRepository: RoomRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(DetailCardState())
     val state: StateFlow<DetailCardState> = _state
@@ -22,7 +20,7 @@ class DetailCardViewModel @Inject constructor(
     fun getAllCard(chapterId: String) {
         viewModelScope.launch {
 //            Log.d("Reditya", "DetailCardViewModel $chapterId")
-            val res = repository.getAllWordById(chapterId)
+            val res = roomRepository.getAllWordById(chapterId)
 //            Log.d("Reditya", "DetailCardViewModel Res $res")
             _state.update { _state.value.copy(listWord = res) }
 //            Log.d("Reditya", "DetailCardViewModel State ${state.value.listWord}")

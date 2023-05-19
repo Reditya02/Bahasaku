@@ -1,9 +1,8 @@
 package com.example.bahasaku.ui.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bahasaku.data.Repository
+import com.example.bahasaku.data.repository.RoomRepository
 import com.example.bahasaku.ui.register.AuthCondition
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -17,14 +16,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    repository: Repository
+    roomRepository: RoomRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginState())
     val state: StateFlow<LoginState> = _state
 
     init {
         viewModelScope.launch {
-            repository.getAllChapter()
+            roomRepository.getAllChapter()
         }
     }
 
