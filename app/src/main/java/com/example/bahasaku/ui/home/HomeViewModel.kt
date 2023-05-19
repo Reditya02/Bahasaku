@@ -4,11 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.repository.RoomRepository
-import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.example.bahasaku.data.repository.FirestoreRepository
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,7 +26,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun updateProgress() {
+    fun getProgress() {
         viewModelScope.launch {
             firestoreRepository.getProgress().collect { response ->
                 response?.let { result ->

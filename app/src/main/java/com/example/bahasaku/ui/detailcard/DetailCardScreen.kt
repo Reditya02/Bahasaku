@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,6 +39,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 @Destination
@@ -79,6 +81,8 @@ fun DetailCardContent(
 
     val pagerState = rememberPagerState(initialPage = selected)
 
+    val scope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -98,7 +102,9 @@ fun DetailCardContent(
                 if (pagerState.currentPage != 0) {
                     Button(
                         modifier = Modifier.weight(0.5f),
-                        onClick = { Log.d("Reditya", "Button Clicked") }
+                        onClick = { scope.launch {
+                            pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                        } }
                     ) {
                         Text(text = "Sebelumnya")
                     }
@@ -111,7 +117,9 @@ fun DetailCardContent(
                 if (pagerState.currentPage != listWord.size - 1) {
                     Button(
                         modifier = Modifier.weight(0.5f),
-                        onClick = { Log.d("Reditya", "Button Clicked") }
+                        onClick = { scope.launch {
+                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        } }
                     ) {
                         Text(text = "Selanjutnya")
                     }
@@ -132,7 +140,8 @@ fun DetailCardContent(
                 .padding(padding)
         ) {
             HorizontalPager(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize(),
                 pageCount = listWord.size,
                 state = pagerState
             ) { page ->
@@ -191,7 +200,17 @@ fun DetailCardContent(
                 }
                 val child = state.child
 
-                DetailCardItem(word = listWord[page], child = child)
+                DetailCardItem(
+                    modifier = Modifier.graphicsLayer {
+                        val pageOffset = pagerState.currentPageOffsetFraction
+                        translationX = size.width * pageOffset
+
+                        val startOffset = pagerState.currentPageOffsetFraction
+                        alpha = (2f - startOffset) / 2f
+                    },
+                    word = listWord[page],
+                    child = child
+                )
             }
         }
     }
@@ -200,12 +219,13 @@ fun DetailCardContent(
 
 @Composable
 fun DetailCardItem(
+    modifier: Modifier = Modifier,
     word: Word,
     child: Word = Word(id = "0")
 ) {
 //    Log.d("Reditya", "DetailCardItem $word")
     Card(
-        modifier = Modifier
+        modifier = modifier
             .padding(8.dp, 8.dp)
 //            .aspectRatio(1f)
             .fillMaxSize(),

@@ -49,43 +49,9 @@ fun BChapterCard(
     chapterData: Chapter,
     navigateToCourse: (String, String) -> Unit,
     showSnackbar: () -> Unit,
+    isAvailable: Boolean,
+    progress: Int
 ) {
-    val i = chapterData.id.toInt()
-
-    var isAvailable = true
-
-    var progress = 0
-
-    Firebase.auth.currentUser?.uid?.let { id ->
-        FirebaseFirestore.getInstance()
-            .collection("progress")
-            .document(id)
-            .collection("learning_card")
-            .document(chapterData.id)
-            .get()
-            .addOnSuccessListener { response ->
-                Log.d("Reditya I", "${chapterData.id} $response")
-
-                val res = response.toObject(ProgressCard::class.java)!!
-
-                Log.d("Reditya II", res.toString())
-
-                progress = res.done.count { it }
-            }
-
-        FirebaseFirestore.getInstance()
-            .collection("progress")
-            .document(id)
-            .collection("learning_chapter")
-            .document("chapter_progress")
-            .get()
-            .addOnSuccessListener { response ->
-                val res = response.toObject(ProgressChapter::class.java)!!
-
-                isAvailable = res.available[i]
-
-            }
-    }
     Card(
         modifier = modifier
             .padding(8.dp, 8.dp)
@@ -118,11 +84,18 @@ fun BChapterCard(
                 image.value = url.toString()
             }
 
-            Image(
-                painter = rememberAsyncImagePainter(image.value),
-                contentDescription = "description",
-                contentScale = ContentScale.Crop
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Spacer(modifier = Modifier.weight(0.3f))
+
+                Image(
+                    modifier = Modifier.weight(0.4f),
+                    painter = rememberAsyncImagePainter(image.value),
+                    contentDescription = "description",
+                    contentScale = ContentScale.Crop
+                )
+
+                Spacer(modifier = Modifier.weight(0.3f))
+            }
 
             Spacer(modifier = Modifier.height(12.dp))
             Text(text = chapterData.title, style = MaterialTheme.typography.body2)

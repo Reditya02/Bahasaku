@@ -18,9 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BChapterCard
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.example.bahasaku.destinations.ListCardScreenDestination
-import com.google.firebase.firestore.FirebaseFirestore
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -57,7 +55,7 @@ fun HomeScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
-                viewModel.updateProgress()
+                viewModel.getProgress()
                 HomeContent(
                     { id, title ->
                         navigator.navigate(ListCardScreenDestination(id, title))

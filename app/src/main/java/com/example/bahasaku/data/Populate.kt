@@ -12,7 +12,7 @@ object Populate {
             id = "00",
             title = "Salam",
             courseNumber = 0,
-            imageUrl = "Hewan/anak_bebek.png"
+            imageUrl = "hewan/anak_bebek.png"
         ),
         Chapter(
             id = "01",
