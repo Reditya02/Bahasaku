@@ -38,4 +38,10 @@ class ListCardViewModel @Inject constructor(
             }
         }
     }
+
+    fun updateChapterProgress(chapterId: String) {
+        viewModelScope.launch {
+            firestoreRepository.updateChapterProgress(chapterId)
+        }
+    }
 }

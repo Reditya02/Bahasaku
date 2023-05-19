@@ -10,6 +10,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class FirestoreRepository @Inject constructor(
@@ -17,9 +19,14 @@ class FirestoreRepository @Inject constructor(
 ) {
     private val uid = auth.uid
 
-    private val fsProgress = FirebaseFirestore.getInstance()
+    private val fsProgress = FirebaseFirestore
+        .getInstance()
         .collection("progress")
         .document(uid)
+
+    private val fsChapterProgress = fsProgress
+        .collection("learning_chapter")
+        .document("chapter_progress")
 
     fun getProgressChapter() = callbackFlow {
         val listener = object : EventListener<DocumentSnapshot> {
@@ -31,15 +38,41 @@ class FirestoreRepository @Inject constructor(
                 if (value != null && value.exists()) {
                     val result = value.toObject(ProgressChapter::class.java)
                     trySend(result)
+                } else {
                 }
             }
         }
 
-        val firebase = fsProgress
-            .collection("learning_chapter")
-            .document("chapter_progress")
+        val firebase = fsChapterProgress
             .addSnapshotListener(listener)
         awaitClose { firebase.remove() }
+    }
+
+    suspend fun updateChapterProgress(chapterId: String) {
+        var result = 0
+        getProgressCard(chapterId).first {
+            it?.done.let {
+                result = it?.count { it }!!
+            }
+            true
+        }
+
+        var progress = mutableListOf<Int>()
+
+        getProgressChapter().first {
+            it?.progress.let {
+                if (it != null) {
+                    progress = it
+                }
+            }
+            true
+        }
+
+        progress[chapterId.toInt()] = result
+
+        fsChapterProgress
+            .update("progress", progress)
+
     }
 
     fun getProgressCard(chapterId: String) = callbackFlow {
@@ -61,6 +94,29 @@ class FirestoreRepository @Inject constructor(
             .document(chapterId)
             .addSnapshotListener(listener)
         awaitClose { firebase.remove() }
+    }
 
+    suspend fun updateCardProgress(chapterId: String, page: Int) {
+        Log.d("Reditya", "repository $chapterId $page")
+        var result = ProgressCard()
+        getProgressCard(chapterId).first {
+            it?.let {
+                result = it
+            }
+            true
+        }
+
+        if (!result.done[page]) {
+            result.done[page] = true
+        }
+
+        if (page != result.done.size - 1) {
+            result.available[page + 1] = true
+        }
+
+        fsProgress
+            .collection("learning_card")
+            .document(chapterId)
+            .set(result)
     }
 }

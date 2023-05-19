@@ -38,6 +38,7 @@ fun ListCardScreen(
 
     val state by viewModel.state.collectAsState()
 
+    viewModel.updateChapterProgress(id)
     viewModel.getAllCard(id)
     viewModel.getProgress(id)
 
