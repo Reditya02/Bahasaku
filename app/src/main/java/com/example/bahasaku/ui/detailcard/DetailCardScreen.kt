@@ -66,7 +66,8 @@ fun DetailCardScreen(
             selected = selected,
             getChild = { viewModel.getChild(it) },
             state = state,
-            updateProgress = { id, page -> viewModel.udateCardProgress(id, page) }
+            updateProgress = { id, page -> viewModel.udateCardProgress(id, page) },
+            updateChapterAvailable = { viewModel.updateChapterAvailable(it) }
         )
     }
 }
@@ -77,7 +78,8 @@ fun DetailCardContent(
     selected: Int,
     getChild: (String) -> Unit,
     state: DetailCardState,
-    updateProgress: (String, Int) -> Unit
+    updateProgress: (String, Int) -> Unit,
+    updateChapterAvailable: (String) -> Unit
 ) {
 //    Log.d("Reditya", "DetailCardContent")
 
@@ -150,54 +152,8 @@ fun DetailCardContent(
 
                 updateProgress(word.chapterId, page)
 
-
-
-//                Firebase.auth.currentUser?.uid?.let { id ->
-//                    val firebase = FirebaseFirestore.getInstance()
-//                        .collection("progress")
-//                        .document(id)
-//                        .collection("learning_card")
-//                        .document(word.chapterId)
-//
-//                    firebase.get().addOnSuccessListener { res ->
-//                        res?.let {
-//                            val result = res.toObject(ProgressCard::class.java)!!
-//
-//                            if (!result.done[page]) {
-//                                result.done[page] = true
-//
-//                                val chapterProgressInstance = FirebaseFirestore.getInstance()
-//                                    .collection("progress")
-//                                    .document(id)
-//                                    .collection("learning_chapter")
-//                                    .document("chapter_progress")
-//
-//                                var chapterProgress: ProgressChapter
-//
-//                                chapterProgressInstance.get()
-//                                    .addOnSuccessListener {
-//                                        chapterProgress = it.toObject(ProgressChapter::class.java)!!
-//
-//                                        val progress = chapterProgress.progress
-//
-//                                        chapterProgress = ProgressChapter(chapterProgress.available, progress)
-//                                    }
-//
-//
-//
-//                                if (pagerState.currentPage != listWord.size - 1) {
-//                                    result.available[page + 1] = true
-//                                } else {
-//
-//                                }
-//
-//
-//
-//                                firebase.set(result)
-//                            }
-//                        }
-//                    }
-//                }
+                if (page ==  listWord.size - 1)
+                    updateChapterAvailable(word.chapterId)
 
                 if (word.wordChild != "") {
                     getChild(word.wordChild)
@@ -228,11 +184,9 @@ fun DetailCardItem(
     word: Word,
     child: Word = Word(id = "0")
 ) {
-//    Log.d("Reditya", "DetailCardItem $word")
     Card(
         modifier = modifier
             .padding(8.dp, 8.dp)
-//            .aspectRatio(1f)
             .fillMaxSize(),
         elevation = 10.dp,
         backgroundColor = Color.White,
@@ -254,7 +208,6 @@ fun DetailCardItem(
 fun DetailCardItemContent(
     word: Word
 ) {
-//    Log.d("Reditya", "DetailCardItemContent $word")
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

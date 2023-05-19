@@ -50,6 +50,10 @@ class FirestoreRepository @Inject constructor(
 
     suspend fun updateChapterProgress(chapterId: String) {
         var result = 0
+
+        val i = chapterId.toInt()
+        Log.d("Reditya", "chapterId $i")
+
         getProgressCard(chapterId).first {
             it?.done.let {
                 result = it?.count { it }!!
@@ -59,21 +63,66 @@ class FirestoreRepository @Inject constructor(
 
         var progress = mutableListOf<Int>()
 
+        var available = mutableListOf<Boolean>()
+
+        Log.d("Reditya", "result $result")
+
+        Log.d("Reditya", "init progress $progress")
+
+        Log.d("Reditya", "init available $available")
+
         getProgressChapter().first {
-            it?.progress.let {
-                if (it != null) {
-                    progress = it
-                }
+            it?.let {
+                progress = it.progress
+                available = it.available
+
+                Log.d("Reditya", "get progress $progress")
+
+                Log.d("Reditya", "get available $available")
             }
             true
         }
 
-        progress[chapterId.toInt()] = result
+        progress[i] = result
+        if (result == progress.size - 1 && i < 8) {
+            Log.d("Reditya", "update available")
+            available[i+1] = true
+        }
 
         fsChapterProgress
             .update("progress", progress)
 
     }
+
+    suspend fun updateChapterAvailable(chapterId: String) {
+        val i = chapterId.toInt()
+        Log.d("Reditya", "chapterId $i")
+
+        var available = mutableListOf<Boolean>()
+
+        Log.d("Reditya", "init available $available")
+
+        getProgressChapter().first {
+            it?.let {
+                available = it.available
+
+                Log.d("Reditya", "get available $available")
+            }
+            true
+        }
+
+        if ( i < 8) {
+            Log.d("Reditya", "update available")
+            available[i+1] = true
+        }
+
+        fsChapterProgress
+            .update("available", available)
+
+    }
+
+
+
 
     fun getProgressCard(chapterId: String) = callbackFlow {
         val listener = object : EventListener<DocumentSnapshot> {

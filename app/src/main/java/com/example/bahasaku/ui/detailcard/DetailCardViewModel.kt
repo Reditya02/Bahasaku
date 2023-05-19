@@ -32,6 +32,12 @@ class DetailCardViewModel @Inject constructor(
         }
     }
 
+    fun updateChapterAvailable(chapterId: String) {
+        viewModelScope.launch {
+            firestoreRepository.updateChapterAvailable(chapterId)
+        }
+    }
+
     fun getChild(id: String) {
 
     }

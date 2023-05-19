@@ -93,7 +93,7 @@ fun ListCardContent(
                 columns = GridCells.Fixed(4),
                 content = {
                     if (state.listWord.isNotEmpty() && state.progress.available.size > 0) {
-                        itemsIndexed(state.listWord) {i, it ->
+                        itemsIndexed(state.listWord) { i, it ->
                             BWordCard(
                                 Modifier.fillMaxWidth(),
                                 onCardClicked = { _, _ -> navigateToCourseContent("", i) },
