@@ -1,5 +1,6 @@
 package com.example.bahasaku.ui.detailcard
 
+import android.media.MediaPlayer
 import android.util.Log
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
@@ -24,10 +25,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
+import com.example.bahasaku.R
 import com.example.bahasaku.data.model.Word
 import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
@@ -162,13 +165,6 @@ fun DetailCardContent(
                 val child = state.child
 
                 DetailCardItem(
-                    modifier = Modifier.graphicsLayer {
-                        val pageOffset = pagerState.currentPageOffsetFraction
-                        translationX = size.width * pageOffset
-
-                        val startOffset = pagerState.currentPageOffsetFraction
-                        alpha = (2f - startOffset) / 2f
-                    },
                     word = listWord[page],
                     child = child
                 )
@@ -208,6 +204,9 @@ fun DetailCardItem(
 fun DetailCardItemContent(
     word: Word
 ) {
+    val context = LocalContext.current
+    val mp = MediaPlayer.create(context, R.raw.audio)
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -227,7 +226,10 @@ fun DetailCardItemContent(
             Image(
                 modifier = Modifier
                     .weight(0.4f)
-                    .aspectRatio(1f),
+                    .aspectRatio(1f)
+                    .clickable {
+                        mp.start()
+                    },
                 painter = rememberAsyncImagePainter(image.value),
                 contentDescription = "description",
                 contentScale = ContentScale.Fit
