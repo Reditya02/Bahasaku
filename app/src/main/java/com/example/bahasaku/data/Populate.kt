@@ -1,8 +1,6 @@
 package com.example.bahasaku.data
 
-import com.example.bahasaku.core.components.CourseType
 import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.data.model.Course
 import com.example.bahasaku.data.model.Word
 
 object Populate {
@@ -11,49 +9,57 @@ object Populate {
         Chapter(
             id = "00",
             title = "Salam",
-            courseNumber = 0,
-            imageUrl = "hewan/anak_bebek.png"
+            cardNumber = 8,
+            exerciseNumber = 8,
+            imageUrl = "salam/terima_kasih.png"
         ),
         Chapter(
             id = "01",
             title = "Panggilan",
-            courseNumber = 0,
-            imageUrl = "Hewan/anak_bebek.png"
+            cardNumber = 9,
+            exerciseNumber = 9,
+            imageUrl = "panggilan/nenek.png"
         ),
         Chapter(
             id = "02",
             title = "Hewan",
-            courseNumber = 0,
-            imageUrl = "Hewan/anak_bebek.png"
+            cardNumber = 12,
+            exerciseNumber = 24,
+            imageUrl = "hewan/anak_bebek.png"
         ),
         Chapter(
             id = "03",
             title = "Angka",
-            courseNumber = 0,
+            cardNumber = 46,
+            exerciseNumber = 46,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "04",
-            title = "Benda",
-            courseNumber = 0,
+            title = "Perabotan",
+            cardNumber = 16,
+            exerciseNumber = 16,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "05",
             title = "Makanan dan Minuman",
-            courseNumber = 0,
+            cardNumber = 14,
+            exerciseNumber = 14,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "06",
             title = "Amggota Badan",
-            courseNumber = 0,
+            cardNumber = 23,
+            exerciseNumber = 23,
             imageUrl = "Hewan/anak_bebek.png"
         ),
         Chapter(
             id = "07",
-            title = "Kata Kerja",
-            courseNumber = 0,
+            title = "Aktivitas",
+            cardNumber = 14,
+            exerciseNumber = 14,
             imageUrl = "Hewan/anak_bebek.png"
         ),
 
@@ -61,467 +67,10 @@ object Populate {
         Chapter(
             id = "12",
             title = "Anak Hewan",
-            courseNumber = 0,
+            cardNumber = 0,
+            exerciseNumber = 0,
             imageUrl = "Hewan/anak_bebek.png"
         ),
-    )
-
-    val populateCourse = listOf(
-        Course(
-            id = "111",
-            chapterId = "1",
-            name = "Salam dan waktu",
-            type = CourseType.Reading,
-            reading = "",
-            isAvailable = true
-        ),
-        Course(
-            id = "121",
-            chapterId = "1",
-            name = "Salam dan waktu",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "112",
-            chapterId = "1",
-            name = "Nama hari dan mata angin",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "122",
-            chapterId = "1",
-            name = "Nama hari dan mata angin",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "113",
-            chapterId = "1",
-            name = "Keluarga",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "123",
-            chapterId = "1",
-            name = "Keluarga",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "114",
-            chapterId = "1",
-            name = "Angka I",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "124",
-            chapterId = "1",
-            name = "Angka I",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "115",
-            chapterId = "1",
-            name = "Pengalaman",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "125",
-            chapterId = "1",
-            name = "Pengalaman",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "116",
-            chapterId = "1",
-            name = "Kata kerja dasar",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "126",
-            chapterId = "1",
-            name = "Kata kerja dasar",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "117",
-            chapterId = "1",
-            name = "Berkenalan",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "127",
-            chapterId = "1",
-            name = "Berkenalan",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-
-        Course(
-            id = "211",
-            chapterId = "2",
-            name = "Kata kerja berimbuhan",
-            type = CourseType.Reading,
-            reading = "",
-            isAvailable = true
-        ),
-        Course(
-            id = "221",
-            chapterId = "2",
-            name = "Kata kerja berimbuhan",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "212",
-            chapterId = "2",
-            name = "Barang di sekolah",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "222",
-            chapterId = "2",
-            name = "Barang di sekolah",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "213",
-            chapterId = "2",
-            name = "Kata kerja dasar dan berimbuhan I",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "223",
-            chapterId = "2",
-            name = "Kata kerja dasar dan berimbuhan I",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "214",
-            chapterId = "2",
-            name = "Barang untuk bersih-bersih",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "224",
-            chapterId = "2",
-            name = "Barang untuk bersih-bersih",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "215",
-            chapterId = "2",
-            name = "Anggota badan",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "225",
-            chapterId = "2",
-            name = "Anggota badan",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "216",
-            chapterId = "2",
-            name = "Jenis kalimat",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "226",
-            chapterId = "2",
-            name = "Jenis kalimat",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-
-        Course(
-            id = "311",
-            chapterId = "3",
-            name = "Kata kerja dasar dan berimbuhan II",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "321",
-            chapterId = "3",
-            name = "Kata kerja dasar dan berimbuhan II",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "312",
-            chapterId = "3",
-            name = "Binatang",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "322",
-            chapterId = "3",
-            name = "Binatang",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "313",
-            chapterId = "3",
-            name = "Tanaman",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "323",
-            chapterId = "3",
-            name = "Tanaman",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "314",
-            chapterId = "3",
-            name = "Makanan",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "324",
-            chapterId = "3",
-            name = "Makanan",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "315",
-            chapterId = "3",
-            name = "Warna",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "325",
-            chapterId = "3",
-            name = "Warna",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "316",
-            chapterId = "3",
-            name = "Angka II",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "326",
-            chapterId = "3",
-            name = "Angka II",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-
-        Course(
-            id = "411",
-            chapterId = "4",
-            name = "Kata kerja dasar dan berimbuhan III",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "421",
-            chapterId = "4",
-            name = "Kata kerja dasar dan berimbuhan III",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "412",
-            chapterId = "4",
-            name = "Barang di dapur",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "422",
-            chapterId = "4",
-            name = "Barang di dapur",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "413",
-            chapterId = "4",
-            name = "Pekerjaan",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "423",
-            chapterId = "4",
-            name = "Pekerjaan",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "414",
-            chapterId = "4",
-            name = "Anak binatang",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "424",
-            chapterId = "4",
-            name = "Anak binatang",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "415",
-            chapterId = "4",
-            name = "Cuaca",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "425",
-            chapterId = "4",
-            name = "Cuaca",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "416",
-            chapterId = "4",
-            name = "Kata sifat",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "426",
-            chapterId = "4",
-            name = "Kata sifat",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "417",
-            chapterId = "4",
-            name = "Kata bilangan",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "427",
-            chapterId = "4",
-            name = "Kata bilangan",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-
-        Course(
-            id = "511",
-            chapterId = "5",
-            name = "Kata kerja dasar dan berimbuhan IV",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "521",
-            chapterId = "5",
-            name = "Kata kerja dasar dan berimbuhan IV",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "512",
-            chapterId = "5",
-            name = "Peralatan di sawah",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "522",
-            chapterId = "5",
-            name = "Peralatan di sawah",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "513",
-            chapterId = "5",
-            name = "Bencana alam",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "523",
-            chapterId = "5",
-            name = "Bencana alam",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "514",
-            chapterId = "5",
-            name = "Kata berulang",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "524",
-            chapterId = "5",
-            name = "Kata berulang",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "515",
-            chapterId = "5",
-            name = "Antonim",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "525",
-            chapterId = "5",
-            name = "Antonim",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-        Course(
-            id = "516",
-            chapterId = "5",
-            name = "Sinonim",
-            type = CourseType.Reading,
-            reading = ""
-        ),
-        Course(
-            id = "526",
-            chapterId = "5",
-            name = "Sinonim",
-            type = CourseType.Exercise,
-            reading = ""
-        ),
-
     )
 
     val populateWord = listOf(
@@ -621,7 +170,7 @@ object Populate {
         Word(
             id = "0102",
             chapterId = "01",
-            indonesian = "Kakak Laki-kali",
+            indonesian = "Kakak Laki-laki",
             balinese = "Bli",
             imageUrl = "panggilan/kakak_laki_laki.png",
             option = "",
@@ -688,7 +237,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kuda",
             balinese = "Jaran",
-            imageUrl = "",
+            imageUrl = "hewan/kuda.png",
             option = "",
             wordChild = "1200"
         ),
@@ -697,7 +246,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kambing",
             balinese = "Kambing",
-            imageUrl = "",
+            imageUrl = "hewan/kambing.png",
             option = "",
             wordChild = "1201"
         ),
@@ -706,7 +255,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kucing",
             balinese = "Meong",
-            imageUrl = "",
+            imageUrl = "hewan/kucing.png",
             option = "",
             wordChild = "1202"
         ),
@@ -715,7 +264,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Bebek",
             balinese = "Bebek",
-            imageUrl = "",
+            imageUrl = "hewan/bebek.png",
             option = "",
             wordChild = "1203"
         ),
@@ -724,7 +273,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Anjing",
             balinese = "Cicing",
-            imageUrl = "",
+            imageUrl = "hewan/anjing.png",
             option = "",
             wordChild = "1204"
         ),
@@ -733,7 +282,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kerbau",
             balinese = "Kebo",
-            imageUrl = "",
+            imageUrl = "hewan/kerbau.png",
             option = "",
             wordChild = "1205"
         ),
@@ -742,7 +291,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Tikus",
             balinese = "Bikul",
-            imageUrl = "",
+            imageUrl = "hewan/tikus.png",
             option = "",
             wordChild = "1206"
         ),
@@ -751,7 +300,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Babi",
             balinese = "Bangkung",
-            imageUrl = "",
+            imageUrl = "hewan/babi.png",
             option = "",
             wordChild = "1207"
         ),
@@ -760,7 +309,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Ular",
             balinese = "Lelipi",
-            imageUrl = "",
+            imageUrl = "hewan/ular.png",
             option = "",
             wordChild = "1208"
         ),
@@ -769,7 +318,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Monyet/Kera",
             balinese = "Bojog",
-            imageUrl = "",
+            imageUrl = "hewan/monyet.png",
             option = "",
             wordChild = "1209"
         ),
@@ -778,7 +327,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Sapi",
             balinese = "Sampi",
-            imageUrl = "",
+            imageUrl = "hewan/sapi.png",
             option = "",
             wordChild = "1210"
         ),
@@ -787,7 +336,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kepiting",
             balinese = "Yuyu",
-            imageUrl = "",
+            imageUrl = "hewan/kepiting.png",
             option = "",
             wordChild = "12011"
         ),
@@ -798,7 +347,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kuda",
             balinese = "Bebedag",
-            imageUrl = "",
+            imageUrl = "hewan/anak_kuda.png",
             option = "",
         ),
         Word(
@@ -806,7 +355,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kambing",
             balinese = "Wiwi",
-            imageUrl = "",
+            imageUrl = "hewan/anak_kambing.png",
             option = "",
         ),
         Word(
@@ -814,7 +363,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kucing",
             balinese = "Tai",
-            imageUrl = "",
+            imageUrl = "hewan/anak_kucing.png",
             option = "",
         ),
         Word(
@@ -822,7 +371,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Bebek",
             balinese = "Memeri",
-            imageUrl = "",
+            imageUrl = "hewan/anak_bebek.png",
             option = "",
         ),
         Word(
@@ -830,7 +379,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Anjing",
             balinese = "Kuluk",
-            imageUrl = "",
+            imageUrl = "hewan/anak_anjing.png",
             option = "",
         ),
         Word(
@@ -838,15 +387,15 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kerbau",
             balinese = "Bedigal",
-            imageUrl = "",
+            imageUrl = "hewan/anak_kerbau.png",
             option = "",
         ),
         Word(
             id = "1206",
             chapterId = "12",
             indonesian = "Anak Tikus",
-            balinese = "Nyinh-nying",
-            imageUrl = "",
+            balinese = "Nying-nying",
+            imageUrl = "hewan/anak_tikus.png",
             option = "",
         ),
         Word(
@@ -854,7 +403,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Babi",
             balinese = "Kucit",
-            imageUrl = "",
+            imageUrl = "hewan/anak_babi.png",
             option = "",
         ),
         Word(
@@ -862,7 +411,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Ular",
             balinese = "Brara",
-            imageUrl = "",
+            imageUrl = "hewan/anak_ular.png",
             option = "",
         ),
         Word(
@@ -870,7 +419,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Monyet/Kera",
             balinese = "Apa",
-            imageUrl = "",
+            imageUrl = "hewan/anak_monyet.png",
             option = "",
         ),
         Word(
@@ -878,7 +427,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Sapi",
             balinese = "Godel",
-            imageUrl = "",
+            imageUrl = "hewan/anak_sapi.png",
             option = "",
         ),
         Word(
@@ -886,11 +435,379 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kepiting",
             balinese = "Kreket/Utung-utung",
-            imageUrl = "",
+            imageUrl = "hewan/anak_kepiting.png",
             option = "",
         ),
 
-        //TODO: Angka
+        //TODO: Angka 03
+        Word(
+            id = "0300",
+            chapterId = "03",
+            indonesian = "Satu",
+            balinese = "Besik",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0301",
+            chapterId = "03",
+            indonesian = "Dua",
+            balinese = "Kalih",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0302",
+            chapterId = "03",
+            indonesian = "Tiga",
+            balinese = "Telu",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0304",
+            chapterId = "03",
+            indonesian = "Empat",
+            balinese = "Papat",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0305",
+            chapterId = "03",
+            indonesian = "Lima",
+            balinese = "Lima",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0306",
+            chapterId = "03",
+            indonesian = "Enam",
+            balinese = "Nenem",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0307",
+            chapterId = "03",
+            indonesian = "Tujuh",
+            balinese = "Pitu",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0308",
+            chapterId = "03",
+            indonesian = "Delapan",
+            balinese = "Kutus",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0309",
+            chapterId = "03",
+            indonesian = "Sembilan",
+            balinese = "Sia/Sanga",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0310",
+            chapterId = "03",
+            indonesian = "Sepuluh",
+            balinese = "Dasa",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0311",
+            chapterId = "03",
+            indonesian = "Sebelas",
+            balinese = "Solas",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0312",
+            chapterId = "03",
+            indonesian = "Dua Belas",
+            balinese = "Roras",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0313",
+            chapterId = "03",
+            indonesian = "Tiga Belas",
+            balinese = "Telulas",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0314",
+            chapterId = "03",
+            indonesian = "Empat Belas",
+            balinese = "Pat belas",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0315",
+            chapterId = "03",
+            indonesian = "Lima Belas",
+            balinese = "Limolas",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0316",
+            chapterId = "03",
+            indonesian = "Enam Belas",
+            balinese = "Nem belas",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0317",
+            chapterId = "03",
+            indonesian = "Tujuh Belas",
+            balinese = "Pitulas",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0318",
+            chapterId = "03",
+            indonesian = "Delapan Belas",
+            balinese = "Plekutus",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0319",
+            chapterId = "03",
+            indonesian = "Sembilan Belas",
+            balinese = "Siangolas",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0320",
+            chapterId = "03",
+            indonesian = "Dua Puluh",
+            balinese = "Duang dasa",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0321",
+            chapterId = "03",
+            indonesian = "Dua Puluh Satu",
+            balinese = "Selikur",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0322",
+            chapterId = "03",
+            indonesian = "Dua Puluh Dua",
+            balinese = "Dua likur",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0323",
+            chapterId = "03",
+            indonesian = "Dua Puluh Tiga",
+            balinese = "Telu likur",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0324",
+            chapterId = "03",
+            indonesian = "Dua Puluh Empat",
+            balinese = "Patlikur",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0325",
+            chapterId = "03",
+            indonesian = "Dua Puluh Lima",
+            balinese = "Selae",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0326",
+            chapterId = "03",
+            indonesian = "Dua Puluh Enam",
+            balinese = "Nem likur",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0327",
+            chapterId = "03",
+            indonesian = "Dua Puluh Tujuh",
+            balinese = "Pitu likur",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0328",
+            chapterId = "03",
+            indonesian = "Dua Puluh Delapan",
+            balinese = "Ululikur",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0329",
+            chapterId = "03",
+            indonesian = "Dua Puluh Sembilan",
+            balinese = "Sanga likur",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0330",
+            chapterId = "03",
+            indonesian = "Tiga Puluh",
+            balinese = "Telung Dasa",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0331",
+            chapterId = "03",
+            indonesian = "Tiga Puluh Satu",
+            balinese = "Telung Dasa Besik",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0332",
+            chapterId = "03",
+            indonesian = "Tiga Puluh Lima",
+            balinese = "Patsasur",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0333",
+            chapterId = "03",
+            indonesian = "Empat Puluh",
+            balinese = "Petang Dasa",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0334",
+            chapterId = "03",
+            indonesian = "Empat Puluh Lima",
+            balinese = "Setiman",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0335",
+            chapterId = "03",
+            indonesian = "Lima Puluh",
+            balinese = "Seket",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0336",
+            chapterId = "03",
+            indonesian = "Tujuh Puluh Lima",
+            balinese = "Tigang Benang",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0337",
+            chapterId = "03",
+            indonesian = "Delapan Puluh",
+            balinese = "Ulung Dasa",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0338",
+            chapterId = "03",
+            indonesian = "Seratus",
+            balinese = "Satus",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0339",
+            chapterId = "03",
+            indonesian = "Seratus Lima Puluh",
+            balinese = "Karobelah",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0340",
+            chapterId = "03",
+            indonesian = "Seratus Tujuh Puluh Lima",
+            balinese = "Lebak",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0341",
+            chapterId = "03",
+            indonesian = "Dua Ratus",
+            balinese = "Satak",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0342",
+            chapterId = "03",
+            indonesian = "Tiga Ratus",
+            balinese = "Telung Atus",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0343",
+            chapterId = "03",
+            indonesian = "Empat Ratus",
+            balinese = "Samas",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0344",
+            chapterId = "03",
+            indonesian = "Enam Ratus",
+            balinese = "Telung Atak",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0345",
+            chapterId = "03",
+            indonesian = "Delapan Ratus",
+            balinese = "Domas",
+            imageUrl = "",
+            option = "",
+        ),
+        Word(
+            id = "0346",
+            chapterId = "03",
+            indonesian = "Seribu",
+            balinese = "Siu",
+            imageUrl = "",
+            option = "",
+        ),
 
         //TODO: Benda
 
