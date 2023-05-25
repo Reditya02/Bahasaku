@@ -18,6 +18,6 @@ data class Word(
     val wordChild: String = ""
 ) : Parcelable {
     fun getOptionList(): List<String> {
-        return option.split("$").shuffled()
+        return "$option|$balinese".split("|").shuffled()
     }
 }

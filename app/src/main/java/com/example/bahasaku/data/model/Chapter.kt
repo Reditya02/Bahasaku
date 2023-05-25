@@ -11,25 +11,9 @@ data class Chapter(
     @PrimaryKey
     val id: String = "",
     val title: String = "",
-    val courseNumber: Int = 0,
+    val cardNumber: Int = 0,
+    val exerciseNumber: Int = 0,
     val imageUrl: String = "",
     val chapterChild: String = "",
     val isChild: Boolean = false
-) : Parcelable {
-    companion object {
-        val getListDummy: List<Chapter>
-            get() {
-                val data = mutableListOf<Chapter>()
-                for (i in 0..10) {
-                    data.add(
-                        Chapter(
-                            title = "Bab $i",
-                            courseNumber = i,
-                            imageUrl = "Hewan/anak_bebek.png"
-                        )
-                    )
-                }
-                return data
-            }
-    }
-}
+) : Parcelable

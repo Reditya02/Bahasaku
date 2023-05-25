@@ -20,7 +20,6 @@ class RoomRepository @Inject constructor(
     fun populateDatabase() {
         dao.apply {
             populateChapter(Populate.populateChapter)
-            populateCourse(Populate.populateCourse)
         }
     }
 }
