@@ -129,6 +129,17 @@ class RegisterViewmodel @Inject constructor(
                         ),
                     ))
 
+                collection("exercise_chapter")
+                    .document("chapter_progress")
+                    .set(ProgressChapter(
+                        available = mutableListOf(
+                            true, false, false, false, false, false, false, false
+                        ),
+                        progress = mutableListOf(
+                            0, 0, 0, 0, 0, 0, 0, 0
+                        ),
+                    ))
+
                 collection("learning_card")
                     .apply {
 

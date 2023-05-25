@@ -2,6 +2,7 @@ package com.example.bahasaku.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bahasaku.data.repository.AuthRepository
 import com.example.bahasaku.data.repository.RoomRepository
 import com.example.bahasaku.ui.register.AuthCondition
 import com.google.firebase.auth.ktx.auth
@@ -9,6 +10,7 @@ import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    roomRepository: RoomRepository
+    roomRepository: RoomRepository,
+    private val auth: AuthRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginState())
     val state: StateFlow<LoginState> = _state
@@ -52,13 +55,16 @@ class LoginViewModel @Inject constructor(
 
     fun login() = viewModelScope.launch {
         _state.value.apply {
-            try {
-                Firebase.auth.signInWithEmailAndPassword(email, password).await()
-                _state.update { it.copy(authCondition = AuthCondition.Success) }
-            } catch (e: Exception) {
-                _state.update { it.copy(authCondition = AuthCondition.Failed) }
-
+            auth.login(email, password).collect { result ->
+                _state.update { it.copy(authCondition = result) }
             }
+//            try {
+//                Firebase.auth.signInWithEmailAndPassword(email, password).await()
+//                _state.update { it.copy(authCondition = AuthCondition.Success) }
+//            } catch (e: Exception) {
+//                _state.update { it.copy(authCondition = AuthCondition.Failed) }
+//
+//            }
         }
     }
 
