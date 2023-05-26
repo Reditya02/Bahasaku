@@ -23,7 +23,6 @@ import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BSearchBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.example.bahasaku.data.model.Word
-import com.example.bahasaku.ui.home.HomeContent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 

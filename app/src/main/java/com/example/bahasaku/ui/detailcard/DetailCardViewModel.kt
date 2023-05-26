@@ -28,7 +28,7 @@ class DetailCardViewModel @Inject constructor(
 
     fun udateCardProgress(chapterId: String, page: Int) {
         viewModelScope.launch {
-            firestoreRepository.updateCardProgress(chapterId, page)
+            firestoreRepository.updateLearningCardProgress(chapterId, page)
         }
     }
 
