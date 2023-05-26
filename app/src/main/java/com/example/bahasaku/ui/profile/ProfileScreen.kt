@@ -143,6 +143,7 @@ fun ProfileContent(
                         .fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.background),
                     onClick = onEditProfileClicked,
+                    hasBackground = true,
                     text = "Edit Profil"
                 )
             }
