@@ -8,8 +8,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 class FirestoreRepository @Inject constructor(
@@ -24,6 +27,10 @@ class FirestoreRepository @Inject constructor(
 
     private val fsLearningChapterProgress = fsProgress
         .collection("learning_chapter")
+        .document("chapter_progress")
+
+    private val fsExerciseChapterProgress = fsProgress
+        .collection("exercise_chapter")
         .document("chapter_progress")
 
     fun getProgressLearningChapter() = callbackFlow {
@@ -118,5 +125,44 @@ class FirestoreRepository @Inject constructor(
             .collection("learning_card")
             .document(chapterId)
             .set(result)
+    }
+
+    private fun getProgressFieldExerciseChapter() = callbackFlow {
+        val listener = object : EventListener<DocumentSnapshot> {
+            override fun onEvent(value: DocumentSnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+                    cancel()
+                    return
+                }
+                if (value != null && value.exists()) {
+                    val result = value.get("progress")
+                    trySend(result)
+                }
+            }
+        }
+        val firebase = fsExerciseChapterProgress
+            .addSnapshotListener(listener)
+        awaitClose { firebase.remove() }
+    }
+
+    fun getProgressExerciseChapter() = callbackFlow {
+        val result = MutableStateFlow(ProgressChapter())
+
+        getProgressLearningChapter().first { progress ->
+            if (progress != null) {
+                result.update { it.copy(available = progress.available) }
+            }
+            true
+        }
+
+        getProgressFieldExerciseChapter().first { progress ->
+            if (progress != null) {
+                result.update { it.copy(progress = progress as MutableList<Int>) }
+            }
+            true
+        }
+
+        trySend(result.value)
+        awaitClose { channel.close() }
     }
 }
