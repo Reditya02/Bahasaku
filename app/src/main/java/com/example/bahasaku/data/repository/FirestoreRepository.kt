@@ -118,8 +118,8 @@ class FirestoreRepository @Inject constructor(
             true
         }
 
-        if (!result.done[page]) { result.done[page] = true }
-        if (page != result.done.size - 1) { result.available[page + 1] = true }
+        if (!result.done[page - 1]) { result.done[page - 1] = true }
+        if (page != result.done.size) { result.available[page] = true }
 
         fsProgress
             .collection("learning_card")

@@ -19,7 +19,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.bahasaku.core.theme.GreenVariant
-import com.example.bahasaku.data.model.Course
 import com.example.bahasaku.data.model.Word
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await

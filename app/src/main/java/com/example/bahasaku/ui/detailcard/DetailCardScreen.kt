@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.bahasaku.R
+import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Word
 import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
@@ -50,25 +51,25 @@ import kotlinx.coroutines.tasks.await
 fun DetailCardScreen(
     navigator: DestinationsNavigator,
     viewModel: DetailCardViewModel = hiltViewModel(),
-    id: String,
+    chapter: Chapter,
     selected: Int
 ) {
     val state by viewModel.state.collectAsState()
 
-    viewModel.getAllCard(id)
+    Log.d("Reditya", "Screen $chapter")
 
-    val listWord by remember {
-        mutableStateOf(state.listWord)
-    }
+    if (chapter.chapterChild != "")
+        viewModel.getAllChild(chapter.chapterChild)
+
+    viewModel.getAllCard(chapter.id)
 
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
         DetailCardContent(
             listWord = state.listWord,
+            listChild = state.listChild,
             selected = selected,
-            getChild = { viewModel.getChild(it) },
-            state = state,
             updateProgress = { id, page -> viewModel.udateCardProgress(id, page) },
             updateChapterAvailable = { viewModel.updateChapterAvailable(it) }
         )
@@ -78,9 +79,8 @@ fun DetailCardScreen(
 @Composable
 fun DetailCardContent(
     listWord: List<Word>,
+    listChild: List<Word> = emptyList(),
     selected: Int,
-    getChild: (String) -> Unit,
-    state: DetailCardState,
     updateProgress: (String, Int) -> Unit,
     updateChapterAvailable: (String) -> Unit
 ) {
@@ -135,11 +135,6 @@ fun DetailCardContent(
             }
         }
     ) { padding ->
-
-        val position by remember {
-            mutableStateOf(selected)
-        }
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -158,11 +153,9 @@ fun DetailCardContent(
                 if (page ==  listWord.size - 1)
                     updateChapterAvailable(word.chapterId)
 
-                if (word.wordChild != "") {
-                    getChild(word.wordChild)
-                    state.child
-                }
-                val child = state.child
+                var child = Word(id = "")
+                if (listChild.isNotEmpty())
+                    child = listChild[page]
 
                 DetailCardItem(
                     word = listWord[page],
@@ -193,7 +186,10 @@ fun DetailCardItem(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             DetailCardItemContent(word = word)
+//            DetailCardItemContent(word = word)
+
             if (child.id != "") {
+                Spacer(Modifier.height(12.dp))
                 DetailCardItemContent(word = child)
             }
         }
@@ -208,7 +204,7 @@ fun DetailCardItemContent(
     val mp = MediaPlayer.create(context, R.raw.audio)
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

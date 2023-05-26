@@ -17,8 +17,8 @@ interface BDao {
     @Query("select * from word where chapterId like :chapterId")
     suspend fun getAllWordById(chapterId: String): List<Word>
 
-    @Query("select * from word where id like :id limit 1")
-    suspend fun getWordById(id: String): Word
+    @Query("select * from chapter where id like :id limit 1")
+    suspend fun getWordById(id: String): Chapter
 
     //Dictionary
     @Query("select * from word where upper(balinese) like upper(:query) or upper(indonesian) like upper(:query)")

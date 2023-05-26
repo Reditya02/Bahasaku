@@ -9,13 +9,11 @@ class RoomRepository @Inject constructor(
 ) {
     suspend fun getAllChapter() = dao.getAllChapter()
 
-    suspend fun getAllCourse(chapterId: String) = dao.getAllCourse(chapterId)
-
-    suspend fun getAllQuestion(courseId: String) = dao.getAllQuestion(courseId)
-
     suspend fun getAllWordById(chapterId: String) = dao.getAllWordById(chapterId)
 
     suspend fun getAllWord(query: String) = dao.getWordByQuery(query)
+
+    suspend fun getWordById(id: String) = dao.getWordById(id)
 
     fun populateDatabase() {
         dao.apply {
