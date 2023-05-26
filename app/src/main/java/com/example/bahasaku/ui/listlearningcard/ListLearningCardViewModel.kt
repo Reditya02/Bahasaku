@@ -27,7 +27,7 @@ class ListLearningCardViewModel @Inject constructor(
 
     fun getProgress(chapterId: String) {
         viewModelScope.launch {
-            firestoreRepository.getProgressCard(chapterId).collect { response ->
+            firestoreRepository.getProgressLearningCard(chapterId).collect { response ->
                 response?.let { result ->
                     _state.update { it.copy(progress = result) }
                 }
@@ -37,7 +37,7 @@ class ListLearningCardViewModel @Inject constructor(
 
     fun updateChapterProgress(chapterId: String) {
         viewModelScope.launch {
-            firestoreRepository.updateChapterProgress(chapterId)
+            firestoreRepository.updateLearningChapterProgress(chapterId)
         }
     }
 }
