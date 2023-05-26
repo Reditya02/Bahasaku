@@ -9,13 +9,11 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.bahasaku.data.Populate
 import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.data.model.Course
-import com.example.bahasaku.data.model.Question
 import com.example.bahasaku.data.model.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Chapter::class, Course::class, Question::class, Word::class], version = 1)
+@Database(entities = [Chapter::class, Word::class], version = 1)
 abstract class BDatabase : RoomDatabase() {
     abstract fun dao(): BDao
 
@@ -42,7 +40,6 @@ abstract class BDatabase : RoomDatabase() {
                                         val bDao = it.dao()
                                         Log.d("Reditya", "populate DB")
                                         bDao.populateChapter(Populate.populateChapter)
-//                                        bDao.populateCourse(Populate.populateCourse)
                                         bDao.populateWord(Populate.populateWord)
                                     }
                                 }
