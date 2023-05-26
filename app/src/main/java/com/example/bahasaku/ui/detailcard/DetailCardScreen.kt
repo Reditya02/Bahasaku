@@ -145,8 +145,12 @@ fun DetailCardContent(
                     .fillMaxSize(),
                 pageCount = listWord.size,
                 state = pagerState
-            ) { page ->
-                val word = listWord[page]
+            ) { nextPage ->
+                val page = pagerState.currentPage
+                val word = listWord[nextPage]
+
+                Log.d("Reditya", "current page $page")
+                Log.d("Reditya", "next page $nextPage")
 
                 updateProgress(word.chapterId, page)
 
@@ -158,7 +162,7 @@ fun DetailCardContent(
                     child = listChild[page]
 
                 DetailCardItem(
-                    word = listWord[page],
+                    word = word,
                     child = child
                 )
             }
@@ -202,6 +206,8 @@ fun DetailCardItemContent(
 ) {
     val context = LocalContext.current
     val mp = MediaPlayer.create(context, R.raw.audio)
+
+    Log.d("Reditya", "word $word")
 
     Column(
         modifier = Modifier,
