@@ -25,7 +25,8 @@ object Populate {
             title = "Hewan",
             cardNumber = 12,
             exerciseNumber = 24,
-            imageUrl = "hewan/anak_bebek.png"
+            imageUrl = "hewan/anak_bebek.png",
+            chapterChild = "12"
         ),
         Chapter(
             id = "03",
