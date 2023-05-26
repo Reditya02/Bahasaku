@@ -1,6 +1,5 @@
 package com.example.bahasaku.ui.profile
 
-import android.widget.ImageButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -8,7 +7,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,11 +20,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.ui.home.HomeContent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.skydoves.landscapist.coil.CoilImage
 import com.example.bahasaku.R
+import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.destinations.EditProfileScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
@@ -140,18 +138,13 @@ fun ProfileContent(
                     modifier = Modifier.padding(bottom = 32.dp)
                 )
                 Spacer(Modifier.weight(1f))
-                Button(
+                BButton(
                     modifier = Modifier
                         .fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.background),
-                    onClick = onEditProfileClicked
-                ) {
-                    Text(
-                        text = "Edit Profil",
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colors.onBackground
-                    )
-                }
+                    onClick = onEditProfileClicked,
+                    text = "Edit Profil"
+                )
             }
         }
     }
