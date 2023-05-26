@@ -1,4 +1,4 @@
-package com.example.bahasaku.ui.home
+package com.example.bahasaku.ui.listlearningchapter
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -25,9 +25,9 @@ import kotlinx.coroutines.launch
 
 @Destination
 @Composable
-fun HomeScreen(
+fun ListLearningChapterScreen(
     navigator: DestinationsNavigator,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: ListLearningChapterViewModel = hiltViewModel()
 ) {
     val snackbarHostState = SnackbarHostState()
     val scope = rememberCoroutineScope()
@@ -56,7 +56,7 @@ fun HomeScreen(
         ) { padding ->
             Column(Modifier.padding(padding)) {
                 viewModel.getProgress()
-                HomeContent(
+                ListChapterLearningContent(
                     { id, title ->
                         navigator.navigate(ListCardScreenDestination(id, title))
                     },
@@ -94,11 +94,11 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeContent(
+fun ListChapterLearningContent(
     navigateToCourse: (String, String) -> Unit,
     snackbarHostState: SnackbarHostState,
     showSnackbar: () -> Unit,
-    data: HomeState
+    data: ListLearningChapterState
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

@@ -1,4 +1,4 @@
-package com.example.bahasaku.ui.home
+package com.example.bahasaku.ui.listlearningchapter
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -13,12 +13,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class ListLearningChapterViewModel @Inject constructor(
     private val roomRepository: RoomRepository,
     private val firestoreRepository: FirestoreRepository
 ) : ViewModel() {
-    private val _state = MutableStateFlow(HomeState())
-    val state: StateFlow<HomeState> = _state
+    private val _state = MutableStateFlow(ListLearningChapterState())
+    val state: StateFlow<ListLearningChapterState> = _state
 
     fun getAllChapter() {
         viewModelScope.launch {

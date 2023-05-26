@@ -1,4 +1,4 @@
-package com.example.bahasaku.ui.listcard
+package com.example.bahasaku.ui.listlearningcard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -27,11 +27,11 @@ import kotlinx.coroutines.launch
 
 @Destination
 @Composable
-fun ListCardScreen(
+fun ListLearningCardScreen(
     navigator: DestinationsNavigator,
     id: String,
     title: String,
-    viewModel: ListCardViewModel = hiltViewModel()
+    viewModel: ListLearningCardViewModel = hiltViewModel()
 ) {
     val snackbarHostState = SnackbarHostState()
     val scope = rememberCoroutineScope()
@@ -44,7 +44,7 @@ fun ListCardScreen(
 
     Surface {
         Column {
-            ListCardContent(
+            ListLearningCardContent(
                 onBackPressed = { navigator.popBackStack() },
                 navigateToCourseContent = { _, i ->
                     navigator.navigate(DetailCardScreenDestination(id, i))
@@ -66,13 +66,13 @@ fun ListCardScreen(
 }
 
 @Composable
-fun ListCardContent(
+fun ListLearningCardContent(
     onBackPressed: () -> Unit,
     navigateToCourseContent: (String, Int) -> Unit,
     showSnackbar: () -> Unit,
     snackbarHostState: SnackbarHostState,
     title: String,
-    state: ListCardState,
+    state: ListCardLearningState,
 ) {
     Scaffold(
         topBar = {

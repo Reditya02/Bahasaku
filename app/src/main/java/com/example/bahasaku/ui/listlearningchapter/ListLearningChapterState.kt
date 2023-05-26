@@ -1,10 +1,10 @@
-package com.example.bahasaku.ui.home
+package com.example.bahasaku.ui.listlearningchapter
 
 import android.net.Uri
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.remote.ProgressChapter
 
-data class HomeState(
+data class ListLearningChapterState(
     val listChapter: List<Chapter> = emptyList(),
     val listImage: List<Unit> = List(5) {
         Uri.parse("android.resource://com.example.bahasaku/drawable/placeholder_image")

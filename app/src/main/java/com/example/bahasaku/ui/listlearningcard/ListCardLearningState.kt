@@ -1,10 +1,9 @@
-package com.example.bahasaku.ui.listcard
+package com.example.bahasaku.ui.listlearningcard
 
 import com.example.bahasaku.data.model.Word
 import com.example.bahasaku.data.model.remote.ProgressCard
-import com.example.bahasaku.data.model.remote.ProgressChapter
 
-data class ListCardState(
+data class ListCardLearningState(
     val listWord: List<Word> = listOf(),
     val progress: ProgressCard = ProgressCard(
         done = mutableListOf(),
