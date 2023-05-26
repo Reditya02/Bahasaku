@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BChapterCard
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
+import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.destinations.ListLearningCardScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -57,8 +58,8 @@ fun ListLearningChapterScreen(
             Column(Modifier.padding(padding)) {
                 viewModel.getProgress()
                 ListChapterLearningContent(
-                    { id, title ->
-                        navigator.navigate(ListLearningCardScreenDestination(id, title))
+                    { chapter ->
+                        navigator.navigate(ListLearningCardScreenDestination(chapter))
                     },
                     snackbarHostState,
                     {
@@ -95,7 +96,7 @@ fun ListLearningChapterScreen(
 
 @Composable
 fun ListChapterLearningContent(
-    navigateToCourse: (String, String) -> Unit,
+    navigateToCourse: (Chapter) -> Unit,
     snackbarHostState: SnackbarHostState,
     showSnackbar: () -> Unit,
     data: ListLearningChapterState

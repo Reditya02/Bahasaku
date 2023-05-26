@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BWordCard
+import com.example.bahasaku.data.model.Chapter
+import com.example.bahasaku.data.model.Word
 import com.example.bahasaku.destinations.DetailCardScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -29,12 +31,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListLearningCardScreen(
     navigator: DestinationsNavigator,
-    id: String,
-    title: String,
+    chapter: Chapter,
     viewModel: ListLearningCardViewModel = hiltViewModel()
 ) {
     val snackbarHostState = SnackbarHostState()
     val scope = rememberCoroutineScope()
+    val id = chapter.id
+    val title = chapter.title
 
     val state by viewModel.state.collectAsState()
 
@@ -46,8 +49,8 @@ fun ListLearningCardScreen(
         Column {
             ListLearningCardContent(
                 onBackPressed = { navigator.popBackStack() },
-                navigateToCourseContent = { _, i ->
-                    navigator.navigate(DetailCardScreenDestination(id, i))
+                navigateToCourseContent = { i ->
+                    navigator.navigate(DetailCardScreenDestination(chapter, i))
                 },
                 showSnackbar = {
                     snackbarHostState.currentSnackbarData?.dismiss()
@@ -68,7 +71,7 @@ fun ListLearningCardScreen(
 @Composable
 fun ListLearningCardContent(
     onBackPressed: () -> Unit,
-    navigateToCourseContent: (String, Int) -> Unit,
+    navigateToCourseContent: (Int) -> Unit,
     showSnackbar: () -> Unit,
     snackbarHostState: SnackbarHostState,
     title: String,
@@ -96,7 +99,7 @@ fun ListLearningCardContent(
                         itemsIndexed(state.listWord) { i, it ->
                             BWordCard(
                                 Modifier.fillMaxWidth(),
-                                onCardClicked = { _, _ -> navigateToCourseContent("", i) },
+                                onCardClicked = { _, _ -> navigateToCourseContent(i) },
                                 showSnackbar = showSnackbar,
                                 word = it,
                                 isAvailable = state.progress.available[i],

@@ -26,7 +26,7 @@ import kotlinx.coroutines.tasks.await
 fun BChapterCard(
     modifier: Modifier = Modifier,
     chapterData: Chapter,
-    navigateToCourse: (String, String) -> Unit,
+    navigateToCourse: (Chapter) -> Unit,
     showSnackbar: () -> Unit,
     isAvailable: Boolean,
     progress: Int
@@ -38,7 +38,7 @@ fun BChapterCard(
 //            .fillMaxWidth()
             .clickable {
                 if (isAvailable)
-                    navigateToCourse(chapterData.id, chapterData.title)
+                    navigateToCourse(chapterData)
                 else
                     showSnackbar()
             },
@@ -70,7 +70,7 @@ fun BChapterCard(
                     modifier = Modifier.weight(0.4f),
                     painter = rememberAsyncImagePainter(image.value),
                     contentDescription = "description",
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Fit
                 )
 
                 Spacer(modifier = Modifier.weight(0.3f))
