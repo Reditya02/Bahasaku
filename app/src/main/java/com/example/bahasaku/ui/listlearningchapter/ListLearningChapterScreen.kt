@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BChapterCard
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.destinations.ListCardScreenDestination
+import com.example.bahasaku.destinations.ListLearningCardScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -49,7 +49,7 @@ fun ListLearningChapterScreen(
             },
             bottomBar = {
                 BBottomNavigationBar(
-                    selected = BottomNavigationDestination.HomeScreen,
+                    selected = BottomNavigationDestination.LearningScreen,
                     navigator = navigator
                 )
             }
@@ -58,7 +58,7 @@ fun ListLearningChapterScreen(
                 viewModel.getProgress()
                 ListChapterLearningContent(
                     { id, title ->
-                        navigator.navigate(ListCardScreenDestination(id, title))
+                        navigator.navigate(ListLearningCardScreenDestination(id, title))
                     },
                     snackbarHostState,
                     {

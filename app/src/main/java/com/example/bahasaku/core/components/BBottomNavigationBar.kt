@@ -17,7 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.bahasaku.R
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.destinations.HomeScreenDestination
+import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.popUpTo
 
@@ -43,7 +43,7 @@ fun BBottomNavigationBar(
                     BottomNavigationItem(
                         selected = selected == it,
                         onClick = { navigator.navigate(it.direction) {
-                            popUpTo(HomeScreenDestination)
+                            popUpTo(ListLearningChapterScreenDestination)
                         } },
                         icon = { Icon(imageVector = it.icon, contentDescription = "") },
 //                label = { Text(text = it.text) },

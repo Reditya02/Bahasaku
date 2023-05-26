@@ -11,7 +11,7 @@ enum class BottomNavigationDestination(
     val text: String,
     val icon: ImageVector
 ) {
-    HomeScreen(HomeScreenDestination, "Home", Icons.Default.Home),
+    LearningScreen(ListLearningChapterScreenDestination, "Learning", Icons.Default.Home),
     ExerciseScreen(ListExerciseChapterScreenDestination, "Exercise", Icons.Default.CheckBox),
     DictionaryScreen(DictionaryScreenDestination, "Dictionary", Icons.Default.Book),
     LeaderboardScreen(LeaderboardScreenDestination, "Leaderboard", Icons.Default.Leaderboard),

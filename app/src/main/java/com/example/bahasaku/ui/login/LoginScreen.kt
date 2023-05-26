@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
-import com.example.bahasaku.destinations.HomeScreenDestination
+import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.example.bahasaku.destinations.RegisterScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
 import com.example.bahasaku.ui.register.AuthCondition
@@ -49,14 +49,14 @@ fun LoginScreen(
 //    val user = Firebase.auth.currentUser
 
     if (Firebase.auth.currentUser != null)
-        navigator.navigate(HomeScreenDestination)
+        navigator.navigate(ListLearningChapterScreenDestination)
 
 //    user?.run {
 //        Log.d("Reditya", "$email\n$displayName\n$uid")
 //    }
 
     if (state.authCondition == AuthCondition.Success)
-        navigator.navigate(HomeScreenDestination)
+        navigator.navigate(ListLearningChapterScreenDestination)
 
     Surface(
         modifier = Modifier.fillMaxSize(),

@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.theme.BahasakuTheme
-import com.example.bahasaku.destinations.HomeScreenDestination
+import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.example.bahasaku.destinations.LoginScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
 import com.google.firebase.auth.ktx.auth
@@ -42,7 +42,7 @@ fun RegisterScreen(
     val state by viewModel.state.collectAsState()
 
     if (state.authCondition == AuthCondition.Success) {
-        navigator.navigate(HomeScreenDestination)
+        navigator.navigate(ListLearningChapterScreenDestination)
     }
 
     Surface(
