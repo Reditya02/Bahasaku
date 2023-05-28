@@ -57,7 +57,6 @@ fun BButton(
                     .onGloballyPositioned { size = it.size.toSize() },
                 text = text,
                 textAlign = Center,
-                color = MaterialTheme.colors.onBackground
             )
         }
     }
