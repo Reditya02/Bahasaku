@@ -65,11 +65,11 @@ class RegisterViewmodel @Inject constructor(
                 val fbAuth = Firebase.auth
                 fbAuth.createUserWithEmailAndPassword(email, password).await()
                 fbAuth.currentUser?.apply {
+                    createProgress(uid, name, uid)
                     updateProfile(userProfileChangeRequest {
                         displayName = name
                         photoUri = Uri.parse("")
                     })
-                    createProgress(uid)
                 }
                 _state.update { it.copy(authCondition = AuthCondition.Success) }
             } catch (e: Exception) {
@@ -109,14 +109,18 @@ class RegisterViewmodel @Inject constructor(
         _state.update { it.copy(isRetypePasswordShown = !_state.value.isRetypePasswordShown) }
     }
 
-    fun createProgress(id: String) {
+    fun createProgress(id: String, name: String, imageUrl: String) {
         FirebaseFirestore
             .getInstance()
             .collection("progress")
             .document(id)
             .apply {
 
-                set(hashMapOf("score" to 0))
+                set(hashMapOf(
+                    "score" to 0,
+                    "name" to name,
+                    "image" to imageUrl
+                ))
 
                 collection("learning_chapter")
                     .document("chapter_progress")
