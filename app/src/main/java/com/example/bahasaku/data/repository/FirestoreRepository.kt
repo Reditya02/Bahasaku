@@ -1,5 +1,7 @@
 package com.example.bahasaku.data.repository
 
+import android.util.Log
+import androidx.compose.runtime.MutableState
 import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.google.firebase.firestore.DocumentSnapshot
@@ -52,44 +54,6 @@ class FirestoreRepository @Inject constructor(
         awaitClose { firebase.remove() }
     }
 
-    suspend fun updateLearningChapterProgress(chapterId: String) {
-        var result = 0
-        val i = chapterId.toInt()
-
-        getProgressLearningCard(chapterId).first {
-            it?.done.let { result = it?.count { it }!! }
-            true
-        }
-
-        var progress = mutableListOf<Int>()
-        var available = mutableListOf<Boolean>()
-
-        getProgressLearningChapter().first {
-            it?.let {
-                progress = it.progress
-                available = it.available
-            }
-            true
-        }
-
-        progress[i] = result
-        if (result == progress.size - 1 && i < 8) { available[i+1] = true }
-        fsLearningChapterProgress.update("progress", progress)
-    }
-
-    suspend fun updateChapterAvailable(chapterId: String) {
-        val i = chapterId.toInt()
-        var available = mutableListOf<Boolean>()
-
-        getProgressLearningChapter().first {
-            it?.let { available = it.available }
-            true
-        }
-
-        if ( i < 8) { available[i+1] = true }
-        fsLearningChapterProgress.update("available", available)
-    }
-
     fun getProgressLearningCard(chapterId: String) = callbackFlow {
         val listener = object : EventListener<DocumentSnapshot> {
             override fun onEvent(value: DocumentSnapshot?, error: FirebaseFirestoreException?) {
@@ -109,22 +73,6 @@ class FirestoreRepository @Inject constructor(
             .document(chapterId)
             .addSnapshotListener(listener)
         awaitClose { firebase.remove() }
-    }
-
-    suspend fun updateLearningCardProgress(chapterId: String, page: Int) {
-        var result = ProgressCard()
-        getProgressLearningCard(chapterId).first {
-            it?.let { result = it }
-            true
-        }
-
-        if (!result.done[page - 1]) { result.done[page - 1] = true }
-        if (page != result.done.size) { result.available[page] = true }
-
-        fsProgress
-            .collection("learning_card")
-            .document(chapterId)
-            .set(result)
     }
 
     private fun getProgressFieldExerciseChapter() = callbackFlow {
@@ -165,4 +113,127 @@ class FirestoreRepository @Inject constructor(
         trySend(result.value)
         awaitClose { channel.close() }
     }
+
+    fun getDoneFieldExerciseCard(chapterId: String) = callbackFlow {
+        val listener = object : EventListener<DocumentSnapshot> {
+            override fun onEvent(value: DocumentSnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+                    cancel()
+                    return
+                }
+                if (value != null && value.exists()) {
+                    val result = value["done"]
+                    trySend(result)
+                }
+            }
+        }
+
+        val firebase = fsProgress
+            .collection("exercise_card")
+            .document(chapterId)
+            .addSnapshotListener(listener)
+        awaitClose { firebase.remove() }
+    }
+
+    fun getProgressExerciseCard(chapterId: String) = callbackFlow {
+        val result = MutableStateFlow(ProgressCard())
+
+        getProgressLearningCard(chapterId).first { res ->
+            if (res != null) {
+                result.update { it.copy(available = res.done) }
+            }
+            true
+        }
+
+        getDoneFieldExerciseCard(chapterId).first { res ->
+            if (res != null) {
+                result.update {it.copy(done = res as MutableList<Boolean>)}
+            }
+            true
+        }
+
+        trySend(result.value)
+        awaitClose { channel.close() }
+    }
+
+    suspend fun updateChapterAvailable(chapterId: String) {
+        val i = chapterId.toInt()
+        var available = mutableListOf<Boolean>()
+
+        getProgressLearningChapter().first {
+            it?.let { available = it.available }
+            true
+        }
+
+        if ( i < 8) { available[i+1] = true }
+        fsLearningChapterProgress.update("available", available)
+    }
+
+    suspend fun updateLearningChapterProgress(chapterId: String) {
+        var result = 0
+        val i = chapterId.toInt()
+
+        getProgressLearningCard(chapterId).first {
+            it?.done.let { result = it?.count { it }!! }
+            true
+        }
+
+        var progress = mutableListOf<Int>()
+        var available = mutableListOf<Boolean>()
+
+        getProgressLearningChapter().first {
+            it?.let {
+                progress = it.progress
+                available = it.available
+            }
+            true
+        }
+
+        progress[i] = result
+        if (result == progress.size - 1 && i < 8) { available[i+1] = true }
+        fsLearningChapterProgress.update("progress", progress)
+    }
+
+    suspend fun updateLearningCardProgress(chapterId: String, page: Int) {
+        var result = ProgressCard()
+        getProgressLearningCard(chapterId).first {
+            it?.let { result = it }
+            true
+        }
+
+        if (!result.done[page]) { result.done[page] = true }
+        if (page != result.done.size - 1) { result.available[page + 1] = true }
+
+        fsProgress
+            .collection("learning_card")
+            .document(chapterId)
+            .set(result)
+    }
+
+    suspend fun updateExerciseChapterProgress(chapterId: String) {
+        var result = 0
+        val i = chapterId.toInt()
+
+        getProgressLearningCard(chapterId).first {
+            it?.done.let { result = it?.count { it }!! }
+            true
+        }
+
+        var progress = mutableListOf<Int>()
+        var available = mutableListOf<Boolean>()
+
+        getProgressLearningChapter().first {
+            it?.let {
+                progress = it.progress
+                available = it.available
+            }
+            true
+        }
+
+        progress[i] = result
+        if (result == progress.size - 1 && i < 8) { available[i+1] = true }
+        fsLearningChapterProgress.update("progress", progress)
+    }
+
+
 }
