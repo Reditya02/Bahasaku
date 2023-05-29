@@ -38,6 +38,7 @@ fun ListExerciseChapterScreen(
 
     viewModel.getProgress()
     viewModel.getAllChapter()
+    viewModel.updateScore()
 
     Surface(
         modifier = Modifier.fillMaxSize(),

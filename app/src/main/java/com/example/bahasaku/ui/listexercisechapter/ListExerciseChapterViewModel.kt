@@ -34,7 +34,11 @@ class ListExerciseChapterViewModel @Inject constructor(
                 }
             }
         }
+    }
 
-        Log.d("Reditya", "viewmodel ${state.value.progress}")
+    fun updateScore() {
+        viewModelScope.launch {
+            firestoreRepository.countScore()
+        }
     }
 }

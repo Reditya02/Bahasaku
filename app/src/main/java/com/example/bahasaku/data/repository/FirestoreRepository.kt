@@ -251,5 +251,21 @@ class FirestoreRepository @Inject constructor(
             .update("done", result)
     }
 
+    suspend fun countScore() {
+        var result = 0
+
+        getProgressExerciseChapter().first {
+            it.progress.forEach { score ->
+                result += score
+            }
+            true
+        }
+
+        Log.d("Reditya", "Score $result")
+
+        val firebase = fsProgress.update("score", result)
+
+    }
+
 
 }
