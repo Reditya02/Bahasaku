@@ -214,16 +214,16 @@ class FirestoreRepository @Inject constructor(
         var result = 0
         val i = chapterId.toInt()
 
-        getProgressLearningCard(chapterId).first {
-            it?.done.let { result = it?.count { it }!! }
+        getProgressExerciseCard(chapterId).first { res ->
+            res.done.let { result = it.count { it } }
             true
         }
 
         var progress = mutableListOf<Int>()
         var available = mutableListOf<Boolean>()
 
-        getProgressLearningChapter().first {
-            it?.let {
+        getProgressExerciseChapter().first {
+            it.let {
                 progress = it.progress
                 available = it.available
             }
@@ -231,8 +231,9 @@ class FirestoreRepository @Inject constructor(
         }
 
         progress[i] = result
+
         if (result == progress.size - 1 && i < 8) { available[i+1] = true }
-        fsLearningChapterProgress.update("progress", progress)
+        fsExerciseChapterProgress.update("progress", progress)
     }
 
     suspend fun updateExerciseCardResult(id: Int, chapterId: String) {

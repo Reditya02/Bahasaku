@@ -103,6 +103,7 @@ fun ListExerciseChapterContent(
     showSnackbar: () -> Unit,
     data: ListExerciseChapterState
 ) {
+    Log.d("Reditya", "ListExerciseChapterScreen ${data.progress}")
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -111,7 +112,6 @@ fun ListExerciseChapterContent(
             modifier = Modifier.padding(horizontal = 8.dp),
             columns = GridCells.Fixed(2),
             content = {
-                Log.d("Reditya", data.toString())
                 if (data.listChapter.isNotEmpty() && data.progress.available.size > 0) {
                     items(data.listChapter) {
                         BChapterCard(
