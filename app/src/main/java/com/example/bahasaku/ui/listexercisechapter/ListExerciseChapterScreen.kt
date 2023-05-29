@@ -19,7 +19,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BChapterCard
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.destinations.ListExerciseScreenDestination
+import com.example.bahasaku.data.model.Chapter
+import com.example.bahasaku.destinations.ListExerciseCardScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -34,6 +35,9 @@ fun ListExerciseChapterScreen(
     val scope = rememberCoroutineScope()
 
     val state by viewModel.state.collectAsState()
+
+    viewModel.getProgress()
+    viewModel.getAllChapter()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -54,11 +58,9 @@ fun ListExerciseChapterScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
-                viewModel.getProgress()
-                viewModel.getAllChapter()
                 ListExerciseChapterContent(
-                    { id, title ->
-                        navigator.navigate(ListExerciseScreenDestination(id, title))
+                    { chapter ->
+                        navigator.navigate(ListExerciseCardScreenDestination(chapter))
                     },
                     snackbarHostState,
                     {
@@ -96,7 +98,7 @@ fun ListExerciseChapterScreen(
 
 @Composable
 fun ListExerciseChapterContent(
-    navigateToCourse: (String, String) -> Unit,
+    navigateToCourse: (Chapter) -> Unit,
     snackbarHostState: SnackbarHostState,
     showSnackbar: () -> Unit,
     data: ListExerciseChapterState
