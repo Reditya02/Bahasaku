@@ -235,5 +235,20 @@ class FirestoreRepository @Inject constructor(
         fsLearningChapterProgress.update("progress", progress)
     }
 
+    suspend fun updateExerciseCardResult(id: Int, chapterId: String) {
+        Log.d("Reditya", "repository id $id chapterId $chapterId")
+        var result = mutableListOf<Boolean>()
+
+        getProgressExerciseCard(chapterId).first {
+            result = it.done
+            true
+        }
+        result[id] = true
+        fsProgress
+            .collection("exercise_card")
+            .document(chapterId)
+            .update("done", result)
+    }
+
 
 }

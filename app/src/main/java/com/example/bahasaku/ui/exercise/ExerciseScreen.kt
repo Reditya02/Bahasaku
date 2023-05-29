@@ -1,6 +1,5 @@
 package com.example.bahasaku.ui.exercise
 
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
@@ -41,7 +40,8 @@ fun ExerciseScreen(
             ExerciseContent(
                 word,
                 state,
-                { navigation.popBackStack() }
+                { navigation.popBackStack() },
+                { viewModel.updateProgress(word.id.drop(2).toInt(), word.chapterId) }
             )
         }
     }
@@ -52,6 +52,7 @@ fun ExerciseContent(
     word: Word,
     state: ExerciseState,
     onBackPressed: () -> Unit,
+    onCorrect: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -81,7 +82,12 @@ fun ExerciseContent(
                 Spacer(modifier = Modifier.weight(1f))
                 ExerciseQuestion(word = word)
                 Spacer(modifier = Modifier.weight(1f))
-                ExerciseOption(word = word, option = word.getOptionList(), onAlertDialogClicked = onBackPressed)
+                ExerciseOption(
+                    word = word,
+                    option = word.getOptionList(),
+                    onAlertDialogClicked = onBackPressed,
+                    onCorrect = onCorrect
+                )
             }
         }
     }
@@ -130,7 +136,8 @@ fun ExerciseQuestion(
 fun ExerciseOption(
     word: Word,
     option: List<String>,
-    onAlertDialogClicked: () -> Unit
+    onAlertDialogClicked: () -> Unit,
+    onCorrect: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -144,6 +151,8 @@ fun ExerciseOption(
         }
 
         if (result != ExerciseCondition.Current) {
+            if (result == ExerciseCondition.Correct)
+                onCorrect()
             ResultAlertDialog(
                 isCorrect = result == ExerciseCondition.Correct,
                 onButtonClicked = {
@@ -168,10 +177,11 @@ fun ExerciseOption(
             modifier = Modifier.fillMaxWidth(),
             enabled = selected.isNotEmpty(),
             onClick = {
-                if (selected == word.balinese)
-                    result = ExerciseCondition.Correct
-                else
-                    result = ExerciseCondition.Wrong
+                result = if (selected == word.balinese) {
+                    ExerciseCondition.Correct
+                } else {
+                    ExerciseCondition.Wrong
+                }
             },
             text = "Periksa",
             hasBackground = true
