@@ -234,38 +234,6 @@ fun OptionButton(
     }
 }
 
-//@Preview
-//@Composable
-//fun ExercisePreview() {
-//    BahasakuTheme {
-//        Surface {
-//            ExerciseContent(
-//                state = ExerciseState(
-//                    word = Word(
-//                        id = "",
-//                        chapterId = "",
-//                        indonesian = "anak bebek",
-//                        balinese = "memeri",
-//                        imageUrl = "",
-//                        option = "bebek|sampi|godel",
-//                        wordChild = ""
-//                    )
-//                ),
-//                word = Word(
-//                    id = "",
-//                    chapterId = "",
-//                    indonesian = "anak bebek",
-//                    balinese = "memeri",
-//                    imageUrl = "",
-//                    option = "bebek|sampi|godel",
-//                    wordChild = ""
-//                ),
-//
-//            )
-//        }
-//    }
-//}
-
 enum class ExerciseCondition {
-    Correct, Wrong, Current, NotAnswered
+    Correct, Wrong, Current
 }
