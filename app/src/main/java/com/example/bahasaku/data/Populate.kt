@@ -82,7 +82,7 @@ object Populate {
             indonesian = "Selamat Pagi",
             balinese = "Rahajeng Semeng",
             imageUrl = "salam/selamat_pagi.png",
-            option = "",
+            option = "Rahajeng|Semeng|Rahajeng Wengi|Rahajeng Pagi",
             wordChild = ""
         ),
         Word(
@@ -91,7 +91,7 @@ object Populate {
             indonesian = "Selamat Siang",
             balinese = "Rahajeng Siang",
             imageUrl = "salam/selamat_siang.png",
-            option = "",
+            option = "Rahajeng Semeng|Rahajeng|Rahajeng Memargi|Semeng",
             wordChild = ""
         ),
         Word(
@@ -100,7 +100,7 @@ object Populate {
             indonesian = "Selamat Malam",
             balinese = "Rahajeng Wengi",
             imageUrl = "salam/selamat_malam.png",
-            option = "",
+            option = "Rahajeng Semeng|Rahajeng Siang|Semeng|Rahajeng",
             wordChild = ""
         ),
         Word(
@@ -109,7 +109,7 @@ object Populate {
             indonesian = "Selamat Makan",
             balinese = "Rahajeng Majengan",
             imageUrl = "salam/selamat_makan.png",
-            option = "",
+            option = "Rahajeng Semeng|Rahajeng|Rahajeng Wanti Warsa|Rahajeng Memargi",
             wordChild = ""
         ),
         Word(
@@ -118,7 +118,7 @@ object Populate {
             indonesian = "Selamat Tahun Baru",
             balinese = "Rahajeng Nyanggra Warsa Anyar",
             imageUrl = "salam/selamat_tahun_baru.png",
-            option = "",
+            option = "Rahajeng Semeng|Rahajeng|Rahajeng Wanti Warsa|Rahajeng Memargi",
             wordChild = ""
         ),
         Word(
@@ -127,7 +127,7 @@ object Populate {
             indonesian = "Selamat Ulang Tahun",
             balinese = "Rahajeng Wanti Warsa",
             imageUrl = "salam/selamat_ulang_tahun.png",
-            option = "",
+            option = "Rahajeng Semeng|Rahajeng|Rahajeng Wengi|Rahajeng Memargi",
             wordChild = ""
         ),
         Word(
@@ -136,7 +136,7 @@ object Populate {
             indonesian = "Selamat Tinggal",
             balinese = "Rahajeng Memargi",
             imageUrl = "salam/selamat_tinggal.png",
-            option = "",
+            option = "Rahajeng Semeng|Rahajeng|Rahajeng Wanti Warsa|Rahajeng Wengi",
             wordChild = ""
         ),
         Word(
@@ -145,7 +145,7 @@ object Populate {
             indonesian = "Terima Kasih",
             balinese = "Matur Suksma",
             imageUrl = "salam/terima_kasih.png",
-            option = "",
+            option = "Rahajeng Semeng|Rahajeng Wengi|Rahajeng Wanti Warsa|Rahajeng Memargi",
             wordChild = ""
         ),
 
@@ -156,7 +156,7 @@ object Populate {
             indonesian = "Saya",
             balinese = "Tiang/Titiang/Irage",
             imageUrl = "panggilan/saya.png",
-            option = "",
+            option = "Awak|Semeng|Bli|Pekak|Mbok|Dadong",
             wordChild = ""
         ),
         Word(
@@ -165,7 +165,7 @@ object Populate {
             indonesian = "Kamu",
             balinese = "Awak",
             imageUrl = "panggilan/kamu.png",
-            option = "",
+            option = "Rahajeng|Tiang|Irage|Pekak|Mbok|Dadong",
             wordChild = ""
         ),
         Word(
@@ -174,7 +174,7 @@ object Populate {
             indonesian = "Kakak Laki-laki",
             balinese = "Bli",
             imageUrl = "panggilan/kakak_laki_laki.png",
-            option = "",
+            option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
         Word(
@@ -183,7 +183,7 @@ object Populate {
             indonesian = "Kakak Perempuan",
             balinese = "Mbok",
             imageUrl = "panggilan/kakak_perempuan.png",
-            option = "",
+            option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
         Word(
@@ -192,7 +192,7 @@ object Populate {
             indonesian = "Ayah",
             balinese = "Bapa",
             imageUrl = "panggilan/ayah.png",
-            option = "",
+            option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
         Word(
@@ -201,7 +201,7 @@ object Populate {
             indonesian = "Ibu",
             balinese = "Meme",
             imageUrl = "panggilan/ibu.png",
-            option = "",
+            option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
         Word(
@@ -210,7 +210,7 @@ object Populate {
             indonesian = "Kakek",
             balinese = "Pekak",
             imageUrl = "panggilan/kakek.png",
-            option = "",
+            option = "Awak|Tiang|Irage|Dadong",
             wordChild = ""
         ),
         Word(
@@ -219,7 +219,7 @@ object Populate {
             indonesian = "Nenek",
             balinese = "Dadong/Niang",
             imageUrl = "panggilan/nenek.png",
-            option = "",
+            option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
         Word(
@@ -228,7 +228,7 @@ object Populate {
             indonesian = "Adik",
             balinese = "Adi/Adin",
             imageUrl = "panggilan/adik.png",
-            option = "",
+            option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
 
