@@ -40,4 +40,10 @@ class ListExerciseCardViewModel @Inject constructor(
             firestoreRepository.updateExerciseChapterProgress(chapterId)
         }
     }
+
+    fun updateChapterAvailable(chapterId: String) {
+        viewModelScope.launch {
+            firestoreRepository.updateChapterAvailable(chapterId)
+        }
+    }
 }

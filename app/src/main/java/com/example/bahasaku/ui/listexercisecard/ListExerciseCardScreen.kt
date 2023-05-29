@@ -43,6 +43,9 @@ fun ListExerciseCardScreen(
     viewModel.getAllCard(id)
     viewModel.updateChapterProgress(id)
 
+    if (state.progress.done.size == state.listWord.size)
+        viewModel.updateChapterAvailable(chapter.id)
+
     Surface {
         Column {
             ListExerciseCardContent(

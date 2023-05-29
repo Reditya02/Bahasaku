@@ -71,7 +71,7 @@ fun DetailCardScreen(
             listChild = state.listChild,
             selected = selected,
             updateProgress = { id, page -> viewModel.udateCardProgress(id, page) },
-            updateChapterAvailable = { viewModel.updateChapterAvailable(it) }
+//            updateChapterAvailable = { viewModel.updateChapterAvailable(it) }
         )
     }
 }
@@ -82,7 +82,7 @@ fun DetailCardContent(
     listChild: List<Word> = emptyList(),
     selected: Int,
     updateProgress: (String, Int) -> Unit,
-    updateChapterAvailable: (String) -> Unit
+//    updateChapterAvailable: (String) -> Unit
 ) {
 //    Log.d("Reditya", "DetailCardContent")
 
@@ -154,8 +154,8 @@ fun DetailCardContent(
 
                 updateProgress(word.chapterId, page)
 
-                if (page ==  listWord.size - 1)
-                    updateChapterAvailable(word.chapterId)
+//                if (page ==  listWord.size - 1)
+//                    updateChapterAvailable(word.chapterId)
 
                 var child = Word(id = "")
                 if (listChild.isNotEmpty())
