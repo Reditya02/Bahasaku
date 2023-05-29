@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.*
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.coroutineScope
@@ -156,6 +153,32 @@ class FirestoreRepository @Inject constructor(
         awaitClose { channel.close() }
     }
 
+    fun getLeaderboard() = callbackFlow {
+        val listener = object : EventListener<QuerySnapshot> {
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+                    cancel()
+                    return
+                }
+                if (value != null) {
+                    val list = mutableListOf<String>()
+                    value.documents.forEach {
+                        val res = it.get("name")
+                        list.add((res ?: "null") as String)
+                    }
+                    trySend(list)
+                }
+            }
+        }
+
+        val firebase = FirebaseFirestore.getInstance()
+            .collection("progress")
+            .orderBy("score", Query.Direction.DESCENDING)
+            .addSnapshotListener(listener)
+
+        awaitClose { firebase.remove() }
+    }
+
     suspend fun updateChapterAvailable(chapterId: String) {
         val i = chapterId.toInt()
         var available = mutableListOf<Boolean>()
@@ -266,6 +289,4 @@ class FirestoreRepository @Inject constructor(
         val firebase = fsProgress.update("score", result)
 
     }
-
-
 }

@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BLeaderboardCard
 import com.example.bahasaku.core.components.BLeaderboardItem
@@ -33,7 +34,10 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun LeaderboardScreen(
     navigator: DestinationsNavigator,
+    viewModel: LeaderboardViewModel = hiltViewModel()
 ) {
+    viewModel.getLeaderboard()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
