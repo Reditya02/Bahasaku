@@ -1,15 +1,12 @@
 package com.example.bahasaku.data.repository
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
-import com.example.bahasaku.data.model.ListUser
 import com.example.bahasaku.data.model.User
 import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.google.firebase.firestore.*
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.first
