@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BWordCard
 import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.data.model.Word
 import com.example.bahasaku.destinations.DetailCardScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

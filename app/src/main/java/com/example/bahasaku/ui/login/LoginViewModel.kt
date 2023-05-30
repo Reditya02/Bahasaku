@@ -4,16 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.repository.AuthRepository
 import com.example.bahasaku.data.repository.RoomRepository
-import com.example.bahasaku.ui.register.AuthCondition
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -69,12 +64,12 @@ class LoginViewModel @Inject constructor(
     }
 
 
-    fun isEmailValid() {
+    private fun isEmailValid() {
         val EMAIL_REGEX = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
         _state.update { it.copy(isEmailValid = EMAIL_REGEX.toRegex().matches(_state.value.email)) }
     }
 
-    fun isPasswordValid() {
+    private fun isPasswordValid() {
         val isValid = _state.value.password.let {
             if (it.length < 8)
                 false

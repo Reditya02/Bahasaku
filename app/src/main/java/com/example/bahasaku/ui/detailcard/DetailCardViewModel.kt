@@ -1,6 +1,5 @@
 package com.example.bahasaku.ui.detailcard
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.repository.FirestoreRepository
@@ -39,13 +38,4 @@ class DetailCardViewModel @Inject constructor(
             firestoreRepository.updateLearningCardProgress(chapterId, page)
         }
     }
-
-//    fun getChild(id: String) {
-//        Log.d("Reditya", "VM id $id")
-//        viewModelScope.launch {
-//            val res = roomRepository.getWordById(id)
-//            Log.d("Reditya", "res $res")
-//            _state.update { _state.value.copy(child = res) }
-//        }
-//    }
 }

@@ -1,6 +1,5 @@
 package com.example.bahasaku.ui.listexercisecard
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.model.remote.ProgressCard
@@ -31,7 +30,6 @@ class ListExerciseCardViewModel @Inject constructor(
             val childWord = roomRepository.getAllWordById(childId)
 
             _state.update { _state.value.copy(listWord = combineArray(parentWord, childWord)) }
-            Log.d("Reditya", "getAllCard ${state.value.listWord.size}")
         }
     }
 
@@ -48,15 +46,12 @@ class ListExerciseCardViewModel @Inject constructor(
     fun getProgressWithChild(chapterId: String, childId: String) {
         viewModelScope.launch {
             val parent = firestoreRepository.getProgressExerciseCard(chapterId).first()
-//            Log.d("Reditya", "getProgress ${parent.size}")
             val child = firestoreRepository.getProgressExerciseCard(childId, chapterId).first()
-//            Log.d("Reditya", "getProgress ${child.size}")
 
             val done = combineArray(parent.done, child.done) as MutableList<Boolean>
             val available = combineArray(parent.available, child.available) as MutableList<Boolean>
 
             _state.update { _state.value.copy(progress = ProgressCard(done = done, available = available)) }
-//            Log.d("Reditya", "getProgress ${state.value.progress.done.size}")
         }
     }
 

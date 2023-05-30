@@ -2,9 +2,6 @@ package com.example.bahasaku.ui.detailcard
 
 import android.media.MediaPlayer
 import android.util.Log
-import androidx.compose.animation.Crossfade
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,8 +19,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,23 +28,14 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.bahasaku.R
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Word
-import com.example.bahasaku.data.model.remote.ProgressCard
-import com.example.bahasaku.data.model.remote.ProgressChapter
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 @Destination
 @Composable
 fun DetailCardScreen(
-    navigator: DestinationsNavigator,
     viewModel: DetailCardViewModel = hiltViewModel(),
     chapter: Chapter,
     selected: Int
@@ -71,7 +57,6 @@ fun DetailCardScreen(
             listChild = state.listChild,
             selected = selected,
             updateProgress = { id, page -> viewModel.udateCardProgress(id, page) },
-//            updateChapterAvailable = { viewModel.updateChapterAvailable(it) }
         )
     }
 }
@@ -82,10 +67,7 @@ fun DetailCardContent(
     listChild: List<Word> = emptyList(),
     selected: Int,
     updateProgress: (String, Int) -> Unit,
-//    updateChapterAvailable: (String) -> Unit
 ) {
-//    Log.d("Reditya", "DetailCardContent")
-
     val pagerState = rememberPagerState(initialPage = selected)
 
     val scope = rememberCoroutineScope()
@@ -184,7 +166,6 @@ fun DetailCardItem(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             DetailCardItemContent(word = word)
-//            DetailCardItemContent(word = word)
 
             if (child.id != "") {
                 Spacer(Modifier.height(12.dp))
@@ -200,8 +181,6 @@ fun DetailCardItemContent(
 ) {
     val context = LocalContext.current
     val mp = MediaPlayer.create(context, R.raw.audio)
-
-    Log.d("Reditya", "word $word")
 
     Column(
         modifier = Modifier,

@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
@@ -25,7 +24,6 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.skydoves.landscapist.coil.CoilImage
 import com.example.bahasaku.R
 import com.example.bahasaku.core.components.BButton
-import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.destinations.EditProfileScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
 import com.google.firebase.auth.ktx.auth
@@ -69,9 +67,7 @@ fun ProfileScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
-                ProfileContent(
-                    { navigator.navigate(EditProfileScreenDestination) }
-                )
+                ProfileContent { navigator.navigate(EditProfileScreenDestination) }
                 if (isOpenDialog) {
                     LogoutAlertDialog(
                         onDismissClicked = { isOpenDialog = false },
@@ -148,13 +144,5 @@ fun ProfileContent(
                 )
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun ProfilePreview() {
-    BahasakuTheme {
-        ProfileContent( {} )
     }
 }

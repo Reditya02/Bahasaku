@@ -22,7 +22,7 @@ class DictionaryViewModel @Inject constructor(
         onSearch(query)
     }
 
-    fun onSearch(query: String) {
+    private fun onSearch(query: String) {
         viewModelScope.launch {
             _state.update { it.copy(listWord = roomRepository.getAllWord("%$query%")) }
         }

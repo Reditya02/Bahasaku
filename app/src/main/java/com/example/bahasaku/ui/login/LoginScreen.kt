@@ -46,14 +46,8 @@ fun LoginScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-//    val user = Firebase.auth.currentUser
-
     if (Firebase.auth.currentUser != null)
         navigator.navigate(ListLearningChapterScreenDestination)
-
-//    user?.run {
-//        Log.d("Reditya", "$email\n$displayName\n$uid")
-//    }
 
     if (state.authCondition == AuthCondition.Success)
         navigator.navigate(ListLearningChapterScreenDestination)

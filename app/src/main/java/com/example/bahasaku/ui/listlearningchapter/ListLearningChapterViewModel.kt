@@ -1,6 +1,5 @@
 package com.example.bahasaku.ui.listlearningchapter
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.repository.RoomRepository
@@ -34,7 +33,5 @@ class ListLearningChapterViewModel @Inject constructor(
                 }
             }
         }
-
-        Log.d("Reditya", "viewmodel ${state.value.progress}")
     }
 }

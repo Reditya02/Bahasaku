@@ -1,6 +1,5 @@
 package com.example.bahasaku.ui.register
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,16 +18,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BEditText
-import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.example.bahasaku.destinations.LoginScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.popUpTo

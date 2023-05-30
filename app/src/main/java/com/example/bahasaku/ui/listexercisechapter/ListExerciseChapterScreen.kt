@@ -63,7 +63,6 @@ fun ListExerciseChapterScreen(
                     { chapter ->
                         navigator.navigate(ListExerciseCardScreenDestination(chapter))
                     },
-                    snackbarHostState,
                     {
                         snackbarHostState.currentSnackbarData?.dismiss()
                         scope.launch {
@@ -100,7 +99,6 @@ fun ListExerciseChapterScreen(
 @Composable
 fun ListExerciseChapterContent(
     navigateToCourse: (Chapter) -> Unit,
-    snackbarHostState: SnackbarHostState,
     showSnackbar: () -> Unit,
     data: ListExerciseChapterState
 ) {

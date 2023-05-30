@@ -72,7 +72,7 @@ fun EditProfileContent(
                 Modifier.background(MaterialTheme.colors.background)
             )
         }
-    ) {
+    ) { padding ->
         Column(
             Modifier.padding(16.dp),
             verticalArrangement = Arrangement.Center,

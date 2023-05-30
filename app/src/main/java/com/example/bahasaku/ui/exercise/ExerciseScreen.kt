@@ -32,14 +32,12 @@ fun ExerciseScreen(
     viewModel: ExerciseViewModel = hiltViewModel(),
     word: Word,
 ) {
-    val state by viewModel.state.collectAsState()
     Surface {
         Column(
             Modifier
         ) {
             ExerciseContent(
                 word,
-                state,
                 { navigation.popBackStack() },
                 { viewModel.updateProgress(word.id.drop(2).toInt(), word.chapterId) }
             )
@@ -50,7 +48,6 @@ fun ExerciseScreen(
 @Composable
 fun ExerciseContent(
     word: Word,
-    state: ExerciseState,
     onBackPressed: () -> Unit,
     onCorrect: () -> Unit
 ) {
