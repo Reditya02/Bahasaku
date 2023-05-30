@@ -2,6 +2,8 @@ package com.example.bahasaku.data.repository
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
+import com.example.bahasaku.data.model.ListUser
+import com.example.bahasaku.data.model.User
 import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.google.firebase.firestore.*
@@ -136,7 +138,6 @@ class FirestoreRepository @Inject constructor(
         val result = MutableStateFlow(ProgressCard())
 
         if (parent.isEmpty()) {
-//            Log.d("Reditya", "$chapterId parent empty")
             getProgressLearningCard(chapterId).first { res ->
                 if (res != null) {
                     result.update { it.copy(available = res.done) }
@@ -144,18 +145,13 @@ class FirestoreRepository @Inject constructor(
                 true
             }
         } else {
-//            Log.d("Reditya", "$chapterId with parent")
             getProgressLearningCard(parent).first { res ->
                 if (res != null) {
-                    Log.d("Redityaa", "$chapterId res $res")
                     result.update { it.copy(available = res.done) }
-                    Log.d("Redityaa", "$chapterId result ${result.value.available}")
                 }
                 true
             }
         }
-
-//        Log.d("Reditya", "done ${result.value.done}")
 
         getDoneFieldExerciseCard(chapterId).first { res ->
             if (res != null) {
@@ -177,11 +173,12 @@ class FirestoreRepository @Inject constructor(
                 }
                 if (value != null) {
                     val list = mutableListOf<String>()
-                    value.documents.forEach {
-                        val res = it.get("name")
-                        list.add((res ?: "null") as String)
-                    }
-                    trySend(list)
+                    val res = value.toObjects(User::class.java)
+//                    value.documents.forEach {
+//                        val res = it.get("name")
+//                        list.add((res ?: "null") as String)
+//                    }
+                    trySend(res)
                 }
             }
         }
@@ -275,7 +272,6 @@ class FirestoreRepository @Inject constructor(
     }
 
     suspend fun updateExerciseCardResult(id: Int, chapterId: String) {
-        Log.d("Reditya", "repository id $id chapterId $chapterId")
         var result = mutableListOf<Boolean>()
 
         getProgressExerciseCard(chapterId).first {
