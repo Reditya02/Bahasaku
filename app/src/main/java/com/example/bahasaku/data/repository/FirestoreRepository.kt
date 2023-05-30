@@ -188,6 +188,25 @@ class FirestoreRepository @Inject constructor(
         awaitClose { firebase.remove() }
     }
 
+    fun getUserProgress() = callbackFlow {
+        val listener = object : EventListener<DocumentSnapshot> {
+            override fun onEvent(value: DocumentSnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+                    cancel()
+                    return
+                }
+                if (value != null && value.exists()) {
+                    val result = value.toObject(User::class.java)
+                    trySend(result)
+                }
+            }
+        }
+
+        val firebase = fsProgress
+            .addSnapshotListener(listener)
+        awaitClose { firebase.remove() }
+    }
+
     suspend fun updateChapterAvailable(chapterId: String) {
         val i = chapterId.toInt()
         var available = mutableListOf<Boolean>()

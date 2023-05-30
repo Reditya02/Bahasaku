@@ -1,12 +1,10 @@
 package com.example.bahasaku.ui.leaderboard
 
+import android.util.Log
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -27,6 +25,7 @@ import com.example.bahasaku.core.components.BLeaderboardItem
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.data.model.LeaderboardData
+import com.example.bahasaku.data.model.User
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -36,7 +35,9 @@ fun LeaderboardScreen(
     navigator: DestinationsNavigator,
     viewModel: LeaderboardViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsState()
     viewModel.getLeaderboard()
+    viewModel.getCurrentUser()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -57,25 +58,42 @@ fun LeaderboardScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
-                LeaderboardContent()
+                LeaderboardContent(
+                    state.listUser,
+                    state.currentUser
+                )
             }
         }
     }
 }
 
 @Composable
-fun LeaderboardContent() {
+fun LeaderboardContent(
+    listUser: List<User>,
+    currentUser: User
+) {
     val scrollState = rememberLazyListState()
+
+    Log.d("Reditya", "Current $currentUser")
+
+    var rank by remember {
+        mutableStateOf(0)
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Box {
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
             LazyColumn(
                 state = scrollState,
                 content = {
-                    items(LeaderboardData.getListDummy) {
-                        if (it.rank != 1) {
+                    itemsIndexed(listUser) { i, it ->
+                        if (it.name == currentUser.name)
+                            rank = i + 1
+                        if (i != 0) {
                             Divider(
                                 modifier = Modifier
                                     .padding(horizontal = 8.dp)
@@ -85,10 +103,10 @@ fun LeaderboardContent() {
                             )
                         }
                         BLeaderboardItem(
-                            rank = it.rank.toString(),
-                            photoUrl = it.photoUrl,
+                            rank = (i + 1).toString(),
+                            photoUrl = "https://loremflickr.com/320/240",
                             name = it.name,
-                            score = it.score
+                            score = it.score.toString()
                         )
                     }
                 }
@@ -108,10 +126,10 @@ fun LeaderboardContent() {
                 ) + fadeOut()
             ) {
                 BLeaderboardCard(
-                    rank = "1",
+                    rank = rank.toString(),
                     photoUrl = "https://loremflickr.com/320/240",
-                    name = "John Doe",
-                    score = "14045"
+                    name = currentUser.name,
+                    score = currentUser.score.toString()
                 )
             }
         }
@@ -135,14 +153,4 @@ private fun LazyListState.isScrollingUp(): Boolean {
             }
         }
     }.value
-}
-
-@Preview
-@Composable
-fun LeaderBoardScreenPreview() {
-    BahasakuTheme {
-        Surface {
-            LeaderboardContent()
-        }
-    }
 }
