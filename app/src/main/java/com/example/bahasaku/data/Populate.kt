@@ -239,7 +239,7 @@ object Populate {
             indonesian = "Kuda",
             balinese = "Jaran",
             imageUrl = "hewan/kuda.png",
-            option = "",
+            option = "Sampi|Kebo|Tiang|Semeng",
             wordChild = "1200"
         ),
         Word(

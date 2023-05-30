@@ -132,15 +132,30 @@ class FirestoreRepository @Inject constructor(
         awaitClose { firebase.remove() }
     }
 
-    fun getProgressExerciseCard(chapterId: String) = callbackFlow {
+    fun getProgressExerciseCard(chapterId: String, parent: String = "") = callbackFlow {
         val result = MutableStateFlow(ProgressCard())
 
-        getProgressLearningCard(chapterId).first { res ->
-            if (res != null) {
-                result.update { it.copy(available = res.done) }
+        if (parent.isEmpty()) {
+//            Log.d("Reditya", "$chapterId parent empty")
+            getProgressLearningCard(chapterId).first { res ->
+                if (res != null) {
+                    result.update { it.copy(available = res.done) }
+                }
+                true
             }
-            true
+        } else {
+//            Log.d("Reditya", "$chapterId with parent")
+            getProgressLearningCard(parent).first { res ->
+                if (res != null) {
+                    Log.d("Redityaa", "$chapterId res $res")
+                    result.update { it.copy(available = res.done) }
+                    Log.d("Redityaa", "$chapterId result ${result.value.available}")
+                }
+                true
+            }
         }
+
+//        Log.d("Reditya", "done ${result.value.done}")
 
         getDoneFieldExerciseCard(chapterId).first { res ->
             if (res != null) {

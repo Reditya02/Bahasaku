@@ -1,5 +1,6 @@
 package com.example.bahasaku.ui.listexercisecard
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -39,9 +40,17 @@ fun ListExerciseCardScreen(
     val id = chapter.id
     val title = chapter.title
 
-    viewModel.getProgress(id)
-    viewModel.getAllCard(id)
+    if (chapter.chapterChild != "") {
+        viewModel.getAllCardWithChild(id, chapter.chapterChild)
+        viewModel.getProgressWithChild(id, chapter.chapterChild)
+    } else {
+        viewModel.getAllCard(id)
+        viewModel.getProgress(id)
+    }
+
     viewModel.updateChapterProgress(id)
+
+//    Log.d("Reditya", "${state.progress.done.size} == ${state.listWord.size}")
 
     if (state.progress.done.size == state.listWord.size)
         viewModel.updateChapterAvailable(chapter.id)
@@ -89,6 +98,7 @@ fun ListExerciseCardContent(
                 modifier = Modifier.padding(horizontal = 8.dp),
                 columns = GridCells.Fixed(4),
                 content = {
+                    Log.d("Reditya", "content ${state.progress.available.size} == ${state.listWord.size}")
                     if (state.listWord.isNotEmpty() && state.progress.available.size > 0) {
                         itemsIndexed(state.listWord) { i, it ->
                             BWordCard(
