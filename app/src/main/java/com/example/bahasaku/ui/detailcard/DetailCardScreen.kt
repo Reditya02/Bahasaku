@@ -149,17 +149,11 @@ fun DetailCardContent(
                 val page = pagerState.currentPage
                 val word = listWord[nextPage]
 
-                Log.d("Reditya", "current page $page")
-                Log.d("Reditya", "next page $nextPage")
-
                 updateProgress(word.chapterId, page)
-
-//                if (page ==  listWord.size - 1)
-//                    updateChapterAvailable(word.chapterId)
 
                 var child = Word(id = "")
                 if (listChild.isNotEmpty())
-                    child = listChild[page]
+                    child = listChild[nextPage]
 
                 DetailCardItem(
                     word = word,
