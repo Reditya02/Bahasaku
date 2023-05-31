@@ -1,5 +1,6 @@
 package com.example.bahasaku.data.repository
 
+import com.example.bahasaku.ui.editprofile.UpdateResult
 import com.example.bahasaku.ui.register.AuthCondition
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
@@ -25,16 +26,21 @@ class AuthRepository {
         awaitClose { channel.close() }
     }
 
-    fun updateName(name: String) {
+    fun updateName(name: String) = callbackFlow {
         val updateRequest = userProfileChangeRequest {
             displayName = name
         }
 
         user?.updateProfile(updateRequest)?.addOnSuccessListener {
+            trySend(UpdateResult.SUCCESS)
             FirebaseFirestore.getInstance()
                 .collection("progress")
                 .document(uid)
                 .update("name", name)
+        }?.addOnFailureListener {
+            trySend(UpdateResult.FAILED)
         }
+
+        awaitClose { channel.close() }
     }
 }

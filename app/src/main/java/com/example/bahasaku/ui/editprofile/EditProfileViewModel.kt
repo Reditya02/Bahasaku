@@ -1,12 +1,14 @@
 package com.example.bahasaku.ui.editprofile
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.repository.AuthRepository
 import com.example.bahasaku.data.repository.RoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,6 +23,10 @@ class EditProfileViewModel @Inject constructor(
     }
 
     fun onUpdateButtonClicked() {
-        auth.updateName(state.value.name)
+        viewModelScope.launch {
+            auth.updateName(state.value.name).collect { result ->
+                _state.update { it.copy(updateResult = result) }
+            }
+        }
     }
 }

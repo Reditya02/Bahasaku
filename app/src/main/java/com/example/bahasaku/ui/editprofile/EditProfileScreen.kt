@@ -40,6 +40,10 @@ fun EditProfileScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    if (state.updateResult == UpdateResult.SUCCESS) {
+        navigator.popBackStack()
+    }
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -50,9 +54,7 @@ fun EditProfileScreen(
                 onNameTextFieldValueChanged = { viewModel.onNameTextFieldValueChanged(it) },
                 onSaveprofileClicked = {
                     viewModel.onUpdateButtonClicked()
-                    navigator.popBackStack()
                 }
-
             )
         }
     }
