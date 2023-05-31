@@ -2,6 +2,8 @@ package com.example.bahasaku.data.repository
 
 import com.example.bahasaku.ui.register.AuthCondition
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
@@ -9,7 +11,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.tasks.await
 
 class AuthRepository {
-    val uid = Firebase.auth.uid ?: ""
+    val user = Firebase.auth.currentUser
+    val uid = user?.uid ?: ""
+
 
     fun login(email: String, password: String) = callbackFlow {
         try {
@@ -19,5 +23,18 @@ class AuthRepository {
             trySend(AuthCondition.Failed)
         }
         awaitClose { channel.close() }
+    }
+
+    fun updateName(name: String) {
+        val updateRequest = userProfileChangeRequest {
+            displayName = name
+        }
+
+        user?.updateProfile(updateRequest)?.addOnSuccessListener {
+            FirebaseFirestore.getInstance()
+                .collection("progress")
+                .document(uid)
+                .update("name", name)
+        }
     }
 }

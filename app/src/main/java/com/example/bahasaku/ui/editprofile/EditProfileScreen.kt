@@ -48,9 +48,10 @@ fun EditProfileScreen(
             EditProfileContent(
                 nameValue = state.name,
                 onNameTextFieldValueChanged = { viewModel.onNameTextFieldValueChanged(it) },
-                emailValue = state.email,
-                onEmailTextFieldValueChanged = { viewModel.onEmailTextFieldValueChanged(it) },
-                onSaveprofileClicked = { navigator.popBackStack() }
+                onSaveprofileClicked = {
+                    viewModel.onUpdateButtonClicked()
+                    navigator.popBackStack()
+                }
 
             )
         }
@@ -61,8 +62,6 @@ fun EditProfileScreen(
 fun EditProfileContent(
     nameValue: String,
     onNameTextFieldValueChanged: (String) -> Unit,
-    emailValue: String,
-    onEmailTextFieldValueChanged: (String) -> Unit,
     onSaveprofileClicked: () -> Unit
 ) {
     Scaffold(
@@ -106,19 +105,19 @@ fun EditProfileContent(
                     imeAction = ImeAction.Next
                 )
             )
-            BEditText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
-                value = emailValue,
-                label = "Email",
-                leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "") },
-                onValueChange = onEmailTextFieldValueChanged,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Email,
-                    imeAction = ImeAction.Done
-                )
-            )
+//            BEditText(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+//                value = emailValue,
+//                label = "Email",
+//                leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "") },
+//                onValueChange = onEmailTextFieldValueChanged,
+//                keyboardOptions = KeyboardOptions(
+//                    keyboardType = KeyboardType.Email,
+//                    imeAction = ImeAction.Done
+//                )
+//            )
             Spacer(modifier = Modifier.weight(0.92f))
             Button(
                 modifier = Modifier
@@ -131,26 +130,6 @@ fun EditProfileContent(
                 )
             }
 
-        }
-    }
-}
-
-@Preview
-@Composable
-fun EditProfilePreview() {
-    BahasakuTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-            Column {
-                EditProfileContent(
-                    nameValue = "",
-                    onNameTextFieldValueChanged = {},
-                    emailValue = "",
-                    onEmailTextFieldValueChanged = {},
-                    onSaveprofileClicked = {})
-            }
         }
     }
 }
