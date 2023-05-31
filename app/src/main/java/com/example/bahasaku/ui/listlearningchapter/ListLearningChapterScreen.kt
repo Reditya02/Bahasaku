@@ -36,6 +36,7 @@ fun ListLearningChapterScreen(
     val state by viewModel.state.collectAsState()
 
     viewModel.getAllChapter()
+    viewModel.getProgress()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -56,7 +57,6 @@ fun ListLearningChapterScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
-                viewModel.getProgress()
                 ListChapterLearningContent(
                     { chapter ->
                         navigator.navigate(ListLearningCardScreenDestination(chapter))

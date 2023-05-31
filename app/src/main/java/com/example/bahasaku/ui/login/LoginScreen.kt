@@ -46,6 +46,8 @@ fun LoginScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+//    Log.d("Reditya", "user ${Firebase.auth.currentUser}")
+
     if (Firebase.auth.currentUser != null)
         navigator.navigate(ListLearningChapterScreenDestination)
 

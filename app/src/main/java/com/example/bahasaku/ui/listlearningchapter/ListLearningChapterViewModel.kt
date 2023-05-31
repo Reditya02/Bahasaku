@@ -1,5 +1,6 @@
 package com.example.bahasaku.ui.listlearningchapter
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.repository.RoomRepository
@@ -26,6 +27,7 @@ class ListLearningChapterViewModel @Inject constructor(
     }
 
     fun getProgress() {
+        Log.d("Reditya", "getProgress Launched")
         viewModelScope.launch {
             firestoreRepository.getProgressLearningChapter().collect { response ->
                 response?.let { result ->

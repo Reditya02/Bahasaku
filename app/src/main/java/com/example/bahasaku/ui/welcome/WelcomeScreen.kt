@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -39,7 +40,10 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun WelcomeScreen(
     navigator: DestinationsNavigator,
+    viewModel: WelcomeViewModel = hiltViewModel()
 ) {
+    viewModel.doSomething()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background

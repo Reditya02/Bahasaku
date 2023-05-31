@@ -73,7 +73,6 @@ class RegisterViewmodel @Inject constructor(
                 }
                 _state.update { it.copy(authCondition = AuthCondition.Success) }
             } catch (e: Exception) {
-                Log.d("Reditya", e.toString())
                 _state.update { it.copy(authCondition = AuthCondition.Failed) }
             }
         }

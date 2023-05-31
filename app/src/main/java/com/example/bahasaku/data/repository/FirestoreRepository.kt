@@ -14,20 +14,24 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 class FirestoreRepository @Inject constructor(
-    auth: AuthRepository
+    private val auth: AuthRepository
 ) {
-    private val uid = auth.uid
+    private fun getUid(): String {
+        val authId = auth.getUid()
+        Log.d("Reditya", "firestore auth $authId")
+        return authId
+    }
 
-    private val fsProgress = FirebaseFirestore
+    private fun fsProgress() = FirebaseFirestore
         .getInstance()
         .collection("progress")
-        .document(uid)
+        .document(getUid())
 
-    private val fsLearningChapterProgress = fsProgress
+    private val fsLearningChapterProgress = fsProgress()
         .collection("learning_chapter")
         .document("chapter_progress")
 
-    private val fsExerciseChapterProgress = fsProgress
+    private val fsExerciseChapterProgress = fsProgress()
         .collection("exercise_chapter")
         .document("chapter_progress")
 
@@ -41,9 +45,12 @@ class FirestoreRepository @Inject constructor(
                 if (value != null && value.exists()) {
                     val result = value.toObject(ProgressChapter::class.java)
                     trySend(result)
+                    Log.d("Reditya", "progress result ${getUid()} \n ${result.toString()}")
                 }
             }
         }
+
+        Log.d("Reditya", "firestore document ${fsProgress().id}")
 
         val firebase = fsLearningChapterProgress
             .addSnapshotListener(listener)
@@ -64,7 +71,7 @@ class FirestoreRepository @Inject constructor(
             }
         }
 
-        val firebase = fsProgress
+        val firebase = fsProgress()
             .collection("learning_card")
             .document(chapterId)
             .addSnapshotListener(listener)
@@ -124,7 +131,7 @@ class FirestoreRepository @Inject constructor(
             }
         }
 
-        val firebase = fsProgress
+        val firebase = fsProgress()
             .collection("exercise_card")
             .document(chapterId)
             .addSnapshotListener(listener)
@@ -202,7 +209,7 @@ class FirestoreRepository @Inject constructor(
             }
         }
 
-        val firebase = fsProgress
+        val firebase = fsProgress()
             .addSnapshotListener(listener)
         awaitClose { firebase.remove() }
     }
@@ -255,7 +262,7 @@ class FirestoreRepository @Inject constructor(
         if (!result.done[page]) { result.done[page] = true }
         if (page != result.done.size - 1) { result.available[page + 1] = true }
 
-        fsProgress
+        fsProgress()
             .collection("learning_card")
             .document(chapterId)
             .set(result)
@@ -295,7 +302,7 @@ class FirestoreRepository @Inject constructor(
             true
         }
         result[id] = true
-        fsProgress
+        fsProgress()
             .collection("exercise_card")
             .document(chapterId)
             .update("done", result)
@@ -313,7 +320,7 @@ class FirestoreRepository @Inject constructor(
 
         Log.d("Reditya", "Score $result")
 
-        val firebase = fsProgress.update("score", result)
+        val firebase = fsProgress().update("score", result)
 
     }
 }
