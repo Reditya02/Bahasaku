@@ -27,11 +27,11 @@ class FirestoreRepository @Inject constructor(
         .collection("progress")
         .document(getUid())
 
-    private val fsLearningChapterProgress = fsProgress()
+    private fun fsLearningChapterProgress() = fsProgress()
         .collection("learning_chapter")
         .document("chapter_progress")
 
-    private val fsExerciseChapterProgress = fsProgress()
+    private fun fsExerciseChapterProgress() = fsProgress()
         .collection("exercise_chapter")
         .document("chapter_progress")
 
@@ -52,7 +52,7 @@ class FirestoreRepository @Inject constructor(
 
         Log.d("Reditya", "firestore document ${fsProgress().id}")
 
-        val firebase = fsLearningChapterProgress
+        val firebase = fsLearningChapterProgress()
             .addSnapshotListener(listener)
         awaitClose { firebase.remove() }
     }
@@ -91,7 +91,7 @@ class FirestoreRepository @Inject constructor(
                 }
             }
         }
-        val firebase = fsExerciseChapterProgress
+        val firebase = fsExerciseChapterProgress()
             .addSnapshotListener(listener)
         awaitClose { firebase.remove() }
     }
@@ -224,7 +224,7 @@ class FirestoreRepository @Inject constructor(
         }
 
         if ( i < 8) { available[i+1] = true }
-        fsLearningChapterProgress.update("available", available)
+        fsLearningChapterProgress().update("available", available)
     }
 
     suspend fun updateLearningChapterProgress(chapterId: String) {
@@ -249,7 +249,7 @@ class FirestoreRepository @Inject constructor(
 
         progress[i] = result
         if (result == progress.size - 1 && i < 8) { available[i+1] = true }
-        fsLearningChapterProgress.update("progress", progress)
+        fsLearningChapterProgress().update("progress", progress)
     }
 
     suspend fun updateLearningCardProgress(chapterId: String, page: Int) {
@@ -291,7 +291,7 @@ class FirestoreRepository @Inject constructor(
         progress[i] = result
 
         if (result == progress.size - 1 && i < 8) { available[i+1] = true }
-        fsExerciseChapterProgress.update("progress", progress)
+        fsExerciseChapterProgress().update("progress", progress)
     }
 
     suspend fun updateExerciseCardResult(id: Int, chapterId: String) {
