@@ -17,8 +17,11 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -27,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BEditText
+import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.example.bahasaku.destinations.RegisterScreenDestination
@@ -37,6 +41,7 @@ import com.google.firebase.ktx.Firebase
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.popUpTo
+import kotlinx.coroutines.launch
 
 @Destination
 @Composable
@@ -44,6 +49,9 @@ fun LoginScreen(
     navigator: DestinationsNavigator,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
+    val snackbarHostState = SnackbarHostState()
+    val scope = rememberCoroutineScope()
+    val focusManager = LocalFocusManager.current
     val state by viewModel.state.collectAsState()
 
 //    Log.d("Reditya", "user ${Firebase.auth.currentUser}")
@@ -65,17 +73,27 @@ fun LoginScreen(
                 passwordValue = state.password,
                 onPasswordTextFieldValueChanged = { viewModel.onPasswordTextFieldValueChanged(it) },
                 onLoginClicked = {
+                    focusManager.clearFocus()
                     viewModel.onLoginClicked()
+                    snackbarHostState.currentSnackbarData?.dismiss()
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            state.authCondition.toString()
+                        )
+                    }
                     Log.d("Reditya", state.authCondition.toString())
                 },
                 onRegisterClicked = { navigator.navigate(RegisterScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
                 } },
                 onHideShowPasswordToggled = { viewModel.onHideShowPasswordToggled() },
-                isPasswordShown = state.isPasswordShown
-
+                isPasswordShown = state.isPasswordShown,
             )
         }
+        BSnackbar(
+            padding = PaddingValues(16.dp),
+            snackbarHostState = snackbarHostState
+        )
     }
 }
 
@@ -88,8 +106,7 @@ fun LoginContent(
     onLoginClicked: () -> Unit,
     onRegisterClicked: () -> Unit,
     onHideShowPasswordToggled: () -> Unit,
-    isPasswordShown: Boolean
-
+    isPasswordShown: Boolean,
 ) {
     Scaffold(
         topBar = {
@@ -170,26 +187,26 @@ fun LoginContent(
     }
 }
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Composable
-fun LoginPreview() {
-    BahasakuTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-            Column {
-                LoginContent(
-                    emailValue = "",
-                    onEmailTextFieldValueChanged = {},
-                    passwordValue = "",
-                    onPasswordTextFieldValueChanged = {},
-                    onLoginClicked = {},
-                    onRegisterClicked = {},
-                    onHideShowPasswordToggled = {},
-                    isPasswordShown = false,
-                )
-            }
-        }
-    }
-}
+//@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
+//@Composable
+//fun LoginPreview() {
+//    BahasakuTheme {
+//        Surface(
+//            modifier = Modifier.fillMaxSize(),
+//            color = MaterialTheme.colors.background
+//        ) {
+//            Column {
+//                LoginContent(
+//                    emailValue = "",
+//                    onEmailTextFieldValueChanged = {},
+//                    passwordValue = "",
+//                    onPasswordTextFieldValueChanged = {},
+//                    onLoginClicked = {},
+//                    onRegisterClicked = {},
+//                    onHideShowPasswordToggled = {},
+//                    isPasswordShown = false,
+//                )
+//            }
+//        }
+//    }
+//}

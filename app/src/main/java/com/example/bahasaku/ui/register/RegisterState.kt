@@ -21,5 +21,5 @@ data class RegisterState(
 )
 
 enum class AuthCondition {
-    None, Success, Failed
+    None, Success, Failed, WrongFormat, NotRegistered
 }

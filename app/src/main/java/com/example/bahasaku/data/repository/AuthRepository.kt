@@ -3,6 +3,8 @@ package com.example.bahasaku.data.repository
 import android.util.Log
 import com.example.bahasaku.ui.editprofile.UpdateResult
 import com.example.bahasaku.ui.register.AuthCondition
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,11 +24,14 @@ class AuthRepository {
         try {
             Firebase.auth.signInWithEmailAndPassword(email, password).await()
             trySend(AuthCondition.Success)
-            Log.d("Reditya", "saved uid ${getUid()} \n new uid ${Firebase.auth.currentUser?.uid ?: "0"}")
-//            user = Firebase.auth.currentUser
-//            uid = user?.uid ?: ""
+        } catch (e: FirebaseAuthInvalidUserException) {
+            Log.d("Reditya", "Login exception $e")
+            trySend(AuthCondition.NotRegistered)
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+            Log.d("Reditya", "Login exception $e")
+            trySend(AuthCondition.WrongFormat)
         } catch (e: Exception) {
-            Log.d("Reditya", "Login exception")
+            Log.d("Reditya", "Login exception $e")
             trySend(AuthCondition.Failed)
         }
         awaitClose { channel.close() }

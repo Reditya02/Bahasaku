@@ -1,5 +1,6 @@
 package com.example.bahasaku.ui.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.repository.AuthRepository
@@ -34,12 +35,14 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onLoginClicked() {
-        isEmailValid()
-        isPasswordValid()
+//        isEmailValid()
+//        isPasswordValid()
 
-        val isValid = _state.value.run {
-            isEmailValid && isPasswordValid
-        }
+//        val isValid = _state.value.run {
+//            isEmailValid && isPasswordValid
+//        }
+
+        val isValid = true
 
         _state.update { it.copy(isLoginValid = isValid) }
 
@@ -51,6 +54,7 @@ class LoginViewModel @Inject constructor(
     fun login() = viewModelScope.launch {
         _state.value.apply {
             auth.login(email, password).collect { result ->
+                Log.d("Reditya", "Login result $result")
                 _state.update { it.copy(authCondition = result) }
             }
 //            try {
@@ -64,19 +68,19 @@ class LoginViewModel @Inject constructor(
     }
 
 
-    private fun isEmailValid() {
-        val EMAIL_REGEX = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
-        _state.update { it.copy(isEmailValid = EMAIL_REGEX.toRegex().matches(_state.value.email)) }
-    }
-
-    private fun isPasswordValid() {
-        val isValid = _state.value.password.let {
-            if (it.length < 8)
-                false
-            else it.all { c -> c.isLetterOrDigit() }
-        }
-        _state.update { it.copy(isPasswordValid = isValid) }
-    }
+//    private fun isEmailValid() {
+//        val EMAIL_REGEX = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
+//        _state.update { it.copy(isEmailValid = EMAIL_REGEX.toRegex().matches(_state.value.email)) }
+//    }
+//
+//    private fun isPasswordValid() {
+//        val isValid = _state.value.password.let {
+//            if (it.length < 8)
+//                false
+//            else it.all { c -> c.isLetterOrDigit() }
+//        }
+//        _state.update { it.copy(isPasswordValid = isValid) }
+//    }
 
     fun onHideShowPasswordToggled() {
         _state.update { it.copy(isPasswordShown = !_state.value.isPasswordShown) }
