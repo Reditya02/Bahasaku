@@ -1,6 +1,5 @@
 package com.example.bahasaku.ui.login
 
-import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,17 +20,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.components.BSnackbar
-import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.example.bahasaku.destinations.RegisterScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
@@ -53,8 +49,6 @@ fun LoginScreen(
     val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
     val state by viewModel.state.collectAsState()
-
-//    Log.d("Reditya", "user ${Firebase.auth.currentUser}")
 
     if (Firebase.auth.currentUser != null)
         navigator.navigate(ListLearningChapterScreenDestination)
@@ -81,7 +75,6 @@ fun LoginScreen(
                             state.authCondition.toString()
                         )
                     }
-                    Log.d("Reditya", state.authCondition.toString())
                 },
                 onRegisterClicked = { navigator.navigate(RegisterScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
@@ -186,27 +179,3 @@ fun LoginContent(
         }
     }
 }
-
-//@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
-//@Composable
-//fun LoginPreview() {
-//    BahasakuTheme {
-//        Surface(
-//            modifier = Modifier.fillMaxSize(),
-//            color = MaterialTheme.colors.background
-//        ) {
-//            Column {
-//                LoginContent(
-//                    emailValue = "",
-//                    onEmailTextFieldValueChanged = {},
-//                    passwordValue = "",
-//                    onPasswordTextFieldValueChanged = {},
-//                    onLoginClicked = {},
-//                    onRegisterClicked = {},
-//                    onHideShowPasswordToggled = {},
-//                    isPasswordShown = false,
-//                )
-//            }
-//        }
-//    }
-//}

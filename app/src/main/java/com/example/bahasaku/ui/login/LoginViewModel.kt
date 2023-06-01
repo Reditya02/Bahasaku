@@ -35,13 +35,6 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onLoginClicked() {
-//        isEmailValid()
-//        isPasswordValid()
-
-//        val isValid = _state.value.run {
-//            isEmailValid && isPasswordValid
-//        }
-
         val isValid = true
 
         _state.update { it.copy(isLoginValid = isValid) }
@@ -57,30 +50,8 @@ class LoginViewModel @Inject constructor(
                 Log.d("Reditya", "Login result $result")
                 _state.update { it.copy(authCondition = result) }
             }
-//            try {
-//                Firebase.auth.signInWithEmailAndPassword(email, password).await()
-//                _state.update { it.copy(authCondition = AuthCondition.Success) }
-//            } catch (e: Exception) {
-//                _state.update { it.copy(authCondition = AuthCondition.Failed) }
-//
-//            }
         }
     }
-
-
-//    private fun isEmailValid() {
-//        val EMAIL_REGEX = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
-//        _state.update { it.copy(isEmailValid = EMAIL_REGEX.toRegex().matches(_state.value.email)) }
-//    }
-//
-//    private fun isPasswordValid() {
-//        val isValid = _state.value.password.let {
-//            if (it.length < 8)
-//                false
-//            else it.all { c -> c.isLetterOrDigit() }
-//        }
-//        _state.update { it.copy(isPasswordValid = isValid) }
-//    }
 
     fun onHideShowPasswordToggled() {
         _state.update { it.copy(isPasswordShown = !_state.value.isPasswordShown) }
