@@ -13,9 +13,7 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -26,6 +24,9 @@ class RegisterViewmodel @Inject constructor(
 ) : ViewModel() {
     private val _state = MutableStateFlow(RegisterState())
     val state: StateFlow<RegisterState> = _state
+
+    private val _authCondition = MutableSharedFlow<AuthCondition>()
+    val authCondition: SharedFlow<AuthCondition> = _authCondition
 
     fun onNameTextFieldValueChanged(value: String) {
         _state.update { it.copy(name = value) }
@@ -44,20 +45,24 @@ class RegisterViewmodel @Inject constructor(
     }
 
     fun onRegisterClicked() {
-//        isEmailValid()
-//        isPasswordValid()
-//        isRetypePasswordValid()
-//        isNameValid()
+        viewModelScope.launch {
+            isRetypePasswordValid()
+            _authCondition.emit(AuthCondition.Loading)
 
-//        val isValid: Boolean= _state.value.run {
-//            isEmailValid && isPasswordValid && isRetypePasswordValid && isNameValid
-//        }
+            var isValid = _state.value.run {
+                email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()
+            }
+            if (!isValid) {
+                _authCondition.emit(AuthCondition.Empty)
+                return@launch
+            }
 
-        val isValid = true
+            isValid = isValid && _state.value.isRetypePasswordValid
+            if (!isValid) {
+                _authCondition.emit(AuthCondition.RetypePasswordNotSame)
+                return@launch
+            }
 
-        _state.update { it.copy(isRegisterValid = isValid) }
-
-        if (isValid) {
             register()
         }
     }
@@ -65,27 +70,9 @@ class RegisterViewmodel @Inject constructor(
     fun register() = viewModelScope.launch {
         state.value.apply {
             auth.register(email, password, name).collect { response ->
-                Log.d("Reditya", "Register Response $response")
-                _state.update { it.copy(authCondition = response) }
+                _authCondition.emit(response)
             }
         }
-
-//        _state.value.apply {
-//            try {
-//                val fbAuth = Firebase.auth
-//                fbAuth.createUserWithEmailAndPassword(email, password).await()
-//                fbAuth.currentUser?.apply {
-////                    createProgress(uid, name, uid)
-//                    updateProfile(userProfileChangeRequest {
-//                        displayName = name
-//                        photoUri = Uri.parse("")
-//                    })
-//                }
-//                _state.update { it.copy(authCondition = AuthCondition.Success) }
-//            } catch (e: Exception) {
-//                _state.update { it.copy(authCondition = AuthCondition.Failed) }
-//            }
-//        }
     }
 
     fun isEmailValid() {

@@ -50,9 +50,6 @@ fun LoginScreen(
 
     LaunchedEffect(snackbarHostState) {
         viewModel.authCondition.collectLatest {
-            if (it == AuthCondition.Success)
-                navigator.navigate(ListLearningChapterScreenDestination)
-
             snackbarHostState.currentSnackbarData?.dismiss()
             val message = when (it) {
                 AuthCondition.Empty -> "Mohon kolom email dan password diisi"
@@ -68,6 +65,9 @@ fun LoginScreen(
                     message
                 )
             }
+
+            if (it == AuthCondition.Success)
+                navigator.navigate(ListLearningChapterScreenDestination)
         }
     }
 
