@@ -1,6 +1,5 @@
 package com.example.bahasaku.ui.login
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -34,9 +33,7 @@ import com.google.firebase.ktx.Firebase
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.popUpTo
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @Destination
 @Composable
@@ -49,9 +46,6 @@ fun LoginScreen(
     val state by viewModel.state.collectAsState()
 
     if (Firebase.auth.currentUser != null)
-        navigator.navigate(ListLearningChapterScreenDestination)
-
-    if (state.authCondition == AuthCondition.Success)
         navigator.navigate(ListLearningChapterScreenDestination)
 
     LaunchedEffect(snackbarHostState) {

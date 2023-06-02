@@ -1,6 +1,5 @@
 package com.example.bahasaku.ui.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.repository.AuthRepository
