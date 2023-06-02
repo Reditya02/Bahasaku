@@ -350,7 +350,6 @@ class AuthRepository {
             }
     }
 
-
     fun updateName(name: String) = callbackFlow {
         val updateRequest = userProfileChangeRequest {
             displayName = name

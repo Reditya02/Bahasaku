@@ -13,10 +13,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -37,6 +34,8 @@ import com.google.firebase.ktx.Firebase
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.popUpTo
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Destination
@@ -56,6 +55,26 @@ fun LoginScreen(
     if (state.authCondition == AuthCondition.Success)
         navigator.navigate(ListLearningChapterScreenDestination)
 
+    LaunchedEffect(snackbarHostState) {
+        viewModel.authCondition.collectLatest {
+            snackbarHostState.currentSnackbarData?.dismiss()
+            val message = when (it) {
+                AuthCondition.Empty -> "Mohon kolom email dan password diisi"
+                AuthCondition.NotRegistered -> "Mohon cek kembali email/password yang dimasukkan"
+                AuthCondition.WrongFormat -> "Format email yang dimasukkan tidak sesuai"
+                AuthCondition.Failed -> "Login gagal, silahkan lakukan kembali beberapa saat lagi"
+                AuthCondition.Success -> "Login berhasil"
+                AuthCondition.Loading -> "Mohon menunggu"
+                else -> null
+            }
+            message?.let {
+                snackbarHostState.showSnackbar(
+                    message
+                )
+            }
+        }
+    }
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -69,12 +88,6 @@ fun LoginScreen(
                 onLoginClicked = {
                     focusManager.clearFocus()
                     viewModel.onLoginClicked()
-                    snackbarHostState.currentSnackbarData?.dismiss()
-                    scope.launch {
-                        snackbarHostState.showSnackbar(
-                            state.authCondition.toString()
-                        )
-                    }
                 },
                 onRegisterClicked = { navigator.navigate(RegisterScreenDestination) {
                     popUpTo(WelcomeScreenDestination)

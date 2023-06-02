@@ -5,10 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bahasaku.data.repository.AuthRepository
 import com.example.bahasaku.data.repository.RoomRepository
+import com.example.bahasaku.ui.register.AuthCondition
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,6 +18,9 @@ class LoginViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginState())
     val state: StateFlow<LoginState> = _state
+
+    private val _authCondition = MutableSharedFlow<AuthCondition>()
+    val authCondition: SharedFlow<AuthCondition> = _authCondition
 
     init {
         viewModelScope.launch {
@@ -35,20 +37,28 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onLoginClicked() {
-        val isValid = true
+        viewModelScope.launch {
+            Log.d("Reditya", "first onLoginClicked $_authCondition")
 
-        _state.update { it.copy(isLoginValid = isValid) }
+            _authCondition.emit(AuthCondition.Loading)
+            val isValid = _state.value.run {
+                email.isNotEmpty() && password.isNotEmpty()
+            }
 
-        if (isValid) {
-            login()
+            _state.update { it.copy(isLoginValid = isValid) }
+
+            if (isValid) {
+                login()
+            } else {
+                _authCondition.emit(AuthCondition.Empty)
+            }
         }
     }
 
     fun login() = viewModelScope.launch {
         _state.value.apply {
             auth.login(email, password).collect { result ->
-                Log.d("Reditya", "Login result $result")
-                _state.update { it.copy(authCondition = result) }
+                _authCondition.emit(result)
             }
         }
     }
