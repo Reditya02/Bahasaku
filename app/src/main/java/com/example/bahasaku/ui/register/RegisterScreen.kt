@@ -1,5 +1,6 @@
 package com.example.bahasaku.ui.register
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,8 +13,10 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -21,12 +24,14 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BEditText
+import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.example.bahasaku.destinations.LoginScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.popUpTo
+import kotlinx.coroutines.launch
 
 @Destination
 @Composable
@@ -34,6 +39,9 @@ fun RegisterScreen(
     navigator: DestinationsNavigator,
     viewModel: RegisterViewmodel = hiltViewModel()
 ) {
+    val snackbarHostState = SnackbarHostState()
+    val scope = rememberCoroutineScope()
+    val focusManager = LocalFocusManager.current
     val state by viewModel.state.collectAsState()
 
     if (state.authCondition == AuthCondition.Success) {
@@ -55,7 +63,15 @@ fun RegisterScreen(
                 retypePasswordValue = state.retypePassword,
                 onRetypePasswordTextFieldValueChanged = { viewModel.onRetypePasswordTextFieldValueChanged(it) },
                 onCreateAccountClicked = {
+                    focusManager.clearFocus()
                     viewModel.onRegisterClicked()
+                    snackbarHostState.currentSnackbarData?.dismiss()
+                    scope.launch {
+                        Log.d("Reditya", "prepare launcing snackbar ${state.authCondition}")
+                        snackbarHostState.showSnackbar(
+                            state.authCondition.toString()
+                        )
+                    }
                 },
                 onLoginClicked = { navigator.navigate(LoginScreenDestination) {
                     popUpTo(WelcomeScreenDestination)
@@ -66,6 +82,10 @@ fun RegisterScreen(
                 isRetypePasswordShown = state.isRetypePasswordShown,
             )
         }
+        BSnackbar(
+            padding = PaddingValues(16.dp),
+            snackbarHostState = snackbarHostState
+        )
     }
 }
 
@@ -196,30 +216,3 @@ fun RegisterContent(
         }
     }
 }
-
-//@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
-//@Composable
-//fun RegisterPreview() {
-//    BahasakuTheme {
-//        Surface(
-//            modifier = Modifier.fillMaxSize(),
-//            color = MaterialTheme.colors.background
-//        ) {
-//            Column {
-//                RegisterContent(
-//                    nameValue = "",
-//                    onNameTextFieldValueChanged = {},
-//                    emailValue = "",
-//                    onEmailTextFieldValueChanged = {},
-//                    passwordValue = "",
-//                    onPasswordTextFieldValueChanged = {},
-//                    retypePasswordValue = "",
-//                    onRetypePasswordTextFieldValueChanged = {},
-//                    onCreateAccountClicked = {},
-//                    onLoginClicked = {}
-//
-//                )
-//            }
-//        }
-//    }
-//}
