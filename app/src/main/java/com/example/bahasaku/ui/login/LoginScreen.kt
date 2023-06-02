@@ -45,7 +45,6 @@ fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel()
 ) {
     val snackbarHostState = SnackbarHostState()
-    val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
     val state by viewModel.state.collectAsState()
 
@@ -57,6 +56,9 @@ fun LoginScreen(
 
     LaunchedEffect(snackbarHostState) {
         viewModel.authCondition.collectLatest {
+            if (it == AuthCondition.Success)
+                navigator.navigate(ListLearningChapterScreenDestination)
+
             snackbarHostState.currentSnackbarData?.dismiss()
             val message = when (it) {
                 AuthCondition.Empty -> "Mohon kolom email dan password diisi"

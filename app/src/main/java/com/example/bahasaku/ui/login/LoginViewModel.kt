@@ -38,8 +38,6 @@ class LoginViewModel @Inject constructor(
 
     fun onLoginClicked() {
         viewModelScope.launch {
-            Log.d("Reditya", "first onLoginClicked $_authCondition")
-
             _authCondition.emit(AuthCondition.Loading)
             val isValid = _state.value.run {
                 email.isNotEmpty() && password.isNotEmpty()
