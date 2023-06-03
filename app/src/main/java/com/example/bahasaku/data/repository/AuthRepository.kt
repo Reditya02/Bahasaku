@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 class AuthRepository {
-    var user = Firebase.auth.currentUser
+    fun user() = Firebase.auth.currentUser
 
     fun getUid(): String {
         return Firebase.auth.currentUser?.uid ?: ""
@@ -355,7 +355,7 @@ class AuthRepository {
             displayName = name
         }
 
-        user?.updateProfile(updateRequest)?.addOnSuccessListener {
+        user()?.updateProfile(updateRequest)?.addOnSuccessListener {
             trySend(UpdateResult.SUCCESS)
             FirebaseFirestore.getInstance()
                 .collection("progress")

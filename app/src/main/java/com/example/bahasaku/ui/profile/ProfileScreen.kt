@@ -1,5 +1,8 @@
 package com.example.bahasaku.ui.profile
 
+import android.net.Uri
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -12,28 +15,33 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberAsyncImagePainter
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.skydoves.landscapist.coil.CoilImage
-import com.example.bahasaku.R
 import com.example.bahasaku.core.components.BButton
+import com.example.bahasaku.data.model.User
 import com.example.bahasaku.destinations.EditProfileScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.tasks.await
 
 @Destination
 @Composable
 fun ProfileScreen(
     navigator: DestinationsNavigator,
+    viewModel: ProfileViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsState()
+    viewModel.getUser()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -67,7 +75,12 @@ fun ProfileScreen(
             }
         ) { padding ->
             Column(Modifier.padding(padding)) {
-                ProfileContent { navigator.navigate(EditProfileScreenDestination) }
+                if (state.name.isNotEmpty()) {
+                    ProfileContent(
+                        { navigator.navigate(EditProfileScreenDestination) },
+                        state
+                    )
+                }
                 if (isOpenDialog) {
                     LogoutAlertDialog(
                         onDismissClicked = { isOpenDialog = false },
@@ -84,9 +97,13 @@ fun ProfileScreen(
 
 @Composable
 fun ProfileContent(
-    onEditProfileClicked: () -> Unit
+    onEditProfileClicked: () -> Unit,
+    user: User
 ) {
-    val user = Firebase.auth.currentUser
+    val email = Firebase.auth.currentUser?.email
+
+    Log.d("Reditya", "user $user")
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -106,28 +123,38 @@ fun ProfileContent(
             ) {
                 Spacer(Modifier.weight(1f))
                 Row {
+                    var url by remember {
+                        mutableStateOf(Uri.parse(""))
+                    }
+                    LaunchedEffect(Unit) {
+                        Log.d("Reditya", "inside launchedEffect")
+                        Log.d("Reditya", "photoUrl ${user.image}")
+                        val storage = FirebaseStorage.getInstance().reference
+                        url = storage.child(user.image).downloadUrl.await()
+                    }
+
                     Spacer(modifier = Modifier.weight(0.3f))
-                    CoilImage(
-                        contentDescription = null,
-                        modifier = Modifier
-                            .weight(0.4f)
-                            .aspectRatio(1f)
-                            .clip(CircleShape),
-                        contentScale = ContentScale.Crop,
-                        imageModel = "https://loremflickr.com/320/240",
-                        placeHolder = ImageBitmap.imageResource(id = R.drawable.placeholder_image),
-                    )
+                    if (url.toString() != "") {
+                        Image(
+                            modifier = Modifier
+                                .weight(0.4f)
+                                .clip(CircleShape),
+                            painter = rememberAsyncImagePainter(url.toString()),
+                            contentDescription = "description",
+                            contentScale = ContentScale.Crop
+                        )
+                    }
                     Spacer(modifier = Modifier.weight(0.3f))
                 }
                 Spacer(Modifier.height(16.dp))
                 Text(
-                    text = user?.displayName ?: "",
+                    text = user.name,
                     style = MaterialTheme.typography.subtitle1,
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = user?.email ?: "",
+                    text = email ?: "",
                     style = MaterialTheme.typography.body2,
                     color = MaterialTheme.colors.onPrimary,
                     textAlign = TextAlign.Center,
