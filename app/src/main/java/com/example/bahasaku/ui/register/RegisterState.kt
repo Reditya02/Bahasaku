@@ -12,6 +12,7 @@ data class RegisterState(
     val isNameValid: Boolean = false,
     val isRegisterValid: Boolean = false,
 
+    val isNotEmpty: Boolean = false,
 
     val authCondition: AuthCondition = AuthCondition.None,
 

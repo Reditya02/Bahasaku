@@ -29,27 +29,34 @@ class LoginViewModel @Inject constructor(
 
     fun onEmailTextFieldValueChanged(value: String) {
         _state.update { it.copy(email = value) }
+        checkEmpty()
     }
 
     fun onPasswordTextFieldValueChanged(value: String) {
         _state.update { it.copy(password = value) }
+        checkEmpty()
     }
 
     fun onLoginClicked() {
         viewModelScope.launch {
             _authCondition.emit(AuthCondition.Loading)
-            val isValid = _state.value.run {
-                email.isNotEmpty() && password.isNotEmpty()
-            }
 
-            _state.update { it.copy(isLoginValid = isValid) }
+            login()
 
-            if (isValid) {
-                login()
-            } else {
-                _authCondition.emit(AuthCondition.Empty)
-            }
+//            _state.update { it.copy(isLoginValid = isValid) }
+//
+//            if (isValid) {
+//            } else {
+//                _authCondition.emit(AuthCondition.Empty)
+//            }
         }
+    }
+
+    fun checkEmpty() {
+        val isNotEmpty = _state.value.run {
+            email.isNotEmpty() && password.isNotEmpty()
+        }
+        _state.update { it.copy(isNotEmpty = isNotEmpty) }
     }
 
     fun login() = viewModelScope.launch {

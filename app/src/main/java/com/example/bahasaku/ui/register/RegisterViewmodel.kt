@@ -30,18 +30,22 @@ class RegisterViewmodel @Inject constructor(
 
     fun onNameTextFieldValueChanged(value: String) {
         _state.update { it.copy(name = value) }
+        checkEmpty()
     }
 
     fun onEmailTextFieldValueChanged(value: String) {
         _state.update { it.copy(email = value) }
+        checkEmpty()
     }
 
     fun onPasswordTextFieldValueChanged(value: String) {
         _state.update { it.copy(password = value) }
+        checkEmpty()
     }
 
     fun onRetypePasswordTextFieldValueChanged(value: String) {
         _state.update { it.copy(retypePassword = value) }
+        checkEmpty()
     }
 
     fun onRegisterClicked() {
@@ -49,15 +53,7 @@ class RegisterViewmodel @Inject constructor(
             isRetypePasswordValid()
             _authCondition.emit(AuthCondition.Loading)
 
-            var isValid = _state.value.run {
-                email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()
-            }
-            if (!isValid) {
-                _authCondition.emit(AuthCondition.Empty)
-                return@launch
-            }
-
-            isValid = isValid && _state.value.isRetypePasswordValid
+            val isValid = _state.value.isRetypePasswordValid
             if (!isValid) {
                 _authCondition.emit(AuthCondition.RetypePasswordNotSame)
                 return@launch
@@ -65,6 +61,13 @@ class RegisterViewmodel @Inject constructor(
 
             register()
         }
+    }
+
+    fun checkEmpty() {
+        val isNotEmpty = _state.value.run {
+            email.isNotEmpty() && password.isNotEmpty() && retypePassword.isNotEmpty() && name.isNotEmpty()
+        }
+        _state.update { it.copy(isNotEmpty = isNotEmpty) }
     }
 
     fun register() = viewModelScope.launch {

@@ -20,6 +20,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
@@ -90,6 +91,7 @@ fun RegisterScreen(
                 isPasswordShown = state.isPasswordShown,
                 onHideShowRetypePasswordToggled = { viewModel.onHideShowRetypePasswordToggled() },
                 isRetypePasswordShown = state.isRetypePasswordShown,
+                state.isNotEmpty
             )
         }
         BSnackbar(
@@ -114,7 +116,8 @@ fun RegisterContent(
     onHideShowPasswordToggled: () -> Unit,
     isPasswordShown: Boolean,
     onHideShowRetypePasswordToggled: () -> Unit,
-    isRetypePasswordShown: Boolean
+    isRetypePasswordShown: Boolean,
+    isNotEmpty: Boolean
 ) {
     Scaffold(
         topBar = {
@@ -128,7 +131,7 @@ fun RegisterContent(
         }
     ) { padding ->
         Column(
-            Modifier.padding(padding)
+            Modifier.padding(16.dp)
         ) {
             Text(
                 modifier = Modifier.padding(top = 32.dp),
@@ -138,7 +141,7 @@ fun RegisterContent(
             BEditText(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 24.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    .padding(top = 24.dp, start = 0.dp, end = 0.dp, bottom = 4.dp),
                 value = nameValue,
                 label = "Nama",
                 leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "") },
@@ -151,7 +154,7 @@ fun RegisterContent(
             BEditText(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    .padding(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 4.dp),
                 value = emailValue,
                 label = "Email",
                 leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "") },
@@ -164,7 +167,7 @@ fun RegisterContent(
             BEditText(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    .padding(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 4.dp),
                 value = passwordValue,
                 label = "Password",
                 leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "") },
@@ -183,7 +186,7 @@ fun RegisterContent(
             BEditText(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 8.dp),
+                    .padding(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 24.dp),
                 value = retypePasswordValue,
                 label = "Masukkan Ulang Password",
                 leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "") },
@@ -199,15 +202,24 @@ fun RegisterContent(
                 visualTransformation = if (isRetypePasswordShown) VisualTransformation.None else PasswordVisualTransformation()
 
             )
-            Button(
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(end = 24.dp),
-                onClick = onCreateAccountClicked
-            ) {
-                Text(text = "Buat Akun")
-                Icon(imageVector = Icons.Rounded.ChevronRight, contentDescription = "")
-            }
+
+            BButton(
+                modifier = Modifier.padding(horizontal = 6.dp),
+                onClick = onCreateAccountClicked,
+                text = "Buat Akun",
+                hasBackground = true,
+                enabled = isNotEmpty
+            )
+
+//            Button(
+//                modifier = Modifier
+//                    .align(Alignment.End)
+//                    .padding(end = 24.dp),
+//                onClick = onCreateAccountClicked
+//            ) {
+//                Text(text = "Buat Akun")
+//                Icon(imageVector = Icons.Rounded.ChevronRight, contentDescription = "")
+//            }
 
             Row(
                 modifier = Modifier

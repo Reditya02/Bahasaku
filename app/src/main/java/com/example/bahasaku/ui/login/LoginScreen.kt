@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
@@ -90,6 +91,7 @@ fun LoginScreen(
                 } },
                 onHideShowPasswordToggled = { viewModel.onHideShowPasswordToggled() },
                 isPasswordShown = state.isPasswordShown,
+                state.isNotEmpty
             )
         }
         BSnackbar(
@@ -109,6 +111,7 @@ fun LoginContent(
     onRegisterClicked: () -> Unit,
     onHideShowPasswordToggled: () -> Unit,
     isPasswordShown: Boolean,
+    isNotEmpty: Boolean
 ) {
     Scaffold(
         topBar = {
@@ -132,7 +135,7 @@ fun LoginContent(
             BEditText(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 24.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    .padding(top = 24.dp, start = 0.dp, end = 0.dp, bottom = 4.dp),
                 value = emailValue,
                 label = "Email",
                 leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "") },
@@ -145,7 +148,7 @@ fun LoginContent(
             BEditText(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 8.dp),
+                    .padding(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 24.dp),
                 value = passwordValue,
                 label = "Password",
                 leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "") },
@@ -161,15 +164,22 @@ fun LoginContent(
                 visualTransformation = if (isPasswordShown) VisualTransformation.None else PasswordVisualTransformation()
 
             )
-            Button(
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(end = 24.dp),
-                onClick = onLoginClicked
-            ) {
-                Text(text = "Masuk")
-                Icon(imageVector = Icons.Rounded.ChevronRight, contentDescription = "")
-            }
+            BButton(
+                modifier = Modifier.padding(horizontal = 6.dp),
+                onClick = onLoginClicked,
+                text = "Masuk",
+                hasBackground = true,
+                enabled = isNotEmpty
+            )
+//            Button(
+//                modifier = Modifier
+//                    .align(Alignment.End)
+//                    .padding(end = 24.dp),
+//                onClick = onLoginClicked
+//            ) {
+//                Text(text = "Masuk")
+//                Icon(imageVector = Icons.Rounded.ChevronRight, contentDescription = "")
+//            }
 
             Row(
                 modifier = Modifier
