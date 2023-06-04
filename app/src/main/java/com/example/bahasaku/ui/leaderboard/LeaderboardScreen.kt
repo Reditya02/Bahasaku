@@ -104,7 +104,7 @@ fun LeaderboardContent(
                         }
                         BLeaderboardItem(
                             rank = (i + 1).toString(),
-                            photoUrl = "https://loremflickr.com/320/240",
+                            photoUrl = it.image,
                             name = it.name,
                             score = it.score.toString()
                         )
@@ -127,7 +127,7 @@ fun LeaderboardContent(
             ) {
                 BLeaderboardCard(
                     rank = rank.toString(),
-                    photoUrl = "https://loremflickr.com/320/240",
+                    photoUrl = currentUser.image,
                     name = currentUser.name,
                     score = currentUser.score.toString()
                 )
