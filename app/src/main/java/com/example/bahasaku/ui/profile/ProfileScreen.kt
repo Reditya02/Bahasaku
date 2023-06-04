@@ -77,7 +77,7 @@ fun ProfileScreen(
             Column(Modifier.padding(padding)) {
                 if (state.name.isNotEmpty()) {
                     ProfileContent(
-                        { navigator.navigate(EditProfileScreenDestination) },
+                        { navigator.navigate(EditProfileScreenDestination(state)) },
                         state
                     )
                 }
@@ -127,8 +127,6 @@ fun ProfileContent(
                         mutableStateOf(Uri.parse(""))
                     }
                     LaunchedEffect(Unit) {
-                        Log.d("Reditya", "inside launchedEffect")
-                        Log.d("Reditya", "photoUrl ${user.image}")
                         val storage = FirebaseStorage.getInstance().reference
                         url = storage.child(user.image).downloadUrl.await()
                     }
@@ -137,8 +135,9 @@ fun ProfileContent(
                     if (url.toString() != "") {
                         Image(
                             modifier = Modifier
+                                .clip(CircleShape)
                                 .weight(0.4f)
-                                .clip(CircleShape),
+                                .aspectRatio(1f),
                             painter = rememberAsyncImagePainter(url.toString()),
                             contentDescription = "description",
                             contentScale = ContentScale.Crop

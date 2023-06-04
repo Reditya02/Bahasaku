@@ -22,7 +22,6 @@ class ProfileViewModel @Inject constructor(
     fun getUser() {
         viewModelScope.launch {
             firestoreRepository.getUserProgress().collect { response ->
-                Log.d("Reditya", "getUser response $response")
                 response?.let {
                     _state.update { response }
                 }
