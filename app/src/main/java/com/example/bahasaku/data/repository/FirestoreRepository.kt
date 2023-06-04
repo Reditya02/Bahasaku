@@ -1,16 +1,21 @@
 package com.example.bahasaku.data.repository
 
+import android.net.Uri
 import android.util.Log
 import com.example.bahasaku.data.model.User
 import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.google.firebase.firestore.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class FirestoreRepository @Inject constructor(
@@ -322,5 +327,23 @@ class FirestoreRepository @Inject constructor(
 
         val firebase = fsProgress().update("score", result)
 
+    }
+
+    suspend fun uploadImage(uri: Uri): Boolean {
+        return try {
+            val uid = getUid()
+            Log.d("Reditya", "start uploadImage to Storage $uri")
+            val image = Firebase.storage.reference
+                .child("profile")
+                .child(uid)
+                .putFile(uri).await()
+                .storage.downloadUrl.await()
+
+            Log.d("Reditya", "start uploadImage to firestore $uri")
+            fsProgress().update("image", "profile/$uid")
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 }
