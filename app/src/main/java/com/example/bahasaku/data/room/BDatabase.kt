@@ -2,7 +2,6 @@ package com.example.bahasaku.data.room
 
 import android.content.Context
 import android.util.Log
-import androidx.room.CoroutinesRoom
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase

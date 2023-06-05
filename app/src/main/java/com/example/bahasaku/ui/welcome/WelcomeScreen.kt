@@ -1,8 +1,8 @@
 package com.example.bahasaku.ui.welcome
 
-import android.annotation.SuppressLint
+//import com.google.accompanist.pager.HorizontalPager
+//import com.google.accompanist.pager.rememberPagerState
 import android.content.res.Configuration
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
@@ -27,10 +27,6 @@ import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.destinations.LoginScreenDestination
 import com.example.bahasaku.destinations.RegisterScreenDestination
-import com.example.bahasaku.ui.register.RegisterScreen
-//import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.HorizontalPagerIndicator
-//import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -42,8 +38,6 @@ fun WelcomeScreen(
     navigator: DestinationsNavigator,
     viewModel: WelcomeViewModel = hiltViewModel()
 ) {
-    viewModel.doSomething()
-
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background

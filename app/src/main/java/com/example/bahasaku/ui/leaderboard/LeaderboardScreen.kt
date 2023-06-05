@@ -1,10 +1,16 @@
 package com.example.bahasaku.ui.leaderboard
 
 import android.util.Log
-import androidx.compose.animation.*
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -16,15 +22,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BLeaderboardCard
 import com.example.bahasaku.core.components.BLeaderboardItem
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.core.theme.BahasakuTheme
-import com.example.bahasaku.data.model.LeaderboardData
 import com.example.bahasaku.data.model.User
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

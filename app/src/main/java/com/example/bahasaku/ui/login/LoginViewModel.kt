@@ -52,7 +52,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun checkEmpty() {
+    private fun checkEmpty() {
         val isNotEmpty = _state.value.run {
             email.isNotEmpty() && password.isNotEmpty()
         }

@@ -1,21 +1,11 @@
 package com.example.bahasaku.ui.register
 
-import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bahasaku.data.repository.RoomRepository
-import com.example.bahasaku.data.model.remote.ProgressCard
-import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.example.bahasaku.data.repository.AuthRepository
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -63,7 +53,7 @@ class RegisterViewmodel @Inject constructor(
         }
     }
 
-    fun checkEmpty() {
+    private fun checkEmpty() {
         val isNotEmpty = _state.value.run {
             email.isNotEmpty() && password.isNotEmpty() && retypePassword.isNotEmpty() && name.isNotEmpty()
         }
@@ -78,26 +68,8 @@ class RegisterViewmodel @Inject constructor(
         }
     }
 
-    fun isEmailValid() {
-        val EMAIL_REGEX = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
-        _state.update { it.copy(isEmailValid = EMAIL_REGEX.toRegex().matches(_state.value.email)) }
-    }
-
-    fun isPasswordValid() {
-        val isValid = _state.value.password.let {
-            if (it.length < 8)
-                false
-            else it.all { c -> c.isLetterOrDigit() }
-        }
-        _state.update { it.copy(isPasswordValid = isValid) }
-    }
-
-    fun isRetypePasswordValid() {
+    private fun isRetypePasswordValid() {
         _state.update { it.copy(isRetypePasswordValid = it.password == it.retypePassword) }
-    }
-
-    fun isNameValid() {
-        _state.update { it.copy(isNameValid = it.name.all { c -> c.isLetter() }) }
     }
 
     fun onHideShowPasswordToggled() {

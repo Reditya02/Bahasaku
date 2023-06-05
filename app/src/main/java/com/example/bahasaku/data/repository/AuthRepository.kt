@@ -60,7 +60,7 @@ class AuthRepository {
         awaitClose { channel.close() }
     }
 
-    fun createProgress(id: String, name: String, imageUrl: String) {
+    private fun createProgress(id: String, name: String, imageUrl: String) {
         FirebaseFirestore
             .getInstance()
             .collection("progress")

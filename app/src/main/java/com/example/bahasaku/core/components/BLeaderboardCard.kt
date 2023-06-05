@@ -12,16 +12,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.google.firebase.storage.FirebaseStorage
-import com.skydoves.landscapist.coil.CoilImage
 import kotlinx.coroutines.tasks.await
 
 @Composable

@@ -7,7 +7,6 @@ import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
@@ -122,7 +121,7 @@ class FirestoreRepository @Inject constructor(
         awaitClose { channel.close() }
     }
 
-    fun getDoneFieldExerciseCard(chapterId: String) = callbackFlow {
+    private fun getDoneFieldExerciseCard(chapterId: String) = callbackFlow {
         val listener = object : EventListener<DocumentSnapshot> {
             override fun onEvent(value: DocumentSnapshot?, error: FirebaseFirestoreException?) {
                 if (error != null) {

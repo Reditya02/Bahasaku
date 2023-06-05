@@ -1,14 +1,10 @@
 package com.example.bahasaku.core.theme
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Surface
 import androidx.compose.material.Typography
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
 // Set of Material typography styles to start with

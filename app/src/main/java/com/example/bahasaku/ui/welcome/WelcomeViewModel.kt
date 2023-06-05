@@ -8,14 +8,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WelcomeViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    authRepository: AuthRepository
 ) : ViewModel() {
     init {
         val id = authRepository.getUid()
-        Log.d("Reditya", "Welcome $id")
-    }
-
-    fun doSomething() {
-
     }
 }
