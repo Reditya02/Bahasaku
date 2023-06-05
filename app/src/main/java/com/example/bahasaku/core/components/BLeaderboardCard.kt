@@ -13,9 +13,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
@@ -53,19 +62,38 @@ fun BLeaderboardCard(
                     var url by remember {
                         mutableStateOf(Uri.parse(""))
                     }
+
+                    val painter = rememberAsyncImagePainter(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(url.toString())
+                            .size(Size.ORIGINAL)
+                            .build()
+                    )
+
                     LaunchedEffect(Unit) {
                         val storage = FirebaseStorage.getInstance().reference
                         url = storage.child(photoUrl).downloadUrl.await()
                     }
 
-                    if (url.toString() != "") {
+                    if (painter.state is AsyncImagePainter.State.Success) {
                         Image(
                             modifier = Modifier
                                 .clip(CircleShape)
                                 .aspectRatio(1f),
-                            painter = rememberAsyncImagePainter(url.toString()),
+                            painter = painter,
                             contentDescription = "description",
                             contentScale = ContentScale.Crop
+                        )
+                    } else {
+                        val composition by rememberLottieComposition(
+                            spec = LottieCompositionSpec.RawRes(R.raw.loading_indicator)
+                        )
+
+                        LottieAnimation(
+                            modifier = Modifier.aspectRatio(1f),
+                            composition = composition,
+                            iterations = LottieConstants.IterateForever,
+                            contentScale = ContentScale.Fit
                         )
                     }
                 }
