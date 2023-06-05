@@ -7,16 +7,19 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.*
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BChapterCard
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.destinations.ListLearningCardScreenDestination
@@ -44,10 +47,7 @@ fun ListLearningChapterScreen(
     ) {
         Scaffold(
             topBar = {
-                CenterAlignedTopAppBar(
-                    title = { Text(text = "Beranda") },
-                    Modifier.background(MaterialTheme.colors.background)
-                )
+                BTopAppBar(title = "Belajar")
             },
             bottomBar = {
                 BBottomNavigationBar(

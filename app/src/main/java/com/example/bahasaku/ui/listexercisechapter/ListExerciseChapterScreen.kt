@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BChapterCard
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.destinations.ListExerciseCardScreenDestination
@@ -46,10 +47,7 @@ fun ListExerciseChapterScreen(
     ) {
         Scaffold(
             topBar = {
-                CenterAlignedTopAppBar(
-                    title = { Text(text = "Latihan") },
-                    Modifier.background(MaterialTheme.colors.background)
-                )
+                BTopAppBar(title = "Latihan")
             },
             bottomBar = {
                 BBottomNavigationBar(

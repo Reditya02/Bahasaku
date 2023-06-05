@@ -24,6 +24,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.bahasaku.R
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.theme.BahasakuTheme
 import com.example.bahasaku.destinations.LoginScreenDestination
 import com.example.bahasaku.destinations.RegisterScreenDestination
@@ -58,10 +59,7 @@ fun WelcomeContent(
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = "Bahasaku") },
-                Modifier.background(MaterialTheme.colors.background)
-            )
+            BTopAppBar(title = "Bahasaku")
         }
     ) { padding ->
         Column(

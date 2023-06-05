@@ -27,6 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.components.BSnackbar
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.example.bahasaku.destinations.RegisterScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
@@ -117,13 +118,7 @@ fun LoginContent(
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(
-                    text = "Bahasaku",
-                    style = MaterialTheme.typography.h6
-                ) },
-                Modifier.background(MaterialTheme.colors.background)
-            )
+            BTopAppBar(title = "Bahasaku")
         }
     ) { padding ->
         Column(
@@ -173,15 +168,6 @@ fun LoginContent(
                 hasBackground = true,
                 enabled = isNotEmpty
             )
-//            Button(
-//                modifier = Modifier
-//                    .align(Alignment.End)
-//                    .padding(end = 24.dp),
-//                onClick = onLoginClicked
-//            ) {
-//                Text(text = "Masuk")
-//                Icon(imageVector = Icons.Rounded.ChevronRight, contentDescription = "")
-//            }
 
             Row(
                 modifier = Modifier

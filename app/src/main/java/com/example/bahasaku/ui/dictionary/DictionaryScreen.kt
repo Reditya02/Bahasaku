@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BSearchBar
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.example.bahasaku.data.model.Word
 import com.ramcosta.composedestinations.annotation.Destination
@@ -40,10 +41,7 @@ fun DictionaryScreen(
     ) {
         Scaffold(
             topBar = {
-                CenterAlignedTopAppBar(
-                    title = { Text(text = "Kamus") },
-                    Modifier.background(MaterialTheme.colors.background)
-                )
+                BTopAppBar(title = "Kamus")
             },
             bottomBar = {
                 BBottomNavigationBar(

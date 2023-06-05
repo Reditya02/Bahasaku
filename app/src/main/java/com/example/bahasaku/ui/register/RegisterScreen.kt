@@ -24,6 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.components.BSnackbar
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.example.bahasaku.destinations.LoginScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
@@ -121,13 +122,7 @@ fun RegisterContent(
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(
-                    text = "Bahasaku",
-                    style = MaterialTheme.typography.h6
-                ) },
-                Modifier.background(MaterialTheme.colors.background)
-            )
+            BTopAppBar(title = "Bahasaku")
         }
     ) { padding ->
         Column(

@@ -33,16 +33,19 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.bahasaku.R
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Word
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 @Destination
 @Composable
 fun DetailCardScreen(
+    navigator: DestinationsNavigator,
     viewModel: DetailCardViewModel = hiltViewModel(),
     chapter: Chapter,
     selected: Int
@@ -64,6 +67,8 @@ fun DetailCardScreen(
             listChild = state.listChild,
             selected = selected,
             updateProgress = { id, page -> viewModel.udateCardProgress(id, page) },
+            title = chapter.title,
+            onBackPressed = { navigator.popBackStack() }
         )
     }
 }
@@ -74,6 +79,8 @@ fun DetailCardContent(
     listChild: List<Word> = emptyList(),
     selected: Int,
     updateProgress: (String, Int) -> Unit,
+    title: String,
+    onBackPressed: () -> Unit
 ) {
     val pagerState = rememberPagerState(initialPage = selected)
 
@@ -81,10 +88,7 @@ fun DetailCardContent(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = "Bahasaku") },
-                Modifier.background(MaterialTheme.colors.background)
-            )
+            BTopAppBar(title = title, hasBackButton = true, onBackPressed = onBackPressed)
         },
         bottomBar = {
             Row(
@@ -236,7 +240,9 @@ fun DetailCardItemContent(
                 )
 
                 LottieAnimation(
-                    modifier = Modifier.weight(0.4f).aspectRatio(1f),
+                    modifier = Modifier
+                        .weight(0.4f)
+                        .aspectRatio(1f),
                     composition = composition,
                     iterations = LottieConstants.IterateForever,
                     contentScale = ContentScale.Fit

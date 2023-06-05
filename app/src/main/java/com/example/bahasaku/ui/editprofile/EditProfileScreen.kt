@@ -35,6 +35,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.bahasaku.R
 import com.example.bahasaku.core.components.BEditText
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.data.model.User
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
@@ -88,10 +89,7 @@ fun EditProfileContent(
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = "Bahasaku") },
-                Modifier.background(MaterialTheme.colors.background)
-            )
+            BTopAppBar(title = "Edit Profil")
         }
     ) { padding ->
         Column(

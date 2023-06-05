@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.components.BWordCard
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Word
@@ -79,15 +80,7 @@ fun ListExerciseCardContent(
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = title) },
-                Modifier.background(MaterialTheme.colors.background),
-                navigationIcon = {
-                    IconButton(onClick = onBackPressed) {
-                        Icon(imageVector = Icons.Default.ChevronLeft, contentDescription = "")
-                    }
-                }
-            )
+            BTopAppBar(title = title, hasBackButton = true, onBackPressed = onBackPressed)
         }
     ) { padding ->
         Column(Modifier.padding(padding)) {

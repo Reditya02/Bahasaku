@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.bahasaku.core.components.BButton
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.data.model.Word
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
@@ -53,15 +54,7 @@ fun ExerciseContent(
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = word.chapterId) },
-                Modifier.background(MaterialTheme.colors.background),
-                navigationIcon = {
-                    IconButton(onClick = onBackPressed) {
-                        Icon(imageVector = Icons.Default.ChevronLeft, contentDescription = "")
-                    }
-                }
-            )
+            BTopAppBar(title = "Bahasaku", hasBackButton = true, onBackPressed = onBackPressed)
         }
     ) { padding ->
         Card(

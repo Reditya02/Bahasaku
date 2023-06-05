@@ -36,6 +36,7 @@ import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.example.bahasaku.core.components.BButton
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.data.model.User
 import com.example.bahasaku.destinations.EditProfileScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
@@ -63,20 +64,33 @@ fun ProfileScreen(
 
         Scaffold(
             topBar = {
-                CenterAlignedTopAppBar(
-                    title = { Text(
-                        text = "Profil",
-                        color = MaterialTheme.colors.onPrimary
-                    ) },
-                    actions = { IconButton(onClick = { isOpenDialog = true }) {
+                BTopAppBar(
+                    title = "Profil",
+                    titleColor = MaterialTheme.colors.onPrimary,
+                    backgroundColor = MaterialTheme.colors.primary,
+                    hasActionButton = true,
+                    actionButton = { IconButton(onClick = { isOpenDialog = true }) {
                         Icon(
                             imageVector = Icons.Default.Logout,
                             contentDescription = "",
                             tint = MaterialTheme.colors.onPrimary
                         )
-                    } },
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colors.primary)
+                    } }
                 )
+//                CenterAlignedTopAppBar(
+//                    title = { Text(
+//                        text = "Profil",
+//                        color = MaterialTheme.colors.onPrimary
+//                    ) },
+//                    actions = { IconButton(onClick = { isOpenDialog = true }) {
+//                        Icon(
+//                            imageVector = Icons.Default.Logout,
+//                            contentDescription = "",
+//                            tint = MaterialTheme.colors.onPrimary
+//                        )
+//                    } },
+//                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colors.primary)
+//                )
             },
             bottomBar = {
                 BBottomNavigationBar(

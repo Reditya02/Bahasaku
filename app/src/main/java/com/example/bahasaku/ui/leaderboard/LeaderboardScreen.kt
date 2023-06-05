@@ -27,6 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BLeaderboardCard
 import com.example.bahasaku.core.components.BLeaderboardItem
+import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.example.bahasaku.data.model.User
 import com.ramcosta.composedestinations.annotation.Destination
@@ -48,10 +49,7 @@ fun LeaderboardScreen(
     ) {
         Scaffold(
             topBar = {
-                CenterAlignedTopAppBar(
-                    title = { Text(text = "Papan Peringkat") },
-                    Modifier.background(MaterialTheme.colors.background)
-                )
+                BTopAppBar(title = "Papan Peringkat")
             },
             bottomBar = {
                 BBottomNavigationBar(
