@@ -165,7 +165,7 @@ object Populate {
             indonesian = "Saya",
             balinese = "Tiang/Titiang/Irage",
             imageUrl = "panggilan/saya.jpg",
-            option = "Awak|Semeng|Bli|Pekak|Mbok|Dadong",
+            option = "Awak|Mbok|Bli|Pekak|Meme|Bapa|Dadong/Niang|Adin",
             wordChild = "",
             audio = R.raw.audio_0100
         ),
@@ -175,7 +175,7 @@ object Populate {
             indonesian = "Kamu",
             balinese = "Awak",
             imageUrl = "panggilan/kamu.jpg",
-            option = "Rahajeng|Tiang|Irage|Pekak|Mbok|Dadong",
+            option = "Adin|Mbok|Bli|Pekak|Meme|Bapa|Dadong/Niang|Tiang/Titiang/Irage",
             wordChild = "",
             audio = R.raw.audio_0101
         ),
@@ -185,7 +185,7 @@ object Populate {
             indonesian = "Kakak Laki-laki",
             balinese = "Bli",
             imageUrl = "panggilan/kakak_laki_laki.jpg",
-            option = "Awak|Tiang|Irage|Pekak",
+            option = "Awak|Mbok|Adin|Pekak|Meme|Bapa|Dadong/Niang|Tiang/Titiang/Irage",
             wordChild = "",
             audio = R.raw.audio_0102
         ),
@@ -195,7 +195,7 @@ object Populate {
             indonesian = "Kakak Perempuan",
             balinese = "Mbok",
             imageUrl = "panggilan/kakak_perempuan.jpg",
-            option = "Awak|Tiang|Irage|Pekak",
+            option = "Awak|Adin|Bli|Pekak|Meme|Bapa|Dadong/Niang|Tiang/Titiang/Irage",
             wordChild = "",
             audio = R.raw.audio_0103
         ),
@@ -205,7 +205,7 @@ object Populate {
             indonesian = "Ayah",
             balinese = "Bapa",
             imageUrl = "panggilan/ayah.jpg",
-            option = "Awak|Tiang|Irage|Pekak",
+            option = "Awak|Mbok|Bli|Pekak|Meme|Adin|Dadong/Niang|Tiang/Titiang/Irage",
             wordChild = "",
             audio = R.raw.audio_0104
         ),
@@ -215,7 +215,7 @@ object Populate {
             indonesian = "Ibu",
             balinese = "Meme",
             imageUrl = "panggilan/ibu.jpg",
-            option = "Awak|Tiang|Irage|Pekak",
+            option = "Awak|Mbok|Bli|Pekak|Adin|Bapa|Dadong/Niang|Tiang/Titiang/Irage",
             wordChild = "",
             audio = R.raw.audio_0105
         ),
@@ -225,7 +225,7 @@ object Populate {
             indonesian = "Kakek",
             balinese = "Pekak",
             imageUrl = "panggilan/kakek.jpg",
-            option = "Awak|Tiang|Irage|Dadong",
+            option = "Awak|Mbok|Bli|Adin|Meme|Bapa|Dadong/Niang|Tiang/Titiang/Irage",
             wordChild = "",
             audio = R.raw.audio_0106
         ),
@@ -235,7 +235,7 @@ object Populate {
             indonesian = "Nenek",
             balinese = "Dadong/Niang",
             imageUrl = "panggilan/nenek.jpg",
-            option = "Awak|Tiang|Irage|Pekak",
+            option = "Awak|Mbok|Bli|Pekak|Meme|Bapa|Adin|Tiang/Titiang/Irage",
             wordChild = "",
             audio = R.raw.audio_0107
         ),
@@ -245,7 +245,7 @@ object Populate {
             indonesian = "Adik",
             balinese = "Adi/Adin",
             imageUrl = "panggilan/adik.jpg",
-            option = "Awak|Tiang|Irage|Pekak",
+            option = "Awak|Mbok|Bli|Pekak|Meme|Bapa|Dadong/Niang|Tiang/Titiang/Irage",
             wordChild = "",
             audio = R.raw.audio_0108
         ),
@@ -257,8 +257,9 @@ object Populate {
             indonesian = "Kuda",
             balinese = "Jaran",
             imageUrl = "hewan/kuda.jpg",
-            option = "Sampi|Kebo|Tiang|Semeng",
-            wordChild = "1200"
+            option = "Sampi|Kebo|Meong|Lelipi|Yuyu|Pekak|Dadong",
+            wordChild = "1200",
+            audio = R.raw.audio_0200
         ),
         Word(
             id = "0201",
@@ -266,8 +267,9 @@ object Populate {
             indonesian = "Kambing",
             balinese = "Kambing",
             imageUrl = "hewan/kambing.jpg",
-            option = "",
-            wordChild = "1201"
+            option = "Sampi|Meong|Lelipi|Bangkung|Jaran|Meong|Mbok|Adin",
+            wordChild = "1201",
+            audio = R.raw.audio_0201
         ),
         Word(
             id = "0202",
@@ -275,8 +277,9 @@ object Populate {
             indonesian = "Kucing",
             balinese = "Meong",
             imageUrl = "hewan/kucing.jpg",
-            option = "",
-            wordChild = "1202"
+            option = "Jaran|Kebo|Bangkung|Lelipi|Cicing|Adin|Pekak",
+            wordChild = "1202",
+            audio = R.raw.audio_0202
         ),
         Word(
             id = "0203",
@@ -284,8 +287,9 @@ object Populate {
             indonesian = "Bebek",
             balinese = "Bebek",
             imageUrl = "hewan/bebek.jpg",
-            option = "",
-            wordChild = "1203"
+            option = "Sampi|Bojog|Jaran|Meong|Cicing|Yuyu|Bojog",
+            wordChild = "1203",
+            audio = R.raw.audio_0203
         ),
         Word(
             id = "0204",
@@ -293,8 +297,9 @@ object Populate {
             indonesian = "Anjing",
             balinese = "Cicing",
             imageUrl = "hewan/anjing.jpg",
-            option = "",
-            wordChild = "1204"
+            option = "Bikul|Kebo|Bangkung|Lelipi|Jaran|Meong|Bojog",
+            wordChild = "1204",
+            audio = R.raw.audio_0204
         ),
         Word(
             id = "0205",
@@ -302,8 +307,9 @@ object Populate {
             indonesian = "Kerbau",
             balinese = "Kebo",
             imageUrl = "hewan/kerbau.jpg",
-            option = "",
-            wordChild = "1205"
+            option = "Bojog|Meong|Bikul|Lelipi|Cicing|Jaran|Meong",
+            wordChild = "1205",
+            audio = R.raw.audio_0205
         ),
         Word(
             id = "0206",
@@ -311,8 +317,9 @@ object Populate {
             indonesian = "Tikus",
             balinese = "Bikul",
             imageUrl = "hewan/tikus.jpg",
-            option = "",
-            wordChild = "1206"
+            option = "Sampi|Kebo|Jaran|Meong|Cicing|Lelipi|Yuyu",
+            wordChild = "1206",
+            audio = R.raw.audio_0206
         ),
         Word(
             id = "0207",
@@ -320,8 +327,9 @@ object Populate {
             indonesian = "Babi",
             balinese = "Bangkung",
             imageUrl = "hewan/babi.jpg",
-            option = "",
-            wordChild = "1207"
+            option = "Sampi|Bojog|Jaran|Meong|Bikul|Cicing|Lelipi|Yuyu",
+            wordChild = "1207",
+            audio = R.raw.audio_0207
         ),
         Word(
             id = "0208",
@@ -329,8 +337,9 @@ object Populate {
             indonesian = "Ular",
             balinese = "Lelipi",
             imageUrl = "hewan/ular.jpg",
-            option = "",
-            wordChild = "1208"
+            option = "Bojog|Kebo|Jaran|Meong|Cicing|Bangkung|Bikul",
+            wordChild = "1208",
+            audio = R.raw.audio_0208
         ),
         Word(
             id = "0209",
@@ -338,8 +347,9 @@ object Populate {
             indonesian = "Monyet/Kera",
             balinese = "Bojog",
             imageUrl = "hewan/monyet.jpg",
-            option = "",
-            wordChild = "1209"
+            option = "Sampi|Kebo|Jaran|Meong|Cicing|Bangkung|Bikul|Lelipi",
+            wordChild = "1209",
+            audio = R.raw.audio_0209
         ),
         Word(
             id = "0210",
@@ -347,8 +357,9 @@ object Populate {
             indonesian = "Sapi",
             balinese = "Sampi",
             imageUrl = "hewan/sapi.jpg",
-            option = "",
-            wordChild = "1210"
+            option = "Bojog|Kebo|Jaran|Meong|Cicing|Bangkung|Bikul|Lelipi",
+            wordChild = "1210",
+            audio = R.raw.audio_0210
         ),
         Word(
             id = "0211",
@@ -356,8 +367,9 @@ object Populate {
             indonesian = "Kepiting",
             balinese = "Yuyu",
             imageUrl = "hewan/kepiting.jpg",
-            option = "",
-            wordChild = "12011"
+            option = "Bojog|Kebo|Jaran|Meong|Cicing|Bangkung|Bikul|Lelipi|Sampi",
+            wordChild = "12011",
+            audio = R.raw.audio_0211
         ),
 
         //TODO: Child
@@ -367,7 +379,8 @@ object Populate {
             indonesian = "Anak Kuda",
             balinese = "Bebedag",
             imageUrl = "hewan/anak_kuda.jpg",
-            option = "",
+            option = "Bojog|Kebo|Jaran|Meong|Cicing|Bangkung|Bikul|Lelipi|Sampi",
+            audio = R.raw.audio_1200
         ),
         Word(
             id = "1201",
@@ -375,7 +388,8 @@ object Populate {
             indonesian = "Anak Kambing",
             balinese = "Wiwi",
             imageUrl = "hewan/anak_kambing.jpg",
-            option = "",
+            option = "Bojog|Kebo|Jaran|Meong|Cicing|Bangkung|Bikul|Bebedag|Kambing",
+            audio = R.raw.audio_1201
         ),
         Word(
             id = "1202",
@@ -383,7 +397,8 @@ object Populate {
             indonesian = "Anak Kucing",
             balinese = "Tai",
             imageUrl = "hewan/anak_kucing.jpg",
-            option = "",
+            option = "Sampi|Kebo|Lelipi|Meong|Cicing|Bangkung|Bikul|Bebedag|Wiwi",
+            audio = R.raw.audio_1202
         ),
         Word(
             id = "1203",
@@ -391,7 +406,8 @@ object Populate {
             indonesian = "Anak Bebek",
             balinese = "Memeri",
             imageUrl = "hewan/anak_bebek.jpg",
-            option = "",
+            option = "Sampi|Kebo|Lelipi|Meong|Cicing|Bebek|Tai|Bebedag|Wiwi",
+            audio = R.raw.audio_1203
         ),
         Word(
             id = "1204",
@@ -399,7 +415,8 @@ object Populate {
             indonesian = "Anak Anjing",
             balinese = "Kuluk",
             imageUrl = "hewan/anak_anjing.jpg",
-            option = "",
+            option = "Sampi|Kebo|Lelipi|Yuyu|Cicing|Bedigal|Tai|Bebedag|Wiwi",
+            audio = R.raw.audio_1204
         ),
         Word(
             id = "1205",
@@ -407,7 +424,8 @@ object Populate {
             indonesian = "Anak Kerbau",
             balinese = "Bedigal",
             imageUrl = "hewan/anak_kerbau.jpg",
-            option = "",
+            option = "Jaran|Kebo|Lelipi|Yuyu|Kebo|Kuluk|Tai|Bebedag|Wiwi",
+            audio = R.raw.audio_1205
         ),
         Word(
             id = "1206",
@@ -415,7 +433,8 @@ object Populate {
             indonesian = "Anak Tikus",
             balinese = "Nying-nying",
             imageUrl = "hewan/anak_tikus.jpg",
-            option = "",
+            option = "Sampi|Kebo|Bedigal|Bikul|Cicing|Kuluk|Tai|Bebedag|Wiwi",
+            audio = R.raw.audio_1206
         ),
         Word(
             id = "1207",
@@ -423,7 +442,8 @@ object Populate {
             indonesian = "Anak Babi",
             balinese = "Kucit",
             imageUrl = "hewan/anak_babi.jpg",
-            option = "",
+            option = "Nying-nying|Bangkung|Lelipi|Yuyu|Kebo|Kuluk|Tai|Bebedag|Wiwi",
+            audio = R.raw.audio_1207
         ),
         Word(
             id = "1208",
@@ -431,7 +451,8 @@ object Populate {
             indonesian = "Anak Ular",
             balinese = "Brara",
             imageUrl = "hewan/anak_ular.jpg",
-            option = "",
+            option = "Nying-nying|Bangkung|Lelipi|Kucit|Kebo|Kuluk|Tai|Bebedag|Wiwi",
+            audio = R.raw.audio_1208
         ),
         Word(
             id = "1209",
@@ -439,7 +460,8 @@ object Populate {
             indonesian = "Anak Monyet/Kera",
             balinese = "Apa",
             imageUrl = "hewan/anak_monyet.jpg",
-            option = "",
+            option = "Nying-nying|Bangkung|Lelipi|Brara|Bojog|Kuluk|Tai|Bebedag|Wiwi",
+            audio = R.raw.audio_1209
         ),
         Word(
             id = "1210",
@@ -447,7 +469,8 @@ object Populate {
             indonesian = "Anak Sapi",
             balinese = "Godel",
             imageUrl = "hewan/anak_sapi.jpg",
-            option = "",
+            option = "Nying-nying|Bangkung|Lelipi|Yuyu|Kebo|Kuluk|Tai|Sampi|Apa",
+            audio = R.raw.audio_1210
         ),
         Word(
             id = "1211",
@@ -455,7 +478,8 @@ object Populate {
             indonesian = "Anak Kepiting",
             balinese = "Kreket/Utung-utung",
             imageUrl = "hewan/anak_kepiting.jpg",
-            option = "",
+            option = "Nying-nying|Bangkung|Lelipi|Godel|Yuyu|Kuluk|Tai|Bebedag|Wiwi",
+            audio = R.raw.audio_1211
         ),
 
         //TODO: Angka
