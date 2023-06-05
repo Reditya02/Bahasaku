@@ -1,5 +1,6 @@
 package com.example.bahasaku.data
 
+import com.example.bahasaku.R
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Word
 
@@ -83,7 +84,8 @@ object Populate {
             balinese = "Rahajeng Semeng",
             imageUrl = "salam/selamat_pagi.jpg",
             option = "Rahajeng|Semeng|Rahajeng Wengi|Rahajeng Pagi",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0000
         ),
         Word(
             id = "0001",
@@ -92,7 +94,8 @@ object Populate {
             balinese = "Rahajeng Siang",
             imageUrl = "salam/selamat_siang.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Memargi|Semeng",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0001
         ),
         Word(
             id = "0002",
@@ -101,7 +104,8 @@ object Populate {
             balinese = "Rahajeng Wengi",
             imageUrl = "salam/selamat_malam.jpg",
             option = "Rahajeng Semeng|Rahajeng Siang|Semeng|Rahajeng",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0002
         ),
         Word(
             id = "0003",
@@ -110,7 +114,8 @@ object Populate {
             balinese = "Rahajeng Majengan",
             imageUrl = "salam/selamat_makan.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Wanti Warsa|Rahajeng Memargi",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0003
         ),
         Word(
             id = "0004",
@@ -119,7 +124,8 @@ object Populate {
             balinese = "Rahajeng Nyanggra Warsa Anyar",
             imageUrl = "salam/selamat_tahun_baru.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Wanti Warsa|Rahajeng Memargi",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0004
         ),
         Word(
             id = "0005",
@@ -128,7 +134,8 @@ object Populate {
             balinese = "Rahajeng Wanti Warsa",
             imageUrl = "salam/selamat_ulang_tahun.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Wengi|Rahajeng Memargi",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0005
         ),
         Word(
             id = "0006",
@@ -137,7 +144,8 @@ object Populate {
             balinese = "Rahajeng Memargi",
             imageUrl = "salam/selamat_tinggal.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Wanti Warsa|Rahajeng Wengi",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0006
         ),
         Word(
             id = "0007",
@@ -146,7 +154,8 @@ object Populate {
             balinese = "Matur Suksma",
             imageUrl = "salam/terima_kasih.jpg",
             option = "Rahajeng Semeng|Rahajeng Wengi|Rahajeng Wanti Warsa|Rahajeng Memargi",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0007
         ),
 
         //TODO: Panggilan
@@ -157,7 +166,8 @@ object Populate {
             balinese = "Tiang/Titiang/Irage",
             imageUrl = "panggilan/saya.jpg",
             option = "Awak|Semeng|Bli|Pekak|Mbok|Dadong",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0100
         ),
         Word(
             id = "0101",
@@ -166,7 +176,8 @@ object Populate {
             balinese = "Awak",
             imageUrl = "panggilan/kamu.jpg",
             option = "Rahajeng|Tiang|Irage|Pekak|Mbok|Dadong",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0101
         ),
         Word(
             id = "0102",
@@ -175,7 +186,8 @@ object Populate {
             balinese = "Bli",
             imageUrl = "panggilan/kakak_laki_laki.jpg",
             option = "Awak|Tiang|Irage|Pekak",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0102
         ),
         Word(
             id = "0103",
@@ -184,7 +196,8 @@ object Populate {
             balinese = "Mbok",
             imageUrl = "panggilan/kakak_perempuan.jpg",
             option = "Awak|Tiang|Irage|Pekak",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0103
         ),
         Word(
             id = "0104",
@@ -193,7 +206,8 @@ object Populate {
             balinese = "Bapa",
             imageUrl = "panggilan/ayah.jpg",
             option = "Awak|Tiang|Irage|Pekak",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0104
         ),
         Word(
             id = "0105",
@@ -202,7 +216,8 @@ object Populate {
             balinese = "Meme",
             imageUrl = "panggilan/ibu.jpg",
             option = "Awak|Tiang|Irage|Pekak",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0105
         ),
         Word(
             id = "0106",
@@ -211,7 +226,8 @@ object Populate {
             balinese = "Pekak",
             imageUrl = "panggilan/kakek.jpg",
             option = "Awak|Tiang|Irage|Dadong",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0106
         ),
         Word(
             id = "0107",
@@ -220,7 +236,8 @@ object Populate {
             balinese = "Dadong/Niang",
             imageUrl = "panggilan/nenek.jpg",
             option = "Awak|Tiang|Irage|Pekak",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0107
         ),
         Word(
             id = "0108",
@@ -229,7 +246,8 @@ object Populate {
             balinese = "Adi/Adin",
             imageUrl = "panggilan/adik.jpg",
             option = "Awak|Tiang|Irage|Pekak",
-            wordChild = ""
+            wordChild = "",
+            audio = R.raw.audio_0108
         ),
 
         //TODO: Hewan

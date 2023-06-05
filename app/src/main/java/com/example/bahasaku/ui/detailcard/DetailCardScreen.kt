@@ -196,7 +196,7 @@ fun DetailCardItemContent(
     word: Word
 ) {
     val context = LocalContext.current
-    val mp = MediaPlayer.create(context, R.raw.audio)
+    val mp = MediaPlayer.create(context, word.audio)
 
     Column(
         modifier = Modifier,

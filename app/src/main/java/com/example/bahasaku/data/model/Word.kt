@@ -15,7 +15,8 @@ data class Word(
     val balinese: String = "",
     val imageUrl: String = "",
     val option: String = "",
-    val wordChild: String = ""
+    val wordChild: String = "",
+    val audio: Int = 0
 ) : Parcelable {
     fun getOptionList(): List<String> {
         val option = option.split("|").shuffled().take(3) as MutableList
