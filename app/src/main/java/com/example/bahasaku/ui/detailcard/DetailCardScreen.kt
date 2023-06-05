@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -33,6 +34,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.bahasaku.R
+import com.example.bahasaku.core.components.BBorderedButton
+import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Word
@@ -99,14 +102,15 @@ fun DetailCardContent(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 if (pagerState.currentPage != 0) {
-                    Button(
-                        modifier = Modifier.weight(0.5f),
+                    BBorderedButton(
+                        text = "Sebelumnya",
+                        modifier = Modifier
+                            .weight(0.5f)
+                            .clip(MaterialTheme.shapes.small),
                         onClick = { scope.launch {
                             pagerState.animateScrollToPage(pagerState.currentPage - 1)
                         } }
-                    ) {
-                        Text(text = "Sebelumnya")
-                    }
+                    )
                 } else {
                     Spacer(Modifier.weight(0.5f))
                 }
@@ -114,14 +118,15 @@ fun DetailCardContent(
                 Spacer(modifier = Modifier.width(8.dp))
 
                 if (pagerState.currentPage != listWord.size - 1) {
-                    Button(
-                        modifier = Modifier.weight(0.5f),
+                    BButton(
+                        text = "Selanjutnya",
+                        modifier = Modifier
+                            .weight(0.5f)
+                            .clip(MaterialTheme.shapes.small),
                         onClick = { scope.launch {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
                         } }
-                    ) {
-                        Text(text = "Selanjutnya")
-                    }
+                    )
                 } else {
                     Spacer(Modifier.weight(0.5f))
                 }
