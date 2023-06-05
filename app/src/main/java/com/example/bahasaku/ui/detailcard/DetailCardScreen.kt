@@ -24,7 +24,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.bahasaku.R
 import com.example.bahasaku.data.model.Chapter
 import com.example.bahasaku.data.model.Word
@@ -187,28 +194,55 @@ fun DetailCardItemContent(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val image = remember {
-            mutableStateOf("")
-        }
-
-        LaunchedEffect(Unit) {
-            val storage = FirebaseStorage.getInstance().reference
-            val url = storage.child(word.imageUrl.ifEmpty { "Hewan/anak_bebek.png" }).downloadUrl.await()
-            image.value = url.toString()
-        }
         Row {
-            Spacer(modifier = Modifier.weight(0.3f))
-            Image(
-                modifier = Modifier
-                    .weight(0.4f)
-                    .aspectRatio(1f)
-                    .clickable {
-                        mp.start()
-                    },
-                painter = rememberAsyncImagePainter(image.value),
-                contentDescription = "description",
-                contentScale = ContentScale.Fit
+            var image by remember {
+                mutableStateOf("")
+            }
+
+            val painter = rememberAsyncImagePainter(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(image)
+                    .size(Size.ORIGINAL)
+                    .build()
             )
+
+            LaunchedEffect(Unit) {
+                val storage = FirebaseStorage.getInstance().reference
+                val url = storage.child(word.imageUrl.ifEmpty { "Hewan/anak_bebek.png" }).downloadUrl.await()
+                image = url.toString()
+            }
+
+            Spacer(modifier = Modifier.weight(0.3f))
+
+            if (painter.state is AsyncImagePainter.State.Success) {
+                Log.d("Reditya", "Sucess ${painter.state}")
+
+                Image(
+                    modifier = Modifier
+                        .weight(0.4f)
+                        .aspectRatio(1f)
+                        .clickable {
+                            mp.start()
+                        },
+                    painter = painter,
+                    contentDescription = "description",
+                    contentScale = ContentScale.Fit
+                )
+            } else {
+                Log.d("Reditya", "Loading ${painter.state}")
+
+                val composition by rememberLottieComposition(
+                    spec = LottieCompositionSpec.RawRes(R.raw.loading_indicator)
+                )
+
+                LottieAnimation(
+                    modifier = Modifier.weight(0.4f).aspectRatio(1f),
+                    composition = composition,
+                    iterations = LottieConstants.IterateForever,
+                    contentScale = ContentScale.Fit
+                )
+            }
+
             Spacer(modifier = Modifier.weight(0.3f))
         }
 
@@ -223,21 +257,5 @@ fun DetailCardItemContent(
             text = word.indonesian,
             style = MaterialTheme.typography.caption
         )
-    }
-}
-
-@Preview
-@Composable
-fun DetailCardItemPreview() {
-    Surface {
-        DetailCardItem(word = Word(
-            id = "",
-            chapterId = "",
-            indonesian = "Indonesian",
-            balinese = "Balinese",
-            imageUrl = "",
-            option = "",
-            wordChild = ""
-        ))
     }
 }

@@ -33,7 +33,7 @@ object Populate {
             title = "Angka",
             cardNumber = 46,
             exerciseNumber = 46,
-            imageUrl = "angka/1.jpg"
+            imageUrl = "angka/1.png"
         ),
         Chapter(
             id = "04",
