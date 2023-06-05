@@ -18,14 +18,14 @@ object Populate {
             title = "Panggilan",
             cardNumber = 9,
             exerciseNumber = 9,
-            imageUrl = "panggilan/nenek.png"
+            imageUrl = "panggilan/nenek.jpg"
         ),
         Chapter(
             id = "02",
             title = "Hewan",
             cardNumber = 12,
             exerciseNumber = 24,
-            imageUrl = "hewan/anak_bebek.png",
+            imageUrl = "hewan/anak_bebek.jpg",
             chapterChild = "12"
         ),
         Chapter(
@@ -33,7 +33,7 @@ object Populate {
             title = "Angka",
             cardNumber = 46,
             exerciseNumber = 46,
-            imageUrl = "angka/1.png"
+            imageUrl = "angka/1.jpg"
         ),
         Chapter(
             id = "04",
@@ -155,7 +155,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Saya",
             balinese = "Tiang/Titiang/Irage",
-            imageUrl = "panggilan/saya.png",
+            imageUrl = "panggilan/saya.jpg",
             option = "Awak|Semeng|Bli|Pekak|Mbok|Dadong",
             wordChild = ""
         ),
@@ -164,7 +164,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Kamu",
             balinese = "Awak",
-            imageUrl = "panggilan/kamu.png",
+            imageUrl = "panggilan/kamu.jpg",
             option = "Rahajeng|Tiang|Irage|Pekak|Mbok|Dadong",
             wordChild = ""
         ),
@@ -173,7 +173,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Kakak Laki-laki",
             balinese = "Bli",
-            imageUrl = "panggilan/kakak_laki_laki.png",
+            imageUrl = "panggilan/kakak_laki_laki.jpg",
             option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
@@ -182,7 +182,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Kakak Perempuan",
             balinese = "Mbok",
-            imageUrl = "panggilan/kakak_perempuan.png",
+            imageUrl = "panggilan/kakak_perempuan.jpg",
             option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
@@ -191,7 +191,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Ayah",
             balinese = "Bapa",
-            imageUrl = "panggilan/ayah.png",
+            imageUrl = "panggilan/ayah.jpg",
             option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
@@ -200,7 +200,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Ibu",
             balinese = "Meme",
-            imageUrl = "panggilan/ibu.png",
+            imageUrl = "panggilan/ibu.jpg",
             option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
@@ -209,7 +209,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Kakek",
             balinese = "Pekak",
-            imageUrl = "panggilan/kakek.png",
+            imageUrl = "panggilan/kakek.jpg",
             option = "Awak|Tiang|Irage|Dadong",
             wordChild = ""
         ),
@@ -218,7 +218,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Nenek",
             balinese = "Dadong/Niang",
-            imageUrl = "panggilan/nenek.png",
+            imageUrl = "panggilan/nenek.jpg",
             option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
@@ -227,7 +227,7 @@ object Populate {
             chapterId = "01",
             indonesian = "Adik",
             balinese = "Adi/Adin",
-            imageUrl = "panggilan/adik.png",
+            imageUrl = "panggilan/adik.jpg",
             option = "Awak|Tiang|Irage|Pekak",
             wordChild = ""
         ),
@@ -238,7 +238,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kuda",
             balinese = "Jaran",
-            imageUrl = "hewan/kuda.png",
+            imageUrl = "hewan/kuda.jpg",
             option = "Sampi|Kebo|Tiang|Semeng",
             wordChild = "1200"
         ),
@@ -247,7 +247,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kambing",
             balinese = "Kambing",
-            imageUrl = "hewan/kambing.png",
+            imageUrl = "hewan/kambing.jpg",
             option = "",
             wordChild = "1201"
         ),
@@ -256,7 +256,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kucing",
             balinese = "Meong",
-            imageUrl = "hewan/kucing.png",
+            imageUrl = "hewan/kucing.jpg",
             option = "",
             wordChild = "1202"
         ),
@@ -265,7 +265,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Bebek",
             balinese = "Bebek",
-            imageUrl = "hewan/bebek.png",
+            imageUrl = "hewan/bebek.jpg",
             option = "",
             wordChild = "1203"
         ),
@@ -274,7 +274,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Anjing",
             balinese = "Cicing",
-            imageUrl = "hewan/anjing.png",
+            imageUrl = "hewan/anjing.jpg",
             option = "",
             wordChild = "1204"
         ),
@@ -283,7 +283,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kerbau",
             balinese = "Kebo",
-            imageUrl = "hewan/kerbau.png",
+            imageUrl = "hewan/kerbau.jpg",
             option = "",
             wordChild = "1205"
         ),
@@ -292,7 +292,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Tikus",
             balinese = "Bikul",
-            imageUrl = "hewan/tikus.png",
+            imageUrl = "hewan/tikus.jpg",
             option = "",
             wordChild = "1206"
         ),
@@ -301,7 +301,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Babi",
             balinese = "Bangkung",
-            imageUrl = "hewan/babi.png",
+            imageUrl = "hewan/babi.jpg",
             option = "",
             wordChild = "1207"
         ),
@@ -310,7 +310,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Ular",
             balinese = "Lelipi",
-            imageUrl = "hewan/ular.png",
+            imageUrl = "hewan/ular.jpg",
             option = "",
             wordChild = "1208"
         ),
@@ -319,7 +319,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Monyet/Kera",
             balinese = "Bojog",
-            imageUrl = "hewan/monyet.png",
+            imageUrl = "hewan/monyet.jpg",
             option = "",
             wordChild = "1209"
         ),
@@ -328,7 +328,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Sapi",
             balinese = "Sampi",
-            imageUrl = "hewan/sapi.png",
+            imageUrl = "hewan/sapi.jpg",
             option = "",
             wordChild = "1210"
         ),
@@ -337,7 +337,7 @@ object Populate {
             chapterId = "02",
             indonesian = "Kepiting",
             balinese = "Yuyu",
-            imageUrl = "hewan/kepiting.png",
+            imageUrl = "hewan/kepiting.jpg",
             option = "",
             wordChild = "12011"
         ),
@@ -348,7 +348,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kuda",
             balinese = "Bebedag",
-            imageUrl = "hewan/anak_kuda.png",
+            imageUrl = "hewan/anak_kuda.jpg",
             option = "",
         ),
         Word(
@@ -356,7 +356,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kambing",
             balinese = "Wiwi",
-            imageUrl = "hewan/anak_kambing.png",
+            imageUrl = "hewan/anak_kambing.jpg",
             option = "",
         ),
         Word(
@@ -364,7 +364,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kucing",
             balinese = "Tai",
-            imageUrl = "hewan/anak_kucing.png",
+            imageUrl = "hewan/anak_kucing.jpg",
             option = "",
         ),
         Word(
@@ -372,7 +372,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Bebek",
             balinese = "Memeri",
-            imageUrl = "hewan/anak_bebek.png",
+            imageUrl = "hewan/anak_bebek.jpg",
             option = "",
         ),
         Word(
@@ -380,7 +380,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Anjing",
             balinese = "Kuluk",
-            imageUrl = "hewan/anak_anjing.png",
+            imageUrl = "hewan/anak_anjing.jpg",
             option = "",
         ),
         Word(
@@ -388,7 +388,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kerbau",
             balinese = "Bedigal",
-            imageUrl = "hewan/anak_kerbau.png",
+            imageUrl = "hewan/anak_kerbau.jpg",
             option = "",
         ),
         Word(
@@ -396,7 +396,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Tikus",
             balinese = "Nying-nying",
-            imageUrl = "hewan/anak_tikus.png",
+            imageUrl = "hewan/anak_tikus.jpg",
             option = "",
         ),
         Word(
@@ -404,7 +404,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Babi",
             balinese = "Kucit",
-            imageUrl = "hewan/anak_babi.png",
+            imageUrl = "hewan/anak_babi.jpg",
             option = "",
         ),
         Word(
@@ -412,7 +412,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Ular",
             balinese = "Brara",
-            imageUrl = "hewan/anak_ular.png",
+            imageUrl = "hewan/anak_ular.jpg",
             option = "",
         ),
         Word(
@@ -420,7 +420,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Monyet/Kera",
             balinese = "Apa",
-            imageUrl = "hewan/anak_monyet.png",
+            imageUrl = "hewan/anak_monyet.jpg",
             option = "",
         ),
         Word(
@@ -428,7 +428,7 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Sapi",
             balinese = "Godel",
-            imageUrl = "hewan/anak_sapi.png",
+            imageUrl = "hewan/anak_sapi.jpg",
             option = "",
         ),
         Word(
@@ -436,11 +436,11 @@ object Populate {
             chapterId = "12",
             indonesian = "Anak Kepiting",
             balinese = "Kreket/Utung-utung",
-            imageUrl = "hewan/anak_kepiting.png",
+            imageUrl = "hewan/anak_kepiting.jpg",
             option = "",
         ),
 
-        //TODO: Angka 03
+        //TODO: Angka
         Word(
             id = "0300",
             chapterId = "03",
