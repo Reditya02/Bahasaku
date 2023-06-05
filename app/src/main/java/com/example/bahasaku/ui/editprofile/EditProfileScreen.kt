@@ -19,12 +19,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.bahasaku.R
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.data.model.User
 import com.google.firebase.storage.FirebaseStorage
@@ -94,22 +103,42 @@ fun EditProfileContent(
                 var url by remember {
                     mutableStateOf(Uri.parse(""))
                 }
+
+                val painter = rememberAsyncImagePainter(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(url.toString())
+                        .size(Size.ORIGINAL)
+                        .build()
+                )
+
                 LaunchedEffect(Unit) {
                     val storage = FirebaseStorage.getInstance().reference
                     url = storage.child(user.image).downloadUrl.await()
                 }
 
                 Spacer(modifier = Modifier.weight(0.3f))
-                if (url.toString() != "") {
+                if (painter.state is AsyncImagePainter.State.Success) {
                     Image(
                         modifier = Modifier
                             .clip(CircleShape)
                             .weight(0.4f)
-                            .aspectRatio(1f)
-                            .clickable { openGallery() },
-                        painter = rememberAsyncImagePainter(url.toString()),
+                            .aspectRatio(1f),
+                        painter = painter,
                         contentDescription = "description",
                         contentScale = ContentScale.Crop
+                    )
+                } else {
+                    val composition by rememberLottieComposition(
+                        spec = LottieCompositionSpec.RawRes(R.raw.loading_indicator)
+                    )
+
+                    LottieAnimation(
+                        modifier = Modifier
+                            .weight(0.4f)
+                            .aspectRatio(1f),
+                        composition = composition,
+                        iterations = LottieConstants.IterateForever,
+                        contentScale = ContentScale.Fit
                     )
                 }
                 Spacer(modifier = Modifier.weight(0.3f))

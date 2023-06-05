@@ -1,5 +1,6 @@
 package com.example.bahasaku.ui.profile
 
+import android.graphics.Color
 import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -15,11 +16,21 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.bahasaku.R
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -102,8 +113,6 @@ fun ProfileContent(
 ) {
     val email = Firebase.auth.currentUser?.email
 
-    Log.d("Reditya", "user $user")
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -126,21 +135,43 @@ fun ProfileContent(
                     var url by remember {
                         mutableStateOf(Uri.parse(""))
                     }
+
+                    val painter = rememberAsyncImagePainter(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(url.toString())
+                            .size(Size.ORIGINAL)
+                            .build()
+                    )
+
                     LaunchedEffect(Unit) {
                         val storage = FirebaseStorage.getInstance().reference
                         url = storage.child(user.image).downloadUrl.await()
                     }
 
                     Spacer(modifier = Modifier.weight(0.3f))
-                    if (url.toString() != "") {
+                    if (painter.state is AsyncImagePainter.State.Success) {
                         Image(
                             modifier = Modifier
                                 .clip(CircleShape)
                                 .weight(0.4f)
                                 .aspectRatio(1f),
-                            painter = rememberAsyncImagePainter(url.toString()),
+                            painter = painter,
                             contentDescription = "description",
                             contentScale = ContentScale.Crop
+                        )
+                    } else {
+                        val composition by rememberLottieComposition(
+                            spec = LottieCompositionSpec.RawRes(R.raw.loading_indicator)
+                        )
+
+                        LottieAnimation(
+                            modifier = Modifier
+                                .weight(0.4f)
+                                .aspectRatio(1f)
+                                .background(White, CircleShape),
+                            composition = composition,
+                            iterations = LottieConstants.IterateForever,
+                            contentScale = ContentScale.Fit
                         )
                     }
                     Spacer(modifier = Modifier.weight(0.3f))
