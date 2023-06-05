@@ -6,17 +6,23 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.GreenVariant
 import com.example.bahasaku.data.model.Word
 import com.google.firebase.storage.FirebaseStorage
@@ -57,23 +63,40 @@ fun BWordCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-//            Log.d("Reditya", "${word.indonesian} > $isAvailable > $isDone")
-            val image = remember {
+            var image by remember {
                 mutableStateOf("")
             }
+            val painter = rememberAsyncImagePainter(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(image)
+                    .size(Size.ORIGINAL)
+                    .build()
+            )
 
             LaunchedEffect(Unit) {
-                val iUrl = word.imageUrl
                 val storage = FirebaseStorage.getInstance().reference
-                val url = storage.child(iUrl).downloadUrl.await()
-                image.value = url.toString()
+                val url = storage.child(word.imageUrl).downloadUrl.await()
+                image = url.toString()
             }
 
-            Image(
-                painter = rememberAsyncImagePainter(image.value),
-                contentDescription = "description",
-                contentScale = ContentScale.Fit
-            )
+            if (painter.state is AsyncImagePainter.State.Success) {
+                Image(
+                    painter = painter,
+                    contentDescription = "description",
+                    contentScale = ContentScale.Fit
+                )
+            } else {
+                val composition by rememberLottieComposition(
+                    spec = LottieCompositionSpec.RawRes(R.raw.loading_indicator)
+                )
+
+                LottieAnimation(
+                    modifier = Modifier.aspectRatio(1f),
+                    composition = composition,
+                    iterations = LottieConstants.IterateForever,
+                    contentScale = ContentScale.Fit
+                )
+            }
         }
     }
 }
