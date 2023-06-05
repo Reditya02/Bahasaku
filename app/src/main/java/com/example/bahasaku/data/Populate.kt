@@ -11,7 +11,7 @@ object Populate {
             title = "Salam",
             cardNumber = 8,
             exerciseNumber = 8,
-            imageUrl = "salam/terima_kasih.png"
+            imageUrl = "salam/terima_kasih.jpg"
         ),
         Chapter(
             id = "01",
@@ -81,7 +81,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Pagi",
             balinese = "Rahajeng Semeng",
-            imageUrl = "salam/selamat_pagi.png",
+            imageUrl = "salam/selamat_pagi.jpg",
             option = "Rahajeng|Semeng|Rahajeng Wengi|Rahajeng Pagi",
             wordChild = ""
         ),
@@ -90,7 +90,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Siang",
             balinese = "Rahajeng Siang",
-            imageUrl = "salam/selamat_siang.png",
+            imageUrl = "salam/selamat_siang.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Memargi|Semeng",
             wordChild = ""
         ),
@@ -99,7 +99,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Malam",
             balinese = "Rahajeng Wengi",
-            imageUrl = "salam/selamat_malam.png",
+            imageUrl = "salam/selamat_malam.jpg",
             option = "Rahajeng Semeng|Rahajeng Siang|Semeng|Rahajeng",
             wordChild = ""
         ),
@@ -108,7 +108,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Makan",
             balinese = "Rahajeng Majengan",
-            imageUrl = "salam/selamat_makan.png",
+            imageUrl = "salam/selamat_makan.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Wanti Warsa|Rahajeng Memargi",
             wordChild = ""
         ),
@@ -117,7 +117,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Tahun Baru",
             balinese = "Rahajeng Nyanggra Warsa Anyar",
-            imageUrl = "salam/selamat_tahun_baru.png",
+            imageUrl = "salam/selamat_tahun_baru.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Wanti Warsa|Rahajeng Memargi",
             wordChild = ""
         ),
@@ -126,7 +126,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Ulang Tahun",
             balinese = "Rahajeng Wanti Warsa",
-            imageUrl = "salam/selamat_ulang_tahun.png",
+            imageUrl = "salam/selamat_ulang_tahun.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Wengi|Rahajeng Memargi",
             wordChild = ""
         ),
@@ -135,7 +135,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Selamat Tinggal",
             balinese = "Rahajeng Memargi",
-            imageUrl = "salam/selamat_tinggal.png",
+            imageUrl = "salam/selamat_tinggal.jpg",
             option = "Rahajeng Semeng|Rahajeng|Rahajeng Wanti Warsa|Rahajeng Wengi",
             wordChild = ""
         ),
@@ -144,7 +144,7 @@ object Populate {
             chapterId = "00",
             indonesian = "Terima Kasih",
             balinese = "Matur Suksma",
-            imageUrl = "salam/terima_kasih.png",
+            imageUrl = "salam/terima_kasih.jpg",
             option = "Rahajeng Semeng|Rahajeng Wengi|Rahajeng Wanti Warsa|Rahajeng Memargi",
             wordChild = ""
         ),
