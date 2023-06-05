@@ -14,8 +14,17 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.bahasaku.R
 import com.example.bahasaku.data.model.Chapter
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
@@ -35,7 +44,6 @@ fun BChapterCard(
         modifier = modifier
             .padding(8.dp, 8.dp)
             .aspectRatio(1f)
-//            .fillMaxWidth()
             .clickable {
                 if (isAvailable)
                     navigateToCourse(chapterData)
@@ -53,25 +61,45 @@ fun BChapterCard(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val image = remember {
+            var image by remember {
                 mutableStateOf("")
             }
+
+            val painter = rememberAsyncImagePainter(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(image)
+                    .size(Size.ORIGINAL)
+                    .build()
+            )
 
             LaunchedEffect(Unit) {
                 val storage = FirebaseStorage.getInstance().reference
                 val url = storage.child(chapterData.imageUrl).downloadUrl.await()
-                image.value = url.toString()
+                image = url.toString()
             }
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Spacer(modifier = Modifier.weight(0.3f))
 
-                Image(
-                    modifier = Modifier.weight(0.4f),
-                    painter = rememberAsyncImagePainter(image.value),
-                    contentDescription = "description",
-                    contentScale = ContentScale.Fit
-                )
+                if (painter.state is AsyncImagePainter.State.Success) {
+                    Image(
+                        modifier = Modifier.weight(0.4f),
+                        painter = painter,
+                        contentDescription = "description",
+                        contentScale = ContentScale.Fit
+                    )
+                } else {
+                    val composition by rememberLottieComposition(
+                        spec = LottieCompositionSpec.RawRes(R.raw.loading_indicator)
+                    )
+
+                    LottieAnimation(
+                        modifier = Modifier.weight(0.4f).aspectRatio(1f),
+                        composition = composition,
+                        iterations = LottieConstants.IterateForever,
+                        contentScale = ContentScale.Fit
+                    )
+                }
 
                 Spacer(modifier = Modifier.weight(0.3f))
             }
