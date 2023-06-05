@@ -33,35 +33,35 @@ object Populate {
             title = "Angka",
             cardNumber = 46,
             exerciseNumber = 46,
-            imageUrl = "Hewan/anak_bebek.png"
+            imageUrl = "angka/1.png"
         ),
         Chapter(
             id = "04",
             title = "Perabotan",
             cardNumber = 16,
             exerciseNumber = 16,
-            imageUrl = "Hewan/anak_bebek.png"
+            imageUrl = "perabotan/meja.png"
         ),
         Chapter(
             id = "05",
             title = "Makanan dan Minuman",
             cardNumber = 14,
             exerciseNumber = 14,
-            imageUrl = "Hewan/anak_bebek.png"
+            imageUrl = "makanan_dan_minuman/daging_ayam.png"
         ),
         Chapter(
             id = "06",
             title = "Amggota Badan",
             cardNumber = 23,
             exerciseNumber = 23,
-            imageUrl = "Hewan/anak_bebek.png"
+            imageUrl = "anggota_badan/mata.png"
         ),
         Chapter(
             id = "07",
             title = "Aktivitas",
             cardNumber = 14,
             exerciseNumber = 14,
-            imageUrl = "Hewan/anak_bebek.png"
+            imageUrl = "aktivitas/berjalan.png"
         ),
 
         //TODO: Child
