@@ -22,7 +22,6 @@ class FirestoreRepository @Inject constructor(
 ) {
     private fun getUid(): String {
         val authId = auth.getUid()
-        Log.d("Reditya", "firestore auth $authId")
         return authId
     }
 
@@ -49,12 +48,10 @@ class FirestoreRepository @Inject constructor(
                 if (value != null && value.exists()) {
                     val result = value.toObject(ProgressChapter::class.java)
                     trySend(result)
-                    Log.d("Reditya", "progress result ${getUid()} \n ${result.toString()}")
                 }
             }
         }
 
-        Log.d("Reditya", "firestore document ${fsProgress().id}")
 
         val firebase = fsLearningChapterProgress()
             .addSnapshotListener(listener)
@@ -322,8 +319,6 @@ class FirestoreRepository @Inject constructor(
             true
         }
 
-        Log.d("Reditya", "Score $result")
-
         val firebase = fsProgress().update("score", result)
 
     }
@@ -331,14 +326,12 @@ class FirestoreRepository @Inject constructor(
     suspend fun uploadImage(uri: Uri): Boolean {
         return try {
             val uid = getUid()
-            Log.d("Reditya", "start uploadImage to Storage $uri")
             val image = Firebase.storage.reference
                 .child("profile")
                 .child(uid)
                 .putFile(uri).await()
                 .storage.downloadUrl.await()
 
-            Log.d("Reditya", "start uploadImage to firestore $uri")
             fsProgress().update("image", "profile/$uid")
             true
         } catch (e: Exception) {
