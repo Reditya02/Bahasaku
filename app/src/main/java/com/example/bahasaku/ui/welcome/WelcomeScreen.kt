@@ -3,7 +3,10 @@ package com.example.bahasaku.ui.welcome
 //import com.google.accompanist.pager.HorizontalPager
 //import com.google.accompanist.pager.rememberPagerState
 import android.content.res.Configuration
+import android.widget.Space
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -16,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -63,15 +68,22 @@ fun WelcomeContent(
         }
     ) { padding ->
         Column(
-            Modifier.padding(padding)
+            modifier = Modifier.padding(padding),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val pagerState = rememberPagerState()
 
             val cardData = arrayListOf(
-                R.raw.business_team,
-                R.raw.business_salesman,
-                R.raw.customer_review,
-                R.raw.singing_contract
+                R.drawable.page_1,
+                R.drawable.page_2,
+                R.drawable.page_3,
+            )
+
+            val text = listOf(
+                "Pantau progres belajar",
+                "Belajar dengan ilustrasi dan audio",
+                "Latihan dengan menjawab soal"
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -84,7 +96,7 @@ fun WelcomeContent(
                     .weight(7f)
                     .fillMaxWidth(),
             ) { page ->
-                WelcomeCard(animation = cardData[page])
+                WelcomeCard(cardData[page], text[page])
             }
 
             Row(
@@ -101,7 +113,6 @@ fun WelcomeContent(
                             .clip(CircleShape)
                             .background(color)
                             .size(8.dp)
-
                     )
                 }
             }
@@ -136,16 +147,26 @@ fun WelcomeContent(
 
 @Composable
 fun WelcomeCard(
-    animation: Int
+    image: Int,
+    text: String
 ) {
-    val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(animation))
-
     Column(
-        Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize().padding(horizontal = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Bottom
     ) {
-        LottieAnimation(composition = composition, iterations = LottieConstants.IterateForever)
-
+        Spacer(modifier = Modifier.weight(1f))
+        Image(
+            painter = painterResource(id = image),
+            contentDescription = "",
+            contentScale = ContentScale.Fit
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = text,
+            style = MaterialTheme.typography.body1
+        )
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
