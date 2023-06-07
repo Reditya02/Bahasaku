@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.bahasaku.core.components.BBorderedButton
 
 @Composable
 fun LogoutAlertDialog(
@@ -26,9 +27,10 @@ fun LogoutAlertDialog(
                     onClick = onDismissClicked
                 ) { Text(text = "Tidak") }
 
-                Button(
+                BBorderedButton(
+                    text = "Iya",
                     onClick = onConfirmClicked
-                ) { Text(text = "Iya") }
+                )
             }
         },
         title = {

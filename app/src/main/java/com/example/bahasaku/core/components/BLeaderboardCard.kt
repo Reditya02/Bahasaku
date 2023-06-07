@@ -39,7 +39,8 @@ fun BLeaderboardCard(
 ) {
     Card(
         modifier = modifier.padding(12.dp),
-        elevation = 10.dp
+        elevation = 10.dp,
+        backgroundColor = MaterialTheme.colors.primary
     ) {
         if (name.isNotEmpty()) {
             Row(
@@ -51,7 +52,7 @@ fun BLeaderboardCard(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Box(modifier = Modifier.weight(0.12f)) {
-                    Text(text = "${rank}.", style = MaterialTheme.typography.subtitle2)
+                    Text(text = "${rank}.", style = MaterialTheme.typography.subtitle2, color = MaterialTheme.colors.onPrimary)
                 }
                 Box(
                     modifier = Modifier
@@ -97,9 +98,9 @@ fun BLeaderboardCard(
                         )
                     }
                 }
-                Text(text = name, style = MaterialTheme.typography.subtitle2)
+                Text(text = name, style = MaterialTheme.typography.subtitle2, color = MaterialTheme.colors.onPrimary)
                 Spacer(modifier = Modifier.weight(0.88f))
-                Text(text = score, style = MaterialTheme.typography.subtitle2)
+                Text(text = score, style = MaterialTheme.typography.subtitle2, color = MaterialTheme.colors.onPrimary)
             }
         }
     }

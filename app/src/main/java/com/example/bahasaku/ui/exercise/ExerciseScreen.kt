@@ -32,6 +32,7 @@ fun ExerciseScreen(
     navigation: DestinationsNavigator,
     viewModel: ExerciseViewModel = hiltViewModel(),
     word: Word,
+    title: String
 ) {
     Surface {
         Column(
@@ -40,7 +41,8 @@ fun ExerciseScreen(
             ExerciseContent(
                 word,
                 { navigation.popBackStack() },
-                { viewModel.updateProgress(word.id.drop(2).toInt(), word.chapterId) }
+                { viewModel.updateProgress(word.id.drop(2).toInt(), word.chapterId) },
+                title
             )
         }
     }
@@ -50,11 +52,12 @@ fun ExerciseScreen(
 fun ExerciseContent(
     word: Word,
     onBackPressed: () -> Unit,
-    onCorrect: () -> Unit
+    onCorrect: () -> Unit,
+    title: String
 ) {
     Scaffold(
         topBar = {
-            BTopAppBar(title = "Bahasaku", hasBackButton = true, onBackPressed = onBackPressed)
+            BTopAppBar(title = title, hasBackButton = true, onBackPressed = onBackPressed)
         }
     ) { padding ->
         Card(
@@ -88,7 +91,6 @@ fun ExerciseQuestion(
     word: Word
 ) {
     Column(
-//        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

@@ -58,7 +58,7 @@ fun ListExerciseCardScreen(
             ListExerciseCardContent(
                 onBackPressed = { navigator.popBackStack() },
                 onCardClicked = {
-                    navigator.navigate(ExerciseScreenDestination(it))
+                    navigator.navigate(ExerciseScreenDestination(it, chapter.title))
                 },
                 showSnackbar = { /*TODO*/ },
                 snackbarHostState = snackbarHostState,

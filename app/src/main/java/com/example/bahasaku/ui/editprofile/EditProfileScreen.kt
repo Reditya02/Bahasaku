@@ -34,6 +34,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.bahasaku.R
+import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.data.model.User
@@ -120,7 +121,8 @@ fun EditProfileContent(
                         modifier = Modifier
                             .clip(CircleShape)
                             .weight(0.4f)
-                            .aspectRatio(1f),
+                            .aspectRatio(1f)
+                            .clickable { openGallery() },
                         painter = painter,
                         contentDescription = "description",
                         contentScale = ContentScale.Crop
@@ -156,16 +158,13 @@ fun EditProfileContent(
                 )
             )
             Spacer(modifier = Modifier.weight(0.92f))
-            Button(
+            BButton(
+                text = "Simpan Profil",
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = onSaveprofileClicked
-            ) {
-                androidx.compose.material.Text(
-                    text = "Simpan Profil",
-                    textAlign = TextAlign.Center,
-                )
-            }
+                onClick = onSaveprofileClicked,
+                hasBackground = true
+            )
 
         }
     }

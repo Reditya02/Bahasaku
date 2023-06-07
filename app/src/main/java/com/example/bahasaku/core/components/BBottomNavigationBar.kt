@@ -42,8 +42,10 @@ fun BBottomNavigationBar(
                         onClick = { navigator.navigate(it.direction) {
                             popUpTo(ListLearningChapterScreenDestination)
                         } },
-                        icon = { Icon(imageVector = it.icon, contentDescription = "") },
-//                label = { Text(text = it.text) },
+                        icon = { Icon(
+                            painter = painterResource(id = it.icon),
+                            contentDescription = ""
+                        ) },
                         alwaysShowLabel = false,
                         selectedContentColor = MaterialTheme.colors.primary,
                         unselectedContentColor = MaterialTheme.colors.onBackground.copy(alpha = 0.6F)
