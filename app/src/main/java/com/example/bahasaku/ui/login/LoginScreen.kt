@@ -118,7 +118,7 @@ fun LoginContent(
 ) {
     Scaffold(
         topBar = {
-            BTopAppBar(title = "Bahasaku")
+            BTopAppBar(title = "Mebaasa Bali")
         }
     ) { padding ->
         Column(
