@@ -4,7 +4,7 @@ import android.net.Uri
 import com.example.bahasaku.data.model.remote.ProgressCard
 import com.example.bahasaku.data.model.remote.ProgressChapter
 import com.example.bahasaku.ui.editprofile.UpdateResult
-import com.example.bahasaku.ui.register.AuthCondition
+import com.example.bahasaku.ui.guest.register.AuthCondition
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
