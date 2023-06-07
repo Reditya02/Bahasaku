@@ -206,16 +206,6 @@ fun RegisterContent(
                 enabled = isNotEmpty
             )
 
-//            Button(
-//                modifier = Modifier
-//                    .align(Alignment.End)
-//                    .padding(end = 24.dp),
-//                onClick = onCreateAccountClicked
-//            ) {
-//                Text(text = "Buat Akun")
-//                Icon(imageVector = Icons.Rounded.ChevronRight, contentDescription = "")
-//            }
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
