@@ -6,7 +6,7 @@ import com.example.bahasaku.data.model.remote.ProgressCard
 data class ListExerciseCardState(
     val listWord: List<Word> = listOf(),
     val progress: ProgressCard = ProgressCard(
-        done = mutableListOf(),
+        done = mutableListOf(true),
         available = mutableListOf()
     )
 )

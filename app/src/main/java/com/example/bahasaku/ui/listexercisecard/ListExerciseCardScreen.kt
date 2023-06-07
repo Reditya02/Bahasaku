@@ -1,5 +1,6 @@
 package com.example.bahasaku.ui.listexercisecard
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -54,7 +55,7 @@ fun ListExerciseCardScreen(
 
     viewModel.updateChapterProgress(id)
 
-    if (state.progress.done.size == state.listWord.size)
+    if (state.progress.done.count { it } == state.listWord.size)
         viewModel.updateChapterAvailable(chapter.id)
 
     Surface {
