@@ -16,9 +16,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.components.BWordCard
 import com.example.bahasaku.data.model.Chapter
@@ -26,6 +28,7 @@ import com.example.bahasaku.data.model.Word
 import com.example.bahasaku.destinations.ExerciseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.launch
 
 @Destination
 @Composable
@@ -37,6 +40,7 @@ fun ListExerciseCardScreen(
     val state by viewModel.state.collectAsState()
 
     val snackbarHostState = SnackbarHostState()
+    val scope = rememberCoroutineScope()
     val id = chapter.id
     val title = chapter.title
 
@@ -60,7 +64,14 @@ fun ListExerciseCardScreen(
                 onCardClicked = {
                     navigator.navigate(ExerciseScreenDestination(it, chapter.title))
                 },
-                showSnackbar = { /*TODO*/ },
+                showSnackbar = {
+                    snackbarHostState.currentSnackbarData?.dismiss()
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            "Latihan terkunci, silahkan selesaikan materi terlebih dahulu"
+                        )
+                    }
+                },
                 snackbarHostState = snackbarHostState,
                 title = title,
                 state = state
@@ -103,12 +114,6 @@ fun ListExerciseCardContent(
                 }
             )
         }
-        Column(Modifier.padding(padding)) {
-            Spacer(modifier = Modifier.weight(1F))
-            SnackbarHost(
-                modifier = Modifier.padding(padding),
-                hostState = snackbarHostState
-            )
-        }
+        BSnackbar(padding = padding, snackbarHostState = snackbarHostState)
     }
 }

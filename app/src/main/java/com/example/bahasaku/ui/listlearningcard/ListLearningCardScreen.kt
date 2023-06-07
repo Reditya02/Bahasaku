@@ -19,6 +19,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.components.BWordCard
 import com.example.bahasaku.data.model.Chapter
@@ -56,7 +57,7 @@ fun ListLearningCardScreen(
                     snackbarHostState.currentSnackbarData?.dismiss()
                     scope.launch {
                         snackbarHostState.showSnackbar(
-                            "Materi terkunci, silahkan selesaikan materi dan latihan soal sebelumnya"
+                            "Materi terkunci, silahkan pelajari materi sebelumnya"
                         )
                     }
                 },
@@ -80,15 +81,6 @@ fun ListLearningCardContent(
     Scaffold(
         topBar = {
             BTopAppBar(title = title, hasBackButton = true, onBackPressed = onBackPressed)
-//            CenterAlignedTopAppBar(
-//                title = { Text(text = title) },
-//                Modifier.background(MaterialTheme.colors.background),
-//                navigationIcon = {
-//                    IconButton(onClick = onBackPressed) {
-//                        Icon(imageVector = Icons.Default.ChevronLeft, contentDescription = "")
-//                    }
-//                }
-//            )
         }
     ) { padding ->
         Column(Modifier.padding(padding)) {
@@ -111,12 +103,6 @@ fun ListLearningCardContent(
                 }
             )
         }
-        Column(Modifier.padding(padding)) {
-            Spacer(modifier = Modifier.weight(1F))
-            SnackbarHost(
-                modifier = Modifier.padding(padding),
-                hostState = snackbarHostState
-            )
-        }
+        BSnackbar(padding = padding, snackbarHostState = snackbarHostState)
     }
 }

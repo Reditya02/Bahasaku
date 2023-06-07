@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BChapterCard
+import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
 import com.example.bahasaku.data.model.Chapter
@@ -65,30 +66,14 @@ fun ListExerciseChapterScreen(
                         snackbarHostState.currentSnackbarData?.dismiss()
                         scope.launch {
                             snackbarHostState.showSnackbar(
-                                "Bab terkunci, silahkan selesaikan bab sebelumnya"
+                                "Bab terkunci, silahkan selesaikan latihan bab sebelumnya"
                             )
                         }
                     },
                     state
                 )
             }
-            Column(Modifier.fillMaxWidth()) {
-                Spacer(modifier = Modifier.weight(1F))
-                SnackbarHost(
-                    modifier = Modifier.padding(padding),
-                    hostState = snackbarHostState,
-                    snackbar = {
-                        snackbarHostState.currentSnackbarData?.let {
-                            Snackbar(
-                                it,
-//                                backgroundColor = MaterialTheme.colors.background,
-//                                contentColor = MaterialTheme.colors.onBackground,
-                                elevation = 16.dp
-                            )
-                        }
-                    }
-                )
-            }
+            BSnackbar(padding = padding, snackbarHostState = snackbarHostState)
         }
     }
 
