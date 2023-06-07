@@ -77,20 +77,6 @@ fun ProfileScreen(
                         )
                     } }
                 )
-//                CenterAlignedTopAppBar(
-//                    title = { Text(
-//                        text = "Profil",
-//                        color = MaterialTheme.colors.onPrimary
-//                    ) },
-//                    actions = { IconButton(onClick = { isOpenDialog = true }) {
-//                        Icon(
-//                            imageVector = Icons.Default.Logout,
-//                            contentDescription = "",
-//                            tint = MaterialTheme.colors.onPrimary
-//                        )
-//                    } },
-//                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colors.primary)
-//                )
             },
             bottomBar = {
                 BBottomNavigationBar(

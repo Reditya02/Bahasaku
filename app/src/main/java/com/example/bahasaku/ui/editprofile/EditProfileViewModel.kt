@@ -20,8 +20,22 @@ class EditProfileViewModel @Inject constructor(
     private val _state = MutableStateFlow(EditProfileState())
     val state: StateFlow<EditProfileState> = _state
 
+    init {
+        getUser()
+    }
+
     fun onNameTextFieldValueChanged(value: String) {
         _state.update { it.copy(name = value) }
+    }
+
+    private fun getUser() {
+        viewModelScope.launch {
+            firestoreRepository.getUserProgress().collect { response ->
+                response?.let {
+                    _state.update { it.copy(name = response.name) }
+                }
+            }
+        }
     }
 
     fun uploadImage(uri: Uri) {
