@@ -214,6 +214,20 @@ class AuthRepository {
                                     )
                                 )
                             )
+
+                        document("12")
+                            .set(
+                                ProgressCard(
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false
+                                    )
+                                )
+                            )
                     }
 
                 collection("exercise_card")
@@ -221,9 +235,7 @@ class AuthRepository {
                         document("00")
                             .set(
                                 ProgressCard(
-                                    available = mutableListOf(
-                                        false, false, false, false, false, false, false, false
-                                    ),
+                                    available = mutableListOf(),
                                     done = mutableListOf(
                                         false, false, false, false, false, false, false, false
                                     )
@@ -233,9 +245,7 @@ class AuthRepository {
                         document("01")
                             .set(
                                 ProgressCard(
-                                    available = mutableListOf(
-                                        false, false, false, false, false, false, false, false, false
-                                    ),
+                                    available = mutableListOf(),
                                     done = mutableListOf(
                                         false, false, false, false, false, false, false, false, false
                                     )
@@ -245,10 +255,7 @@ class AuthRepository {
                         document("02")
                             .set(
                                 ProgressCard(
-                                    available = mutableListOf(
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false
-                                    ),
+                                    available = mutableListOf(),
                                     done = mutableListOf(
                                         false, false, false, false, false, false, false, false, false, false,
                                         false, false
@@ -259,13 +266,7 @@ class AuthRepository {
                         document("03")
                             .set(
                                 ProgressCard(
-                                    available = mutableListOf(
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false, false, false, false, false
-                                    ),
+                                    available = mutableListOf(),
                                     done = mutableListOf(
                                         false, false, false, false, false, false, false, false, false, false,
                                         false, false, false, false, false, false, false, false, false, false,
@@ -279,10 +280,7 @@ class AuthRepository {
                         document("04")
                             .set(
                                 ProgressCard(
-                                    available = mutableListOf(
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false, false, false, false, false
-                                    ),
+                                    available = mutableListOf(),
                                     done = mutableListOf(
                                         false, false, false, false, false, false, false, false, false, false,
                                         false, false, false, false, false, false
@@ -293,10 +291,7 @@ class AuthRepository {
                         document("05")
                             .set(
                                 ProgressCard(
-                                    available = mutableListOf(
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false, false, false
-                                    ),
+                                    available = mutableListOf(),
                                     done = mutableListOf(
                                         false, false, false, false, false, false, false, false, false, false,
                                         false, false, false, false
@@ -307,11 +302,7 @@ class AuthRepository {
                         document("06")
                             .set(
                                 ProgressCard(
-                                    available = mutableListOf(
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false, false
-                                    ),
+                                    available = mutableListOf(),
                                     done = mutableListOf(
                                         false, false, false, false, false, false, false, false, false, false,
                                         false, false, false, false, false, false, false, false, false, false,
@@ -323,10 +314,7 @@ class AuthRepository {
                         document("07")
                             .set(
                                 ProgressCard(
-                                    available = mutableListOf(
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false, false, false
-                                    ),
+                                    available = mutableListOf(),
                                     done = mutableListOf(
                                         false, false, false, false, false, false, false, false, false, false,
                                         false, false, false, false
@@ -337,10 +325,7 @@ class AuthRepository {
                         document("12")
                             .set(
                                 ProgressCard(
-                                    available = mutableListOf(
-                                        false, false, false, false, false, false, false, false, false, false,
-                                        false, false
-                                    ),
+                                    available = mutableListOf(),
                                     done = mutableListOf(
                                         false, false, false, false, false, false, false, false, false, false,
                                         false, false
