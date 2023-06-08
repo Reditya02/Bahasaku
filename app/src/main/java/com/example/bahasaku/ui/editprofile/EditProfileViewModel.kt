@@ -28,7 +28,7 @@ class EditProfileViewModel @Inject constructor(
         _state.update { it.copy(name = value) }
     }
 
-    private fun getUser() {
+    fun getUser() {
         viewModelScope.launch {
             firestoreRepository.getUserProgress().collect { response ->
                 response?.let {
@@ -39,9 +39,12 @@ class EditProfileViewModel @Inject constructor(
     }
 
     fun uploadImage(uri: Uri) {
+        _state.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             val res = firestoreRepository.uploadImage(uri)
+            getUser()
             _state.update { it.copy(
+                isLoading = !res,
                 updateResult = if (res) UpdateResult.SUCCESS else UpdateResult.FAILED
             ) }
         }

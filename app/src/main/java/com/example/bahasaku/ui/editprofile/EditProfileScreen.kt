@@ -38,9 +38,12 @@ import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.data.model.User
+import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
+import com.example.bahasaku.destinations.ProfileScreenDestination
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.popUpTo
 import kotlinx.coroutines.tasks.await
 
 @Destination
@@ -59,14 +62,16 @@ fun EditProfileScreen(
     }
 
     if (state.updateResult == UpdateResult.SUCCESS) {
-        navigator.popBackStack()
+        navigator.navigate(ProfileScreenDestination) {
+            popUpTo(ListLearningChapterScreenDestination)
+        }
     }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
-        Column {
+        Box {
             EditProfileContent(
                 nameValue = state.name,
                 onNameTextFieldValueChanged = { viewModel.onNameTextFieldValueChanged(it) },
@@ -76,6 +81,28 @@ fun EditProfileScreen(
                 user,
                 openGallery = { galleryLauncher.launch("image/*") }
             )
+            if (state.isLoading) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colors.primary.copy(alpha = 0.4f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    val composition by rememberLottieComposition(
+                        spec = LottieCompositionSpec.RawRes(R.raw.loading_indicator_white)
+                    )
+                    Row {
+                        Spacer(modifier = Modifier.weight(0.3f))
+                        LottieAnimation(
+                            modifier = Modifier.weight(0.4f).aspectRatio(1f),
+                            composition = composition,
+                            iterations = LottieConstants.IterateForever,
+                            contentScale = ContentScale.Fit
+                        )
+                        Spacer(modifier = Modifier.weight(0.3f))
+                    }
+                }
+            }
         }
     }
 }
