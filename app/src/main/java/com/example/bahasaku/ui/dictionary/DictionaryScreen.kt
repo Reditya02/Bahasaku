@@ -16,9 +16,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.bahasaku.R
 import com.example.bahasaku.core.components.BBottomNavigationBar
 import com.example.bahasaku.core.components.BSearchBar
 import com.example.bahasaku.core.components.BTopAppBar
@@ -111,20 +117,41 @@ fun DictionaryContent(
         BSearchBar(query = searchedTextValue, onQueryChange = onSearchedTextTextFieldValueChanged)
 
         if (searchedTextValue.isNotEmpty()) {
-            LazyColumn(
-                content = {
-                    items(listWord) {
-                        DictionaryItem(word = it, isToBalinese = isToBalinese)
-                    }
+            if (listWord.isEmpty()) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    val composition by rememberLottieComposition(
+                        spec = LottieCompositionSpec.RawRes(R.raw.not_found)
+                    )
+
+                    LottieAnimation(
+                        modifier = Modifier.aspectRatio(1f),
+                        composition = composition,
+                        iterations = LottieConstants.IterateForever,
+                        contentScale = ContentScale.Fit
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(text = "Kata Tidak Ditemukan")
                 }
-            )
+            } else {
+                LazyColumn(
+                    content = {
+                        items(listWord) {
+                            DictionaryItem(word = it, isToBalinese = isToBalinese)
+                        }
+                    }
+                )
+            }
         } else {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "Kosong")
+                Text(text = "")
             }
         }
     }
