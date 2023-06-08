@@ -41,7 +41,7 @@ class AuthRepository {
             Firebase.auth.apply {
                 createUserWithEmailAndPassword(email, password).await()
                 currentUser?.apply {
-                    val photo = ""
+                    val photo = "profile/blue.jpg"
                     createProgress(uid, name, photo)
                     updateProfile(userProfileChangeRequest {
                         displayName = name
