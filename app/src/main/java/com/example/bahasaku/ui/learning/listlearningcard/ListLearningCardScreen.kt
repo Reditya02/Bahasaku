@@ -23,7 +23,7 @@ import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.components.BWordCard
 import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.destinations.DetailCardScreenDestination
+import com.example.bahasaku.destinations.LearningScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -51,7 +51,7 @@ fun ListLearningCardScreen(
             ListLearningCardContent(
                 onBackPressed = { navigator.popBackStack() },
                 navigateToCourseContent = { i ->
-                    navigator.navigate(DetailCardScreenDestination(chapter, i))
+                    navigator.navigate(LearningScreenDestination(chapter, i))
                 },
                 showSnackbar = {
                     snackbarHostState.currentSnackbarData?.dismiss()
