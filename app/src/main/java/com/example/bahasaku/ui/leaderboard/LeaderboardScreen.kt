@@ -92,7 +92,7 @@ fun LeaderboardContent(
                 state = scrollState,
                 content = {
                     itemsIndexed(listUser) { i, it ->
-                        if (it.name == currentUser.name)
+                        if (it.email == currentUser.email)
                             rank = i + 1
                         if (i != 0) {
                             Divider(

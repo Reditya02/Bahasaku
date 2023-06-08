@@ -42,7 +42,7 @@ class AuthRepository {
                 createUserWithEmailAndPassword(email, password).await()
                 currentUser?.apply {
                     val photo = "profile/blue.jpg"
-                    createProgress(uid, name, photo)
+                    createProgress(uid, name, photo, email)
                     updateProfile(userProfileChangeRequest {
                         displayName = name
                         photoUri = Uri.parse(photo)
@@ -60,7 +60,7 @@ class AuthRepository {
         awaitClose { channel.close() }
     }
 
-    private fun createProgress(id: String, name: String, imageUrl: String) {
+    private fun createProgress(id: String, name: String, imageUrl: String, email: String) {
         FirebaseFirestore
             .getInstance()
             .collection("progress")
@@ -70,30 +70,31 @@ class AuthRepository {
                 set(hashMapOf(
                     "score" to 0,
                     "name" to name,
-                    "image" to imageUrl
+                    "image" to imageUrl,
+                    "email" to email
                 ))
 
                 collection("learning_chapter")
                     .document("chapter_progress")
                     .set(
                         ProgressChapter(
-                        available = mutableListOf(
-                            true, false, false, false, false, false, false, false
-                        ),
-                        progress = mutableListOf(
-                            0, 0, 0, 0, 0, 0, 0, 0
-                        ),
-                    )
+                            available = mutableListOf(
+                                true, false, false, false, false, false, false, false
+                            ),
+                            progress = mutableListOf(
+                                0, 0, 0, 0, 0, 0, 0, 0
+                            ),
+                        )
                     )
 
                 collection("exercise_chapter")
                     .document("chapter_progress")
                     .set(
                         ProgressChapter(
-                        progress = mutableListOf(
-                            0, 0, 0, 0, 0, 0, 0, 0
-                        ),
-                    )
+                            progress = mutableListOf(
+                                0, 0, 0, 0, 0, 0, 0, 0
+                            ),
+                        )
                     )
 
                 collection("learning_card")
@@ -101,117 +102,117 @@ class AuthRepository {
                         document("00")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    true, false, false, false, false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false
+                                    available = mutableListOf(
+                                        true, false, false, false, false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("01")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    true, false, false, false, false, false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false
+                                    available = mutableListOf(
+                                        true, false, false, false, false, false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("02")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    true, false, false, false, false, false, false, false, false, false,
-                                    false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false
+                                    available = mutableListOf(
+                                        true, false, false, false, false, false, false, false, false, false,
+                                        false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("03")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    true, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false
+                                    available = mutableListOf(
+                                        true, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("04")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    true, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false
+                                    available = mutableListOf(
+                                        true, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("05")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    true, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false
+                                    available = mutableListOf(
+                                        true, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("06")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    true, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false
+                                    available = mutableListOf(
+                                        true, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("07")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    true, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false
+                                    available = mutableListOf(
+                                        true, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false
                                 ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false
+                                    )
                                 )
-                            )
                             )
                     }
 
@@ -220,131 +221,131 @@ class AuthRepository {
                         document("00")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    false, false, false, false, false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("01")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("02")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("03")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("04")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("05")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("06")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("07")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false, false, false
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false, false, false
+                                    )
                                 )
-                            )
                             )
 
                         document("12")
                             .set(
                                 ProgressCard(
-                                available = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false
-                                ),
-                                done = mutableListOf(
-                                    false, false, false, false, false, false, false, false, false, false,
-                                    false, false
+                                    available = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false
+                                    ),
+                                    done = mutableListOf(
+                                        false, false, false, false, false, false, false, false, false, false,
+                                        false, false
+                                    )
                                 )
-                            )
                             )
                     }
             }
