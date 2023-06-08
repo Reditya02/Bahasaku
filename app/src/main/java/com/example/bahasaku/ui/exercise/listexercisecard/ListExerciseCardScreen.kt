@@ -53,7 +53,7 @@ fun ListExerciseCardScreen(
         viewModel.getProgress(id)
     }
 
-    viewModel.updateChapterProgress(id)
+    viewModel.updateChapterProgress(id, chapter.chapterChild)
 
     if (state.progress.done.count { it } == state.listWord.size)
         viewModel.updateChapterAvailable(chapter.id)

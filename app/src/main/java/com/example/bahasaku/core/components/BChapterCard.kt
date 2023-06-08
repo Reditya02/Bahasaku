@@ -34,6 +34,7 @@ import kotlinx.coroutines.tasks.await
 @Composable
 fun BChapterCard(
     modifier: Modifier = Modifier,
+    isLearning: Boolean = true,
     chapterData: Chapter,
     navigateToCourse: (Chapter) -> Unit,
     showSnackbar: () -> Unit,
@@ -107,7 +108,7 @@ fun BChapterCard(
             Spacer(modifier = Modifier.height(12.dp))
             Text(text = chapterData.title, style = MaterialTheme.typography.body2)
             Spacer(modifier = Modifier.height(12.dp))
-            Text(text = chapterData.run { "$progress/$cardNumber" }, style = MaterialTheme.typography.caption)
+            Text(text = chapterData.run { "$progress/${if (isLearning) cardNumber else exerciseNumber}" }, style = MaterialTheme.typography.caption)
         }
     }
 }

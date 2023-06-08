@@ -98,6 +98,7 @@ fun ListExerciseChapterContent(
                     items(data.listChapter) {
                         BChapterCard(
                             chapterData = it,
+                            isLearning = false,
                             navigateToCourse = navigateToCourse,
                             showSnackbar = showSnackbar,
                             isAvailable = data.progress.available[it.id.toInt()],

@@ -269,13 +269,20 @@ class FirestoreRepository @Inject constructor(
             .set(result)
     }
 
-    suspend fun updateExerciseChapterProgress(chapterId: String) {
+    suspend fun updateExerciseChapterProgress(chapterId: String, child: String) {
         var result = 0
         val i = chapterId.toInt()
 
         getProgressExerciseCard(chapterId).first { res ->
-            res.done.let { result = it.count { it } }
+            res.done.let { result += it.count { it } }
             true
+        }
+
+        if (child != "") {
+            getProgressExerciseCard(child).first { res ->
+                res.done.let { result += it.count { it } }
+                true
+            }
         }
 
         var progress = mutableListOf<Int>()

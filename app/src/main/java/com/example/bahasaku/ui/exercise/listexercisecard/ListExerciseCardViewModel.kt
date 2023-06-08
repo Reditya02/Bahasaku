@@ -55,9 +55,9 @@ class ListExerciseCardViewModel @Inject constructor(
         }
     }
 
-    fun updateChapterProgress(chapterId: String) {
+    fun updateChapterProgress(chapterId: String, childId: String) {
         viewModelScope.launch {
-            firestoreRepository.updateExerciseChapterProgress(chapterId)
+            firestoreRepository.updateExerciseChapterProgress(chapterId, childId)
         }
     }
 
