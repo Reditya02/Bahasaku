@@ -37,7 +37,7 @@ import com.example.bahasaku.R
 import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BEditText
 import com.example.bahasaku.core.components.BTopAppBar
-import com.example.bahasaku.data.model.User
+import com.example.bahasaku.model.entity.User
 import com.example.bahasaku.destinations.ListLearningChapterScreenDestination
 import com.example.bahasaku.destinations.ProfileScreenDestination
 import com.google.firebase.storage.FirebaseStorage

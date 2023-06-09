@@ -24,8 +24,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.components.BWordCard
-import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.data.model.Word
+import com.example.bahasaku.model.entity.Chapter
+import com.example.bahasaku.model.entity.Word
 import com.example.bahasaku.destinations.ExerciseScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

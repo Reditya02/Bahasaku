@@ -1,8 +1,8 @@
-package com.example.bahasaku.data.repository
+package com.example.bahasaku.model.repository
 
 import android.net.Uri
-import com.example.bahasaku.data.model.remote.ProgressCard
-import com.example.bahasaku.data.model.remote.ProgressChapter
+import com.example.bahasaku.model.entity.remote.ProgressCard
+import com.example.bahasaku.model.entity.remote.ProgressChapter
 import com.example.bahasaku.ui.editprofile.UpdateResult
 import com.example.bahasaku.ui.guest.register.AuthCondition
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException

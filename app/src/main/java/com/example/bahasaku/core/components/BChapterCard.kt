@@ -25,7 +25,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.bahasaku.R
-import com.example.bahasaku.data.model.Chapter
+import com.example.bahasaku.model.entity.Chapter
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.tasks.await

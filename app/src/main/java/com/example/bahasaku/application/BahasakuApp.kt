@@ -1,8 +1,8 @@
 package com.example.bahasaku.application
 
 import android.app.Application
-import com.example.bahasaku.data.repository.RoomRepository
-import com.example.bahasaku.data.room.BDatabase
+import com.example.bahasaku.model.repository.RoomRepository
+import com.example.bahasaku.model.room.BDatabase
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob

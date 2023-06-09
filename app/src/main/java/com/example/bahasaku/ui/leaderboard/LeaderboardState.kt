@@ -1,6 +1,6 @@
 package com.example.bahasaku.ui.leaderboard
 
-import com.example.bahasaku.data.model.User
+import com.example.bahasaku.model.entity.User
 
 data class LeaderboardState(
     val listUser: List<User> = listOf(),

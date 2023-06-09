@@ -33,8 +33,8 @@ import com.example.bahasaku.R
 import com.example.bahasaku.core.components.BBorderedButton
 import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BTopAppBar
-import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.data.model.Word
+import com.example.bahasaku.model.entity.Chapter
+import com.example.bahasaku.model.entity.Word
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

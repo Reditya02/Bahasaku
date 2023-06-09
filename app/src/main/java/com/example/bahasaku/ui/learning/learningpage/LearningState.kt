@@ -1,6 +1,6 @@
 package com.example.bahasaku.ui.learning.learningpage
 
-import com.example.bahasaku.data.model.Word
+import com.example.bahasaku.model.entity.Word
 
 data class LearningState(
     val child: Word = Word(),

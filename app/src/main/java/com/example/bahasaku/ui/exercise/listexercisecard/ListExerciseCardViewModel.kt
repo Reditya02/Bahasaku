@@ -2,9 +2,9 @@ package com.example.bahasaku.ui.exercise.listexercisecard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bahasaku.data.model.remote.ProgressCard
-import com.example.bahasaku.data.repository.FirestoreRepository
-import com.example.bahasaku.data.repository.RoomRepository
+import com.example.bahasaku.model.entity.remote.ProgressCard
+import com.example.bahasaku.model.repository.FirestoreRepository
+import com.example.bahasaku.model.repository.RoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

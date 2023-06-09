@@ -21,7 +21,7 @@ import com.example.bahasaku.core.components.BChapterCard
 import com.example.bahasaku.core.components.BSnackbar
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.data.model.Chapter
+import com.example.bahasaku.model.entity.Chapter
 import com.example.bahasaku.destinations.ListExerciseCardScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

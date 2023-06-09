@@ -1,9 +1,9 @@
 package com.example.bahasaku.di
 
-import com.example.bahasaku.data.repository.FirestoreRepository
-import com.example.bahasaku.data.repository.RoomRepository
-import com.example.bahasaku.data.room.BDao
-import com.example.bahasaku.data.repository.AuthRepository
+import com.example.bahasaku.model.repository.FirestoreRepository
+import com.example.bahasaku.model.repository.RoomRepository
+import com.example.bahasaku.model.room.BDao
+import com.example.bahasaku.model.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

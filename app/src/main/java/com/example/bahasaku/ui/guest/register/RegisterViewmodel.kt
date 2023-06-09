@@ -2,7 +2,7 @@ package com.example.bahasaku.ui.guest.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bahasaku.data.repository.AuthRepository
+import com.example.bahasaku.model.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

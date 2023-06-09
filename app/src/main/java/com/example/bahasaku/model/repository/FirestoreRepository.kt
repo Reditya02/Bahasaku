@@ -1,10 +1,10 @@
-package com.example.bahasaku.data.repository
+package com.example.bahasaku.model.repository
 
 import android.net.Uri
 import android.util.Log
-import com.example.bahasaku.data.model.User
-import com.example.bahasaku.data.model.remote.ProgressCard
-import com.example.bahasaku.data.model.remote.ProgressChapter
+import com.example.bahasaku.model.entity.User
+import com.example.bahasaku.model.entity.remote.ProgressCard
+import com.example.bahasaku.model.entity.remote.ProgressChapter
 import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage

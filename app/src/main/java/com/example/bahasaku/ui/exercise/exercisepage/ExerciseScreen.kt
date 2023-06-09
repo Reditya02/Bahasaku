@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BTopAppBar
-import com.example.bahasaku.data.model.Word
+import com.example.bahasaku.model.entity.Word
 import com.google.firebase.storage.FirebaseStorage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

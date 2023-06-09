@@ -37,7 +37,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.example.bahasaku.core.components.BButton
 import com.example.bahasaku.core.components.BTopAppBar
-import com.example.bahasaku.data.model.User
+import com.example.bahasaku.model.entity.User
 import com.example.bahasaku.destinations.EditProfileScreenDestination
 import com.example.bahasaku.destinations.WelcomeScreenDestination
 import com.google.firebase.auth.ktx.auth

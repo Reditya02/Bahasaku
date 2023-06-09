@@ -29,7 +29,7 @@ import com.example.bahasaku.core.components.BLeaderboardCard
 import com.example.bahasaku.core.components.BLeaderboardItem
 import com.example.bahasaku.core.components.BTopAppBar
 import com.example.bahasaku.core.navigation.BottomNavigationDestination
-import com.example.bahasaku.data.model.User
+import com.example.bahasaku.model.entity.User
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 

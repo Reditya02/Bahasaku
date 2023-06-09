@@ -1,7 +1,7 @@
 package com.example.bahasaku.ui.exercise.listexercisecard
 
-import com.example.bahasaku.data.model.Word
-import com.example.bahasaku.data.model.remote.ProgressCard
+import com.example.bahasaku.model.entity.Word
+import com.example.bahasaku.model.entity.remote.ProgressCard
 
 data class ListExerciseCardState(
     val listWord: List<Word> = listOf(),

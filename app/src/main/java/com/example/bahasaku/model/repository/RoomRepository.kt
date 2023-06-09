@@ -1,7 +1,7 @@
-package com.example.bahasaku.data.repository
+package com.example.bahasaku.model.repository
 
-import com.example.bahasaku.data.Populate
-import com.example.bahasaku.data.room.BDao
+import com.example.bahasaku.model.Populate
+import com.example.bahasaku.model.room.BDao
 import javax.inject.Inject
 
 class RoomRepository @Inject constructor(

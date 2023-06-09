@@ -1,7 +1,7 @@
 package com.example.bahasaku.di
 
 import android.content.Context
-import com.example.bahasaku.data.room.BDatabase
+import com.example.bahasaku.model.room.BDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

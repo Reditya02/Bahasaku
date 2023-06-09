@@ -1,8 +1,8 @@
 package com.example.bahasaku.ui.learning.listlearningchapter
 
 import android.net.Uri
-import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.data.model.remote.ProgressChapter
+import com.example.bahasaku.model.entity.Chapter
+import com.example.bahasaku.model.entity.remote.ProgressChapter
 
 data class ListLearningChapterState(
     val listChapter: List<Chapter> = emptyList(),

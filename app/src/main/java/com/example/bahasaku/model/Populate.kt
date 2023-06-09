@@ -1,8 +1,8 @@
-package com.example.bahasaku.data
+package com.example.bahasaku.model
 
 import com.example.bahasaku.R
-import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.data.model.Word
+import com.example.bahasaku.model.entity.Chapter
+import com.example.bahasaku.model.entity.Word
 
 object Populate {
     //TODO: Chapter

@@ -1,4 +1,4 @@
-package com.example.bahasaku.data.model
+package com.example.bahasaku.model.entity
 
 import android.os.Parcelable
 import androidx.room.Entity

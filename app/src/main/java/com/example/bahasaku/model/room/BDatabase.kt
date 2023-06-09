@@ -1,4 +1,4 @@
-package com.example.bahasaku.data.room
+package com.example.bahasaku.model.room
 
 import android.content.Context
 import android.util.Log
@@ -6,9 +6,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.bahasaku.data.Populate
-import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.data.model.Word
+import com.example.bahasaku.model.Populate
+import com.example.bahasaku.model.entity.Chapter
+import com.example.bahasaku.model.entity.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

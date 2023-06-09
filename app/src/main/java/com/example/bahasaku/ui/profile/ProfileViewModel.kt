@@ -2,8 +2,8 @@ package com.example.bahasaku.ui.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bahasaku.data.model.User
-import com.example.bahasaku.data.repository.FirestoreRepository
+import com.example.bahasaku.model.entity.User
+import com.example.bahasaku.model.repository.FirestoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

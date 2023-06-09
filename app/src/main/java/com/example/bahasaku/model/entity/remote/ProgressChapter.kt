@@ -1,4 +1,4 @@
-package com.example.bahasaku.data.model.remote
+package com.example.bahasaku.model.entity.remote
 
 data class ProgressChapter(
     val available: MutableList<Boolean> = mutableListOf(),

@@ -1,11 +1,11 @@
-package com.example.bahasaku.data.room
+package com.example.bahasaku.model.room
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.example.bahasaku.data.model.Chapter
-import com.example.bahasaku.data.model.Word
+import com.example.bahasaku.model.entity.Chapter
+import com.example.bahasaku.model.entity.Word
 
 @Dao
 interface BDao {

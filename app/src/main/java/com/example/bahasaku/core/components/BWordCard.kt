@@ -24,7 +24,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.bahasaku.R
 import com.example.bahasaku.core.theme.GreenVariant
-import com.example.bahasaku.data.model.Word
+import com.example.bahasaku.model.entity.Word
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 
