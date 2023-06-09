@@ -1,7 +1,6 @@
 package com.example.bahasaku.model.repository
 
 import android.net.Uri
-import android.util.Log
 import com.example.bahasaku.model.entity.User
 import com.example.bahasaku.model.entity.remote.ProgressCard
 import com.example.bahasaku.model.entity.remote.ProgressChapter
